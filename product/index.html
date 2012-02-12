@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+
+		<title>Click Counter</title>
+	</head>
+	<body>
+		<br />
+		<br />
+		<h1 align="center">Click Counter</h1>
+		<div align="center">
+			<button style="height:100px; width:200px;">Click me!!!</button>
+		</div>
+		<br />
+		<h2 align="center">You Clicked:</h2>
+		<h2 align="center" style="color: red;">0</h2>
+		<h2 align="center">times</h2>
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+		<script type="text/javascript">
+			
+			var clickCounter = 0;
+			var counterObject = $('h2').eq(1);
+			
+			(function(){
+				
+				$(document).on('click', function(){
+					clickCounter++;
+					counterObject.text(clickCounter);
+				});
+				
+			})();
+			
+		</script>
+
+		<title>Pizzario of Bakker</title>
+	</head>
+	<body style="padding: 0px; margin: 0px;">
+		<div id="header" style="width: 100%; height: 100px; border-bottom: 5px solid black">
+			<h1 align="center">Project 3 <b>PizzaRio</b> of <b>Bakker</b></h1>
+			
+			<div align="center">
+				<button id="bakker">Bakker</button>
+				<button id="pizza">PizzaRio</button>
+			</div>
+			
+			
+		</div>
+		<h1 id="titel" align="center"></h1>
+		<img id="titleImg" align="center" style="width:100%; text-align:center;" src="" />
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+		
+		<script type="text/javascript">
+			
+			(function(){
+				var titel = $('#titel');
+				var img = $('#titleImg');
+				
+				$('button').on('click', function(){
+					var $this = $(this);
+					
+					if($this.attr('id') == 'bakker'){
+						titel.text('Bakker');
+						img.attr('src', 'bakker.jpg');
+						$this.siblings('#pizza').removeAttr('disabled', 'disabled');
+						$this.attr('disabled', 'disabled');
+						//console.log('bakker');
+					} else {
+						titel.text('PizzaRio');
+						img.attr('src', 'pizza.jpg');
+						$this.siblings('#bakker').removeAttr('disabled', 'disabled');
+						$this.attr('disabled', 'disabled');
+						//console.log('pizza');
+					}
+					
+					// link.attr('href', $this.data('file'));
+// 					
+// 
+// 					
+					// $this
+						// .siblings('button')
+							// .removeAttr('disabled')
+							// .end()
+							// .attr('disabled', 'disabled');
+							
+
+				});
+			})();
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
