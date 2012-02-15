@@ -1,32 +1,146 @@
 @charset "utf-8";
-* {margin:0; padding:0;}
-html{overflow-y: scroll;}
-html, body {margin:0px; padding:0px; font-family: Arial,Helvetica,sans-serif; font-size: 13px; position:relative; line-height: 1.67em;  background:url('../images/img_BG.png') repeat top left; color:#555; text-align:left; height: 100%;}
-p {margin-bottom:18px; height:auto;}
-img {padding:0 !important; border:none !important; background:none !important;}
-.clear {clear: both; height: 0; width: 0; line-height: 0; font-size: 0px;}
-.hidden {display:none;}
-.no-margin {margin-right:0 !important;}
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	overflow-y: scroll;
+}
+html {
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	background: url('../images/img_BG.png') repeat top left;
+	height: 100%;
+}
+body{
+	color: #555;
+	text-align: left;
+	line-height: 1.67em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
 
-#site-wrapper {height: auto; position:relative; overflow:hidden;}
-.container {position:relative; margin:0 auto; width:960px;}
+#wrapper{
+	margin: 0 auto;
+	width: 960px;
+}
+/* =========== */
+/* header      */
+/* =========== */
+header {
+	height: 210px;
+	width: 940px;
+	position: relative;
+	background: url('../images/img_banner_banner.png') no-repeat scroll center bottom transparent;
+}
 
-div#boven{height:210px; width:940px; position:relative; background:url('../images/img_banner_banner.png') no-repeat scroll center bottom transparent;}
+/* navigation */
+nav {
+	padding-top: 25px;
+	padding-left: 202px;
+	width: 680px;
+	position: relative;
+}
 
-div#inlog{width:232px; height:65px; position:relative;margin-left:690px;padding-top:15px;}
-div#inlogText{text-align:right; color:#666666; width:100px;padding-right:7px; overflow:hidden;position:relative;float: left;}
-input#inlogInput{width: 120px;position:relative;}
-input#onthouInput{overflow:hidden;position:relative;float: left;margin-top:3px;margin-left:24px;}
-div#onthouText{color:#666666;overflow:hidden;position:relative;float: left; font-size:10px;}
-div#inlogSubmit{text-align:right;position:relative; }
-input#aanmeldInput{ text-align: right;width: 90px; text-align:center; color:#666666;}
+#header_nav li {
+	display: inline;
+	margin-left: 18px;
+	margin-right: 18px;
+}
+/* end navigation */
 
-div#menu{padding-top:26px; padding-left:200px;width:680px;position:relative;float:left;}
-div#menuItem{padding-right:20px; padding-left:20px; overflow:hidden;position:relative; float:left;}
 
-div#content{height:auto; width:940px; position:relative; background:url('../images/img_content_bgsmall.png') repeat-y scroll center bottom transparent;}
-div#contenttext{padding-left:80px; width:780px;}
+/* login */
+div#inlog {
+	width: 232px;
+	height: 66px;
+	position: relative;
+	margin-left: 690px;
+	padding-top: 15px;
+}
 
-div#onder{height:55px; width:940px; position:relative; background:url('../images/img_content_footer.png') repeat-y scroll center bottom transparent;margin-bottom:6px;}
-div#onderbinnen{width:940; text-align:center;padding-top:29px;}
-a#sociaal{margin-left:20px; margin-right:20px;}
+input.right_input{
+	float: right;
+	width: 120px;
+}
+
+.remember_me { margin-left: 18px; }
+.remember_me_text { font-size: 11px;}
+
+
+input.aanmeldInput {
+	float: right;
+	width: 90px;
+	color: #666666;
+}
+/* end login */
+
+/* =========== */
+/* end header  */
+/* =========== */
+
+/* =========== */
+/* content     */
+/* =========== */
+section#main_content {
+	height: auto;
+	width: 940px;
+	position: relative;
+	background: url('../images/img_content_bgsmall.png') repeat-y scroll center bottom transparent;
+}
+
+article {
+	padding-left: 80px;
+	width: 780px;
+}
+/* =========== */
+/* end content */
+/* =========== */
+
+/* =========== */
+/* footer      */
+/* =========== */
+footer {
+	height: 55px;
+	width: 940px;
+	position: relative;
+	background: url('../images/img_content_footer.png') repeat-y scroll center bottom transparent;
+	margin-bottom: 6px;
+}
+div.footer_center {
+	text-align: center;
+	padding-top: 29px;
+}
+
+#footer_nav li {
+	display: inline;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+/* =========== */
+/* end footer  */
+/* =========== */
+
+p {
+	margin-bottom: 18px;
+	height: auto;
+}
+img {
+	padding: 0 !important;
+	border: none !important;
+	background: none !important;
+}
+.clear {
+	clear: both;
+	height: 0;
+	width: 0;
+	line-height: 0;
+	font-size: 0px;
+}
+.hidden {
+	display: none;
+}
+.no-margin {
+	margin-right: 0 !important;
+}
