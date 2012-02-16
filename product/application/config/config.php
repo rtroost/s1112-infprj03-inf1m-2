@@ -15,9 +15,9 @@
 |
 */
 if($_SERVER['SERVER_ADDR'] == "192.168.1.101"){
-	$config['base_url']	= 'http://62.45.110.217/project3/';
+	$config['base_url']	= 'http://62.45.110.217/pizzario/';
 } else {
-	$config['base_url']	= 'http://127.0.0.1/project3/';
+	$config['base_url']	= 'http://127.0.0.1/pizzario/';
 }
 
 /*
