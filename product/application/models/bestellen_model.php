@@ -1,6 +1,6 @@
 <?php
 
-class bestellen_model extends CI_model{
+class Bestellen_model extends CI_model{
 
 	function getProducten(){
 		$productenQ = $this->db->query('

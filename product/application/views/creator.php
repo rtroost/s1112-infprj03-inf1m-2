@@ -28,7 +28,7 @@
 
 			<div id="appMainWindow1" class="mainWindows">
 				<div id="appSideBar">
-					<h1>Kies je categorie: </h1>
+					<h1>Kies een categorie: </h1>
 					<br />
 					<table id="sidebar_table">
 						<?php foreach($records as $row) : ?>
@@ -50,7 +50,14 @@
 				</div>
 				<div id="appView">
 					<h1>Product creator</h1>
-					<p>U kunt hier zelf een product samenstellen. Begin door een categorie te kiezen.</p>
+					<p>U kunt hier zelf een product samenstellen. Begin door een categorie te kiezen.
+						
+						<br />
+						Stap1 : <br />
+						Stap2 :<br />
+						Stap3 : <br />
+						Stap4 :<br />
+						 </p>
 				</div>
 				<div id="appSelector">
 					<!-- <h1>Pizza</h1>
@@ -60,50 +67,144 @@
 			</div>
 			<div id="appMainWindow2" class="mainWindows">
 				<div id="appSideBar">
+					<h1>Uw product samenstellen</h1>
+					<p id="samenstellenText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
 					<br />
-					<table id="sidebar_table">
-					</table>
+					<div id="sidebar_table2_div" style="display: none;">
+						<table id="sidebar_table2">
+						</table>
+					</div>
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
 						 &nbsp; <button class="nav_button" id="volgende"> Volgende » </button>
 					</div>
 				</div>
-				<div id="appView">
-					<h1>Je hebt nog geen categorie gekozen</h1>
-				</div>
-				<div id="appSelector2">
-					<div id="slider-nav">
-						<button data-dir="prev"><</button>
-						<button data-dir="next">></button>
+				<div id="appView2">
+					<h1 id="samenstellen_view_titel" style="display:none;">Uw product:</h1>
+					<table id="view2_table_head">
+						<tr>
+							<td><h4>Ingredient</h4></td>
+							<td><h4>Gewichtpunten</h4></td>
+							<td><h4>Hoeveelheid</h4></td>
+							<td><h4>Totaal Gewicht</h4></td>
+						</tr>
+					</table>
+					<div id="overflow" style="display:none;">
+						<table id="view2_table_main">
+						</table>
 					</div>
-					<div id="appSelector2Content">
-						<ul>
-						</ul>
-					</div>
+					<table id="view2_table_foot" cellspacing="0">
+						<tr>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
+							<td><h4>Totaal Gewicht (max 20)</h4></td>
+							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div id="appMainWindow3" class="mainWindows">
 				<div id="appSideBar">
+					<h1>Uw product opslaan</h1>
+					<p id="opslaanText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
+					<div id="opslaan" style="display:none;">
+						<?php if(isset($_SESSION['username'])){ ?>
+								<p>Hallo {{naam}} <br />
+									U kan hier uw product opslaan in uw profiel
+								</p>
+								
+								<button style="border-radius: 5px; background: #fff;">Opslaan</button>
+								
+								<p>U kunt dit product en andere gemaakte producten beheren door maar "Mijn profiel" te gaan.</p>
+								
+						<?php } else { ?>
+								<p>U bent nog niet ingelogd. U hoeft uw product niet opteslaan om te kunnen bestellen, u kunt dan deze stap overslaan.</p>
+								<h4>Login:</h4>
+								<form action="#" method="post">
+									<label for="username">Username: </label>
+									<br />
+									<input name="username" value="" type="text" />
+									<br />
+									<label for="password">Password: </label>
+									<br />
+									<input name="password" value="" type="password" />
+									<br />
+									<input style="border-radius: 5px; background: #fff;" type="submit" value="login" />
+								</form>
+								
+								<p>Geen account? <a href="register">Registeer hier</a></p>
+								
+						<?php } ?>
+					</div>
+					
+					
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
 						 &nbsp; <button class="nav_button" id="volgende"> Volgende » </button>
 					</div>
 				</div>
-				<div id="appView">
-				</div>
-				<div id="appSelector">
+				<div id="appView2">
+					<h1 id="opslaan_view_titel" style="display:none;">Uw product:</h1>
+					<table id="view3_table_head">
+						<tr>
+							<td><h4>Ingredient</h4></td>
+							<td><h4>Hoeveelheid</h4></td>
+						</tr>
+					</table>
+					<div id="overflow" style="display:none;">
+						<table id="view2_table_main">
+						</table>
+					</div>
+					<table id="view2_table_foot" cellspacing="0">
+						<tr>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
+							<td><h4>Totaal Gewicht (max 20)</h4></td>
+							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div id="appMainWindow4" class="mainWindows">
 				<div id="appSideBar">
+					<h1>Uw product bestellen:</h1>
+					<p id="bestelText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
+					<div id="bestellen" style="display:none;">
+						<?php if(isset($_SESSION['username'])){ ?>
+								<p>Hallo {{naam}} <br />
+									Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
+								</p>
+						<?php } else { ?>
+								<p>Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.</p>
+								<button id="winkelwagen" style="border-radius: 5px; background: #fff;">In Winkelwagen</button><br />
+								<a id="naarWinkelwagen" href="#" style="display: none;">Naar uw Winkelwagen</a>
+						<?php } ?>
+					</div>	
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
 						 &nbsp; <button class="nav_button" id="volgende" disabled="disabled"> Volgende » </button>
 					</div>
 				</div>
-				<div id="appView">
-				</div>
-				<div id="appSelector">
+				<div id="appView2">
+					<h1 id="bestellen_view_titel" style="display:none;">Uw product:</h1>
+					<table id="view3_table_head">
+						<tr>
+							<td><h4>Ingredient</h4></td>
+							<td><h4>Hoeveelheid</h4></td>
+						</tr>
+					</table>
+					<div id="overflow" style="display:none;">
+						<table id="view2_table_main">
+						</table>
+					</div>
+					<table id="view2_table_foot" cellspacing="0">
+						<tr>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
+							<td><h4>Totaal Gewicht (max 20)</h4></td>
+							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			
@@ -120,27 +221,43 @@
 
 			// FUNCTION VARIABELEN
 			vars = {
+				opgeslagen: 0,
 				pagenr: 1,
 				appNavigationUl: $('div#appNavigation ul'),
 				gekozenCategorie: 0,
 				ingredienten: [],
+				totaalGewicht: 0,
+				totaalPrijs: 0,
 				sidebar1: $('div#appMainWindow1').find('div#appSideBar'),
 				view1: $('div#appMainWindow1').find('div#appView'),
 				selector1: $('div#appMainWindow1').find('div#appSelector'),
 				
 				sidebar2: $('div#appMainWindow2').find('div#appSideBar'),
-				view2: $('div#appMainWindow2').find('div#appView'),
-				selector2: $('div#appMainWindow2').find('div#appSelector2'),
+				view2: $('div#appMainWindow2').find('div#appView2'),
 				
 				sidebar3: $('div#appMainWindow3').find('div#appSideBar'),
-				view3: $('div#appMainWindow3').find('div#appView'),
-				selector3: $('div#appMainWindow3').find('div#appSelector'),
+				view3: $('div#appMainWindow3').find('div#appView2'),
 				
 				sidebar4: $('div#appMainWindow4').find('div#appSideBar'),
-				view4: $('div#appMainWindow4').find('div#appView'),
-				selector4: $('div#appMainWindow4').find('div#appSelector'),
+				view4: $('div#appMainWindow4').find('div#appView2'),
+
+				h4Gewicht: $('h4#totaal_gewicht_ingredienten'),
+				h4Prijs: $('h4#totaal_prijs_ingredienten'),
+				
+				samenstellenText: $('p#samenstellenText'),
+				divSamenstellen: $('div#sidebar_table2_div'),
+				samenstellenViewTitel: $('h1#samenstellen_view_titel'),
+				
+				opslaanText: $('p#opslaanText'),
+				divOpslaan: $('div#opslaan'),
+				opslaanViewTitel: $('h1#opslaan_view_titel'),
+				
+				bestelText: $('p#bestelText'),
+				divBestellen: $('div#bestellen'),
+				bestellenViewTitel: $('h1#bestellen_view_titel'),
+				a_naarWinkelwagen: $('a#naarWinkelwagen')
 			}
-		
+			
 			// Navigation script
 			$('a.appNav').on('click', function(e){
 				
@@ -175,6 +292,10 @@
 			});
 			// END Navigation script
 			
+			$('button#winkelwagen').on('click', function(){
+				vars.a_naarWinkelwagen.show();
+			});
+			
 			
 			$('input.sidebar_keuze_categorie').on('change', function(){
 				var thisId = $(this).attr('value');
@@ -182,10 +303,26 @@
 				vars.gekozenCategorie = thisId;
 			});
 			
-			$('div#appMainWindow2 #sidebar_table').on('click', 'input', function(){
-				var $this = $(this);
-				vars.ingredienten[$this.attr('data-arrayIndex')].gekozen = !vars.ingredienten[$this.attr('data-arrayIndex')].gekozen;
-				changeContent.createIngredient($this.attr('data-arrayIndex'), vars.ingredienten[$this.attr('data-arrayIndex')].gekozen);
+			$('div#appMainWindow2 #sidebar_table2').on('click', 'input', function(e){
+				//e.preventDefault();
+				var $this = $(this),
+					id = $this.attr('data-arrayIndex')
+
+
+			 if((parseInt(vars.totaalGewicht) +parseInt(vars.ingredienten[id].gewichtspunten)) > 20){
+					console.log('stop');
+					if(vars.ingredienten[$this.attr('data-arrayIndex')].gekozen && vars.view2.find('table#view2_table_main tr.' + id).length == 1){
+						console.log('del');
+						vars.ingredienten[$this.attr('data-arrayIndex')].gekozen = !vars.ingredienten[$this.attr('data-arrayIndex')].gekozen;
+						changeContent.createIngredient(id, vars.ingredienten[$this.attr('data-arrayIndex')].gekozen, e);
+					} else {
+					console.log('stopstop');
+						e.preventDefault();
+						return;
+					}
+				} else {						vars.ingredienten[$this.attr('data-arrayIndex')].gekozen = !vars.ingredienten[$this.attr('data-arrayIndex')].gekozen;						changeContent.createIngredient(id, vars.ingredienten[$this.attr('data-arrayIndex')].gekozen, e);
+				}
+				
 			});
 			
 			//=================================================================
@@ -216,6 +353,14 @@
 			// changeContent verzameling
 			var changeContent = {
 				
+				setPrice: function(){
+					if(String(vars.totaalPrijs).length == 3){
+						vars.h4Prijs.text('€' + String(vars.totaalPrijs).substring(0,1) + ',' + String(vars.totaalPrijs).substring(1));
+					} else {
+						vars.h4Prijs.text('€' + String(vars.totaalPrijs).substring(0,2) + ',' + String(vars.totaalPrijs).substring(2));
+					}
+				},
+				
 				categorie_content_change: function(value){
 					
 					$.ajax({
@@ -230,22 +375,38 @@
 							var count = 0;
 							var tr;
 							
-							vars.sidebar2.find('h1').remove();
-							$('<h1>', {
-								text: 'Stel uw ' + records[0].naam + ' samen'
-							}).prependTo(vars.sidebar2);
-							vars.sidebar2.find('table').empty();
-							vars.selector2.find('div#appSelector2Content ul').empty();
+							vars.samenstellenText.remove();
+							vars.divSamenstellen.show();
+							vars.samenstellenViewTitel.show();
 							
+							vars.opslaanText.remove();
+							vars.divOpslaan.show();
+							vars.opslaanViewTitel.show();
+							
+							vars.bestelText.remove();
+							vars.divBestellen.show();
+							vars.bestellenViewTitel.show();
+							
+							vars.sidebar2.find('table').empty();
+							vars.totaalGewicht = 0;
+							vars.h4Gewicht.text(vars.totaalGewicht);
+							vars.totaalPrijs = parseInt(records[0].standaardprijs);
+							changeContent.setPrice();
+							
+							vars.view2.find('table#view2_table_main').empty();
+							vars.view3.find('table#view2_table_main').empty();
+							vars.view4.find('table#view2_table_main').empty();
 							vars.ingredienten = [];
 							
 							for ( property in ingredienten ){
 								vars.ingredienten[count] = {
 									ingredientId: ingredienten[count].ingredientid,
-									prijs: ingredienten[count].prijs,
+									prijs100: ingredienten[count].prijs,
+									prijs: Math.round(ingredienten[count].prijs*0.75),
 									naam: ingredienten[count].naam,
 									gewichtspunten: ingredienten[count].gewichtspunten,
 									hoeveelheid: 2,
+									gewicht: parseInt(ingredienten[count].gewichtspunten),
 									gekozen: false
 								}
 								
@@ -277,20 +438,13 @@
 									type: 'checkbox',
 									style: 'margin-top: 20px; margin-left: 10px;',
 								}).appendTo(td);
-									
-								
-								
-								// vullen tabel
-								// plaatje opvragen door categorieID(map)/ingredientID(map)
-								
 								count++;
 							} 
 							
 							// aanpassingen aan div1
 								vars.view1.empty();
 								vars.selector1.empty();
-									
-								//main view
+
 									$('<h1>', {
 										text: 'U heeft gekozen voor: ' + records[0].naam,
 									}).appendTo(vars.view1);
@@ -304,173 +458,141 @@
 										width: 400,
 										height: 300,
 									}).appendTo(div);
-								//end main view
-								
-								//selector
+
 									$('<h1>', {
 										text: records[0].naam,
 									}).appendTo(vars.selector1);
 									$('<p>', {
 										text: records[0].omschrijving,
 									}).appendTo(vars.selector1);
-								//end selector
 							// end aanpassingen aan div1
-							
-							
-							// aanpassingen aan div2
-								vars.view2.empty();									
-								//main view
-									$('<h1>', {
-										text: 'Uw ' + records[0].naam,
-									}).appendTo(vars.view2);
-									
-									var div = $('<div>', {
-										class: 'center',
-									}).appendTo(vars.view2);
-									
-									
-									$('<table>', {
-										id : 'view2_table',
-									}).appendTo(div);
 
-									
-									// $('<img>', {
-										// src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/start.png',
-										// width: 400,
-										// height: 330,
-									// }).appendTo(div);
-								//end main view
-							// end aanpassingen aan div2
-							
+								vars.view2.find('table').show();
+								vars.view3.find('table').show();
+								vars.view4.find('table').show();
 							
 						}
 					});
 				},
 				
-				createIngredient: function(id, bool){
-
-					if(vars.selector2.find('li').length == 6 && vars.ingredienten.length > 6){
-						vars.selector2.find('button').show();
-					}
-					
+				createIngredient: function(id, bool, e){
 					
 					if(bool){
 						
-						var li = $('<li>', {
-							class: 'center',
-							id: id,
-						}).appendTo(vars.selector2.find('div#appSelector2Content ul'));
-						var left = $('<div>', {
-							style: 'float: left; height: 100%; width: 50px;',
-						}).appendTo(li);
-						$('<p>', {
-							text: vars.ingredienten[id].naam,
-							style: '',
-							class: ''
-						}).appendTo(left);
+						vars.view2.find('div#overflow').show();
+						vars.view3.find('div#overflow').show();
+						vars.view4.find('div#overflow').show();
 						
-						var right = $('<div>', {
-							class: 'selectorRightButtons',
-							style: 'float: right; height: 100%; width: 24px;'
-						}).appendTo(li);
-						$('<button>', {
-							class: '-',
-							text: '˄'
-						}).appendTo(right).on('click', function(){
-								var id = $(this).parents('li').attr('id');
-								if(vars.ingredienten[id].hoeveelheid < 5){
-									vars.ingredienten[id].hoeveelheid++;
-									$(this).siblings('span').text(' ' + vars.ingredienten[id].hoeveelheid + ' ');
+						var tr = $('<tr>', {class: id}).appendTo(vars.view2.find('table#view2_table_main')),
+						 	td1 = $('<td>').appendTo(tr),
+							td2 = $('<td>', { text: vars.ingredienten[id].gewichtspunten }).appendTo(tr),
+							td3 = $('<td>').appendTo(tr),
+						 	td4 = $('<td>', { text: (vars.ingredienten[id].gewicht), class: 'totaalGewicht'}).appendTo(tr),
+						 	tr2 = $('<tr>', {class: id}).appendTo(vars.view3.find('table#view2_table_main')),
+						 	td1tr2 = $('<td>').appendTo(tr2),
+						 	td2tr2 = $('<td>').appendTo(tr2);
+						 	tr3 = $('<tr>', {class: id}).appendTo(vars.view4.find('table#view2_table_main')),
+						 	td1tr3 = $('<td>').appendTo(tr3),
+						 	td2tr3 = $('<td>').appendTo(tr3);						
+						
+						$('<img>', { 
+							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
+						}).appendTo(td1);
+						$('<p>', { text: vars.ingredienten[id].naam }).appendTo(td1);
+						
+						$('<img>', { 
+							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
+						}).appendTo(td1tr2);
+						$('<p>', { text: vars.ingredienten[id].naam }).appendTo(td1tr2);
+						
+						$('<img>', { 
+							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
+						}).appendTo(td1tr3);
+						$('<p>', { text: vars.ingredienten[id].naam }).appendTo(td1tr3);
+						
+						$('<p>', { id: 'view3Hoeveelheid', text: 'Wijnig'}).appendTo(td2tr2);
+						$('<p>', { id: 'view4Hoeveelheid', text: 'Wijnig'}).appendTo(td2tr3);
+						
+						var divButtons = $('<div>', {class: 'view2buttons'}).appendTo(td3).on('click', 'button', function(){
+							var $this = $(this);
+							if($this.attr('class') === 'down'){ return; }
+							var	tr = $this.parents('tr'),
+								id = tr.attr('class'),
+								dataFunc = $this.attr('data-func'),
+								view3Hoeveelheid = vars.view3.find('table#view2_table_main tr.'+id).find('p#view3Hoeveelheid'),
+								view4Hoeveelheid = vars.view4.find('table#view2_table_main tr.'+id).find('p#view4Hoeveelheid');
+							if(vars.ingredienten[id].gewichtspunten != 0){
+								var huidigGewichtPunt = vars.ingredienten[id].gewicht/vars.ingredienten[id].gewichtspunten,
+									diff = (dataFunc - huidigGewichtPunt) * vars.ingredienten[id].gewichtspunten;
+								if(vars.totaalGewicht + diff > 20){
+									return;
 								}
-							});
-						$('<br />').appendTo(right);
-						$('<span>', {
-							class: 'val',
-							text: ' ' + vars.ingredienten[id].hoeveelheid + ' '
-						}).appendTo(right);
-						$('<br />').appendTo(right);
-						$('<button>', {
-							class: '+',
-							text: '˅'
-						}).appendTo(right).on('click', function(){
-								var id = $(this).parents('li').attr('id');
-								if(vars.ingredienten[id].hoeveelheid > 1){
-									vars.ingredienten[id].hoeveelheid--;
-									$(this).siblings('span').text(' ' + vars.ingredienten[id].hoeveelheid + ' ');
-								}
-							});
+							}							
+							$this.toggleClass('down').siblings().removeClass('down');
+							vars.ingredienten[id].hoeveelheid = dataFunc;
+							if(diff){
+								vars.totaalGewicht += diff;
+								vars.h4Gewicht.text(vars.totaalGewicht);
+							}
+							vars.ingredienten[id].gewicht = vars.ingredienten[id].gewichtspunten*vars.ingredienten[id].hoeveelheid;
+							tr.children('.totaalGewicht').text(vars.ingredienten[id].gewicht);
+							var oldPrijs = vars.ingredienten[id].prijs;
+							if(dataFunc == 1){
+								view3Hoeveelheid.text('Wijnig');
+								view4Hoeveelheid.text('Wijnig');
+								vars.ingredienten[id].prijs = Math.round(vars.ingredienten[id].prijs100*0.75);
+							} else if(dataFunc == 2){
+								view3Hoeveelheid.text('Normaal');
+								view4Hoeveelheid.text('Normaal');
+								vars.ingredienten[id].prijs = Math.round(vars.ingredienten[id].prijs100);
+							} else {
+								view3Hoeveelheid.text('Veel');
+								view4Hoeveelheid.text('Veel');
+								vars.ingredienten[id].prijs = Math.round(vars.ingredienten[id].prijs100*1.25);
+							}
+							vars.totaalPrijs -= oldPrijs;
+							vars.totaalPrijs += vars.ingredienten[id].prijs;
+							changeContent.setPrice();
+						});
 						
-						if((vars.selector2.find('li').length-1) % 3 === 0){
-							$('<tr>').appendTo(vars.view2.find('table'));
-						}
-						
-						var td = $('<td>', { class: vars.ingredienten[id].ingredientId}).appendTo(vars.view2.find('table tr').last());
-						
-						$('<img>', {
-							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png',
-						}).appendTo(td);
-						$('<h4>', {
-							text: vars.ingredienten[id].naam,
-						}).appendTo(td);
-						// $('<p>', {
-							// text: 'Omschrijving omschrijving omschrijving',
-						// }).appendTo(td);
-						//vars.view2.find('table')
-							
-							
+						$('<button>', {text: 'Wijzig', class: 'down', 'data-func': 1}).appendTo(divButtons);
+						$('<button>', {text: 'Normaal', 'data-func': 2}).appendTo(divButtons);
+						$('<button>', {text: 'Veel', 'data-func': 3}).appendTo(divButtons);
+
+						vars.totaalGewicht += vars.ingredienten[id].gewicht;
+						vars.h4Gewicht.text(vars.totaalGewicht);
+
+						vars.totaalPrijs += vars.ingredienten[id].prijs;
+						changeContent.setPrice();
+
 					} else {
-						vars.view2.find('.'+vars.ingredienten[id].ingredientId).remove();
-						if(vars.view2.find('tr').last().children().length === 0){
-							vars.view2.find('tr').last().remove();
-						}
-					
-						if(vars.selector2.find('li').length == 7 && vars.ingredienten.length > 6){
-							vars.selector2.find('#slider-nav button').hide();
-							vars.selector2.find('ul').animate({
-								'margin-left': 0,
-							});
+
+						if(vars.view2.find('table#view2_table_main tr.' + id).length == 1){
+							vars.view2.find('table#view2_table_main tr.' + id).remove();
+							vars.view3.find('table#view2_table_main tr.' + id).remove();
+							vars.view4.find('table#view2_table_main tr.' + id).remove();
+							vars.ingredienten[id].gewicht = parseInt(vars.ingredienten[id].gewichtspunten);
+	
+							vars.totaalGewicht -= vars.ingredienten[id].gewicht;
+							vars.h4Gewicht.text(vars.totaalGewicht);
+							
+							vars.totaalPrijs -= vars.ingredienten[id].prijs;
+							changeContent.setPrice();
 						}
 						
-						vars.selector2.find('#' + id).remove();
+						if(vars.view2.find('table#view2_table_main tr').length == 0){
+							vars.view2.find('div#overflow').hide();
+							vars.view3.find('div#overflow').hide();
+							vars.view4.find('div#overflow').hide();
+						}
+
 					}
-					
 				}
 			}
 			// END changeContent verzameling
 			//=================================================================
 
-			vars.selector2.find('button').on('click', function(){		
-				var temp = '';
-				var count = $(this).parent().siblings('div#appSelector2Content').find('ul li').length;
-				var toAnimate = $(this).parent().siblings('div#appSelector2Content').find('ul');
-				var liWidth = 80;
-				var margin = parseInt(toAnimate.css('margin-left'));
-
-				if($(this).attr('data-dir') === 'next'){
-					if((margin-(liWidth*2)) <= (370-(count*liWidth))){
-						return;
-					}
-					temp = '-='+liWidth;
-				} else {
-					if(margin >= 0){
-						return;
-					}
-					temp = '+='+liWidth;
-					
-				}
-				
-				toAnimate.animate({
-					'margin-left': temp,
-				});
-			});
-			
-			
-
-
 		})( jQuery );
-		
-		
-		
 		
 </script>
 <?php $this->load->view('includes/footer') ?>
