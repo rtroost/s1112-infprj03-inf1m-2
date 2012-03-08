@@ -20,6 +20,7 @@
 						<input class="aanmeldInput" name="aanmeldenSubmit" value="Aanmelden" type="submit" />
 					</form>
 				</div>
+			
 				<nav>
 					<ul id="header_nav">
 						<li>
@@ -36,5 +37,13 @@
 						</li>
 					</ul>
 				</nav>
+				
+				<div id="search">
+					<form id="searchform" action="<?php echo base_url();?>index.php/search_cont">
+						<label for="search">Zoeken</label>
+						<input class="zoeken" name="search" type="text" />		
+						<img src="<?php echo base_url();?>images/glas.png" onclick="document.forms['searchform'].submit();" />
+					</form>
+				</div>
 			</header>
 			<section id="main_content">
