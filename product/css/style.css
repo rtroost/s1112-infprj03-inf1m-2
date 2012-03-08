@@ -37,9 +37,9 @@ header {
 
 /* navigation */
 nav {
-	padding-top: 25px;
+	padding-top: 23px;
 	padding-left: 202px;
-	width: 680px;
+	width: 530px;
 	position: relative;
 }
 
@@ -48,8 +48,20 @@ nav {
 	margin-left: 18px;
 	margin-right: 18px;
 }
-/* end navigation */
 
+div#search {
+	width: 175px;
+	margin-left: 740px;
+	margin-top: -30px;
+	position: relative;
+	text-align: right;
+}
+
+input.zoeken {
+	width: 100px;
+}
+
+/* end navigation */
 
 /* login */
 div#inlog {
@@ -60,7 +72,7 @@ div#inlog {
 	padding-top: 15px;
 }
 
-input.right_input{
+input.right_input {
 	float: right;
 	width: 120px;
 }
