@@ -12,8 +12,14 @@
 		<tr id=\"productRow\" >
 			<td id=\"productColumn\">".$product."</td>
 			<td id=\"productPrijs\">&#8364;".number_format($productinformatie['prijs']/100, 2) ."</td>
-			<td id=\"productAantal\"></td>
-			<td id=\"productTotaal\"></td>
+			<td id=\"productAantal\">
+			<img src=\"".base_url()."images/img_order_minus.png\">
+			<label for=\"aantal\"></label>
+			<input class=\"aantal\" value=\"0\" name=\"aantal\" type=\"text\" />
+			<img src=\"".base_url()."images/img_order_plus.png\">
+			</td>
+			<td id=\"productTotaal\"><img src=\"".base_url()."images/winkelwagen.png\"></td>
+			
 		</tr>
 		<tr id=\"ingredientRow\">
 			<td id=\"ingredientColumn\">";
