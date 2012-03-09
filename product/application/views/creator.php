@@ -1,10 +1,15 @@
 <?php $this->load->view('includes/header') ?>
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/productApp.css" />
-	<article>
+	<div id="content">
 		
 		<h1>De product creëer pagina</h1>
 		<p>U kunt hier uw eigen product samenstellen</p>
+		
+		<button id="setcookie">Set cookie</button>
+		<button id="unsetcookie">Usset cookie</button>
+		<br />
+		<br />
 		
 		<div id="productApp">
 			<div id="appNavigation">
@@ -50,14 +55,17 @@
 				</div>
 				<div id="appView">
 					<h1>Product creator</h1>
-					<p>U kunt hier zelf een product samenstellen. Begin door een categorie te kiezen.
-						
+					<p>Welkom bij de product creator. Hier kan je zelf een product maken en gelijk bestellen.</p>
+					<p>
 						<br />
-						Stap1 : <br />
-						Stap2 :<br />
-						Stap3 : <br />
-						Stap4 :<br />
-						 </p>
+						<b>Stap1</b> : Kies een categorie. Elke categorie heeft een start prijs <br />
+						<b>Stap2</b> : Stel je product samen. <br />
+						<b>Stap3</b> : Sla je product op.<br />
+							 Dit kan allen als je ingelogged bent. Ben je nog niet ingeloged?
+							 	 Je kan hier <a href="#">inloggen</a> of <a href="#">registreren</a>.
+							 Je kan je product een naam geven en opslaan zodat je het product later nog een keer kan bestellen.<br />
+						<b>Stap4</b> : Bestel je product.<br />
+					</p>
 				</div>
 				<div id="appSelector">
 					<!-- <h1>Pizza</h1>
@@ -112,6 +120,9 @@
 								<p>Hallo {{naam}} <br />
 									U kan hier uw product opslaan in uw profiel
 								</p>
+								
+								<h4>Product naam:</h4><br />
+								<input type="text" name="naam" value=""/><br />
 								
 								<button style="border-radius: 5px; background: #fff;">Opslaan</button>
 								
@@ -211,11 +222,48 @@
 			
 		</div>
 		<br />
-	</article>
+	</div>
 	
 	<script src="<?php echo base_url(); ?>js/jquery.json-2.3.js"></script>
 	
 	<script>
+		
+		 // $this -> load -> library('cart');
+//   
+		  // $this->cart->destroy();
+// 		
+		  // /** Test cookie data */
+		  // $data = array(
+		               // array(
+		                       // 'id'      => 1,
+		                       // 'qty'     => 1,
+		                       // 'price'  => 1.00,
+		                       // 'name'  => 'sdf'
+		                    // ),
+		                // array(
+		                       // 'id'      => 2,
+		                       // 'qty'     => 3,
+		                       // 'price'  => 5.00,
+		                       // 'name'  => 'Pizza Kuttelienie'
+		                    // )
+		        // );
+// 		
+		  // $this->cart->insert($data);
+		
+		
+		
+		
+		
+		$('button#setcookie').on('click', function(){
+			$.cookie('koekje_test', [id= 2, qty= 1, price=1.00, name='pizza of awesomeness'], { expires: 1});
+		});
+		
+		$('button#unsetcookie').on('click', function(){
+			$.cookie('koekje_test', null);
+		});
+		
+		
+		
 		
 		(function( $ ){
 

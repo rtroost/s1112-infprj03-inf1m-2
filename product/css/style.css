@@ -102,7 +102,7 @@ section#main_content {
 	background: url('../images/img_content_bgsmall.png') repeat-y scroll center bottom transparent;
 }
 
-article {
+div#content {
 	padding-left: 80px;
 	width: 780px;
 }
@@ -157,11 +157,11 @@ img {
 	margin-right: 0 !important;
 }
 
-div#content{
+/*div#content{
 	padding-left:50px;
 	padding-right:50px;
 	position:relative;
-}
+}*/
 
 table#bestellijst{
 	line-height:1.0em;
