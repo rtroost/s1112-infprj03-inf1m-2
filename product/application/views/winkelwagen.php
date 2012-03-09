@@ -59,6 +59,9 @@
 </style>
 <script>
 	$(document).ready(function() {
+		$('.update').click(function() {
+			//Update quanTITIES with JSON
+		});
 		$('.delete').click(function() {
 			//Delete info from cookie
 
@@ -80,7 +83,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php $i = 1;?>
+		<?php $i = 1; ?>
 		<?php foreach ($this->cart->contents() as $items):
 		?>
 		<tr id="<?php echo $items['rowid'];?>">
