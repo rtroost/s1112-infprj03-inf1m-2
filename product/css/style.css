@@ -165,3 +165,77 @@ table.winkelwagen{
     border-collapse:separate;
     width: 100%;
 }
+
+div#content{
+	padding-left:50px;
+	padding-right:50px;
+	position:relative;
+}
+
+table#bestellijst{
+	line-height:1.0em;
+	padding: 0px;
+	
+	border-collapse:collapse;
+}
+
+tr#categorieRow{
+	font-size:18px;
+	font-family:calibri;
+	font-weight:bold;
+	color:#c0a55a;
+
+	height:25px;
+}
+
+td#categorieColumn{
+	width:400px;
+	
+}
+
+td#categoriePrijs{
+	width:110px;
+	text-align:right;
+}
+
+td#categorieAantal{
+	width:160px;
+	text-align:right;
+}
+
+td#categorieTotaal{
+	width:150px;
+	text-align:right;
+}
+
+tr#productRow{
+	font-size:12px;
+	font-family: "Trebuchet MS", sans-serif;
+	font-weight:bold;
+}
+
+td#productColumn{
+	padding-left:15px;
+}
+
+td#productPrijs{
+	text-align:right;
+}
+
+td#productAantal{
+	text-align:right;
+}
+
+td#productTotaal{
+	text-align:right;
+}
+
+tr#ingredientRow{
+	font-size:8px;
+	vertical-align: baseline;
+	height:20px;
+}
+
+td#ingredientColumn{
+	padding-left:20px;
+}
