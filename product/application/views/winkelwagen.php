@@ -26,25 +26,25 @@
 		color: #6D929B;
 	}
 	table.winkelwagen input[type=text] {
-		font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-		width: 80%;
+		font-family: "Trebuchet MS", sans-serif;
+		font-size: 11px;
+		line-height: 1.4em;
+		padding: 6px 6px 6px 6px;
 		border: 0;
-		border-bottom: 1px #222 inset;
+		width: 90%;
 		background: transparent;
 		text-align: right;
 	}
-	
 	div.checkout-div {
 		width: 100%;
 		text-align: right;
 	}
-	
 	div.checkout-div input[type="submit"], div.checkout-div input[type="button"] {
 		border: 1px solid #39adf0;
 		background: #6ac7fc;
 		color: white;
 		font-size: 14px;
-/*		width: 200px;*/
+		/*		width: 200px;*/
 		text-transform: uppercase;
 		font-weight: bold;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -55,62 +55,78 @@
 	div.checkout-div input[type="submit"]:hover, div.checkout-div input[type="button"]:hover {
 		background: #70d2fd;
 	}
-	
 </style>
 <script>
 	$(document).ready(function() {
 		$('.update').click(function() {
 			//Update quanTITIES with JSON
 		});
-		$('.delete').click(function() {
-			//Delete info from cookie
 
-			//Remove line
-			$(this).parents('tr').hide('slow');
+		$('#winkelwagen').submit(function(e) {
+
+			e.preventDefault();
+
+			/* Sending the form fileds to submit.php: */
+			$.post('submit.php', $(this).serialize(), function() {
+			}, 'json');
+		});
+
+		$('.remove').click(function() {
+			//$(this).parents('tr').hide('slow');
+			
+			return false;
 		});
 	});
-
 </script>
-<table class="winkelwagen">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Omschrijving</th>
-			<th>Aantal</th>
-			<th>Prijs per product</th>
-			<th>Sub-totaal</th>
-			<th>Delete</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php $i = 1; ?>
-		<?php foreach ($this->cart->contents() as $items):
-		?>
-		<tr id="<?php echo $items['rowid'];?>">
-			<td><?php echo $i;?></td>
-			<td><?php echo $items['name'];?></td>
-			<td>
-			<input type="text" value="<?php echo $items['qty'];?>" />
-			</td>
-			<td>€ <?php echo $this -> cart -> format_number($items['price']);?></td>
-			<td>€ <?php echo $this -> cart -> format_number($items['subtotal']);?></td>
-			<td><a href="#" class="delete">Remove</a></td>
-		</tr>
-		<?php $i++;?>
-		<?php endforeach;?>
-	</tbody>
-	<tfoot>
-		<tr>
-			<th scope="row">Total</th>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
-		</tr>
-	</tfoot>
-</table>
-<br />
-<div class="checkout-div">
-	<input type="button" size="5" value="Save and update" id="update" />
-	<input type="button" size="5" value="Check out" id="checkout" />
+<div id="content">
+	<?php
+	if($this->cart->total_items() == 0) {
+		echo '<p>Je winkelwagen is leeg!</p>';
+	} else { ?>
+	<form action="" method="post" accept-charset="utf-8">
+		<table class="winkelwagen" id="winkelwagen">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Omschrijving</th>
+					<th>Aantal</th>
+					<th>Prijs per product</th>
+					<th>Sub-totaal</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $i = 1;?>
+				<?php foreach ($this->cart->contents() as $item):
+				?>
+				<tr id="<?php echo $item['rowid'];?>">
+					<td><?php echo $i;?></td>
+					<td><?php echo $item['name'];?></td>
+					<td>
+					<input type="text" value="<?php echo $item['qty'];?>" />
+					</td>
+					<td>€ <?php echo $this -> cart -> format_number($item['price']);?></td>
+					<td>€ <?php echo $this -> cart -> format_number($item['subtotal']);?></td>
+					<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], 'X', array('class' => 'remove'));?></td>
+				</tr>
+				<?php $i++;?>
+				<?php endforeach;?>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th scope="row">Total</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
+				</tr>
+			</tfoot>
+		</table>
+		<br />
+		<div class="checkout-div">
+			<input type="button" size="5" value="Veranderingen opslaan" id="update" />
+			<input type="submit" size="5" value="Check-out &rarr;" id="checkout" />
+		</div>
+	</form>
+	<?php } //endif ?>
 </div>

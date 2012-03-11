@@ -3,7 +3,6 @@ class Winkelwagen extends CI_controller {
 
 	function index() {
 		$this -> load -> view('includes/header');
-		$this -> load -> library('cart');
 		
 		$this->cart->destroy();
 
@@ -21,14 +20,24 @@ class Winkelwagen extends CI_controller {
                        'price'	 => 5.00,
                        'name'	 => 'Pizza Kuttelienie'
                     )
-        );
+         );
 
 		$this->cart->insert($data);
 
-		//$data['totaal'] = $this -> updatePizzaData();
+		$data['totaal'] = $this -> updatePizzaData();
 
-		$this -> load -> view('winkelwagen', $data);
+		$this -> load -> view('winkelwagen');
 		$this -> load -> view('includes/footer');
+	}
+	
+	function remove($rowid) {
+		
+		$this->cart->update(array(
+			'rowid' => $rowid,
+			'qty' => 0
+		));
+		
+		redirect('winkelwagen');	
 	}
 
 	function updatePizzaData() {
