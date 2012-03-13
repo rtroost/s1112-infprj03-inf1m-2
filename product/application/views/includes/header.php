@@ -40,7 +40,7 @@
 							<a href="<?php echo base_url();?>index.php/product_cont/creator">Product Creator</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url();?>index.php/winkelwagen">Winkelwagenr</a>
+							<a href="<?php echo base_url();?>index.php/winkelwagen">Winkelwagen</a>
 						</li>
 					</ul>
 				</nav>
