@@ -1,50 +1,34 @@
 <style type="text/css" media="screen">
-	table.winkelwagen {
-		font-family: "Trebuchet MS", sans-serif;
-		font-size: 16px;
-		line-height: 1.4em;
-		font-style: normal;
-		border-collapse: separate;
+	table {
+		font: bold 12px "Trebuchet MS", sans-serif;
+		line-height: 1.0em;
+		padding: 0px;
+		border-collapse: collapse;
 		width: 100%;
 	}
-	table.winkelwagen tr {
-		height: 30px;
+	th {
+		font-size: 18px;
+		color: #c0a55a;
+		height: 25px;
 	}
-	table.winkelwagen th {
-		font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-		color: #6D929B;
-		border-right: 1px solid #C1DAD7;
-		border-bottom: 1px solid #C1DAD7;
-		border-top: 1px solid #C1DAD7;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-		text-align: left;
-		padding: 6px 6px 6px 12px;
+	tr {
+		height: 25px;
 	}
-	table.winkelwagen td {
-		padding: 6px 6px 6px 12px;
-		color: #6D929B;
-	}
-	table.winkelwagen input[type=text] {
-		font-family: "Trebuchet MS", sans-serif;
-		font-size: 11px;
-		line-height: 1.4em;
-		padding: 6px 6px 6px 6px;
-		border: 0;
-		width: 90%;
-		background: transparent;
+	td:last-child {
 		text-align: right;
+	}
+	td.upperBorder {
+		border-top: 1px #000 solid;
 	}
 	div.checkout-div {
 		width: 100%;
 		text-align: right;
 	}
-	div.checkout-div input[type="submit"], div.checkout-div input[type="button"] {
+	button, div.checkout-div input[type="submit"], div.checkout-div input[type="button"] {
 		border: 1px solid #39adf0;
 		background: #6ac7fc;
 		color: white;
 		font-size: 14px;
-		/*		width: 200px;*/
 		text-transform: uppercase;
 		font-weight: bold;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -52,45 +36,10 @@
 		padding: 12px;
 		cursor: pointer;
 	}
-	div.checkout-div input[type="submit"]:hover, div.checkout-div input[type="button"]:hover {
+	button:hover, div.checkout-div input[type="submit"]:hover, div.checkout-div input[type="button"]:hover {
 		background: #70d2fd;
 	}
 </style>
-<script>
-	$(document).ready(function() {
-		$('.update').click(function() {
-			//Update quanTITIES with JSON
-		});
-
-		$('#winkelwagen').submit(function(e) {
-
-			e.preventDefault();
-
-			/* Sending the form fileds to submit.php: */
-			$.post('submit.php', $(this).serialize(), function() {
-			}, 'json');
-		});
-
-		$('#update').click(function() {
-			var $kids = $('#winkelwagen').children('tbody').children('tr');
-			var $rowids = '';
-
-			for(var i = 0; i < $kids.length; i++) {
-				$rowids = $rowids.concat($kids.eq(i).attr('id') + '=' + $kids.eq(i).children('td').eq(2).children('input').attr('value') + '&');
-			}
-			console.log($rowids);
-
-			$.ajax({
-				url : 'winkelwagen/update',
-				type : 'POST',
-				data : $rowids,
-				success : function(result) {
-				}
-			});
-		});
-	});
-
-</script>
 <div id="content">
 	<?php
 if($this->cart->total_items() == 0) {
@@ -105,7 +54,7 @@ echo form_open('winkelwagen/update_cart');
 				<th>Omschrijving</th>
 				<th>Aantal</th>
 				<th>Prijs per product</th>
-				<th>Sub-totaal</th>
+				<th>Subtotaal</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -120,26 +69,27 @@ echo form_open('winkelwagen/update_cart');
 				<td><?php echo form_input(array('name' => $i . '[qty]', 'value' => $item['qty'], 'maxlength' => '3', 'size' => '5'));?></td>
 				<td>€ <?php echo $this -> cart -> format_number($item['price']);?></td>
 				<td>€ <?php echo $this -> cart -> format_number($item['subtotal']);?></td>
-				<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], 'X');?></td>
+				<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], '<img src="' . base_url() . 'images/validationError.png" />');?></td>
 			</tr>
 			<?php $i++;?>
 			<?php endforeach;?>
 		</tbody>
 		<tfoot>
 			<tr>
-				<th scope="row">Total</th>
+				<th scope="row">Totaal</th>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td>€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
+				<td class="upperBorder">€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
+				<td></td>
 			</tr>
 		</tfoot>
 	</table>
 	<br />
 	<div class="checkout-div">
 		<?php echo form_submit('', 'Update your Cart');?>
-		<input type="button" size="5" value="Check-out &rarr;" id="checkout" />
-		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'winkelwagen/clear_cart\'"');?>
+		<?php echo form_button('', 'Check Out', 'onClick="javascript: location.href=\'winkelwagen/checkout/\'"');?>
+		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'winkelwagen/clear_cart/\'"');?>
 	</div>
 	</form> <?php } //endif?>
 </div>

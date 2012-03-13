@@ -11,8 +11,6 @@ class Winkelwagen extends CI_controller {
 		
 		$this -> cart -> insert($data);
 
-		$data['totaal'] = $this -> updatePizzaData();
-
 		$this -> load -> view('winkelwagen');
 		$this -> load -> view('includes/footer');
 	}
@@ -40,25 +38,40 @@ class Winkelwagen extends CI_controller {
 		$this -> cart -> destroy();
 		redirect('winkelwagen');
 	}
-
-	function updatePizzaData() {
-		$total = 0;
-
-		foreach ($this->cart->contents() as $item) :
-			$this -> load -> model('Product_model');
-
-			$name = $this -> Product_model -> getName($item['id']);
-			$price = $this -> Product_model -> getCost($item['id']);
-
-			$data = array('rowid' => $item['rowid'], 'name' => $name, 'price' => $price);
-
-			$total += $price;
-
-			$this -> cart -> update($data);
-		endforeach;
-
-		return $total;
+	
+	function checkout() {
+		$this -> load -> view('includes/header');
+		
+		
+		
+		// if($this-> session -> userdata('logged_in')) {
+			// //Proceed to checkout
+		// } else {
+			// //$data = array('return_href' => 'winkelwagen/checkout');
+			// //$this -> load -> view('login', $data);
+		// }
+		
+		$this -> load -> view('includes/footer');
 	}
+
+	// function updatePizzaData() {
+		// $total = 0;
+// 
+		// foreach ($this->cart->contents() as $item) :
+			// $this -> load -> model('Product_model');
+// 
+			// $name = $this -> Product_model -> getName($item['id']);
+			// $price = $this -> Product_model -> getCost($item['id']);
+// 
+			// $data = array('rowid' => $item['rowid'], 'name' => $name, 'price' => $price);
+// 
+			// $total += $price;
+// 
+			// $this -> cart -> update($data);
+		// endforeach;
+// 
+		// return $total;
+	// }
 
 }
 ?>
