@@ -18,6 +18,7 @@
 							<input class="right_input" name="password" type="password" />
 							<input class="remember_me" name="remember" type="checkbox" />
 							<label class="remember_me_text" for="remember">Onthoud mij</label>
+							<!-- <input type="hidden" name="link" value="index.php/product_cont/creator"/> -->
 							<input class="aanmeldInput" name="aanmeldenSubmit" value="Aanmelden" type="submit" />
 						</form>
 					</div>

@@ -18,7 +18,17 @@ class Login extends CI_controller{
 			);
 			$this->session->set_userdata($data);
 			
-			redirect(base_url() . 'index.php');
+			if($this->input->post('link')){
+				redirect(base_url() . $this->input->post('link'));
+			}
+			
+			// als er geen ajax request gemaakt is moet een ridirect gedaan worden.
+			if(!isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+				redirect(base_url() . 'index.php');
+			}
+			
+			
+			
 		} else {
 			
 			//redirect(base_url() . 'index.php?login=false');

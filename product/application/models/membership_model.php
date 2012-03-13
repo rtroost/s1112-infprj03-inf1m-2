@@ -4,8 +4,7 @@
 class Membership_model extends CI_model {
 	
 	function validate() {
-		$sql = "SELECT * FROM gebruiker WHERE email = '" . $this->input->post('email') . "' AND wachtwoord = '" . $this->input->post('password') . "' ";
-		//md5($this->input->post('password')
+		$sql = "SELECT gebruikerid, typeid, voornaam, achternaam, email FROM gebruiker WHERE email = '" . $this->input->post('email') . "' AND wachtwoord = '" . md5($this->input->post('password')) . "' ";
 		
 		$q = $this->db->query($sql);
 		
