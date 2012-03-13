@@ -48,7 +48,7 @@
 							<a href="<?php echo base_url();?>index.php/product_cont/creator">Product Creator</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url();?>index.php/winkelwagen">Winkelwagen</a>
+							<a href="<?php echo base_url();?>index.php/cart">Winkelwagen</a>
 						</li>
 					</ul>
 				</nav>

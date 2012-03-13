@@ -28,12 +28,10 @@
 		border: 1px solid #39adf0;
 		background: #6ac7fc;
 		color: white;
-		font-size: 14px;
+		font: bold 11px "Trebuchet MS", sans-serif;
 		text-transform: uppercase;
-		font-weight: bold;
-		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		text-shadow: 1px 1px 0 #7a7a7a;
-		padding: 12px;
+		padding: 6px;
 		cursor: pointer;
 	}
 	button:hover, div.checkout-div input[type="submit"]:hover, div.checkout-div input[type="button"]:hover {
@@ -45,7 +43,7 @@
 if($this->cart->total_items() == 0) {
 echo '<p>Je winkelwagen is leeg!</p>';
 } else {
-echo form_open('winkelwagen/update_cart');
+echo form_open('cart/update_cart');
 	?>
 	<table class="winkelwagen" id="winkelwagen">
 		<thead>
@@ -69,7 +67,7 @@ echo form_open('winkelwagen/update_cart');
 				<td><?php echo form_input(array('name' => $i . '[qty]', 'value' => $item['qty'], 'maxlength' => '3', 'size' => '5'));?></td>
 				<td>€ <?php echo $this -> cart -> format_number($item['price']);?></td>
 				<td>€ <?php echo $this -> cart -> format_number($item['subtotal']);?></td>
-				<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], '<img src="' . base_url() . 'images/validationError.png" />');?></td>
+				<td><?php echo anchor('cart/remove/' . $item['rowid'], '<img src="' . base_url() . 'images/validationError.png" />');?></td>
 			</tr>
 			<?php $i++;?>
 			<?php endforeach;?>
@@ -88,8 +86,8 @@ echo form_open('winkelwagen/update_cart');
 	<br />
 	<div class="checkout-div">
 		<?php echo form_submit('', 'Update your Cart');?>
-		<?php echo form_button('', 'Check Out', 'onClick="javascript: location.href=\'winkelwagen/checkout/\'"');?>
-		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'winkelwagen/clear_cart/\'"');?>
+		<?php echo form_button('', 'Check Out', 'onClick="javascript: location.href=\'cart/checkout/\'"');?>
+		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'cart/clear_cart/\'"');?>
 	</div>
 	</form> <?php } //endif?>
 </div>

@@ -1,5 +1,5 @@
 <?php
-class Winkelwagen extends CI_controller {
+class Cart extends CI_controller {
 
 	function index() {
 		$this -> load -> view('includes/header');
@@ -11,7 +11,7 @@ class Winkelwagen extends CI_controller {
 		
 		$this -> cart -> insert($data);
 
-		$this -> load -> view('winkelwagen');
+		$this -> load -> view('cart');
 		$this -> load -> view('includes/footer');
 	}
 
@@ -25,24 +25,24 @@ class Winkelwagen extends CI_controller {
 			$this -> cart -> update($data);
 		}
 		
-		redirect('winkelwagen');
+		redirect('cart');
 	}
 
 	function remove($rowid) {
 		$this -> cart -> update(array('rowid' => $rowid, 'qty' => 0));
 
-		redirect('winkelwagen');
+		redirect('cart');
 	}
 
 	function clear_cart() {
 		$this -> cart -> destroy();
-		redirect('winkelwagen');
+		redirect('cart');
 	}
 	
 	function checkout() {
 		$this -> load -> view('includes/header');
 		
-		
+		$this -> load -> view('order-form');
 		
 		// if($this-> session -> userdata('logged_in')) {
 			// //Proceed to checkout
