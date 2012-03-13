@@ -1,3 +1,5 @@
+<?php $this->load->library('session'); ?>
+
 <!DOCTYPE html>
 <html lang="nl-nl">
 	<head>
@@ -9,9 +11,9 @@
 	<body>
 		<div id="wrapper">
 			<header>
-				<?php if(!isset($logged_in)){ ?>
+				<?php if($this->session->userdata('logged_in') != 1){ ?>
 					<div id="inlog">
-						<form action="<?php echo base_url();?>index.php/login/validate_credentials" method="post">
+						<form action="<?php echo base_url();?>index.php/login_cont/login" method="post">
 							<label for="username" >Email adres:</label>
 							<input class="right_input" name="email" type="text" />
 							<label for="wachtwoord" >Wachtwoord:</label>
@@ -24,7 +26,7 @@
 					</div>
 				<?php } else {?>	
 					<div id="inlog">
-						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
+						<form action="<?php echo base_url();?>index.php/login_cont/logout" method="post">
 							<input type="submit" id="logout" value="Logout"/>
 						</form>
 					</div>
