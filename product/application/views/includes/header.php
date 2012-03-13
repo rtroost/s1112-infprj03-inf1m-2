@@ -9,18 +9,25 @@
 	<body>
 		<div id="wrapper">
 			<header>
-				<div id="inlog">
-					<form>
-						<label for="username" >Gebruikersnaam:</label>
-						<input class="right_input" name="username" type="text" />
-						<label for="wachtwoord" >Wachtwoord:</label>
-						<input class="right_input" name="wachtwoord" type="password" />
-						<input class="remember_me" name="remember" type="checkbox" />
-						<label class="remember_me_text" for="remember">Onthoud mij</label>
-						<input class="aanmeldInput" name="aanmeldenSubmit" value="Aanmelden" type="submit" />
-					</form>
-				</div>
-			
+				<?php if(!isset($logged_in)){ ?>
+					<div id="inlog">
+						<form action="<?php echo base_url();?>index.php/login/validate_credentials" method="post">
+							<label for="username" >Email adres:</label>
+							<input class="right_input" name="email" type="text" />
+							<label for="wachtwoord" >Wachtwoord:</label>
+							<input class="right_input" name="password" type="password" />
+							<input class="remember_me" name="remember" type="checkbox" />
+							<label class="remember_me_text" for="remember">Onthoud mij</label>
+							<input class="aanmeldInput" name="aanmeldenSubmit" value="Aanmelden" type="submit" />
+						</form>
+					</div>
+				<?php } else {?>	
+					<div id="inlog">
+						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
+							<input type="submit" id="logout" value="Logout"/>
+						</form>
+					</div>
+				<?php } ?>
 				<nav>
 					<ul id="header_nav">
 						<li>
