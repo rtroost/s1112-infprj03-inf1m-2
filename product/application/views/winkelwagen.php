@@ -71,62 +71,75 @@
 			}, 'json');
 		});
 
-		$('.remove').click(function() {
-			//$(this).parents('tr').hide('slow');
-			
-			return false;
+		$('#update').click(function() {
+			var $kids = $('#winkelwagen').children('tbody').children('tr');
+			var $rowids = '';
+
+			for(var i = 0; i < $kids.length; i++) {
+				$rowids = $rowids.concat($kids.eq(i).attr('id') + '=' + $kids.eq(i).children('td').eq(2).children('input').attr('value') + '&');
+			}
+			console.log($rowids);
+
+			$.ajax({
+				url : 'winkelwagen/update',
+				type : 'POST',
+				data : $rowids,
+				success : function(result) {
+				}
+			});
 		});
 	});
+
 </script>
 <div id="content">
 	<?php
-	if($this->cart->total_items() == 0) {
-		echo '<p>Je winkelwagen is leeg!</p>';
-	} else { ?>
-	<form action="" method="post" accept-charset="utf-8">
-		<table class="winkelwagen" id="winkelwagen">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Omschrijving</th>
-					<th>Aantal</th>
-					<th>Prijs per product</th>
-					<th>Sub-totaal</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php $i = 1;?>
-				<?php foreach ($this->cart->contents() as $item):
-				?>
-				<tr id="<?php echo $item['rowid'];?>">
-					<td><?php echo $i;?></td>
-					<td><?php echo $item['name'];?></td>
-					<td>
-					<input type="text" value="<?php echo $item['qty'];?>" />
-					</td>
-					<td>€ <?php echo $this -> cart -> format_number($item['price']);?></td>
-					<td>€ <?php echo $this -> cart -> format_number($item['subtotal']);?></td>
-					<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], 'X', array('class' => 'remove'));?></td>
-				</tr>
-				<?php $i++;?>
-				<?php endforeach;?>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th scope="row">Total</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
-				</tr>
-			</tfoot>
-		</table>
-		<br />
-		<div class="checkout-div">
-			<input type="button" size="5" value="Veranderingen opslaan" id="update" />
-			<input type="submit" size="5" value="Check-out &rarr;" id="checkout" />
-		</div>
-	</form>
-	<?php } //endif ?>
+if($this->cart->total_items() == 0) {
+echo '<p>Je winkelwagen is leeg!</p>';
+} else {
+echo form_open('winkelwagen/update_cart');
+	?>
+	<table class="winkelwagen" id="winkelwagen">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Omschrijving</th>
+				<th>Aantal</th>
+				<th>Prijs per product</th>
+				<th>Sub-totaal</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php $i = 1;?>
+			<?php foreach ($this->cart->contents() as $item):
+			?>
+			<?php echo form_hidden($i . '[rowid]', $item['rowid']);?>
+			<tr>
+				<td><?php echo $i;?></td>
+				<td><?php echo $item['name'];?></td>
+				<td><?php echo form_input(array('name' => $i . '[qty]', 'value' => $item['qty'], 'maxlength' => '3', 'size' => '5'));?></td>
+				<td>€ <?php echo $this -> cart -> format_number($item['price']);?></td>
+				<td>€ <?php echo $this -> cart -> format_number($item['subtotal']);?></td>
+				<td><?php echo anchor('winkelwagen/remove/' . $item['rowid'], 'X');?></td>
+			</tr>
+			<?php $i++;?>
+			<?php endforeach;?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th scope="row">Total</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
+			</tr>
+		</tfoot>
+	</table>
+	<br />
+	<div class="checkout-div">
+		<?php echo form_submit('', 'Update your Cart');?>
+		<input type="button" size="5" value="Check-out &rarr;" id="checkout" />
+		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'winkelwagen/clear_cart\'"');?>
+	</div>
+	</form> <?php } //endif?>
 </div>
