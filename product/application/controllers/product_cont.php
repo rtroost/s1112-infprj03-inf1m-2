@@ -3,6 +3,44 @@
 class product_cont extends CI_controller {
 	
 	function index(){
+		
+		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && isset($_POST['setCookie'])){
+			
+						
+			  /** Test cookie data */
+			  // $data = 
+			  		// //array(
+			                // array(
+			                       // 'id'      => 2,
+			                       // 'qty'     => 3,
+			                       // 'price'  => 5.00,
+			                       // 'name'  => 'Pizza Kuttelienie'
+			                    // )
+			       // // );
+// 			
+			  // $this->cart->insert($data);
+			  
+			  
+			  
+			  
+			  
+
+			  
+						
+			
+			// SET COOKIE
+			// if(setcookie($name)){
+				// echo "succes";
+			// } else {
+				// echo "failed";
+			// }
+			
+			echo "success";
+			return;
+		}
+		
+		
+		
 		$this->load->view('product');
 	}
 	

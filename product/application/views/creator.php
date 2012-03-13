@@ -5,10 +5,6 @@
 		
 		<h1>De product creëer pagina</h1>
 		<p>U kunt hier uw eigen product samenstellen</p>
-		
-		<button id="setcookie">Set cookie</button>
-		<button id="unsetcookie">Usset cookie</button>
-		<br />
 		<br />
 		
 		<div id="productApp">
@@ -92,9 +88,9 @@
 					<table id="view2_table_head">
 						<tr>
 							<td><h4>Ingredient</h4></td>
-							<td><h4>Gewichtpunten</h4></td>
+							<td><h4>Gewicht</h4></td>
 							<td><h4>Hoeveelheid</h4></td>
-							<td><h4>Totaal Gewicht</h4></td>
+							<td><h4>Prijs</h4></td>
 						</tr>
 					</table>
 					<div id="overflow" style="display:none;">
@@ -103,10 +99,10 @@
 					</div>
 					<table id="view2_table_foot" cellspacing="0">
 						<tr>
-							<td><h4>Totaal Prijs</h4></td>
-							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 							<td><h4>Totaal Gewicht (max 20)</h4></td>
 							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 						</tr>
 					</table>
 				</div>
@@ -160,25 +156,26 @@
 						<tr>
 							<td><h4>Ingredient</h4></td>
 							<td><h4>Hoeveelheid</h4></td>
+							<td><h4>Prijs</h4></td>
 						</tr>
 					</table>
 					<div id="overflow" style="display:none;">
-						<table id="view2_table_main">
+						<table id="view3_table_main">
 						</table>
 					</div>
 					<table id="view2_table_foot" cellspacing="0">
 						<tr>
-							<td><h4>Totaal Prijs</h4></td>
-							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 							<td><h4>Totaal Gewicht (max 20)</h4></td>
 							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div id="appMainWindow4" class="mainWindows">
 				<div id="appSideBar">
-					<h1>Uw product bestellen:</h1>
+					<h1>Uw product bestellen</h1>
 					<p id="bestelText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
 					<div id="bestellen" style="display:none;">
 						<?php if(isset($_SESSION['username'])){ ?>
@@ -188,6 +185,7 @@
 						<?php } else { ?>
 								<p>Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.</p>
 								<button id="winkelwagen" style="border-radius: 5px; background: #fff;">In Winkelwagen</button><br />
+								<h4 id="winkelwagenHeading" style="display: none;">Uw bestelling is geplaatst</h4>
 								<a id="naarWinkelwagen" href="#" style="display: none;">Naar uw Winkelwagen</a>
 						<?php } ?>
 					</div>	
@@ -202,18 +200,19 @@
 						<tr>
 							<td><h4>Ingredient</h4></td>
 							<td><h4>Hoeveelheid</h4></td>
+							<td><h4>Prijs</h4></td>
 						</tr>
 					</table>
 					<div id="overflow" style="display:none;">
-						<table id="view2_table_main">
+						<table id="view3_table_main">
 						</table>
 					</div>
 					<table id="view2_table_foot" cellspacing="0">
 						<tr>
-							<td><h4>Totaal Prijs</h4></td>
-							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 							<td><h4>Totaal Gewicht (max 20)</h4></td>
 							<td><h4 id="totaal_gewicht_ingredienten">0</h4></td>
+							<td><h4>Totaal Prijs</h4></td>
+							<td><h4 id="totaal_prijs_ingredienten">0</h4></td>
 						</tr>
 					</table>
 				</div>
@@ -254,13 +253,13 @@
 		
 		
 		
-		$('button#setcookie').on('click', function(){
-			$.cookie('koekje_test', [id= 2, qty= 1, price=1.00, name='pizza of awesomeness'], { expires: 1});
-		});
-		
-		$('button#unsetcookie').on('click', function(){
-			$.cookie('koekje_test', null);
-		});
+		// $('button#setcookie').on('click', function(){
+			// $.cookie('koekje_test', [id= 2, qty= 1, price=1.00, name='pizza of awesomeness'], { expires: 1});
+		// });
+// 		
+		// $('button#unsetcookie').on('click', function(){
+			// $.cookie('koekje_test', null);
+		// });
 		
 		
 		
@@ -303,7 +302,8 @@
 				bestelText: $('p#bestelText'),
 				divBestellen: $('div#bestellen'),
 				bestellenViewTitel: $('h1#bestellen_view_titel'),
-				a_naarWinkelwagen: $('a#naarWinkelwagen')
+				a_naarWinkelwagen: $('a#naarWinkelwagen'),
+				winkelwagenHeading: $('h4#winkelwagenHeading')
 			}
 			
 			// Navigation script
@@ -341,7 +341,19 @@
 			// END Navigation script
 			
 			$('button#winkelwagen').on('click', function(){
-				vars.a_naarWinkelwagen.show();
+				$.ajax({
+						url: "<?php echo base_url(); ?>index.php/product_cont",
+						type: 'POST',
+						data: 'setCookie=true',
+						success: function(result){
+							if(result === 'success'){
+								vars.winkelwagenHeading.show();
+								vars.a_naarWinkelwagen.show();
+							} else {
+								vars.winkelwagenHeading.text('bestellen is mislukt').show();
+							}
+						}
+				});
 			});
 			
 			
@@ -401,12 +413,30 @@
 			// changeContent verzameling
 			var changeContent = {
 				
-				setPrice: function(){
+				setPriceFirst: function(id){
+					if(String(vars.ingredienten[id].prijs).length == 2){
+						return '€0,' + String(vars.ingredienten[id].prijs);
+					} else {
+						return '€' + String(vars.ingredienten[id].prijs).substring(0,1) + ',' + String(vars.ingredienten[id].prijs).substring(1);
+					}
+				},
+				
+				setPrice: function(id){
 					if(String(vars.totaalPrijs).length == 3){
 						vars.h4Prijs.text('€' + String(vars.totaalPrijs).substring(0,1) + ',' + String(vars.totaalPrijs).substring(1));
 					} else {
 						vars.h4Prijs.text('€' + String(vars.totaalPrijs).substring(0,2) + ',' + String(vars.totaalPrijs).substring(2));
 					}
+					if(id){
+						if(String(vars.ingredienten[id].prijs).length == 2){
+							var string = '€0,' + String(vars.ingredienten[id].prijs);
+						} else {
+							var string = '€' + String(vars.ingredienten[id].prijs).substring(0,1) + ',' + String(vars.ingredienten[id].prijs).substring(1);
+						}
+						vars.view2.find('tr.'+id).children('.prijs').text(string);
+						vars.view3.find('table#view3_table_main tr.'+id).children('.prijs').text(string);
+						vars.view4.find('table#view3_table_main tr.'+id).children('.prijs').text(string);
+					} 
 				},
 				
 				categorie_content_change: function(value){
@@ -533,15 +563,19 @@
 						
 						var tr = $('<tr>', {class: id}).appendTo(vars.view2.find('table#view2_table_main')),
 						 	td1 = $('<td>').appendTo(tr),
-							td2 = $('<td>', { text: vars.ingredienten[id].gewichtspunten }).appendTo(tr),
+							//td2 = $('<td>', { text: vars.ingredienten[id].gewichtspunten }).appendTo(tr),
+							td2 = $('<td>', { text: (vars.ingredienten[id].gewicht), class: 'totaalGewicht'}).appendTo(tr),
 							td3 = $('<td>').appendTo(tr),
-						 	td4 = $('<td>', { text: (vars.ingredienten[id].gewicht), class: 'totaalGewicht'}).appendTo(tr),
-						 	tr2 = $('<tr>', {class: id}).appendTo(vars.view3.find('table#view2_table_main')),
+						 	td4 = $('<td>', { text: changeContent.setPriceFirst(id), class: 'prijs'}).appendTo(tr),
+						 	
+						 	tr2 = $('<tr>', {class: id}).appendTo(vars.view3.find('table#view3_table_main')),
 						 	td1tr2 = $('<td>').appendTo(tr2),
-						 	td2tr2 = $('<td>').appendTo(tr2);
-						 	tr3 = $('<tr>', {class: id}).appendTo(vars.view4.find('table#view2_table_main')),
+						 	td2tr2 = $('<td>').appendTo(tr2),
+						 	td3tr2 = $('<td>', {text: changeContent.setPriceFirst(id), class: 'prijs'}).appendTo(tr2),
+						 	tr3 = $('<tr>', {class: id}).appendTo(vars.view4.find('table#view3_table_main')),
 						 	td1tr3 = $('<td>').appendTo(tr3),
-						 	td2tr3 = $('<td>').appendTo(tr3);						
+						 	td2tr3 = $('<td>').appendTo(tr3),						
+						 	td3tr3 = $('<td>', {text: changeContent.setPriceFirst(id), class: 'prijs'}).appendTo(tr3);						
 						
 						$('<img>', { 
 							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
@@ -552,6 +586,8 @@
 							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
 						}).appendTo(td1tr2);
 						$('<p>', { text: vars.ingredienten[id].naam }).appendTo(td1tr2);
+						
+						
 						
 						$('<img>', { 
 							src: 'http://127.0.0.1/pizzario/images/productApp/' + vars.gekozenCategorie + '/' + vars.ingredienten[id].ingredientId + '/left.png'
@@ -600,7 +636,7 @@
 							}
 							vars.totaalPrijs -= oldPrijs;
 							vars.totaalPrijs += vars.ingredienten[id].prijs;
-							changeContent.setPrice();
+							changeContent.setPrice(id);
 						});
 						
 						$('<button>', {text: 'Wijzig', class: 'down', 'data-func': 1}).appendTo(divButtons);

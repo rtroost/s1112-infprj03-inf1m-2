@@ -1,6 +1,6 @@
 <?php $this->load->view('includes/header') ?>
-	<article>
+	<div id="content">
 		<h1>Hoofdpagina</h1>
 	
-	</article>	
+	</div>	
 <?php $this->load->view('includes/footer') ?>

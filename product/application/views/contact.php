@@ -1,5 +1,5 @@
 <?php $this->load->view('includes/header') ?>
-	<article>
+	<div id="content">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 		Vestibulum facilisis blandit augue in condimentum. 
 		Aliquam erat volutpat. Suspendisse suscipit egestas ipsum, et porttitor erat dapibus sit amet. 
@@ -11,5 +11,5 @@
 		Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
 		Vivamus id hendrerit diam. Suspendisse potenti. 
 		Maecenas at neque sit amet lectus ultricies semper.
-	</article>	
+	</div>	
 <?php $this->load->view('includes/footer') ?>

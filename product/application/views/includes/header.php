@@ -4,7 +4,6 @@
 		<meta charset="UTF-8" />
 		<title>Pizzario</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo base_url();?>js/jquery.cookie.js"></script>
 		<link rel="stylesheet" href="<?php echo base_url();?>css/style.css" type="text/css" />
 	</head>
 	<body>
@@ -25,6 +24,7 @@
 				<nav>
 					<ul id="header_nav">
 						<li>
+<!-- 							<a href="<?php echo base_url();?>index.php"></a> -->
 							<a href="<?php echo base_url();?>index.php"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_home_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_home_over.png'" src="<?php echo base_url();?>images/img_button_home_over.png"></img></a>
 						</li>
 						<li>
@@ -36,10 +36,16 @@
 						<li>
 							<a href="<?php echo base_url();?>index.php/contact_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_contact_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_contact.png'" src="<?php echo base_url();?>images/img_button_contact.png"></img></a>
 						</li>
+						<li>
+							<a href="<?php echo base_url();?>index.php/product_cont/creator">Product Creator</a>
+						</li>
+						<li>
+							<a href="<?php echo base_url();?>index.php/winkelwagen">Winkelwagenr</a>
+						</li>
 					</ul>
 				</nav>
 				
-				<div id="search">
+				<div id="search" style="margin-top: -10px;">
 					<form id="searchform" action="<?php echo base_url();?>index.php/search_cont">
 						<label for="search">Zoeken</label>
 						<input class="zoeken" name="search" type="text" />		
