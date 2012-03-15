@@ -183,7 +183,7 @@ tr#categorieRow{
 }
 
 td#categorieColumn{
-	width:400px;	
+	width:300px;	
 }
 
 td#categoriePrijs{
@@ -192,12 +192,17 @@ td#categoriePrijs{
 }
 
 td#categorieAantal{
-	width:160px;
+	width:140px;
 	text-align:right;
 }
 
 td#categorieTotaal{
-	width:150px;
+	width:120px;
+	text-align:right;
+}
+
+td#categorieBestellen{
+	width:140px;
 	text-align:right;
 }
 
@@ -219,7 +224,7 @@ td#productAantal{
 	text-align:right;
 }
 
-td#productTotaal{
+td.productTotaal{
 	text-align:right;
 }
 
