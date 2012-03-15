@@ -71,6 +71,14 @@ echo form_open('cart/update_cart');
 			</tr>
 			<?php $i++;?>
 			<?php endforeach;?>
+			<tr>
+				<td>-</td>
+				<td>Verzendkosten</td>
+				<td>-</td>
+				<td>-</td>
+				<td>€ 1,95</td>
+				<td>-</td>
+			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
@@ -78,7 +86,7 @@ echo form_open('cart/update_cart');
 				<td></td>
 				<td></td>
 				<td></td>
-				<td class="upperBorder">€ <?php echo $this -> cart -> format_number($this -> cart -> total());?></td>
+				<td class="upperBorder">€ <?php echo $this -> cart -> format_number($this -> cart -> total() + 1.95);?></td>
 				<td></td>
 			</tr>
 		</tfoot>

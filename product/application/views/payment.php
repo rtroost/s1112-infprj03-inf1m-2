@@ -10,7 +10,7 @@
 		background-size: 20px;
 		background-repeat: no-repeat;
 		background-position: 10px center;
-		/*		display: block;*/
+		display: block;
 		width: 250px;
 	}
 	.info {
@@ -67,7 +67,7 @@
 	}
 	form.order_userinfo input[type="submit"]:hover {
 		background: #70d2fd;
-	}
+	}
 </style>
 <div id="content">
 	<?php if($this -> cart -> total_items() == 0) {
@@ -86,38 +86,6 @@
 		$attributes = array('class' => 'order_userinfo', 'id' => 'order_userinfo');
 		echo form_open('', $attributes);
 		?>
-		<p>
-		<label for="voorletters">Voorletters <span class="required">*</span></label>
-		<input id="voorletters" type="text" name="voorletters" placeholder="A.B.F." maxlength="20" value="<?php echo set_value('voorletters');?>"  />
-		</p>
-		<p>
-		<label for="achternaam">Achternaam <span class="required">*</span></label>
-		<input id="achternaam" type="text" name="achternaam" maxlength="50" value="<?php echo set_value('achternaam');?>"  />
-		</p>
-		<p>
-		<label for="adresregel_1">Adresregel 1 <span class="required">*</span></label>
-		<input id="adresregel_1" type="text" name="adresregel_1" placeholder="Straatnaam 00" maxlength="50" value="<?php echo set_value('adresregel_1');?>"  />
-		</p>
-		<p>
-		<label for="adresregel_2">Adresregel 2</label>
-		<input id="adresregel_2" type="text" name="adresregel_2" maxlength="50" value="<?php echo set_value('adresregel_2');?>"  />
-		</p>
-		<p>
-		<label for="postcode">Postcode <span class="required">*</span></label>
-		<input id="postcode" type="text" name="postcode" placeholder="1234AB" maxlength="6" value="<?php echo set_value('postcode');?>"  />
-		</p>
-		<p>
-		<label for="woonplaats">Woonplaats <span class="required">*</span></label>
-		<input id="woonplaats" type="text" name="woonplaats" placeholder="Utrecht" maxlength="50" value="<?php echo set_value('woonplaats');?>"  />
-		</p>
-		<p>
-		<label for="telefoon_nummer">Telefoonnummer <span class="required">*</span></label>
-		<input id="telefoon_nummer" type="text" name="telefoon_nummer" placeholder="0101234567" maxlength="10" value="<?php echo set_value('telefoon_nummer');?>"  />
-		</p>
-		<p>
-		<label for="email">Email <span class="required">*</span></label>
-		<input id="email" type="text" name="email" placeholder="username@provider.countrycode" maxlength="100" value="<?php echo set_value('email');?>"  />
-		</p>
 		<p>
 		<label for="eindbedrag">Eindbedrag</label>
 		<span id="eindbedrag">€ <?php echo $this -> cart -> format_number($this -> cart -> total() + 1.95);?></span>
