@@ -16,22 +16,21 @@
 			foreach($producten as $product => $productinformatie){ $i++; echo "
 			<tr id=\"productRow\" >
 				<td id=\"productColumn\">".$product."</td>
-				<td id=\"productPrijs\">&#8364;".number_format($productinformatie['prijs']/100, 2) ."</td>
-				<td id=\"productAantal\">
-				<img onClick=\"minAantal(".$i.", ".$productinformatie['prijs'].")\" src=\"".base_url()."images/img_order_minus.png\">
-				<input class=\"aantal\" onChange=\"manualAantal(".$i.", ".$productinformatie['prijs'].")\" id=\"aantal".$i."\" value=\"0\" name=\"aantal\" type=\"text\" />
-				<img onClick=\"plusAantal(".$i.", ".$productinformatie['prijs'].")\" src=\"".base_url()."images/img_order_plus.png\">
+				<td rowspan=\"2\" id=\"productPrijs\">&#8364;".number_format($productinformatie['prijs']/100, 2) ."</td>
+				<td rowspan=\"2\" id=\"productAantal\">
+					<img class=\"bestellenButtons\" onClick=\"plusAantal(".$i.", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_plus_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_plus.png'\" src=\"".base_url()."images/img_order_plus.png\"></img>
+					<input class=\"aantal\" onChange=\"manualAantal(".$i.", ".$productinformatie['prijs'].")\" id=\"aantal".$i."\" value=\"0\" name=\"aantal\" type=\"text\" />
+					<img class=\"bestellenButtons\" onClick=\"minAantal(".$i.", ".$productinformatie['prijs'].")\" src=\"".base_url()."images/img_order_minus.png\">
 				</td>
-				<td id=\"totaal".$i."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
-				<td id=\"categorieBestellen\"><img src=\"".base_url()."images/winkelwagen.png\" name=\"winkelwagen\"></td>
+				<td rowspan=\"2\" id=\"totaal".$i."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
+				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"12px\" src=\"".base_url()."images/winkelwagen.png\" name=\"winkelwagen\"></td>
 			</tr>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";
 				for($i = 0; $i < count($productinformatie)-1; $i++){ 
 					if($i == 0){ echo $productinformatie[$i];}
 					else{ echo ", ".$productinformatie[$i];}
-				
-				
+					
 				}echo "														
 				</td>
 			</tr>";															

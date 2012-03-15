@@ -109,6 +109,21 @@ div#content {
 
 input.aantal {
 	width: 20px;
+	font-size: 10px;
+	height: 14px;
+	border:1px solid #000000;
+	position:relative;
+	margin-left:2px;
+	margin-right:2px;
+	float:right;
+	
+}
+
+img.bestellenButtons {
+	vertical-align: baseline;
+	border:1px solid #000000;
+	position:relative;
+	float:right;
 }
 /* =========== */
 /* end content */
@@ -167,6 +182,8 @@ img {
 	position:relative;
 }*/
 
+
+
 table#bestellijst{
 	line-height:1.0em;
 	padding: 0px;
@@ -183,7 +200,7 @@ tr#categorieRow{
 }
 
 td#categorieColumn{
-	width:300px;	
+	width:300px;
 }
 
 td#categoriePrijs{
@@ -218,22 +235,31 @@ td#productColumn{
 
 td#productPrijs{
 	text-align:right;
+	vertical-align:baseline;
+	float:right;
 }
 
 td#productAantal{
 	text-align:right;
+	vertical-align:baseline;
 }
 
 td.productTotaal{
 	text-align:right;
+	vertical-align:baseline;
+	float:right;
+}
+
+td#productBestellen{
+	text-align:right;
+	vertical-align:baseline;
 }
 
 tr#ingredientRow{
 	font-size:8px;
-	vertical-align: baseline;
-	height:20px;
 }
 
 td#ingredientColumn{
 	padding-left:20px;
+	padding-bottom: 8px;
 }
