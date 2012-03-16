@@ -9,11 +9,8 @@ class Order_model extends CI_Model {
 		$this -> db -> where('gebruikerid', $this -> session -> userdata('gebruikerid'));
 		$this -> db -> update('gebruiker', $form_data);
 
-		if ($this -> db -> affected_rows() == '1') {
-			return TRUE;
-		}
-
-		return FALSE;
+		//If something, do something :D
+		return TRUE;
 	}
 
 	function getShippingData() {

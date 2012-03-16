@@ -27,7 +27,7 @@
 					</div>
 				<?php } else {?>	
 					<div id="inlog">
-						<form action="<?php echo base_url();?>index.php/login_cont/logout" method="post">
+						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
 							<input type="submit" id="logout" value="Logout"/>
 						</form>
 					</div>

@@ -13,14 +13,6 @@ class Cart extends CI_controller {
 
 	function index() {
 		$this -> load -> view('includes/header');
-
-		$this -> cart -> destroy();
-
-		/** Test cookie data */
-		$data = array( array('id' => 1, 'qty' => 1, 'price' => 1.00, 'name' => 'sdf'), array('id' => 2, 'qty' => 3, 'price' => 5.00, 'name' => 'Pizza Kuttelienie'));
-
-		$this -> cart -> insert($data);
-
 		$this -> load -> view('cart');
 		$this -> load -> view('includes/footer');
 	}
@@ -61,7 +53,8 @@ class Cart extends CI_controller {
 		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
-
+		$this -> form_validation -> set_rules('payment-method', 'Payment method', 'required');
+		
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed

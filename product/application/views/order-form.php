@@ -119,10 +119,6 @@
 		<input id="email" type="text" name="email" placeholder="username@provider.countrycode" maxlength="100" value="<?php echo $email;?>"  />
 		</p>
 		<p>
-		<label for="eindbedrag">Eindbedrag</label>
-		<span id="eindbedrag">€ <?php echo $this -> cart -> format_number($this -> cart -> total() + 1.95);?></span>
-		</p>
-		<p>
 		<label for="payment-method">Betaalmethode <span class="required">*</span></label>
 		<?php // Change the values in this array to populate your dropdown as required?>
 		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDeal', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
