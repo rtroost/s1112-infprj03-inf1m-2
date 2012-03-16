@@ -28,11 +28,11 @@
 					<img class=\"bestellenButtons\" onClick=\"minAantal(".$pid.", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_min_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_min.png'\" src=\"".base_url()."images/img_order_min.png\"></img>
 				</td>
 				<td rowspan=\"2\" id=\"totaal".$pid."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
-				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" <img onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
+				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
 			</tr>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";
-				for($i = 0; $i < count($productinformatie)-1; $i++){ 
+				for($i = 0; $i < count($productinformatie)-2; $i++){ 
 					if($i == 0){ echo $productinformatie[$i];}
 					else{ echo ", ".$productinformatie[$i];}
 					
@@ -43,6 +43,8 @@
 		</table>";
 		}echo "																		
 	</div>";
-	$this->load->view('includes/footer')
-	 										
-?>
+	?>
+	
+	<?php
+		$this->load->view('includes/footer')
+	?>

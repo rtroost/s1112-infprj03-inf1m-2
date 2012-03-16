@@ -6,9 +6,7 @@ class Bestellen_cont extends CI_controller {
 		$this->load->model('bestellen_model');
 		$data['bestellijst'] = $this->bestellen_model->getFullProducten();
 		$this->load->view('bestellen', $data);
-		
 	}
-	
 }
 
 ?>

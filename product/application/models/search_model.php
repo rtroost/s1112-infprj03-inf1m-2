@@ -35,7 +35,7 @@ class search_model extends CI_model{
 		INNER JOIN product_ingredient ON (product.productid = product_ingredient.productid)
 		INNER JOIN categorie_ingredient ON (product_ingredient.catingid = categorie_ingredient.catingid)
 		INNER JOIN ingredient ON (categorie_ingredient.ingredientid = ingredient.ingredientid)
-		WHERE product.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1' OR categorie.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1' OR ingredient.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1'
+		WHERE product.productid = '".$product->productid."' AND product.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1' OR product.productid = '".$product->productid."' AND categorie.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1' OR product.productid = '".$product->productid."' AND ingredient.naam like '%".$_GET['search']."%' AND categorie.gearchiveerd != '1' and product.gearchiveerd != '1'
 		GROUP BY product.naam");
 				
 			if($ingredientenQ->num_rows() > 0){

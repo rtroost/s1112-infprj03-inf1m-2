@@ -26,6 +26,7 @@ class Bestellen_model extends CI_model{
 							}
 							$prijs = $categorie->standaardprijs+$prijs;
 							$data[$categorie->naam][$product->naam]['prijs'] = $prijs;
+							$data[$categorie->naam][$product->naam]['id'] = $product->productid;
 						}
 					}
 				}
