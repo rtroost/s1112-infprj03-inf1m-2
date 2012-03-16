@@ -14,15 +14,15 @@
 			<header>
 				<?php if($this->session->userdata('logged_in') != 1){ ?>
 					<div id="inlog">
-						<form action="<?php echo base_url();?>index.php/login_cont/login" method="post">
+						<form action="<?php echo base_url();?>index.php/login" method="post">
 							<label for="username" >Email adres:</label>
-							<input class="right_input" name="email" type="text" />
-							<label for="wachtwoord" >Wachtwoord:</label>
-							<input class="right_input" name="password" type="password" />
-							<input class="remember_me" name="remember" type="checkbox" />
-							<label class="remember_me_text" for="remember">Onthoud mij</label>
+							<input class="right_input" name="username" id="username" type="text" />
+							<label for="password" >Wachtwoord:</label>
+							<input class="right_input" name="password" id="password" type="password" />
+							<input class="remember_me" name="remember" id="remember_me" type="checkbox" />
+							<label class="remember_me_text" for="remember_me">Onthoud mij</label>
 							<!-- <input type="hidden" name="link" value="index.php/product_cont/creator"/> -->
-							<input class="aanmeldInput" name="aanmeldenSubmit" value="Aanmelden" type="submit" />
+							<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
 						</form>
 					</div>
 				<?php } else {?>	

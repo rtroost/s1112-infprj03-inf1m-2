@@ -88,35 +88,35 @@
 		?>
 		<p>
 		<label for="voorletters">Voorletters <span class="required">*</span></label>
-		<input id="voorletters" type="text" name="voorletters" placeholder="A.B.F." maxlength="20" value="<?php echo set_value('voorletters');?>"  />
+		<input id="voorletters" type="text" name="voorletters" placeholder="A.B.F." maxlength="20" value="<?php echo $voornaam; ?>"  />
 		</p>
 		<p>
 		<label for="achternaam">Achternaam <span class="required">*</span></label>
-		<input id="achternaam" type="text" name="achternaam" maxlength="50" value="<?php echo set_value('achternaam');?>"  />
+		<input id="achternaam" type="text" name="achternaam" maxlength="50" value="<?php echo $achternaam;?>"  />
 		</p>
 		<p>
 		<label for="adresregel_1">Adresregel 1 <span class="required">*</span></label>
-		<input id="adresregel_1" type="text" name="adresregel_1" placeholder="Straatnaam 00" maxlength="50" value="<?php echo set_value('adresregel_1');?>"  />
+		<input id="adresregel_1" type="text" name="adresregel_1" placeholder="Straatnaam 00" maxlength="50" value="<?php echo $adresregel_1?>"  />
 		</p>
 		<p>
 		<label for="adresregel_2">Adresregel 2</label>
-		<input id="adresregel_2" type="text" name="adresregel_2" maxlength="50" value="<?php echo set_value('adresregel_2');?>"  />
+		<input id="adresregel_2" type="text" name="adresregel_2" maxlength="50" value="<?php echo $adresregel_2;?>"  />
 		</p>
 		<p>
 		<label for="postcode">Postcode <span class="required">*</span></label>
-		<input id="postcode" type="text" name="postcode" placeholder="1234AB" maxlength="6" value="<?php echo set_value('postcode');?>"  />
+		<input id="postcode" type="text" name="postcode" placeholder="1234AB" maxlength="6" value="<?php echo $postcode; ?>"  />
 		</p>
 		<p>
 		<label for="woonplaats">Woonplaats <span class="required">*</span></label>
-		<input id="woonplaats" type="text" name="woonplaats" placeholder="Utrecht" maxlength="50" value="<?php echo set_value('woonplaats');?>"  />
+		<input id="woonplaats" type="text" name="woonplaats" placeholder="Utrecht" maxlength="50" value="<?php echo $woonplaats;?>"  />
 		</p>
 		<p>
-		<label for="telefoon_nummer">Telefoonnummer <span class="required">*</span></label>
-		<input id="telefoon_nummer" type="text" name="telefoon_nummer" placeholder="0101234567" maxlength="10" value="<?php echo set_value('telefoon_nummer');?>"  />
+		<label for="telefoonnummer">Telefoonnummer <span class="required">*</span></label>
+		<input id="telefoonnummer" type="text" name="telefoonnummer" placeholder="0101234567" maxlength="10" value="<?php echo $telefoonnummer;?>"  />
 		</p>
 		<p>
 		<label for="email">Email <span class="required">*</span></label>
-		<input id="email" type="text" name="email" placeholder="username@provider.countrycode" maxlength="100" value="<?php echo set_value('email');?>"  />
+		<input id="email" type="text" name="email" placeholder="username@provider.countrycode" maxlength="100" value="<?php echo $email;?>"  />
 		</p>
 		<p>
 		<label for="eindbedrag">Eindbedrag</label>
