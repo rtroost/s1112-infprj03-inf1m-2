@@ -121,7 +121,7 @@
 		<p>
 		<label for="payment-method">Betaalmethode <span class="required">*</span></label>
 		<?php // Change the values in this array to populate your dropdown as required?>
-		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDeal', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
+		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDEAL', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
 
 		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'))
 		?>

@@ -54,7 +54,7 @@ class Cart extends CI_controller {
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
 		$this -> form_validation -> set_rules('payment-method', 'Payment method', 'required');
-		
+
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
@@ -82,8 +82,34 @@ class Cart extends CI_controller {
 	}
 
 	function payment() {
+		//Hier de prijzen updaten van de pizzas in de cart!!!
+		
+		
 		$this -> load -> view('includes/header');
 		$this -> load -> view('payment');
+		$this -> load -> view('includes/footer');
+	}
+
+	function idealresult() {
+		$status = $this -> input -> get('status');
+
+		if (strcmp($status, 'cancel') === 0) {
+			// Notify user
+			$data['result'] = '<h1>Transactie geannuleerd.</h1><p>U heeft de betaling met iDEAL afgebroken.</p>';
+		} elseif (strcmp($status, 'error') === 0) {
+			// Notify user
+			$data['result'] = '<h1>Transactie fout.</h1><p>Betalen met iDEAL is nu niet mogelijk. Probeer het later opnieuw of betaal op een andere manier.<br>Als u in uw Internetbankieren ziet dat de betaling van uw bestelling toch heeft plaatsgevonden, zullen wij zodra wij hiervan de bevestiging ontvangen tot levering overgaan.</p>';
+		} elseif (strcmp($status, 'success') === 0) {
+			// Notify user
+			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
+			$this->cart->destroy();
+		} else {
+			// Notify user
+			$data['result'] = '<h1>Transactie fout.</h1><p>De status van uw iDEAL betaling is onbekend.</p>';
+		}
+
+		$this -> load -> view('includes/header');
+		$this -> load -> view('message', $data);
 		$this -> load -> view('includes/footer');
 	}
 

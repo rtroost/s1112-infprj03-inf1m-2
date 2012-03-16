@@ -67,7 +67,7 @@
 	}
 	form.order_userinfo input[type="submit"]:hover {
 		background: #70d2fd;
-	}
+	}
 </style>
 <div id="content">
 	<?php if($this -> cart -> total_items() == 0) {
@@ -76,32 +76,31 @@
 		Uw winkelwagen is leeg.
 	</p>
 	<?php } else {?>
-	<div style="float:right;">
 		<?php
-		$this -> form_validation -> set_error_delimiters('<li">', '</li>');
-		echo validation_errors(' <div class="error"> ', ' </div> ');
-		?>
-		</div>
-		<?php
-		$attributes = array('class' => 'order_userinfo', 'id' => 'order_userinfo');
-		echo form_open('', $attributes);
-		?>
-		<p>
-		<label for="eindbedrag">Eindbedrag</label>
-		<span id="eindbedrag">€ <?php echo $this -> cart -> format_number($this -> cart -> total() + 1.95);?></span>
-		</p>
-		<p>
-		<label for="payment-method">Betaalmethode <span class="required">*</span></label>
-		<?php // Change the values in this array to populate your dropdown as required?>
-		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDeal', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
+		// Set default timezone for DATE/TIME functions
+		if (function_exists('date_default_timezone_set')) {
+			date_default_timezone_set('Europe/Amsterdam');
+		}
 
-		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'))
-		?>
-		</p>
-		<p>
-		<?php echo form_submit(array('value' => 'Verder', 'class' => 'margRight'));?>
-		</p>
-		<?php echo form_close();?>
+		include ('library/ideallite.cls.php');
 
-		<?php }?>
+		$oIdeal = new IdealLite();
+
+		// Set shop details
+		$oIdeal -> setUrlCancel(base_url().'index.php/cart/idealresult?status=cancel');
+		$oIdeal -> setUrlError(base_url().'index.php/cart/idealresult?status=error');
+		$oIdeal -> setUrlSuccess(base_url().'index.php/cart/idealresult?status=success');
+
+		// Set order details
+		$oIdeal -> setAmount($this -> cart -> format_number($this -> cart -> total() + 1.95));
+		//$oIdeal -> setOrderId($sOrderId);
+		$oIdeal -> setOrderDescription('Pizzaria Pizzario - Bestelling');
+
+		// Customize submit button
+		$oIdeal -> setButton('Betalen met iDEAL');
+
+		// Generate form
+		echo '<p>Uw bestelling afrekenen!</p>' . $oIdeal -> createForm();
+	}
+		?>
 	</div>
