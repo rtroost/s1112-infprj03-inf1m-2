@@ -82,9 +82,8 @@ class Cart extends CI_controller {
 	}
 
 	function payment() {
-		//Hier de prijzen updaten van de pizzas in de cart!!!
-		
-		
+		$this->order_model->getUpToDatePizzaCost();
+
 		$this -> load -> view('includes/header');
 		$this -> load -> view('payment');
 		$this -> load -> view('includes/footer');
@@ -102,7 +101,7 @@ class Cart extends CI_controller {
 		} elseif (strcmp($status, 'success') === 0) {
 			// Notify user
 			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
-			$this->cart->destroy();
+			$this -> cart -> destroy();
 		} else {
 			// Notify user
 			$data['result'] = '<h1>Transactie fout.</h1><p>De status van uw iDEAL betaling is onbekend.</p>';
@@ -112,25 +111,6 @@ class Cart extends CI_controller {
 		$this -> load -> view('message', $data);
 		$this -> load -> view('includes/footer');
 	}
-
-	// function updatePizzaData() {
-	// $total = 0;
-	//
-	// foreach ($this->cart->contents() as $item) :
-	// $this -> load -> model('Product_model');
-	//
-	// $name = $this -> Product_model -> getName($item['id']);
-	// $price = $this -> Product_model -> getCost($item['id']);
-	//
-	// $data = array('rowid' => $item['rowid'], 'name' => $name, 'price' => $price);
-	//
-	// $total += $price;
-	//
-	// $this -> cart -> update($data);
-	// endforeach;
-	//
-	// return $total;
-	// }
 
 }
 ?>

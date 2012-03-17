@@ -26,5 +26,23 @@ class Order_model extends CI_Model {
 		return FALSE;
 	}
 
+	function getUpToDatePizzaCost() {
+		foreach ($this->cart->contents() as $item) :
+			$query_prod_ingredients = $this -> db -> query('SELECT catingid, ingredienthoeveelheid FROM product_ingredient WHERE productid = ' . $item -> id);
+
+			if ($query_prod_ingredients -> num_rows() > 0) {
+				foreach ($query_prod_ingredients->results() as $row) :
+					$query_ingredients = $this -> db -> query('SELECT prijs FROM categorie_ingredient WHERE catingid = ' . $row -> catingid);
+
+					if ($query_ingredients -> num_rows() > 0) {
+						$eeningredient = $query_ingredients -> row();
+						$total_product_price = $total_product_price + ($eeningredient -> prijs * $query_prod_ingredients -> ingredienthoeveelheid);
+					}
+				endforeach;
+			}
+			$item['price'] = $total_product_price;
+		endforeach;
+	}
+
 }
 ?>
