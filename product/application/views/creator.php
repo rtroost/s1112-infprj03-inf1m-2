@@ -44,7 +44,7 @@
 					</table>
 					
 					<div class="center nav_div">
-						<button class="nav_button" id="vorige" disabled="disabled"> « Vorige </button>
+						<button class="nav_button" id="vorige" style="visibility:hidden;"> « Vorige </button>
 						 &nbsp; <button class="nav_button" id="volgende"> Volgende » </button>
 					</div>
 					
@@ -71,7 +71,7 @@
 			</div>
 			<div id="appMainWindow2" class="mainWindows">
 				<div id="appSideBar">
-					<h1>Uw product samenstellen</h1>
+					<h1>Product samenstellen</h1>
 					<p id="samenstellenText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
 					<br />
 					<div id="sidebar_table2_div" style="display: none;">
@@ -112,36 +112,46 @@
 					<h1>Uw product opslaan</h1>
 					<p id="opslaanText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
 					<div id="opslaan" style="display:none;">
-						<?php if(isset($_SESSION['username'])){ ?>
-								<p>Hallo {{naam}} <br />
-									U kan hier uw product opslaan in uw profiel
-								</p>
-								
-								<h4>Product naam:</h4><br />
-								<input type="text" name="naam" value=""/><br />
-								
-								<button style="border-radius: 5px; background: #fff;">Opslaan</button>
-								
-								<p>U kunt dit product en andere gemaakte producten beheren door maar "Mijn profiel" te gaan.</p>
-								
-						<?php } else { ?>
-								<p>U bent nog niet ingelogd. U hoeft uw product niet opteslaan om te kunnen bestellen, u kunt dan deze stap overslaan.</p>
-								<h4>Login:</h4>
-								<form action="#" method="post">
-									<label for="username">Username: </label>
-									<br />
-									<input name="username" value="" type="text" />
-									<br />
-									<label for="password">Password: </label>
-									<br />
-									<input name="password" value="" type="password" />
-									<br />
-									<input style="border-radius: 5px; background: #fff;" type="submit" value="login" />
-								</form>
-								
-								<p>Geen account? <a href="register">Registeer hier</a></p>
-								
-						<?php } ?>
+						<div id="opslaan_login" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display: none;"; } ?>">
+							<p>Hallo <span class="name"><?php if($this->session->userdata('voornaam')){ echo $this->session->userdata('voornaam'); } ?></span>, <br />
+								U kan hier uw product opslaan in uw profiel
+							</p>
+							
+							<h4>Product naam:</h4>
+							<input id="product_name" type="text" name="naam" value=""/><br />
+							<p>Wilt u uw product publikelijk maken?</p>
+							<input id="product_publikelijk" type="checkbox" name="publikelijk" value=""/>
+							<br />
+							
+							<button id="buttonOpslaan">Opslaan</button><br /><br />
+							
+							<p>U kunt dit product en andere gemaakte producten beheren door maar "Mijn profiel" te gaan.</p>
+						</div>	
+						<div id="opslaan_logout" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display: none;"; } ?>">
+							<p>U bent nog niet ingelogd. U hoeft uw product niet opteslaan om te kunnen bestellen, u kunt dan deze stap overslaan.</p>
+							<h4>Login:</h4>
+							<form id="login_form" action="<?php echo base_url();?>index.php/login" method="post">
+								<label for="username">Username: </label>
+								<br />
+								<input name="username" value="" type="text" />
+								<br />
+								<label for="password">Password: </label>
+								<br />
+								<input name="password" value="" type="password" />
+								<br />
+								<input style="background: #b8cc81;" type="submit" value="login" id="loginSubmit" />
+							</form><br />
+							
+							
+							
+							<p>Geen account? <a href="register">Registeer hier</a></p>
+						</div>
+						<div id="after_opslaan" style="display: none;">
+							<p>Uw product is opgeslagen<br />
+								U kunt de samenstelling van dit product later nog wijzigen, dit kunt u regelen in "mijn profiel".<br />
+								U kunt nu uw product bestellen door naar de volgende stap te gaan.
+							</p>
+						</div>		
 					</div>
 					
 					
@@ -178,20 +188,31 @@
 					<h1>Uw product bestellen</h1>
 					<p id="bestelText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
 					<div id="bestellen" style="display:none;">
-						<?php if(isset($_SESSION['username'])){ ?>
-								<p>Hallo {{naam}} <br />
-									Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
-								</p>
-						<?php } else { ?>
-								<p>Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.</p>
-								<button id="winkelwagen" style="border-radius: 5px; background: #fff;">In Winkelwagen</button><br />
-								<h4 id="winkelwagenHeading" style="display: none;">Uw bestelling is geplaatst</h4>
-								<a id="naarWinkelwagen" href="#" style="display: none;">Naar uw Winkelwagen</a>
-						<?php } ?>
+						<div id="bestellen_login" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display: none;"; } ?>">
+							<p>Hallo <span class="name"><?php if($this->session->userdata('voornaam')){ echo $this->session->userdata('voornaam'); } ?></span>, <br />
+								Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
+							</p>
+						</div>
+						<div id="bestellen_logout" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display: none;"; } ?>">
+							<p>Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.</p>
+							<h5>Hoeveel wilt u bestellen</h5>
+							<input id="qty" type="text" name="qty" value="1"/>
+							<button id="winkelwagen" data-after="false">In Winkelwagen</button><br />
+							<h4 id="winkelwagenHeading" data-after="false" style="display: none;">Uw bestelling is geplaatst</h4>
+							<a id="naarWinkelwagen" data-after="false" href="<?php echo base_url();?>index.php/cart" style="display: none;">Naar uw Winkelwagen</a>
+						</div>
+						<div id="after_bestellen" style="display: none;">
+							<p>Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.</p>
+							<h5>Hoeveel wilt u bestellen</h5>
+							<input id="qty" type="text" name="qty" value="1"/>
+							<button id="winkelwagen" data-after="true">In Winkelwagen</button><br />
+							<h4 id="winkelwagenHeading" data-after="true" style="display: none;">Uw bestelling is geplaatst</h4>
+							<a id="naarWinkelwagen" data-after="true" href="<?php echo base_url();?>index.php/cart" style="display: none;">Naar uw Winkelwagen</a>
+						</div>	
 					</div>	
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
-						 &nbsp; <button class="nav_button" id="volgende" disabled="disabled"> Volgende » </button>
+						 &nbsp; <button class="nav_button" id="volgende" style="visibility:hidden;"> Volgende » </button>
 					</div>
 				</div>
 				<div id="appView2">
@@ -224,6 +245,7 @@
 	</div>
 	
 	<script src="<?php echo base_url(); ?>js/jquery.json-2.3.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.numeric.js"></script>
 	
 	<script>
 		
@@ -268,6 +290,18 @@
 
 			// FUNCTION VARIABELEN
 			vars = {
+				<?php if($this->session->userdata('logged_in') == 1){
+					echo "loginData: {
+						achternaam: '{$this->session->userdata('achternaam')}',
+						email: '{$this->session->userdata('email')}',
+						gebruikerid: '{$this->session->userdata('gebruikerid')}',
+						logged_in: {$this->session->userdata('logged_in')},
+						type: '{$this->session->userdata('type')}',
+						voornaam: '{$this->session->userdata('voornaam')}'
+					},"; 
+				} else {
+					echo "loginData: {},";
+				} ?>
 				opgeslagen: 0,
 				pagenr: 1,
 				appNavigationUl: $('div#appNavigation ul'),
@@ -303,8 +337,23 @@
 				divBestellen: $('div#bestellen'),
 				bestellenViewTitel: $('h1#bestellen_view_titel'),
 				a_naarWinkelwagen: $('a#naarWinkelwagen'),
-				winkelwagenHeading: $('h4#winkelwagenHeading')
-			}
+				winkelwagenHeading: $('h4#winkelwagenHeading'),
+				opslaan_login: $('div#opslaan_login'),
+				opslaan_logout: $('div#opslaan_logout'),
+				bestellen_login: $('div#bestellen_login'),
+				bestellen_logout: $('div#bestellen_logout'),
+				spanNaam: $('span.name'),
+				after_opslaan: $('div#after_opslaan'),
+				after_bestellen: $('div#after_bestellen'),
+				aangemaakt_product_id: 0,
+				product_naam: '',
+				quantity: 0
+			};
+			
+			console.log(vars.loginData);
+			
+			$('input#qty').numeric();
+
 			
 			// Navigation script
 			$('a.appNav').on('click', function(e){
@@ -341,20 +390,64 @@
 			// END Navigation script
 			
 			$('button#winkelwagen').on('click', function(){
-				$.ajax({
-						url: "<?php echo base_url(); ?>index.php/product_cont",
+				$this = $(this);
+				if(vars.product_naam === ''){
+					vars.product_naam = 'product zonder naam';
+				}
+				var qtyVal = $(this).siblings('#qty').attr('value');
+				if(qtyVal === ''){
+					vars.quantity = 1;
+				} else {
+					vars.quantity = qtyVal;
+				}
+				
+				if($this.data('after')){
+					insertCart($this);
+				} else {
+					console.log(vars.product_naam);
+					formData = createFormData();
+					console.log(formData);
+					$.ajax({
+						url: '<?php echo base_url(); ?>index.php/product_cont/save_product',
 						type: 'POST',
-						data: 'setCookie=true',
+						data: formData,  // q=d&test=hallo
+						success: function(results) {
+							if(results !== 'failed'){
+								vars.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
+								vars.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
+								vars.view2.find('div.view2buttons button').attr('disabled', 'disabled');
+								vars.sidebar3.find('input#loginSubmit').attr('disabled', 'disabled');
+								vars.aangemaakt_product_id = results;
+								console.log(results);
+								console.log(vars.aangemaakt_product_id);
+								insertCart($this);
+							} else {
+								//error
+							}
+						}
+					});
+				}				
+			});
+			
+			var insertCart = function(obj){
+				$.ajax({
+						url: '<?php echo base_url(); ?>index.php/product_cont',
+						type: 'POST',
+						data: {id: vars.aangemaakt_product_id, qty: vars.quantity, price: vars.totaalPrijs, name: vars.product_naam},
 						success: function(result){
 							if(result === 'success'){
 								vars.winkelwagenHeading.show();
 								vars.a_naarWinkelwagen.show();
+								
+								obj.siblings('#qty').remove();
+								obj.siblings('h5').remove();
+								obj.remove();
 							} else {
 								vars.winkelwagenHeading.text('bestellen is mislukt').show();
 							}
 						}
 				});
-			});
+			}
 			
 			
 			$('input.sidebar_keuze_categorie').on('change', function(){
@@ -366,7 +459,7 @@
 			$('div#appMainWindow2 #sidebar_table2').on('click', 'input', function(e){
 				//e.preventDefault();
 				var $this = $(this),
-					id = $this.attr('data-arrayIndex')
+					id = $this.attr('data-arrayIndex');
 
 
 			 if((parseInt(vars.totaalGewicht) +parseInt(vars.ingredienten[id].gewichtspunten)) > 20){
@@ -383,6 +476,98 @@
 				} else {						vars.ingredienten[$this.attr('data-arrayIndex')].gekozen = !vars.ingredienten[$this.attr('data-arrayIndex')].gekozen;						changeContent.createIngredient(id, vars.ingredienten[$this.attr('data-arrayIndex')].gekozen, e);
 				}
 				
+			});
+			
+			$('input#loginSubmit').on('click', function(e){
+				$this = $(this);
+				$.ajax({
+					url: $this.parent('form').attr('action'),
+					type: $this.parent('form').attr('method'),
+					data: $this.parent('form').serialize(),  // q=d&test=hallo
+					dataType: 'json',
+					success: function(results) {
+						if(results !== 'failed'){
+							console.log(results);
+							console.log(results.logged_in);
+							console.log(results.type);
+							vars.loginData = {
+								achternaam: results.achternaam,
+								email: results.email,
+								gebruikerid: results.gebruikerid,
+								logged_in: results.logged_in,
+								type: results.type,
+								voornaam: results.voornaam
+							}
+							console.log(vars.loginData);
+							vars.spanNaam.text(vars.loginData.voornaam);
+							vars.opslaan_login.show();
+							vars.opslaan_logout.hide();
+							vars.bestellen_login.show();
+							vars.bestellen_logout.hide();
+							$('div#inlog_false').hide();
+							$('div#inlog_true').show();
+						} else {
+							if(vars.sidebar3.find('h5#loginFlaseText').length === 0){
+								$('<h5>', {
+									text: 'Username en password combinatie verkeerd',
+									style: 'color: red;',
+									id: 'loginFlaseText'
+								}).insertAfter(vars.sidebar3.find('form#login_form'));
+							}
+						}
+					}
+				});
+				e.preventDefault();
+			});
+			
+			var createFormData = function(){
+				var gekozenCount = 0;
+				var publikelijk;
+				if($('input#product_publikelijk').attr('checked') == 'checked'){
+					publikelijk = 1;
+				} else {
+					publikelijk = 0;
+				}
+				var formData = 'gebruikerid='+vars.loginData.gebruikerid+'&publiekelijk='+publikelijk+'&productNaam='+vars.product_naam+'&categorieid='+vars.gekozenCategorie;
+				for(var i = 0; i < vars.ingredienten.length; i++){
+					if(vars.ingredienten[i].gekozen){
+						gekozenCount++;
+						formData = formData.concat('&ingredientid'+gekozenCount+'='+vars.ingredienten[i].ingredientId+
+						'&hoeveelheid'+gekozenCount+'='+vars.ingredienten[i].hoeveelheid);
+					}
+				}
+				formData = formData.concat('&aantalingredienten='+gekozenCount);
+				if(vars.loginData.logged_in){
+					formData = formData.concat('&logged_in=true');
+				} else {
+					formData = formData.concat('&logged_in=false');
+				}
+				
+				return formData;
+			};
+			
+			$('button#buttonOpslaan').on('click', function(){
+				vars.product_naam = $('input#product_name').attr('value');
+				formData = createFormData();
+				console.log(formData);
+				
+				$.ajax({
+					url: '<?php echo base_url(); ?>index.php/product_cont/save_product',
+					type: 'POST',
+					data: formData,  // q=d&test=hallo
+					success: function(results) {
+						if(results !== 'failed'){
+							vars.opslaan_login.hide();
+							vars.bestellen_login.hide();
+							vars.after_opslaan.show();
+							vars.after_bestellen.show();
+							vars.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
+							vars.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
+							vars.view2.find('div.view2buttons button').attr('disabled', 'disabled');
+							vars.aangemaakt_product_id = results;
+						}
+					}
+				});
 			});
 			
 			//=================================================================
@@ -442,7 +627,7 @@
 				categorie_content_change: function(value){
 					
 					$.ajax({
-						url: "<?php echo base_url(); ?>index.php/product_cont/ajax_getId",
+						url: '<?php echo base_url(); ?>index.php/product_cont/ajax_getId',
 						type: 'POST',
 						data: {id: value, ajax: '1'},
 						success: function(msg){
@@ -472,8 +657,8 @@
 							changeContent.setPrice();
 							
 							vars.view2.find('table#view2_table_main').empty();
-							vars.view3.find('table#view2_table_main').empty();
-							vars.view4.find('table#view2_table_main').empty();
+							vars.view3.find('table#view3_table_main').empty();
+							vars.view4.find('table#view3_table_main').empty();
 							vars.ingredienten = [];
 							
 							for ( property in ingredienten ){
@@ -483,7 +668,7 @@
 									prijs: Math.round(ingredienten[count].prijs*0.75),
 									naam: ingredienten[count].naam,
 									gewichtspunten: ingredienten[count].gewichtspunten,
-									hoeveelheid: 2,
+									hoeveelheid: 1,
 									gewicht: parseInt(ingredienten[count].gewichtspunten),
 									gekozen: false
 								}
@@ -603,8 +788,8 @@
 							var	tr = $this.parents('tr'),
 								id = tr.attr('class'),
 								dataFunc = $this.attr('data-func'),
-								view3Hoeveelheid = vars.view3.find('table#view2_table_main tr.'+id).find('p#view3Hoeveelheid'),
-								view4Hoeveelheid = vars.view4.find('table#view2_table_main tr.'+id).find('p#view4Hoeveelheid');
+								view3Hoeveelheid = vars.view3.find('table#view3_table_main tr.'+id).find('p#view3Hoeveelheid'),
+								view4Hoeveelheid = vars.view4.find('table#view3_table_main tr.'+id).find('p#view4Hoeveelheid');
 							if(vars.ingredienten[id].gewichtspunten != 0){
 								var huidigGewichtPunt = vars.ingredienten[id].gewicht/vars.ingredienten[id].gewichtspunten,
 									diff = (dataFunc - huidigGewichtPunt) * vars.ingredienten[id].gewichtspunten;

@@ -17,27 +17,52 @@ class Login extends CI_controller {
 	}
 
 	function index() {
+		// echo $this->input->post('username');
+		// echo $this->input->post('password');
 		$this -> form_validation -> set_rules('username', 'E-mail Adres', 'required|trim|valid_email');
 		$this -> form_validation -> set_rules('password', 'Wachtwoord', 'required');
 
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
-
+		//echo "lol1";
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed and/or no post has happend
 		{
-			$this -> load -> view('includes/header');
-			$this -> load -> view('login');
-			$this -> load -> view('includes/footer');
+			//echo "lol2";
+			if(!$this->input->is_ajax_request()){
+				$this -> load -> view('login');
+			} else {
+				echo json_encode("failed");
+				return;
+			}
 		} else // passed validation proceed to post success logic
 		{
-			if($this -> usersystem_model -> validate()) {
+			$data = $this -> usersystem_model -> validate();
+			if($data != null) {
 				// $data = array('gebruikerid' => $query[0] -> gebruikerid, 'email' => $query[0] -> email, 'voornaam' => $query[0] -> voornaam, 'achternaam' => $query[0] -> achternaam, 'type' => $query[0] -> typeid, 'logged_in' => TRUE);
 				// $this -> session -> set_userdata($data);
 
-				if ($this -> input -> post('redirect')) {
-					redirect(base_url() . 'index.php/'. $this -> input -> post('redirect'));
+				if(!$this->input->is_ajax_request()){
+					if ($this -> input -> post('redirect')) {
+						redirect(base_url() . 'index.php/'. $this -> input -> post('redirect'));
+					} else {
+						redirect(base_url());
+					}
 				} else {
-					redirect(base_url());
+					//echo "lol";
+					echo json_encode($data);
+					return;
 				}
+
+				
+			} else {
+				
+				// ERROR VERKEERDE COMBINATIE
+				if(!$this->input->is_ajax_request()){
+					//redirect(base_url() . 'index.php');
+				} else {
+					echo json_encode("failed");
+					return;
+				}
+
 			}
 		}
 	}

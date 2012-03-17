@@ -64,7 +64,7 @@ input.zoeken {
 /* end navigation */
 
 /* login */
-div#inlog {
+div.inlog {
 	width: 232px;
 	height: 66px;
 	position: relative;

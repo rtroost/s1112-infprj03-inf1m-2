@@ -23,7 +23,7 @@ div#productApp h1 {
 }
 
 #productApp button{
-   background: #b8cc81;
+   background: #C0A55A;
 }
 
 ol, ul {
@@ -131,7 +131,7 @@ table#sidebar_table2 td{
 /*	margin-top: 120px;*/
 	bottom: 0;
 	position: absolute;
-	margin-bottom: 22px;
+	margin-bottom: 36px;
 }
 
 div#appSideBar{
@@ -160,7 +160,7 @@ div#appView2{
 	background: #DFE3CB;
 	float: left;
 	width: 531px;
-	height: 434px;
+	height: 448px;
 /*	padding: 15px;*/
 	padding-top: 15px;
 	padding-left: 15px;
@@ -200,7 +200,7 @@ div#appSelector2 li {
 
 button.nav_button{
 /*	border-radius: 5px;*/
-	background: #b8cc81;
+	background: #C0A55A;
 /*	background: #fadb81;*/
 }
 
@@ -317,7 +317,7 @@ table#view2_table_main button{
 
 table#view2_table_main button.down{
 	text-align: center;
-	background: #b8cc81;
+	background: #C0A55A;
 /*	border: 1px solid black;*/
 }
 

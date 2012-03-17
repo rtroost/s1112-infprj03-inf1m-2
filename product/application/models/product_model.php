@@ -33,5 +33,11 @@ class Product_model extends CI_model {
 		}
 		return $data;
 	}
+	
+	function create_product($data){
+		$sql = 'INSERT INTO product (naam, standaard, categorieid, gearchiveerd, temp) VALUES (?, ?, ?, ?, ?);';
+		$insert = $this->db->query($sql, $data);
+		return $insert;
+	}
 }
 ?>

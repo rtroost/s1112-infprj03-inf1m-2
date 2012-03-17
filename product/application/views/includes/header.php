@@ -12,8 +12,8 @@
 	<body>
 		<div id="wrapper">
 			<header>
-				<?php if($this->session->userdata('logged_in') != 1){ ?>
-					<div id="inlog">
+				
+					<div id="inlog_false" class="inlog" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display:none;"; } ?>" >
 						<form action="<?php echo base_url();?>index.php/login" method="post">
 							<label for="username" >Email adres:</label>
 							<input class="right_input" name="username" id="username" type="text" />
@@ -25,13 +25,11 @@
 							<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
 						</form>
 					</div>
-				<?php } else {?>	
-					<div id="inlog">
+					<div id="inlog_true" class="inlog" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display:none;"; } ?>" >
 						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
 							<input type="submit" id="logout" value="Logout"/>
 						</form>
 					</div>
-				<?php } ?>
 				<nav>
 					<ul id="header_nav">
 						<li>

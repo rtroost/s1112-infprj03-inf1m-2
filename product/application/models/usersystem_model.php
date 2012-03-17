@@ -12,10 +12,10 @@ class Usersystem_model extends CI_model {
 			
 			$data = array('gebruikerid' => $row -> gebruikerid, 'email' => $row -> email, 'voornaam' => $row -> voornaam, 'achternaam' => $row -> achternaam, 'type' => $row -> typeid, 'logged_in' => TRUE);
 			$this -> session -> set_userdata($data);
-			return TRUE;
+			return $data;
 			//fetch array
 		}
-		return FALSE;
+		return NULL;
 	}
 
 	function create_member() {
