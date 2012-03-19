@@ -92,7 +92,7 @@
 		$oIdeal -> setUrlSuccess(base_url().'index.php/cart/idealresult?status=success');
 
 		// Set order details
-		$oIdeal -> setAmount($this -> cart -> format_number($this -> cart -> total() + 1.95));
+		$oIdeal -> setAmount($this -> cart -> total() + 1.95);
 		//$oIdeal -> setOrderId($sOrderId);
 		$oIdeal -> setOrderDescription('Pizzaria Pizzario - Bestelling');
 

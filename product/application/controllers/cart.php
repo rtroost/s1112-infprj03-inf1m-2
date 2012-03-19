@@ -82,7 +82,7 @@ class Cart extends CI_controller {
 	}
 
 	function payment() {
-		$this->order_model->getUpToDatePizzaCost();
+		$this -> order_model -> getUpToDatePizzaCost();
 
 		$this -> load -> view('includes/header');
 		$this -> load -> view('payment');
@@ -101,6 +101,10 @@ class Cart extends CI_controller {
 		} elseif (strcmp($status, 'success') === 0) {
 			// Notify user
 			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
+
+			$orderid = $this->order_model->createOrder();
+			$this->order_model->makePayment($orderid);			
+
 			$this -> cart -> destroy();
 		} else {
 			// Notify user

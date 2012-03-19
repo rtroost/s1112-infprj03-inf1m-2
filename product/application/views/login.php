@@ -1,3 +1,4 @@
+<?php $this->load->view('includes/header') ?>
 <div id="content">
 	<?php $this -> form_validation -> set_error_delimiters('<li">', '</li>');
 	echo validation_errors(' <div class="error"> ', ' </div> ');
@@ -21,3 +22,4 @@
 	<?php echo form_close();?>
 </div>
 
+<?php $this->load->view('includes/footer') ?>

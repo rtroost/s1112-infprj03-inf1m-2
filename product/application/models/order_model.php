@@ -27,21 +27,49 @@ class Order_model extends CI_Model {
 	}
 
 	function getUpToDatePizzaCost() {
+		//Werkt nog niet helemaal D:
+		
 		foreach ($this->cart->contents() as $item) :
-			$query_prod_ingredients = $this -> db -> query('SELECT catingid, ingredienthoeveelheid FROM product_ingredient WHERE productid = ' . $item -> id);
+			$query_prod_ingredients = $this -> db -> query('SELECT catingid, ingredienthoeveelheid FROM product_ingredient WHERE productid = ' . $item['id']);
+
+			$total_product_price = 0.0;
 
 			if ($query_prod_ingredients -> num_rows() > 0) {
-				foreach ($query_prod_ingredients->results() as $row) :
+				foreach ($query_prod_ingredients->result() as $row) :
 					$query_ingredients = $this -> db -> query('SELECT prijs FROM categorie_ingredient WHERE catingid = ' . $row -> catingid);
 
 					if ($query_ingredients -> num_rows() > 0) {
 						$eeningredient = $query_ingredients -> row();
-						$total_product_price = $total_product_price + ($eeningredient -> prijs * $query_prod_ingredients -> ingredienthoeveelheid);
+						$total_product_price = $total_product_price + (($eeningredient -> prijs / 100) * $row -> ingredienthoeveelheid);
 					}
 				endforeach;
 			}
-			$item['price'] = $total_product_price;
+
+			echo $total_product_price;
+			$data = array('rowid' => $item['rowid'], 'price' => $total_product_price);
+			$this -> cart -> update($data);
+
+			echo $item['price'];
 		endforeach;
+	}
+
+	function createOrder() {
+		$q = array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'));
+		$this -> db -> insert('bestelling', $q);
+
+		$bestellingid = $this -> db -> insert_id();
+
+		foreach ($this->cart->contents() as $item) :
+			$q = array('productid' => $item['id'], 'bestellingid' => $bestellingid, 'aantal' => $item['qty'], 'korting' => '0');
+			$this -> db -> insert('bestelregel', $q);
+		endforeach;
+
+		return $bestellingid;
+	}
+
+	function makePayment($orderid) {
+		$q = array('bestellingid' => $orderid, 'bedrag' => $this -> cart -> total(), 'datetime' => date('Y-m-d H:i:s'), 'betaalmethodeid' => '1');
+		$this -> db -> insert('betaling', $q);
 	}
 
 }
