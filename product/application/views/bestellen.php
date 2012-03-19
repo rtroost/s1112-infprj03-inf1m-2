@@ -40,8 +40,8 @@
 				</td>
 			</tr>";															
 			} echo "
-		</table>";
-		}echo "<p>&nbsp;<p>																		
+		</table><p>&nbsp;<p>";
+		}echo "																
 	</div>";
 	?>
 	
