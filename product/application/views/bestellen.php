@@ -2,7 +2,7 @@
 	$this->load->view('includes/header') 
 ?>
 <div id="content"> 	
-															
+		bla													
 	<?php
 	 
 		$i=0; 
