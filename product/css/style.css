@@ -80,7 +80,6 @@ input.right_input {
 .remember_me { margin-left: 18px; }
 .remember_me_text { font-size: 11px;}
 
-
 input.aanmeldInput {
 	float: right;
 	width: 90px;
@@ -158,6 +157,7 @@ p {
 /*	margin-bottom: 18px;*/
 	height: auto;
 }
+
 img {
 	padding: 0 !important;
 	border: none !important;
@@ -182,8 +182,6 @@ img {
 	padding-right:50px;
 	position:relative;
 }*/
-
-
 
 table#bestellijst{
 	line-height:1.0em;
@@ -265,3 +263,22 @@ td#ingredientColumn{
 	padding-left:20px;
 	padding-bottom: 8px;
 }
+
+/* =========== */
+/* Start Beheer_Gebruikers  */
+/* =========== */
+
+table#gebruikerTable{
+	line-height:1.0em;
+	padding: 0px;
+	
+	border: 1px solid #000000;
+}
+
+.beheerInput{
+	width: 250px;
+}
+
+/* =========== */
+/* End Beheer_Gebruikers  */
+/* =========== */
