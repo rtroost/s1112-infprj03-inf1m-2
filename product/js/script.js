@@ -73,6 +73,6 @@ function editBeheer(id){
 			document.getElementById("beheer"+i+id).disabled = true;
 			
 		}
-		document.getElementById("beheerbutton"+id).value = "edit";
+		document.getElementById("beheerbutton"+id).value = "Wijzig";
 	}
 }

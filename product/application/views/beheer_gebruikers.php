@@ -21,9 +21,9 @@
 				<tr><td>Woonplaats</td><td><input id=\"beheer8".$id."\" disabled name=\"woonplaats\" class=\"beheerInput\" value=\"".$gebruikers[$i]->woonplaats ."\"</td></tr>
 				<tr><td>Telefoonnummer</td><td><input id=\"beheer9".$id."\" disabled MAXLENGTH=\"10\" name=\"telefoonnummer\" class=\"beheerInput\" value=\"".$gebruikers[$i]->telefoonnummer ."\"</td></tr>
 				<tr><td>Kortingspunten</td><td><input id=\"beheer10".$id."\" onchange=\"oldValue(".$id.", ".$gebruikers[$i]->kortingspunten.")\" disabled name=\"kortingspunten\" class=\"beheerInput\" value=\"".$gebruikers[$i]->kortingspunten ."\"</td></tr>					
-				<tr><td><input name=\"bevestig\" id=\"beheerbutton".$id."\" onmousedown=\"editBeheer(".$id.")\" type=\"button\" value=\"Wijzig\"></td></tr>
+				<tr><td><input name=\"bevestig\" id=\"beheerbutton".$id."\" style=\"width:110px\" onmousedown=\"editBeheer(".$id.")\" type=\"button\" value=\"Wijzig\"></td><td><div id=\"resultaat".$id."\"></div></td></tr>
 			</table>
-			<div id=\"resultaat".$id."\"></div>&nbsp
+			&nbsp
 			";
 		}
 	?>

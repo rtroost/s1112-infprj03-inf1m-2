@@ -49,6 +49,9 @@
 						<li>
 							<a href="<?php echo base_url();?>index.php/cart">Winkelwagen</a>
 						</li>
+						<li>
+							<a href="<?php echo base_url();?>index.php/beheer_gebruikers_cont">Gebruikers beheer</a>
+						</li>
 					</ul>
 				</nav>
 				
@@ -56,7 +59,7 @@
 					<form id="searchform" action="<?php echo base_url();?>index.php/search_cont">
 						<label for="search">Zoeken</label>
 						<input class="zoeken" name="search" type="text" />		
-						<img src="<?php echo base_url();?>images/glas.png" onclick="document.forms['searchform'].submit();" />
+						<img src="<?php echo base_url();?>images/glas.png" style="cursor: pointer;" onclick="document.forms['searchform'].submit();" />
 					</form>
 				</div>
 			</header>

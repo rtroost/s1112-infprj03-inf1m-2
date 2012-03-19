@@ -18,6 +18,5 @@ class Home_cont extends CI_controller {
 
 		//$this -> load -> view('includes/footer');
 	}
-
 }
 ?>
