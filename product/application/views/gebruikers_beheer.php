@@ -1,4 +1,3 @@
-<<<<<<< .mine
 <?php $this->load->view('includes/header') ?>
 
 <div id="content">
@@ -17,11 +16,8 @@
 	?>
 </div>
 
-<?php $this->load->view('includes/footer') ?>=======
-<?php $this->load->view('includes/header') ?>
-
 <?php
 	print_r($gebruikers);
 ?>
 
-<?php $this->load->view('includes/footer') ?>>>>>>>> .r53
+<?php $this->load->view('includes/footer') ?>
