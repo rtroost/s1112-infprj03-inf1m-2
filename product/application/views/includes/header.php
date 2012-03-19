@@ -28,6 +28,7 @@
 						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
 							<input type="submit" id="logout" value="Logout"/>
 						</form>
+						<a href="<?php echo base_url();?>index.php/mijnprofiel_cont">Mijn profiel</a>
 					</div>
 				<nav>
 					<ul id="header_nav">

@@ -60,6 +60,41 @@ class product_cont extends CI_controller {
 	}
 	
 	function creator(){
+		
+		if($this->input->post('productid')){
+			$data['load'] = true;
+			
+			$this->load->model('product_model');
+			$this->load->model('categorie_model');
+			$data['rows'] = $this->product_model->get_products_by_id($this->input->post('productid'));
+			if($data['rows'] != null){
+				foreach ($data['rows'] as $row) {
+					$result = $this->product_model->get_products_by_id($row->productid);
+					$row->product = $result;
+					$categorierow = $this->categorie_model->getId($row->product[0]->categorieid);
+					$row->categorienaam = $categorierow[0]->naam;
+					$row->categorieimg = $categorierow[0]->image_groot;
+					$row->categorieomschrijving = $categorierow[0]->omschrijving;
+					$row->standaardprijs = $categorierow[0]->standaardprijs;
+					//$categorieimg = $this->categorie_model->get_img($row->product[0]->categorieid);
+					//$row->categorieimg = $categorieimg[0]->image_groot;
+					$records = $this->product_model->get_name_hoeveelheid_of_ingredients($row->productid);
+					//var_dump($names);
+					$row->names = $records['names'];
+					$row->hoeveelheid = $records['hoeveelheid'];
+				}
+			} else {
+				//error
+			}
+
+			$this->load->model('ingredient_model');
+			$data['ingredienten'] = $this->ingredient_model->get_all_names_by_categorie($data['rows'][0]->categorieid);
+			$data['id'] = $this->input->post('productid');
+			//echo $this->input->post('productid');
+			// laad de gegevens van dit product
+			// en zet in de divs van de view de ingredienten etc 
+		}
+		
 		$this->load->model('categorie_model');
 		$data['records'] = $this->categorie_model->getCategorieen();
 		$this->load->view('creator', $data);

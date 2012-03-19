@@ -24,5 +24,17 @@ class Categorie_model extends CI_model{
 		return $data;
 	}
 	
+	function get_name($id){
+		$data = NULL;
+		$naam = $this->db->query("
+			SELECT naam FROM categorie WHERE categorieid = '{$id}'
+		");
+		
+		if ($naam->num_rows() > 0){
+			$data = $naam->result();
+		}
+		return $data;
+	}
+	
 }
 ?>

@@ -12,5 +12,19 @@ class Ingredient_model extends CI_model{
 		return $data;
 	}
 	
+	function get_all_names_by_categorie($catid){
+		$data = NULL;
+		$namen = $this->db->query("
+		SELECT i.ingredientid, naam, i.gewichtspunten, prijs FROM categorie_ingredient AS ci, ingredient AS i WHERE ci.ingredientid = i.ingredientid AND ci.categorieid = {$catid}
+		");
+		
+		if ($namen->num_rows() > 0){
+			foreach($namen->result() as $naam){
+				$data[] = $naam;
+			}
+		}
+		return $data;
+	}
+	
 }
 ?>

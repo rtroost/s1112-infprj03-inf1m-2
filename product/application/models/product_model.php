@@ -39,5 +39,65 @@ class Product_model extends CI_model {
 		$insert = $this->db->query($sql, $data);
 		return $insert;
 	}
+	
+	function get_products_by_id($product_id){
+		
+		$data = NULL;
+		$result = $this->db->query("
+			SELECT * FROM product WHERE productid = '{$product_id}' AND gearchiveerd = '0' AND temp = '0' LIMIT 1
+		");
+		
+		if ($result->num_rows() > 0){
+			$data = $result->result();		
+		}
+		return $data;
+	}
+	
+	function get_name_of_ingredients($product_id){
+			$data = NULL;
+			$result = $this->db->query("
+				SELECT i.naam
+				FROM product AS p, product_ingredient AS pi, categorie_ingredient AS ci, ingredient AS i
+				WHERE p.productid = '{$product_id}' 
+				AND p.productid= pi.productid 
+				AND pi.catingid = ci.catingid 
+				AND ci.ingredientid = i.ingredientid
+			");
+			if ($result->num_rows() > 0){
+				foreach($result->result() as $naam){
+					$data[] = $naam->naam;
+				}	
+				//$data = $result->result();		
+			}
+			return $data;
+	}
+	
+	function get_name_hoeveelheid_of_ingredients($product_id){
+			$data = array();
+			$result = $this->db->query("
+				SELECT i.naam, pi.ingredienthoeveelheid
+				FROM product AS p, product_ingredient AS pi, categorie_ingredient AS ci, ingredient AS i
+				WHERE p.productid = '{$product_id}' 
+				AND p.productid= pi.productid 
+				AND pi.catingid = ci.catingid 
+				AND ci.ingredientid = i.ingredientid
+			");
+			if ($result->num_rows() > 0){
+				foreach($result->result() as $naam){
+					$data['names'][] = $naam->naam;
+					$data['hoeveelheid'][] = $naam->ingredienthoeveelheid;
+				}	
+				//$data = $result->result();		
+			}
+			return $data;
+	}
+	
+	function verwijder_product($product_id){
+		return $this->db->query("
+			UPDATE product SET gearchiveerd = 1 WHERE productid = '{$product_id}';
+		");
+	}
+	
+	
 }
 ?>

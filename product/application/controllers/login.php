@@ -5,9 +5,9 @@ class Login extends CI_controller {
 	function __construct() {
 		parent::__construct();
 		
-		if($this->session->userdata('loggedin') == TRUE) {
-			redirect(base_url());
-		} 
+		// if($this->session->userdata('logged_in') == 1) {
+			// redirect(base_url());
+		// } 
 		
 		$this -> load -> library('form_validation');
 		$this -> load -> database();

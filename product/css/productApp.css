@@ -100,7 +100,7 @@ table#sidebar_table td{
 }
 
 div#sidebar_table2_div{
-	margin-top: -16px;
+	margin-top: 4px;
 	width: 233px;
 	height: 380px;
 	overflow: scroll;
@@ -147,7 +147,7 @@ div#appSideBar{
 div#appView{
 	background: #DFE3CB;
 	float: left;
-	width: 516px;
+	width: 536px;
 	height: 320px;
 	padding: 15px;
 	border-bottom: 1px solid gray;
@@ -159,7 +159,7 @@ div#appView{
 div#appView2{
 	background: #DFE3CB;
 	float: left;
-	width: 531px;
+	width: 551px;
 	height: 434px;
 /*	padding: 15px;*/
 	padding-top: 15px;
@@ -172,7 +172,7 @@ div#appView2{
 div#appSelector{
 	 background: #DFE3CB;
 	 float: left;
-	 width: 531px;
+	 width: 551px;
 	 height: 83px;
 	 padding-left: 15px;
 	 padding-top: 15px;
