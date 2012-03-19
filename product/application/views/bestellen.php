@@ -41,7 +41,7 @@
 			</tr>";															
 			} echo "
 		</table>";
-		}echo "																		
+		}echo "<p>&nbsp;<p>																		
 	</div>";
 	?>
 	
