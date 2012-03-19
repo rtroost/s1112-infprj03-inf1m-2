@@ -51,7 +51,6 @@ class Bestellen_model extends CI_model{
 		if ($productenQ->num_rows() > 0){
 			foreach($productenQ->result() as $product){
 				$data[] = $product;
-				
 			}
 		}
 		return $data;
