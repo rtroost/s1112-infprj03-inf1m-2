@@ -27,16 +27,16 @@
 
 				<ul>
 					<li id="1" class="activated">
-						<a class="appNav" href="">Categorie</a>
+						<a class="appNav" href="">Categorie 1</a>
 					</li>
 					<li id="2" class="overig">
-						<a class="appNav" href="">Samenstellen</a>
+						<a class="appNav" href="">Samenstellen 2</a>
 					</li>
 					<li id="3" class="overig">
-						<a class="appNav" href="">Opslaan</a>
+						<a class="appNav" href="">Opslaan 3</a>
 					</li>
 					<li id="4" class="overig">
-						<a class="appNav" href="">Bestellen</a>
+						<a class="appNav" href="">Bestellen 4</a>
 					</li>
 				</ul>
 
@@ -430,11 +430,6 @@
 	<script src="<?php echo base_url(); ?>js/jquery.json-2.3.js"></script>
 	<script src="<?php echo base_url(); ?>js/jquery.numeric.js"></script>
 	<script src="<?php echo base_url(); ?>js/createApp_script.js"></script>
-	
-<<<<<<< .mine
-=======
-	
->>>>>>> .r77
 	<script>
 	(function( $ ){
 
