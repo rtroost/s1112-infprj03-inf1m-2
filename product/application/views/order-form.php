@@ -41,7 +41,7 @@
 		line-height: 2em;
 	}
 	form.order_userinfo p {
-		margin: 5px;
+		padding: 5px;
 	}
 	form.order_userinfo label {
 		width: 200px;
