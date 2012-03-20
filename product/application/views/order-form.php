@@ -1,3 +1,4 @@
+<?php $this->load->view('includes/header');?>
 <style type="text/css" media="screen">
 	/*
 	 * Messages
@@ -133,3 +134,4 @@
 
 		<?php }?>
 	</div>
+<?php $this->load->view('includes/footer');?>

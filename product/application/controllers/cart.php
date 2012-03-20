@@ -12,9 +12,7 @@ class Cart extends CI_controller {
 	}
 
 	function index() {
-		$this -> load -> view('includes/header');
 		$this -> load -> view('cart');
-		$this -> load -> view('includes/footer');
 	}
 
 	function update_cart() {
@@ -60,9 +58,7 @@ class Cart extends CI_controller {
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
 			$data = $this -> order_model -> getShippingData();
-			$this -> load -> view('includes/header');
 			$this -> load -> view('order-form', $data);
-			$this -> load -> view('includes/footer');
 		} else// passed validation proceed to post success logic
 		{
 			// build array for the model
@@ -83,10 +79,7 @@ class Cart extends CI_controller {
 
 	function payment() {
 		$this -> order_model -> getUpToDatePizzaCost();
-
-		$this -> load -> view('includes/header');
 		$this -> load -> view('payment');
-		$this -> load -> view('includes/footer');
 	}
 
 	function idealresult() {
@@ -111,9 +104,7 @@ class Cart extends CI_controller {
 			$data['result'] = '<h1>Transactie fout.</h1><p>De status van uw iDEAL betaling is onbekend.</p>';
 		}
 
-		$this -> load -> view('includes/header');
 		$this -> load -> view('message', $data);
-		$this -> load -> view('includes/footer');
 	}
 
 }

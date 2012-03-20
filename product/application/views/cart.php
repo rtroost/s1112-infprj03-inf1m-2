@@ -1,3 +1,4 @@
+<?php $this->load->view('includes/header');?>
 <style type="text/css" media="screen">
 	table {
 		font: bold 12px "Trebuchet MS", sans-serif;
@@ -99,3 +100,4 @@ echo form_open('cart/update_cart');
 	</div>
 	</form> <?php } //endif?>
 </div>
+<?php $this->load->view('includes/footer');?>

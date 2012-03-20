@@ -29,7 +29,6 @@ class Registreer_cont extends CI_controller {
 
 		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('registreer.php');
-
 		} else {
 			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => md5(set_value('wachtwoord')));
 			$this -> gebruiker_model -> registreer_gebruiker($form_data);
