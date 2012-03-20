@@ -281,12 +281,12 @@ var CreateApp = {
 		}).appendTo(td1tr3);
 		$('<p>', { text: self.config.ingredienten[id].naam }).appendTo(td1tr3);
 		
-		$('<p>', { id: 'view3Hoeveelheid', text: 'Wijnig'}).appendTo(td2tr2);
-		$('<p>', { id: 'view4Hoeveelheid', text: 'Wijnig'}).appendTo(td2tr3);
+		$('<p>', { id: 'view3Hoeveelheid', text: 'Weinig'}).appendTo(td2tr2);
+		$('<p>', { id: 'view4Hoeveelheid', text: 'Weinig'}).appendTo(td2tr3);
 		
 		var divButtons = $('<div>', {class: 'view2buttons'}).appendTo(td3);
 		
-		$('<button>', {text: 'Wijzig', class: 'down', 'data-func': 1}).appendTo(divButtons);
+		$('<button>', {text: 'Weinig', class: 'down', 'data-func': 1}).appendTo(divButtons);
 		$('<button>', {text: 'Normaal', 'data-func': 2}).appendTo(divButtons);
 		$('<button>', {text: 'Veel', 'data-func': 3}).appendTo(divButtons);
 
@@ -345,8 +345,8 @@ var CreateApp = {
 		tr.children('.totaalGewicht').text(self.config.ingredienten[id].gewicht);
 		var oldPrijs = self.config.ingredienten[id].prijs;
 		if(dataFunc == 1){
-			view3Hoeveelheid.text('Wijnig');
-			view4Hoeveelheid.text('Wijnig');
+			view3Hoeveelheid.text('Weinig');
+			view4Hoeveelheid.text('Weinig');
 			self.config.ingredienten[id].prijs = Math.round(self.config.ingredienten[id].prijs100*0.75);
 		} else if(dataFunc == 2){
 			view3Hoeveelheid.text('Normaal');

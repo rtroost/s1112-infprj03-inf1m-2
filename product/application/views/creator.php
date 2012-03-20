@@ -226,7 +226,7 @@
 											<td class="totaalGewicht"><?php echo $viewgewicht; ?></td>
 											<td>
 												<div class="view2buttons">
-													<button <?php if($viewhoeveelheid == 1){ echo "class='down'"; } ?> data-func="1">Wijzig</button>
+													<button <?php if($viewhoeveelheid == 1){ echo "class='down'"; } ?> data-func="1">Weinig</button>
 													<button <?php if($viewhoeveelheid == 2){ echo "class='down'"; } ?> data-func="2">Normaal</button>
 													<button <?php if($viewhoeveelheid == 3){ echo "class='down'"; } ?> data-func="3">Veel</button>
 												</div>
@@ -260,12 +260,12 @@
 					<div id="opslaan" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>
 						<div id="opslaan_login" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display: none;"; } ?>">
 							<p>Hallo <span class="name"><?php if($this->session->userdata('voornaam')){ echo $this->session->userdata('voornaam'); } ?></span>, <br />
-								U kan hier uw product opslaan in uw profiel
+								U kunt hier uw product opslaan op uw profiel.
 							</p>
 							
 							<h4>Product naam:</h4>
 							<input id="product_name" type="text" name="naam" value=""/><br />
-							<p>Wilt u uw product publikelijk maken?</p>
+							<p>Wilt u uw product publiekelijk maken?</p>
 							<input id="product_publikelijk" type="checkbox" name="publikelijk" value=""/>
 							<br />
 							
@@ -274,7 +274,7 @@
 							<p>U kunt dit product en andere gemaakte producten beheren door maar "Mijn profiel" te gaan.</p>
 						</div>	
 						<div id="opslaan_logout" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display: none;"; } ?>">
-							<p>U bent nog niet ingelogd. U hoeft uw product niet opteslaan om te kunnen bestellen, u kunt dan deze stap overslaan.</p>
+							<p>U bent nog niet ingelogd. U hoeft uw product niet op te slaan om te kunnen bestellen, u deze stap eventueel overslaan.</p>
 							<h4>Login:</h4>
 							<form id="login_form" action="<?php echo base_url();?>index.php/login" method="post">
 								<label for="username">Email adres: </label>
@@ -326,7 +326,7 @@
 											<p><?php echo $ingredientdeel['naam']; ?></p>
 										</td>
 										<td>	
-											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Wijnig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
+											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Weinig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
 										</td>
 										<td class="prijs"><?php echo $ingredientdeel['calcedprijs']; ?></td>
 									</tr>
@@ -400,7 +400,7 @@
 											<p><?php echo $ingredientdeel['naam']; ?></p>
 										</td>
 										<td>
-											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Wijnig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
+											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Weinig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
 										</td>
 										<td class="prijs"><?php echo $ingredientdeel['calcedprijs']; ?></td>
 									</tr>
@@ -431,7 +431,10 @@
 	<script src="<?php echo base_url(); ?>js/jquery.numeric.js"></script>
 	<script src="<?php echo base_url(); ?>js/createApp_script.js"></script>
 	
+<<<<<<< .mine
+=======
 	
+>>>>>>> .r77
 	<script>
 	(function( $ ){
 
