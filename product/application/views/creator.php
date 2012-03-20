@@ -431,7 +431,7 @@
 	<script src="<?php echo base_url(); ?>js/jquery.numeric.js"></script>
 	<script src="<?php echo base_url(); ?>js/createApp_script.js"></script>
 	
-	<?php// var_dump($JSingredienten); ?>
+	
 	<script>
 	(function( $ ){
 

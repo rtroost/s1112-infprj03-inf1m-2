@@ -53,6 +53,9 @@
 						<li>
 							<a href="<?php echo base_url();?>index.php/beheer_gebruikers_cont">Gebruikers beheer</a>
 						</li>
+						<li>
+							<a href="<?php echo base_url();?>index.php/registreer_cont">Registreer</a>
+						</li>
 					</ul>
 				</nav>
 				

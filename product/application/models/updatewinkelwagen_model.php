@@ -9,7 +9,7 @@ class Updatewinkelwagen_model extends CI_model{
 		$data = array(
                'id'      => $id,
                'qty'     => $aantal,
-               'price'   => $price,
+               'price'   => $price / 100,
                'name'    => $results->naam
             );
 			
