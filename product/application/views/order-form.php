@@ -1,4 +1,4 @@
-<?php $this->load->view('includes/header');?>
+<?php $this -> load -> view('includes/header');?>
 <style type="text/css" media="screen">
 	/*
 	 * Messages
@@ -87,51 +87,50 @@
 		$attributes = array('class' => 'order_userinfo', 'id' => 'order_userinfo');
 		echo form_open('', $attributes);
 		?>
-		<p>
-		<label for="voorletters">Voorletters <span class="required">*</span></label>
-		<input id="voorletters" type="text" name="voorletters" placeholder="A.B.F." maxlength="20" value="<?php echo $voornaam; ?>"  />
-		</p>
-		<p>
-		<label for="achternaam">Achternaam <span class="required">*</span></label>
-		<input id="achternaam" type="text" name="achternaam" maxlength="50" value="<?php echo $achternaam;?>"  />
-		</p>
-		<p>
-		<label for="adresregel_1">Adresregel 1 <span class="required">*</span></label>
-		<input id="adresregel_1" type="text" name="adresregel_1" placeholder="Straatnaam 00" maxlength="50" value="<?php echo $adresregel_1?>"  />
-		</p>
-		<p>
-		<label for="adresregel_2">Adresregel 2</label>
-		<input id="adresregel_2" type="text" name="adresregel_2" maxlength="50" value="<?php echo $adresregel_2;?>"  />
-		</p>
-		<p>
-		<label for="postcode">Postcode <span class="required">*</span></label>
-		<input id="postcode" type="text" name="postcode" placeholder="1234AB" maxlength="6" value="<?php echo $postcode; ?>"  />
-		</p>
-		<p>
-		<label for="woonplaats">Woonplaats <span class="required">*</span></label>
-		<input id="woonplaats" type="text" name="woonplaats" placeholder="Utrecht" maxlength="50" value="<?php echo $woonplaats;?>"  />
-		</p>
-		<p>
-		<label for="telefoonnummer">Telefoonnummer <span class="required">*</span></label>
-		<input id="telefoonnummer" type="text" name="telefoonnummer" placeholder="0101234567" maxlength="10" value="<?php echo $telefoonnummer;?>"  />
-		</p>
-		<p>
-		<label for="email">Email <span class="required">*</span></label>
-		<input id="email" type="text" name="email" placeholder="username@provider.countrycode" maxlength="100" value="<?php echo $email;?>"  />
-		</p>
-		<p>
-		<label for="payment-method">Betaalmethode <span class="required">*</span></label>
-		<?php // Change the values in this array to populate your dropdown as required?>
+		<?php $required = ' <span class="required">*</span>';?>
+			<?php echo form_open('', array('class' => 'registreerform'));?>
+	<p>
+		<?php echo form_label('Voorletters' . $required, 'voorletters');?>
+		<?php echo form_input(array('name' => 'voorletters', 'id' => 'voorletters', 'placeholder' => 'A.B.F.', 'maxlength' => '20', 'value' => $voornaam));?>
+	</p>
+	<p>
+		<?php echo form_label('Achternaam' . $required, 'achternaam');?>
+		<?php echo form_input(array('name' => 'achternaam', 'id' => 'achternaam', 'placeholder' => '', 'maxlength' => '50', 'value' => $achternaam));?>
+	</p>
+	<p>
+		<?php echo form_label('Adresregel 1' . $required, 'adresregel_1');?>
+		<?php echo form_input(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'placeholder' => 'Straatnaam 00', 'maxlength' => '50', 'value' => $adresregel_1));?>
+	</p>
+	<p>
+		<?php echo form_label('Adresregel 2', 'adresregel_2');?>
+		<?php echo form_input(array('name' => 'adresregel_2', 'id' => 'adresregel_2', 'placeholder' => 'Straatnaam 00', 'maxlength' => '50', 'value' => $adresregel_2));?>
+	</p>
+	<p>
+		<?php echo form_label('Postcode' . $required, 'postcode');?>
+		<?php echo form_input(array('name' => 'postcode', 'id' => 'postcode', 'placeholder' => '1234AB', 'maxlength' => '6', 'value' => $postcode));?>
+	</p>
+	<p>
+		<?php echo form_label('Woonplaats' . $required, 'woonplaats');?>
+		<?php echo form_input(array('name' => 'woonplaats', 'id' => 'woonplaats', 'placeholder' => 'Utrecht', 'maxlength' => '50', 'value' => $woonplaats));?>
+	</p>
+	<p>
+		<?php echo form_label('Telefoonnummer' . $required, 'telefoonnummer');?>
+		<?php echo form_input(array('name' => 'telefoonnummer', 'id' => 'telefoonnummer', 'placeholder' => '0101234567', 'maxlength' => '10', 'value' => $telefoonnummer));?>
+	</p>	
+	<p>
+		<?php echo form_label('E-mail' . $required, 'email');?>
+		<?php echo form_input(array('name' => 'email', 'id' => 'email', 'placeholder' => 'username@provider.countrycode', 'maxlength' => '100', 'value' => $email));?>
+	</p>
+	<p>
+		<?php echo form_label('Betaalmethode' . $required, 'payment_method');?>
 		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDEAL', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
-
-		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'))
-		?>
-		</p>
-		<p>
+		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'));?>
+	</p>
+	<p>
 		<?php echo form_submit(array('value' => 'Verder', 'class' => 'margRight'));?>
-		</p>
-		<?php echo form_close();?>
+	</p>
+	<?php echo form_close();?>
 
-		<?php }?>
+	<?php }?>
 	</div>
-<?php $this->load->view('includes/footer');?>
+<?php $this -> load -> view('includes/footer');?>
