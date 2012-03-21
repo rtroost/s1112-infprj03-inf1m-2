@@ -45,16 +45,16 @@ class Order_model extends CI_Model {
 				endforeach;
 			}
 
-			echo $total_product_price;
-			$data = array('rowid' => $item['rowid'], 'price' => $total_product_price);
-			$this -> cart -> update($data);
+			echo $total_product_price.'<br/>';
+			// $data = array('rowid' => $item['rowid'], 'price' => $total_product_price);
+			// $this -> cart -> update($data);
 
 			echo $item['price'];
 		endforeach;
 	}
 
 	function createOrder() {
-		$q = array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'));
+		$q = array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'), 'bestelmethodeid' => $this->session->userdata('bestelmethode'));
 		$this -> db -> insert('bestelling', $q);
 
 		$bestellingid = $this -> db -> insert_id();

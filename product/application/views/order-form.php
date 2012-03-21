@@ -68,7 +68,8 @@
 	}
 	form.order_userinfo input[type="submit"]:hover {
 		background: #70d2fd;
-	}
+	}
+
 </style>
 <div id="content">
 	<?php if($this -> cart -> total_items() == 0) {
@@ -123,8 +124,13 @@
 	</p>
 	<p>
 		<?php echo form_label('Betaalmethode' . $required, 'payment_method');?>
-		<?php $options = array('' => 'Please Select', 'paypal' => 'Paypal', 'ideal' => 'iDEAL', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard');?>
+		<?php $options = array('' => '-- Maak een keuze --', 'paypal' => 'Paypal', 'ideal' => 'iDEAL', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard', 'contant' => 'Contant');?>
 		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'));?>
+	</p>
+	<p>
+		<?php echo form_label('Afleveren/Ophalen' . $required, 'bestelmethode');?>
+		<?php $options = array('' => '-- Maak een keuze --', '1' => 'Afhalen na 30 minuten', '2' => 'Bezorging binnen 1 uur');?>
+		<?php echo form_dropdown('bestelmethode', $options, set_value('bestelmethode'));?>
 	</p>
 	<p>
 		<?php echo form_submit(array('value' => 'Verder', 'class' => 'margRight'));?>

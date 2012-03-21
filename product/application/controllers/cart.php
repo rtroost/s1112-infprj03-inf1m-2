@@ -51,7 +51,8 @@ class Cart extends CI_controller {
 		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
-		$this -> form_validation -> set_rules('payment-method', 'Payment method', 'required');
+		$this -> form_validation -> set_rules('payment-method', 'Payment methode', 'required');
+		$this -> form_validation -> set_rules('bestelmethode', 'Bestel methode', 'required');
 
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -64,12 +65,18 @@ class Cart extends CI_controller {
 			// build array for the model
 
 			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'));
-
+			$this->session->set_userdata(array('bestelmethode' => set_value('bestelmethode')));
 			// run insert model to write data to db
 
 			if ($this -> order_model -> saveShippingData($form_data) == TRUE)// the information has therefore been successfully saved in the db
 			{
-				redirect('cart/payment');
+				//if bestelmethode == aan de deur
+
+				if($this->input->post('payment-method') === "contant") {
+					redirect('cart/complete');
+				} else {
+					redirect('cart/payment');
+				}				
 			} else {
 				echo 'An error occurred saving your information. Please try again later';
 				// Or whatever error handling is necessary
@@ -107,5 +114,14 @@ class Cart extends CI_controller {
 		$this -> load -> view('message', $data);
 	}
 
+	function complete() {
+		$orderid = $this->order_model->createOrder();
+		$this->order_model->makePayment($orderid);			
+
+		$this -> cart -> destroy();
+
+		$data['result'] = '<h1>Bestelling kompleet</h1><p>Uw bestelling is geplaatst.</p>';
+		$this->load->view('message', $data);
+	}
 }
 ?>

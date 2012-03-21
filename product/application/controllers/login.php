@@ -5,9 +5,9 @@ class Login extends CI_controller {
 	function __construct() {
 		parent::__construct();
 		
-		// if($this->session->userdata('logged_in') == 1) {
-			// redirect(base_url());
-		// } 
+		if($this->session->userdata('logged_in') == 1) {
+			redirect(base_url());
+		} 
 		
 		$this -> load -> library('form_validation');
 		$this -> load -> database();
@@ -17,16 +17,13 @@ class Login extends CI_controller {
 	}
 
 	function index() {
-		// echo $this->input->post('username');
-		// echo $this->input->post('password');
 		$this -> form_validation -> set_rules('username', 'E-mail Adres', 'required|trim|valid_email');
 		$this -> form_validation -> set_rules('password', 'Wachtwoord', 'required');
 
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
-		//echo "lol1";
+
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed and/or no post has happend
 		{
-			//echo "lol2";
 			if(!$this->input->is_ajax_request()){
 				$this -> load -> view('login');
 			} else {
@@ -69,7 +66,6 @@ class Login extends CI_controller {
 
 	function create_member() {
 		$this -> load -> library('form_validation');
-		//fieldname, error message, validation rules
 
 		$this -> form_validation -> set_rules('first_name', 'Name', 'trim|required');
 		$this -> form_validation -> set_rules('last_name', 'Last Name', 'trim|required');

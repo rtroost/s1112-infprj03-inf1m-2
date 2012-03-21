@@ -98,6 +98,6 @@ echo form_open('cart/update_cart');
 		<?php echo form_button('', 'Check Out', 'onClick="javascript: location.href=\'cart/checkout/\'"');?>
 		<?php echo form_button('', 'Clear Cart', 'onClick="javascript: location.href=\'cart/clear_cart/\'"');?>
 	</div>
-	</form> <?php } //endif?>
+	</form> <?php }?>
 </div>
 <?php $this->load->view('includes/footer');?>
