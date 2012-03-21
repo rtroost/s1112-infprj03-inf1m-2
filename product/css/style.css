@@ -238,14 +238,12 @@ td#productPrijs{
 	float:right;
 }
 
-td#productAantal{
+td.productTotaal, td#productAantal {
 	text-align:right;
 	vertical-align:baseline;
 }
 
 td.productTotaal{
-	text-align:right;
-	vertical-align:baseline;
 	float:right;
 }
 

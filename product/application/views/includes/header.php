@@ -7,7 +7,9 @@
 		<title>Pizzario</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo base_url();?>js/script.js" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo base_url();?>js/tooltip.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="<?php echo base_url();?>css/style.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>css/tooltip.css" type="text/css" />
 	</head>
 	<body>
 		<div id="wrapper">
@@ -42,7 +44,7 @@
 							<a href="<?php echo base_url();?>index.php/contact_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_contact_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_contact.png'" src="<?php echo base_url();?>images/img_button_contact.png"></img></a>
 						</li>
 						<li>
-							<a href="<?php echo base_url();?>index.php/account_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_account_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_account.png'" src="<?php echo base_url();?>images/img_button_account.png"></img></a>
+							<a href="<?php echo base_url();?>index.php/account_cont"><img onmouseover="this.src='<?php echo base_url();?>images/beheer_over.png' " onmouseout="this.src='<?php echo base_url();?>images/beheer.png'" src="<?php echo base_url();?>images/beheer.png"></img></a>
 						</li>
 						<li>
 							<a href="<?php echo base_url();?>index.php/product_cont/creator">Product Creator</a>

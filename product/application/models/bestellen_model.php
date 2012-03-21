@@ -27,6 +27,15 @@ class Bestellen_model extends CI_model{
 							$prijs = $categorie->standaardprijs+$prijs;
 							$data[$categorie->naam][$product->naam]['prijs'] = $prijs;
 							$data[$categorie->naam][$product->naam]['id'] = $product->productid;
+							if (file_exists("images/products/".$product->productid .".png")){
+								$data[$categorie->naam][$product->naam]['plaatje'] = $product->productid .".png";
+							}elseif(file_exists( base_url()."images/products/".$product->productid .".jpg")){
+								$data[$categorie->naam][$product->naam]['plaatje'] = $product->productid .".jpg";
+							}elseif(file_exists( base_url()."images/products/".$product->productid .".gif")){
+								$data[$categorie->naam][$product->naam]['plaatje'] = $product->productid .".gif";
+							}else{
+								$data[$categorie->naam][$product->naam]['plaatje'] = "geenAfbeelding.png";
+							}
 						}
 					}
 				}
