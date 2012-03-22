@@ -35,10 +35,10 @@
 				<nav>
 					<ul id="header_nav">
 						<li>
-							<a href="<?php echo base_url();?>index.php"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_home_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_home_over.png'" src="<?php echo base_url();?>images/img_button_home_over.png"></img></a>
+							<a href="<?php echo base_url();?>index.php"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_home_over.png' " onmouseout="this.src='<?php $pos = strlen($_SERVER['REQUEST_URI']); if($pos == 19) { echo base_url()."images/img_button_home_over.png";} else{ echo base_url()."images/img_button_home.png";} ?>'" src="<?php $pos = strlen($_SERVER['REQUEST_URI']); if($pos == 19) { echo base_url()."images/img_button_home_over.png";} else{ echo base_url()."images/img_button_home.png";} ?>"></img></a>
 						</li>
 						<li>
-							<a href="<?php echo base_url();?>index.php/bestellen_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_bestellen_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_bestellen.png'" src="<?php echo base_url();?>images/img_button_bestellen.png"></img></a>
+							<a href="<?php echo base_url();?>index.php/bestellen_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_bestellen_over.png' " onmouseout="this.src='<?php $pos = strpos($_SERVER['REQUEST_URI'], "bestellen_cont"); if($pos > 0) { echo base_url()."images/img_button_bestellen_over.png";} else{ echo base_url()."images/img_button_bestellen.png";} ?>'" src="<?php $pos = strpos($_SERVER['REQUEST_URI'], "bestellen_cont"); if($pos > 0) { echo base_url()."images/img_button_bestellen_over.png";} else{ echo base_url()."images/img_button_bestellen.png";} ?>" ></img></a>
 						</li>
 						<li>
 							<a href="<?php echo base_url();?>index.php/contact_cont"><img onmouseover="this.src='<?php echo base_url();?>images/img_button_contact_over.png' " onmouseout="this.src='<?php echo base_url();?>images/img_button_contact.png'" src="<?php echo base_url();?>images/img_button_contact.png"></img></a>
@@ -49,23 +49,9 @@
 
 <!-- 							<a href="<?php echo base_url();?>index.php/account_cont"><img onmouseover="this.src='<?php echo base_url();?>images/beheer_over.png' " onmouseout="this.src='<?php echo base_url();?>images/beheer.png'" src="<?php echo base_url();?>images/beheer.png"></img></a> -->
 
-						</li>
-						<li>
-							<a href="<?php echo base_url();?>index.php/product_cont/creator">Product Creator</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url();?>index.php/cart">Winkelwagen</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url();?>index.php/beheer_gebruikers_cont">Gebruikers beheer</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url();?>index.php/registreer_cont">Registreer</a>
-						</li>
 					</ul>
 				</nav>
-				
-				<div id="search" style="margin-top: -10px;">
+				<div id="search" style="margin-top: -27px;">
 					<form id="searchform" action="<?php echo base_url();?>index.php/search_cont">
 						<label for="search">Zoeken</label>
 						<input class="zoeken" name="search" type="text" />		

@@ -2,8 +2,10 @@
 	$this->load->view('includes/header') 
 ?>
 <div id="content"> 	
-															
+	<div id="legenda"><div class="legendaItem" ><b>(w) = weinig</div><div class="legendaItem">(n) = normale hoeveelheid</div><div class="legendaItem" >(v) = veel</b></div></div>													
+	<p>&nbsp;<p>&nbsp;
 	<?php
+	/* variabellen */
 		$fixedTooltipBegin = "<table id=\"dpop\" class=\"popup\">
         	<tbody><tr>
         		<td id=\"topleft\" class=\"corner\"></td>
@@ -18,13 +20,16 @@
         	</tr>
         	<tr>
         		<td class=\"corner\" id=\"bottomleft\"></td>
-        		<td class=\"bottom\"><img width=\"30\" height=\"29\" alt=\"popup tail\" src=\"".base_url()."images/tooltip/bubble-tail2.png\"></td>
+        		<td class=\"bottom\"></td>
         		<td id=\"bottomright\" class=\"corner\"></td>
         	</tr>
         </tbody></table>";
 		$i=0; 
 		$pid=0;
+		/* einde variabellen */
 		
+		
+		/* bestellijst  */
 		foreach($bestellijst as $categorie => $producten){ echo "						
 		<table id=\"bestellijst\">
 			<tr id=\"categorieRow\">
@@ -35,16 +40,31 @@
 				<td id=\"categorieBestellen\"></td>
 			</tr>";
 			
-			foreach($producten as $product => $productinformatie){ $pid++; echo "
-			<tr id=\"productRow\" >
+			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4);
+echo		"<tr id=\"productRow\" >
 				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\">".$product."</span>";
 
 				/* tooltip */
 echo			$fixedTooltipBegin;
 echo 			"<table style=\"background-color:#ffffff;\">
 					<tr>
-						<td><img width=\"100px\" src=\"".base_url()."images/products/".$productinformatie['plaatje']."\"></td>
-						<td></td>
+						<td rowspan=\"3\" style=\"width:130px;\"><img style=\"border:1px solid #000000;\" width=\"100px\" height=\"100px\" src=\"".base_url()."images/products/".$productinformatie['plaatje']."\"></td>
+						<td colspan=\"".$tableWidth."\" style=\"font-size:13px;font-weight:bold; vertical-align:baseline\">".$product."</td>
+					</tr>
+					<tr>
+						<td colspan=\"".$tableWidth."\" style=\"font-size:11px;height:30px;font-weight:bold; vertical-align:baseline\">&#8364;".number_format($productinformatie['prijs']/100, 2)."</td>
+					</tr>
+					
+					<tr>";
+								for($i = 0; $i < $tableWidth; $i++){
+echo								"<td style=\"vertical-align:baseline\">";
+										if(0+$i*4 < count($productinformatie)-3) {echo $productinformatie[0+$i*4]."&nbsp;&nbsp;<br>";}
+										if(1+$i*4 < count($productinformatie)-3) {echo $productinformatie[1+$i*4]."&nbsp;&nbsp;<br>";}
+										if(2+$i*4 < count($productinformatie)-3) {echo $productinformatie[2+$i*4]."&nbsp;&nbsp;<br>";}
+										if(3+$i*4 < count($productinformatie)-3) {echo $productinformatie[3+$i*4]."&nbsp;&nbsp;";}
+echo								"</td>";
+								}
+echo					"</td>
 					</tr>
 				</table>";
 echo   			$fixedTooltipEinde;
@@ -71,7 +91,10 @@ echo   			"</div></td>
 			</tr>";															
 			} echo "
 		</table><p>&nbsp;<p>";
-		}echo "																
+		}
+		
+		/* einde bestellijst */
+		echo "																
 	</div>";
 	?>
 	

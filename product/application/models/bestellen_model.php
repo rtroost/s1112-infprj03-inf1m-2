@@ -20,7 +20,10 @@ class Bestellen_model extends CI_model{
 							$i=0;
 							$prijs = 0;
 							foreach($ingredientenQ->result() as $ingredient){
-								$data[$categorie->naam][$product->naam][$i]	= $ingredient->naam;
+								if($ingredient->ingredienthoeveelheid == 1) {$hoeveelheid = "(w)";};
+								if($ingredient->ingredienthoeveelheid == 2) {$hoeveelheid = "(n)";};
+								if($ingredient->ingredienthoeveelheid == 3) {$hoeveelheid = "(v)";};
+								$data[$categorie->naam][$product->naam][$i]	= $hoeveelheid.$ingredient->naam;
 								$prijs = $prijs+(($ingredient->ingredienthoeveelheid*0.5)*$ingredient->prijs);
 								$i++;								
 							}

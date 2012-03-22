@@ -27,7 +27,7 @@ color:#000099;
 .popup td.left { background-image: url(../images/tooltip/bubble-4.png); }
 .popup td.right { background-image: url(../images/tooltip/bubble-5.png); }
 .popup td#bottomleft { background-image: url(../images/tooltip/bubble-6.png); }
-.popup td.bottom { background-image: url(../images/tooltip/bubble-7.png); text-align: center;}
+.popup td.bottom { background-image: url(../images/tooltip/bubble-7.png); text-align: left;}
 .popup td.bottom img { display: block; margin: 0 auto; }
 .popup td#bottomright { background-image: url(../images/tooltip/bubble-8.png); }
 
@@ -36,5 +36,5 @@ color:#000099;
 	line-height: 1.2em;
 	background-color: #fff;
 	color: #666;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+	font-family: arial;
 	}

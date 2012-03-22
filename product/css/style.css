@@ -85,6 +85,16 @@ input.aanmeldInput {
 	width: 90px;
 	color: #666666;
 }
+
+div #legenda {
+	padding-left:100px;}
+	
+div.legendaItem{
+	padding-left:50px;
+	padding-right:50px;
+	float:left;
+}
+	
 /* end login */
 
 /* =========== */
@@ -203,7 +213,7 @@ td#categorieColumn{
 }
 
 td#categoriePrijs{
-	width:200px;
+	width:100px;
 	text-align:right;
 }
 
