@@ -7,10 +7,6 @@
 <?php
 	if(isset($load)){
 		$nameCounter = 0;
-		//var_dump($rows[0]);
-		//var_dump($ingredienten);
-		//var_dump($rows[0]->categorieid);
-		
 		$totaalgewicht = 0;
 		$totaalprijs = $rows[0]->standaardprijs;
 	}
@@ -38,6 +34,9 @@
 					<li id="4" class="overig">
 						<a class="appNav" href="">Bestellen 4</a>
 					</li>
+					<li id="5" class="overig">
+						<a class="appNav" href="">Delen 5</a>
+					</li>
 				</ul>
 
 			</div>
@@ -51,7 +50,7 @@
 						<tr>
 							<td><img src="<?php echo base_url(); ?>images/productApp/<?php echo $row->image_klein; ?>" width="80px" height="70px"/></td>
 							<td>
-								<input class="sidebar_keuze_categorie" name="sidebar_keuze" value="<?php echo $row->categorieid; ?>" type="radio" <?php if(isset($load)){ if($count == $rows[0]->categorieid){ echo "checked='checked'"; } } ?>/>
+								<input class="sidebar_keuze_categorie" name="sidebar_keuze" value="<?php echo $row->categorieid; ?>" type="radio" <?php if(isset($load)){ if($count == $rows[0]->categorieid){ echo "checked='checked'"; } else { echo "disabled='disabled'";} } ?>/>
 								<label><?php echo $row->naam; ?></label>
 							</td>
 						</tr>
@@ -113,7 +112,7 @@
 											<label for="sidebar_keuze"><?php echo $ing->naam; ?></label>
 											<br>
 											<img src="http://127.0.0.1/pizzario/images/productApp/<?php echo $rows[0]->categorieid; ?>/<?php echo $ing->ingredientid; ?>/left.png" style="float: left; height: 50px; width: 50px;">
-											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="1" data-arrayindex="0" style="margin-top: 20px; margin-left: 10px;" <?php if(($nameCounter < count($rows[0]->names) && ($ing->naam == $rows[0]->names[$nameCounter]))){ echo "checked='checked'"; $nameCounter++; }  ?>>
+											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="1" data-arrayindex="<?php echo $ing->ingredientid-1; ?>" style="margin-top: 20px; margin-left: 10px;" <?php if(($nameCounter < count($rows[0]->names) && ($ing->naam == $rows[0]->names[$nameCounter]))){ echo "checked='checked'"; $nameCounter++; }  ?>>
 										</td>
 									<?php if($count % 2 == 0 ){ echo "</tr>"; } ?>
 								<?php $count++; endforeach; ?>
@@ -193,15 +192,11 @@
 										
 										
 										if($tempcount == 1 || $temptemp == true){
-											$JSingredienten[$JScount] = "ingredientId: {$ing->ingredientid}, prijs100: {$ing->prijs}";
+											$JSingredienten[$JScount] = "ingredientId: '{$ing->ingredientid}', prijs100: '{$ing->prijs}'";
 											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", prijs: {$tempprijs}";
 											
-											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", naam: {$ing->naam}, gewichtspunten: {$ing->gewichtspunten}";
-											if(isset($hoeveelheid)){
-												$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", hoeveelheid: {$hoeveelheid}";
-											} else {
-												$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", hoeveelheid: 1";
-											}
+											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", naam: '{$ing->naam}', gewichtspunten: '{$ing->gewichtspunten}'";
+											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", hoeveelheid: {$hoeveelheid}";
 											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", gewicht: {$tempgewicht}";
 											
 											if(($ing->naam == $naam)){
@@ -218,7 +213,7 @@
 												$tempcount++;
 											}
 									?>
-									<tr class="<?php echo $id; ?>">
+									<tr class="<?php echo $viewid; ?>">
 											<td>
 												<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $viewid+1; ?>/left.png">
 												<p><?php echo $naam; ?></p>
@@ -264,9 +259,9 @@
 							</p>
 							
 							<h4>Product naam:</h4>
-							<input id="product_name" type="text" name="naam" value=""/><br />
+							<input id="product_name" type="text" name="naam" size="34" value="<?php if(isset($load)){ echo $rows[0]->naam; }?>"/><br />
 							<p>Wilt u uw product publiekelijk maken?</p>
-							<input id="product_publikelijk" type="checkbox" name="publikelijk" value=""/>
+							<input id="product_publikelijk" type="checkbox" name="publikelijk" value="" <?php if(isset($load) && $rows[0]->publiekelijk == 1){ echo "checked='checked'"; }?>/>
 							<br />
 							
 							<button id="buttonOpslaan">Opslaan</button><br /><br />
@@ -296,7 +291,7 @@
 							<p>Uw product is opgeslagen<br />
 								U kunt de samenstelling van dit product later nog wijzigen, dit kunt u regelen in "mijn profiel".<br />
 								U kunt nu uw product bestellen door naar de volgende stap te gaan.
-							</p>
+							</p><br />
 						</div>		
 					</div>
 					
@@ -377,7 +372,7 @@
 					</div>	
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
-						 &nbsp; <button class="nav_button" id="volgende" style="visibility:hidden;"> Volgende » </button>
+						 &nbsp; <button class="nav_button" id="volgende"> Volgende » </button>
 					</div>
 				</div>
 				<div id="appView2">
@@ -420,19 +415,30 @@
 					</table>
 				</div>
 			</div>
-			
+			<div id="appMainWindow5" class="mainWindows">
+				<div id="appSideBar">
+					<h1>Uw product Delen</h1>
+					<div class="center nav_div">
+						<button class="nav_button" id="vorige"> « Vorige </button>
+						 &nbsp; <button class="nav_button" id="volgende" style="visibility:hidden;"> Volgende » </button>
+					</div>
+				</div>
+				<div id="appView2">
+
+				</div>
+			</div>
 			
 		</div>
 		<br />
 	</div>
-
+	
 	<script src="http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.0.beta.6.js"></script>
 	<script src="<?php echo base_url(); ?>js/jquery.json-2.3.js"></script>
 	<script src="<?php echo base_url(); ?>js/jquery.numeric.js"></script>
 	<script src="<?php echo base_url(); ?>js/createApp_script.js"></script>
 	<script>
 	(function( $ ){
-
+		
 		CreateApp.init({
 			<?php if($this->session->userdata('logged_in') == 1){
 					echo "loginData: {
@@ -446,23 +452,25 @@
 				} else {
 					echo "loginData: {},";
 				} ?>
-				
-				
 				opgeslagen: 0,
-				
-	
 				<?php if(isset($load)){ ?>
-				ingredienten: [],
-				gekozenCategorie: <?php echo $catid; ?>,
-				<?php } else { ?>
-				ingredienten: [],
-				gekozenCategorie: 0,
+					ingredienten: [ <?php  $javascriptCounter = 0;	foreach ($JSingredienten as $JSing) { echo '{' . $JSing . "},"; $javascriptCounter++; } ?>	],
+					gekozenCategorie: <?php echo $catid; ?>,
+					totaalGewicht: <?php echo $totaalgewicht; ?>,
+					totaalPrijs: <?php echo $totaalprijs; ?>,
+					load: true,
+					product_id: <?php echo $rows[0]->productid; ?>,
+				<?php } else {?>
+					ingredienten: [],
+					gekozenCategorie: 0,
+					totaalGewicht: 0,
+					totaalPrijs: 0,
+					load: false,
+					product_id: 0,
 				<?php } ?>
-				
 				pagenr: 1,
 				appNavigationUl: $('div#appNavigation ul'),
-				totaalGewicht: 0,
-				totaalPrijs: 0,
+				
 				appMainWindow1: $('div#appMainWindow1'),
 				sidebar1: $('div#appMainWindow1').find('div#appSideBar'),
 				view1: $('div#appMainWindow1').find('div#appView'),
@@ -479,6 +487,8 @@
 				appMainWindow4: $('div#appMainWindow4'),
 				sidebar4: $('div#appMainWindow4').find('div#appSideBar'),
 				view4: $('div#appMainWindow4').find('div#appView2'),
+
+				appMainWindow5: $('div#appMainWindow5'),
 
 				h4Gewicht: $('h4#totaal_gewicht_ingredienten'),
 				h4Prijs: $('h4#totaal_prijs_ingredienten'),
@@ -503,7 +513,6 @@
 				spanNaam: $('span.name'),
 				after_opslaan: $('div#after_opslaan'),
 				after_bestellen: $('div#after_bestellen'),
-				aangemaakt_product_id: 0,
 				product_naam: '',
 				quantity: 0,
 				a_nav: $('div#appNavigation'),
@@ -514,6 +523,8 @@
 				winkelwagenButton: $('button#winkelwagen'),
 		});
 		
+		
+		
 	})( jQuery );	
 </script>
-<?php $this->load->view('includes/footer') ?>
+<?php $this->load->view('includes/footer'); ?>

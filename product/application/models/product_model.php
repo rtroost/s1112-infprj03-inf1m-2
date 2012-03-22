@@ -34,10 +34,66 @@ class Product_model extends CI_model {
 		return $data;
 	}
 	
+	function getTotalCost($productid) {
+		$data = 0;
+		$result = $this->db->query("
+			SELECT * FROM product WHERE productid = {$productid}
+		");
+		
+		if ($result->num_rows() > 0){
+			$temp = $result->row();
+			$result2 = $this->db->query("
+				SELECT * FROM `categorie` WHERE `categorieid` = {$temp->categorieid}
+			");
+			if ($result2->num_rows() > 0){
+				$temp2 = $result2->row();
+				$data += $temp2->standaardprijs;
+				$result3 = $this->db->query("
+				SELECT catingid FROM product_ingredient WHERE productid = {$productid}
+				");
+				
+				if ($result3->num_rows() > 0){
+					foreach($result3->result() as $product_ingredient){
+						$result4 = $this->db->query("
+							SELECT prijs FROM categorie_ingredient WHERE catingid = {$product_ingredient->catingid}
+							");
+							if ($result4->num_rows() > 0){
+								$row = $result4->result();
+								$data += $row[0]->prijs;
+							}
+					}
+				}
+				
+			}
+			
+		}
+		return $data;
+	}
+	
+	function check_name($naam, $load){
+		$result = $this->db->query("
+		SELECT * FROM product WHERE naam = '{$naam}'
+		");
+		if ($result->num_rows() > 0){
+			if($load == "true"){
+				return true;
+			}
+			return false;		
+		} else {
+			return true;
+		}
+	}
+	
 	function create_product($data){
 		$sql = 'INSERT INTO product (naam, standaard, categorieid, gearchiveerd, temp) VALUES (?, ?, ?, ?, ?);';
 		$insert = $this->db->query($sql, $data);
 		return $insert;
+	}
+	
+	function update_name($product_id, $naam){
+		return $this->db->query("
+			UPDATE product SET naam = '{$naam}' WHERE productid = '{$product_id}';
+		");
 	}
 	
 	function get_products_by_id($product_id){

@@ -3,41 +3,6 @@
 class product_cont extends CI_controller {
 	
 	function index(){
-// 		
-		// if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && isset($_POST['setCookie'])){
-// 			
-// 						
-			  // /** Test cookie data */
-			  // // $data = 
-			  		// // //array(
-			                // // array(
-			                       // // 'id'      => 2,
-			                       // // 'qty'     => 3,
-			                       // // 'price'  => 5.00,
-			                       // // 'name'  => 'Pizza Kuttelienie'
-			                    // // )
-			       // // // );
-// // 			
-			  // // $this->cart->insert($data);
-// 			  
-// 			  
-// 			  
-// 			  
-// 			  
-// 
-// 			  
-// 						
-// 			
-			// // SET COOKIE
-			// // if(setcookie($name)){
-				// // echo "succes";
-			// // } else {
-				// // echo "failed";
-			// // }
-// 			
-			// echo "success";
-			// return;
-		// }
 		
 		if($this->input->is_ajax_request()){
 			//$data = array('id' => 1, 'qty' => 1, 'price' => 1.00, 'name' => 'sdf');
@@ -46,6 +11,9 @@ class product_cont extends CI_controller {
 			$data['name'] = $this->input->post('name');
 			$data['price'] = $this->input->post('price');
 			$data['qty'] = $this->input->post('qty');
+			if($this->input->post('mediatype') == 'true'){
+				$data['options'] = array('media' => 'true');
+			}
 			if($this->cart->insert($data)){
 				echo "success";
 				return;
@@ -56,7 +24,34 @@ class product_cont extends CI_controller {
 			
 		}
 
-		$this->load->view('product');
+
+		if(!$this->input->get('productid')){
+			$this->load->view('product');
+			return;
+		}
+		
+		$this->load->model('gebruiker_product_model');		
+		$this->load->model('product_model');
+		$this->load->model('categorie_model');
+		
+		$product_id = $this->input->get('productid');
+		$data = null;
+		$result = $this->product_model->get_products_by_id($product_id);
+		if($result != null){
+			$data['rows'] = $result[0];
+			$categorienaam = $this->categorie_model->get_name($data['rows']->categorieid);
+			$data['rows']->categorienaam = $categorienaam[0]->naam;
+			$names = $this->product_model->get_name_of_ingredients($product_id);
+			$data['rows']->names = $names;
+			$prijs = $this->product_model->getTotalCost($product_id);
+			$data['rows']->prijs = $prijs;
+			$eigenaar = $this->gebruiker_product_model->get_eigenaar($product_id);
+			$data['rows']->eigenaar_naam = $eigenaar[0]->email;
+		}
+		if($this->input->get('ref')){
+			$data['ref'] = "true";
+		}
+		$this->load->view('product', $data);
 	}
 	
 	function creator(){
@@ -66,6 +61,7 @@ class product_cont extends CI_controller {
 			
 			$this->load->model('product_model');
 			$this->load->model('categorie_model');
+			$this->load->model('gebruiker_product_model');
 			$data['rows'] = $this->product_model->get_products_by_id($this->input->post('productid'));
 			if($data['rows'] != null){
 				foreach ($data['rows'] as $row) {
@@ -76,6 +72,8 @@ class product_cont extends CI_controller {
 					$row->categorieimg = $categorierow[0]->image_groot;
 					$row->categorieomschrijving = $categorierow[0]->omschrijving;
 					$row->standaardprijs = $categorierow[0]->standaardprijs;
+					$publikelijk = $this->gebruiker_product_model->get_publiekelijk($this->input->post('productid'));
+					$row->publiekelijk = $publikelijk[0]->publiekelijk;
 					//$categorieimg = $this->categorie_model->get_img($row->product[0]->categorieid);
 					//$row->categorieimg = $categorieimg[0]->image_groot;
 					$records = $this->product_model->get_name_hoeveelheid_of_ingredients($row->productid);
@@ -139,52 +137,100 @@ class product_cont extends CI_controller {
 		$dataProduct['standaard'] = 1;
 		$dataProduct['categorieid'] = $this->input->post('categorieid');
 		$dataProduct['gearchiveerd'] = 0;
+		$load = $this->input->post('load');
 		if($this->input->post('gebruikerid') == "undefined"){
 			// de gebruiker was niet ingelogged dus moet als temp worden opgeslagen
 			$dataProduct['temp'] = 1;
 		} else {
 			$dataProduct['temp'] = 0;
-		}
-		
-		$success = true;
-		
-		if($this->product_model->create_product($dataProduct)){
-			
-			$product_id = mysql_insert_id();
-			
-			if($this->input->post('gebruikerid') != "undefined"){
-				$dataGebruiker_Product['gebruikerid'] = $this->input->post('gebruikerid');
-				$dataGebruiker_Product['productid'] = $product_id;
-				$dataGebruiker_Product['publiekelijk'] = $this->input->post('publiekelijk');
-				$dataGebruiker_Product['aanmaak_datetime'] = date("Y-m-d H:i:s");
-				
-				if(!$this->gebruiker_product_model->create_gebruiker_product($dataGebruiker_Product)){
-					$success = false;
-				}
-				//create Gebruiker_Product
+			if(!$this->product_model->check_name($this->input->post('productNaam'), $load)){
+				echo "naam";
+				return;
 			}
-			
-			if($this->input->post('aantalingredienten') != 0){
-			
-				for($i = 0; $i < $this->input->post('aantalingredienten'); $i++){
-					$ingredientid = 'ingredientid'.($i+1);
-					$hoeveelheid = 'hoeveelheid'.($i+1);
-					$dataProduct_ingredient[$i]['catingid'] = $this->input->post($ingredientid);
-					$dataProduct_ingredient[$i]['productid'] = $product_id;
-					$dataProduct_ingredient[$i]['ingredienthoeveelheid'] = $this->input->post($hoeveelheid);
-					
-					if(!$this->product_ingredient_model->create_product_ingredient($dataProduct_ingredient[$i])){
-						$success = false;
+		}
+
+		$success = true;
+		$publiekelijkonder5 = false;
+		
+		
+		if($load == 'true'){
+			$product_id = $this->input->post('product_id');
+			if($this->product_ingredient_model->del_ingredients_for_product($product_id)){
+				$publiekelijk = $this->input->post('publiekelijk');
+				if($this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
+					$publiekelijk = 0;
+					$publiekelijkonder5 = true;
+				}
+				$this->gebruiker_product_model->set_publiekelijk($product_id, $publiekelijk);
+				$this->product_model->update_name($product_id, $this->input->post('productNaam'));
+				if($this->input->post('aantalingredienten') != 0){
+				
+					for($i = 0; $i < $this->input->post('aantalingredienten'); $i++){
+						$ingredientid = 'ingredientid'.($i+1);
+						$hoeveelheid = 'hoeveelheid'.($i+1);
+						$dataProduct_ingredient[$i]['catingid'] = $this->input->post($ingredientid);
+						$dataProduct_ingredient[$i]['productid'] = $product_id;
+						$dataProduct_ingredient[$i]['ingredienthoeveelheid'] = $this->input->post($hoeveelheid);
+						
+						if(!$this->product_ingredient_model->create_product_ingredient($dataProduct_ingredient[$i])){
+							$success = false;
+						}
 					}
 				}
+			} else {
+				$success = false;
 			}
 			
+			
 		} else {
-			$success = false;
+
+			if($this->product_model->create_product($dataProduct)){
+				
+				$product_id = mysql_insert_id();
+				
+				if($this->input->post('gebruikerid') != "undefined"){
+					$dataGebruiker_Product['gebruikerid'] = $this->input->post('gebruikerid');
+					$dataGebruiker_Product['productid'] = $product_id;
+					$dataGebruiker_Product['publiekelijk'] = $this->input->post('publiekelijk');
+					if($this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
+						$dataGebruiker_Product['publiekelijk'] = 0;
+						$publiekelijkonder5 = true;
+					}
+					$dataGebruiker_Product['aanmaak_datetime'] = date("Y-m-d H:i:s");
+					$dataGebruiker_Product['eigenaar'] = 1;
+					
+					if(!$this->gebruiker_product_model->create_gebruiker_product($dataGebruiker_Product)){
+						$success = false;
+					}
+					//create Gebruiker_Product
+				}
+				
+				if($this->input->post('aantalingredienten') != 0){
+				
+					for($i = 0; $i < $this->input->post('aantalingredienten'); $i++){
+						$ingredientid = 'ingredientid'.($i+1);
+						$hoeveelheid = 'hoeveelheid'.($i+1);
+						$dataProduct_ingredient[$i]['catingid'] = $this->input->post($ingredientid);
+						$dataProduct_ingredient[$i]['productid'] = $product_id;
+						$dataProduct_ingredient[$i]['ingredienthoeveelheid'] = $this->input->post($hoeveelheid);
+						
+						if(!$this->product_ingredient_model->create_product_ingredient($dataProduct_ingredient[$i])){
+							$success = false;
+						}
+					}
+				}
+			
+			} else {
+				$success = false;
+			}
 		}
 		
 		if($success){
-			echo $product_id;
+			if($publiekelijkonder5){
+				echo $product_id . ",onder5";
+			} else {
+				echo $product_id;
+			}
 		} else {
 			echo "failed";
 		}

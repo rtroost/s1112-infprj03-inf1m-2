@@ -33,8 +33,8 @@ ol, ul {
 
 
 #appNavigation li {
-	text-align: center;
-	width: 25%;
+/*	text-align: center;*/
+	width: 20%;
     color: #726B6B;
     display: block;
     float: left;
@@ -53,7 +53,6 @@ ol, ul {
 
 
 #appNavigation li:last-of-type{
-	width: 195px;
 	border-right: none;
 }
 
@@ -194,7 +193,7 @@ div#appSelector2 li {
 	border-right: 1px solid gray;
 }
 
-#appMainWindow2, #appMainWindow3, #appMainWindow4{
+#appMainWindow2, #appMainWindow3, #appMainWindow4, #appMainWindow5{
 	display: none;
 }
 

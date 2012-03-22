@@ -64,7 +64,8 @@ var CreateApp = {
 		if(this.config.pagenr == 1){ this.config.appMainWindow1.show().siblings('.mainWindows').hide();
 		} else if(this.config.pagenr == 2){	this.config.appMainWindow2.show().siblings('.mainWindows').hide();
 		} else if(this.config.pagenr == 3){	this.config.appMainWindow3.show().siblings('.mainWindows').hide();
-		} else { this.config.appMainWindow4.show().siblings('.mainWindows').hide();	}
+		} else if(this.config.pagenr == 4){	this.config.appMainWindow4.show().siblings('.mainWindows').hide();
+		} else { this.config.appMainWindow5.show().siblings('.mainWindows').hide();	}
 	},
 	
 	get_categorie: function(){
@@ -125,6 +126,7 @@ var CreateApp = {
 				gekozen: false
 			}
 			
+			
 			if(count % 2 == 0){
 				tr = $('<tr>').appendTo(self.config.sidebar2.find('table'));
 			}
@@ -132,7 +134,7 @@ var CreateApp = {
 			var td = $('<td>').appendTo(tr);
 			
 			$('<label>', {
-				for: 'sidebar_keuze',
+				'for': 'sidebar_keuze',
 				text: self.config.ingredienten[count].naam,
 			}).appendTo(td);
 			
@@ -146,7 +148,7 @@ var CreateApp = {
 			}).appendTo(td);
 			
 			$('<input>', {
-				class: 'sidebar_keuze_ingredient',
+				'class': 'sidebar_keuze_ingredient',
 				name: 'sidebar_keuze',
 				value: self.config.ingredienten[count].ingredientId,
 				'data-arrayIndex': count,
@@ -155,7 +157,7 @@ var CreateApp = {
 			}).appendTo(td);
 			count++;
 		} 
-		
+				
 		// aanpassingen aan div1
 		self.config.view1.empty();
 		self.config.selector1.empty();
@@ -165,7 +167,7 @@ var CreateApp = {
 		}).appendTo(self.config.view1);
 		
 		var div = $('<div>', {
-			class: 'center',
+			'class': 'center',
 		}).appendTo(self.config.view1);
 		
 		$('<img>', {
@@ -250,19 +252,19 @@ var CreateApp = {
 		self.config.view3.find('div#overflow').show();
 		self.config.view4.find('div#overflow').show();
 		
-		var tr = $('<tr>', {class: id}).appendTo(self.config.view2.find('table#view2_table_main')),
+		var tr = $('<tr>', {'class': id}).appendTo(self.config.view2.find('table#view2_table_main')),
 		 	td1 = $('<td>').appendTo(tr),
-			td2 = $('<td>', { text: (self.config.ingredienten[id].gewicht), class: 'totaalGewicht'}).appendTo(tr),
+			td2 = $('<td>', { text: (self.config.ingredienten[id].gewicht), 'class': 'totaalGewicht'}).appendTo(tr),
 			td3 = $('<td>').appendTo(tr),
-		 	td4 = $('<td>', { text: self.setPriceFirst(id), class: 'prijs'}).appendTo(tr),
-		 	tr2 = $('<tr>', {class: id}).appendTo(self.config.view3.find('table#view3_table_main')),
+		 	td4 = $('<td>', { text: self.setPriceFirst(id), 'class': 'prijs'}).appendTo(tr),
+		 	tr2 = $('<tr>', {'class': id}).appendTo(self.config.view3.find('table#view3_table_main')),
 		 	td1tr2 = $('<td>').appendTo(tr2),
 		 	td2tr2 = $('<td>').appendTo(tr2),
-		 	td3tr2 = $('<td>', {text: self.setPriceFirst(id), class: 'prijs'}).appendTo(tr2),
-		 	tr3 = $('<tr>', {class: id}).appendTo(self.config.view4.find('table#view3_table_main')),
+		 	td3tr2 = $('<td>', {text: self.setPriceFirst(id), 'class': 'prijs'}).appendTo(tr2),
+		 	tr3 = $('<tr>', {'class': id}).appendTo(self.config.view4.find('table#view3_table_main')),
 		 	td1tr3 = $('<td>').appendTo(tr3),
 		 	td2tr3 = $('<td>').appendTo(tr3),						
-		 	td3tr3 = $('<td>', {text: self.setPriceFirst(id), class: 'prijs'}).appendTo(tr3);					
+		 	td3tr3 = $('<td>', {text: self.setPriceFirst(id), 'class': 'prijs'}).appendTo(tr3);					
 		
 		$('<img>', { 
 			src: 'http://127.0.0.1/pizzario/images/productApp/' + self.config.gekozenCategorie + '/' + self.config.ingredienten[id].ingredientId + '/left.png'
@@ -284,9 +286,9 @@ var CreateApp = {
 		$('<p>', { id: 'view3Hoeveelheid', text: 'Weinig'}).appendTo(td2tr2);
 		$('<p>', { id: 'view4Hoeveelheid', text: 'Weinig'}).appendTo(td2tr3);
 		
-		var divButtons = $('<div>', {class: 'view2buttons'}).appendTo(td3);
+		var divButtons = $('<div>', {'class': 'view2buttons'}).appendTo(td3);
 		
-		$('<button>', {text: 'Weinig', class: 'down', 'data-func': 1}).appendTo(divButtons);
+		$('<button>', {text: 'Weinig', 'class': 'down', 'data-func': 1}).appendTo(divButtons);
 		$('<button>', {text: 'Normaal', 'data-func': 2}).appendTo(divButtons);
 		$('<button>', {text: 'Veel', 'data-func': 3}).appendTo(divButtons);
 
@@ -428,6 +430,11 @@ var CreateApp = {
 		} else {
 			formData = formData.concat('&logged_in=false');
 		}
+		if(self.config.load){
+			formData = formData.concat('&load=true&product_id='+self.config.product_id);
+		} else {
+			formData = formData.concat('&load=false');
+		}
 		
 		return formData;
 	},
@@ -455,7 +462,7 @@ var CreateApp = {
 	
 	after_opslaan: function (results){
 		var self = CreateApp;
-		if(results !== 'failed'){
+		if(results !== 'failed' && results !== 'naam'){
 			self.config.opslaan_login.hide();
 			self.config.bestellen_login.hide();
 			self.config.after_opslaan.show();
@@ -463,7 +470,31 @@ var CreateApp = {
 			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
 			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
 			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
-			self.config.aangemaakt_product_id = results;
+			results = results.split(",");
+			self.config.product_id = results[0];
+			if(results[1] === 'onder5'){
+				if(self.config.after_opslaan.find('p.5publiekelijk').length === 0){
+					$('<p>', {text: 'U heeft al 5 publiekelijke producten , dit product is niet publiekelijke gemaakt', style: 'color: red;', 'class': '5publiekelijk'}).appendTo(self.config.after_opslaan);
+				}
+			}
+		} else if(results === 'naam') {
+			if(self.config.opslaan_login.find('p.naamerror').length === 0){
+				$('<p>', {text: 'Deze naam bestaat al', style: 'color: red;', 'class': 'naamerror'}).appendTo(self.config.opslaan_login);
+			}
+		} else {
+			//error
+		}
+	},
+	
+	after_opslaan_temp: function(results){
+		var self = CreateApp;
+		if(results !== 'failed'){
+			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
+			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
+			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
+			self.config.sidebar3.find('input#loginSubmit').attr('disabled', 'disabled');
+			self.config.product_id = results;
+			self.insertCart();
 		} else {
 			//error
 		}
@@ -481,7 +512,7 @@ var CreateApp = {
 		$.ajax({
 				url: self.config.base_url+'index.php/product_cont',
 				type: 'POST',
-				data: {id: self.config.aangemaakt_product_id, qty: self.config.quantity, price: prijs, name: self.config.product_naam},
+				data: {id: self.config.product_id, qty: self.config.quantity, price: prijs, name: self.config.product_naam},
 				success: function(result){
 					if(result === 'success'){
 						self.config.winkelwagenHeading.show();
@@ -513,20 +544,6 @@ var CreateApp = {
 			self.insertCart();
 		} else {
 			self.product_opslaan('true');
-		}
-	},
-
-	after_opslaan_temp: function(results){
-		var self = CreateApp;
-		if(results !== 'failed'){
-			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
-			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
-			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
-			self.config.sidebar3.find('input#loginSubmit').attr('disabled', 'disabled');
-			self.config.aangemaakt_product_id = results;
-			self.insertCart();
-		} else {
-			//error
 		}
 	},
 

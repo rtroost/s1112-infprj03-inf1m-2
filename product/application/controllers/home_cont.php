@@ -4,8 +4,10 @@ class Home_cont extends CI_controller {
 
 	function index() {
 
-		//$this -> load -> view('includes/header');
-
+		// LAAT STAAN AUB ================
+		//var_dump($this->session->all_userdata());
+		// ===============================
+	
 		if ($this -> session -> userdata('logged_in')) {
 			$data['logged_in'] = $this -> session -> userdata('logged_in');
 
@@ -16,7 +18,6 @@ class Home_cont extends CI_controller {
 			$this -> load -> view('index');
 		}
 
-		//$this -> load -> view('includes/footer');
 	}
 }
 ?>
