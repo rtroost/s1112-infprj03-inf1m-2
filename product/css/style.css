@@ -286,6 +286,13 @@ table#gebruikerTable{
 	width: 250px;
 }
 
+div#navigatie{
+	
+	width: 800px;
+	height: 40px;
+	border: 1px solid #000000;
+}
+
 /* =========== */
 /* End Beheer_Gebruikers  */
 /* =========== */
