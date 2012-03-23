@@ -14,9 +14,9 @@ class Order_model extends CI_Model {
 	}
 
 	function getShippingData() {
-		$sql = "SELECT voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer FROM gebruiker WHERE gebruikerid = '" . $this -> session -> userdata('gebruikerid') . "' LIMIT 1";
-
-		$query = $this -> db -> query($sql);
+		$this->db->select('voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer');
+		$this->db->where('gebruikerid', $this -> session -> userdata('gebruikerid'));
+		$query = $this->db->get('gebruiker');
 
 		if ($query -> num_rows() > 0) {
 			$row = $query -> row();
@@ -24,33 +24,6 @@ class Order_model extends CI_Model {
 			return $row;
 		}
 		return FALSE;
-	}
-
-	function getUpToDatePizzaCost() {
-		//Werkt nog niet helemaal D:
-		
-		foreach ($this->cart->contents() as $item) :
-			$query_prod_ingredients = $this -> db -> query('SELECT catingid, ingredienthoeveelheid FROM product_ingredient WHERE productid = ' . $item['id']);
-
-			$total_product_price = 0.0;
-
-			if ($query_prod_ingredients -> num_rows() > 0) {
-				foreach ($query_prod_ingredients->result() as $row) :
-					$query_ingredients = $this -> db -> query('SELECT prijs FROM categorie_ingredient WHERE catingid = ' . $row -> catingid);
-
-					if ($query_ingredients -> num_rows() > 0) {
-						$eeningredient = $query_ingredients -> row();
-						$total_product_price = $total_product_price + (($eeningredient -> prijs / 100) * $row -> ingredienthoeveelheid);
-					}
-				endforeach;
-			}
-
-			echo $total_product_price.'<br/>';
-			// $data = array('rowid' => $item['rowid'], 'price' => $total_product_price);
-			// $this -> cart -> update($data);
-
-			echo $item['price'];
-		endforeach;
 	}
 
 	function createOrder() {

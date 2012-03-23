@@ -1,4 +1,4 @@
-<?php
+	<?php
 class Cart extends CI_controller {
 
 	function __construct() {
@@ -9,6 +9,7 @@ class Cart extends CI_controller {
 		$this -> load -> helper('form');
 		$this -> load -> helper('url');
 		$this -> load -> model('order_model');
+		$this->load->model('product_model');
 	}
 
 	function index() {
@@ -85,7 +86,11 @@ class Cart extends CI_controller {
 	}
 
 	function payment() {
-		$this -> order_model -> getUpToDatePizzaCost();
+		foreach($this->cart->contents() as $item) {
+			$data = array('rowid' => $item['rowid'], 'price' => ($this->product_model->getTotalCost($item['id']) / 100));
+			$this->cart->update($data);
+		}
+		
 		$this -> load -> view('payment');
 	}
 
