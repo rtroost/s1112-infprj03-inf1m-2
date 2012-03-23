@@ -18,7 +18,7 @@ class Beheer_Gebruikers_cont extends CI_controller {
 		if(isset ($_GET['archief']))
 		{
 			$data['gebruikers'] = $this->beheer_gebruikers_model->getGebruikersGearchiveerd();
-			$this->load->view('beheer_gebruikers', $data);	
+			print_r ($data);
 		}
 		
 		else

@@ -130,10 +130,18 @@ function paginaType(sel)
 	if(value == 1)
 	{
 		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("GET","beheer_gebruikers_cont?archief=waar",true);
+		xmlhttp.open("GET","beheer_gebruikers_cont?archief=waar",true); //extra waarde meegeven
 		xmlhttp.send();
+		xmlhttp.onreadystatechange=function()
+		{
+			
+		
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    }
 	}
-	
+	}
 	else
 	{
 		xmlhttp=new XMLHttpRequest();
