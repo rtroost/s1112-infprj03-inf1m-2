@@ -62,6 +62,24 @@ function updateWinkelwagen(id, price)
 	xmlhttp.send();
 }
 
+function getSearch()
+{
+	var status = document.getElementById("gebruikersType").value;
+	var searchText = document.getElementById("zoekBeheer").value;
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET","ajax_cont?status="+status+"&search="+searchText, true);
+	xmlhttp.send();
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+    		document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    	}
+	}
+}
+
 function wijzigGebruiker(id)
 {
 	if(document.getElementById("beheer1"+id).disabled == true)
@@ -106,21 +124,41 @@ function wijzigGebruiker(id)
 function archiveerGebruiker(id)
 {
 	var answer = confirm("Weet u zeker dat u de gebruiker wilt archiveren?")
-	
+	var status = document.getElementById("gebruikersType").value;
 		if(answer)
 		{
 			xmlhttp=new XMLHttpRequest();
-			xmlhttp.open("GET","beheer_gebruikers_cont?archiveer=waar&id="+document.getElementById("beheer0"+id).value,true);
+			xmlhttp.open("GET","ajax_cont?archiveer=waar&status="+status+"&id="+document.getElementById("beheer0"+id).value,true);
 			xmlhttp.send();
 		}
 		
 		xmlhttp.onreadystatechange=function()
-		{
-			if(xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
-				location.reload(true);
+		  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+    			document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    			}
 			}
+}
+
+function activeerGebruiker(id)
+{
+	var answer = confirm("Weet u zeker dat u de gebruiker wilt activeren?")
+	var status = document.getElementById("gebruikersType").value;
+		if(answer)
+		{
+			xmlhttp=new XMLHttpRequest();
+			xmlhttp.open("GET","ajax_cont?activeer=waar&status="+status+"&id="+document.getElementById("beheer0"+id).value,true);
+			xmlhttp.send();
 		}
+		
+		xmlhttp.onreadystatechange=function()
+			{
+		  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+    			document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    			}
+			}
 }
 
 function paginaType(sel)
@@ -129,23 +167,31 @@ function paginaType(sel)
 	
 	if(value == 1)
 	{
+		
 		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("GET","beheer_gebruikers_cont?archief=waar",true); //extra waarde meegeven
+		xmlhttp.open("GET","ajax_cont?archief=waar&status=1",true);
 		xmlhttp.send();
 		xmlhttp.onreadystatechange=function()
 		{
-			
-		
-		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
-    }
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+    			document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    		}
+		}
 	}
-	}
-	else
+	
+	if(value == 0)
 	{
 		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("GET","beheer_gebruikers_cont",true);
+		xmlhttp.open("GET","ajax_cont?archief=waar&status=0",true);
 		xmlhttp.send();
+		
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+    			document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
+    		}
+		}
 	}
 }

@@ -17,11 +17,11 @@ class Beheer_Gebruikers_model extends CI_model{
 		return $data;
 	}
 	
-	function getGebruikersGearchiveerd(){
-		$gebruikers = $this->db->query('
+	function getGebruikersGearchiveerd($status){
+		$gebruikers = $this->db->query("
 		SELECT gebruikerid, typeid, voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer, kortingspunten
 		FROM gebruiker
-		WHERE gearchiveerd = 1');
+		WHERE gearchiveerd = '".$status."'");
 	
 		if ($gebruikers->num_rows() > 0){
 			$data = $gebruikers->result();
@@ -53,6 +53,32 @@ class Beheer_Gebruikers_model extends CI_model{
 		SET gearchiveerd = '1'
 		WHERE gebruikerid = '".$gebruikerid."'
 		");
+	}
+	
+		function activeerGebruiker($gebruikerid){
+		$gebruikers = $this->db->query("
+		UPDATE gebruiker
+		SET gearchiveerd = '0'
+		WHERE gebruikerid = '".$gebruikerid."'
+		");
+	}
+	
+	function searchGebruikers($status, $search){
+		$gebruikers = $this->db->query("
+		SELECT gebruikerid, typeid, voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer, kortingspunten
+		FROM gebruiker
+		WHERE voornaam like '%".$search."%' OR achternaam like '%".$search."%' OR email like '%".$search."%' OR woonplaats like '%".$search."%' OR adresregel_1 like '%".$search."%' OR adresregel_2 like '%".$search."%' OR postcode like '%".$search."%' OR telefoonnummer like '%".$search."%' AND gearchiveerd = '".$status."'");
+		
+		if ($gebruikers->num_rows() > 0)
+		{
+			$data = $gebruikers->result();
+		}
+		else
+		{
+			$data = null;
+		}
+		
+		return $data;
 	}
 }
 

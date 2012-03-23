@@ -279,6 +279,11 @@ td#ingredientColumn{
 div#gebruikers{
 	line-height:1.0em;
 	padding: 0px;
+}
+
+table#gebruikerTable{
+	line-height:1.0em;
+	padding: 0px;
 	border: 1px solid #000000;
 }
 
@@ -287,10 +292,15 @@ div#gebruikers{
 }
 
 div#navigatie{
-	
-	width: 800px;
-	height: 40px;
-	border: 1px solid #000000;
+	width: 300px;
+	height: 50px;
+	float: left;
+}
+
+div#zoekGebruiker{
+	width: 300px;
+	height: 50px;
+	float: right;
 }
 
 /* =========== */
