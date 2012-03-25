@@ -69,16 +69,26 @@ var CreateApp = {
 	},
 	
 	get_categorie: function(){
-		var self = CreateApp,
-		$this = $(this);
-		self.config.gekozenCategorie = $this.attr('value');
+		var self = CreateApp;
+		// div op loading zetten..
+		self.config.gekozenCategorie = $(this).attr('value');
+		self.config.view1.find('h1').hide();
+		self.config.view1.find('div').hide();
+		self.config.view1.addClass('loading');
+		
 		$.ajax({
 			url: self.config.base_url+'index.php/product_cont/ajax_getId',
 			type: 'POST',
 			data: {id: self.config.gekozenCategorie, ajax: '1'},
 			success: function(msg){
-				self.categorie_content_change(msg)
+				self.categorie_content_change(msg);
 			}
+		}).done(function(){
+			self.config.view2.find('table').show();
+			self.config.view3.find('table').show();
+			self.config.view4.find('table').show();
+			self.config.view1.removeClass('loading');
+			//loading uit divs weghalen en alle aangemakte objs showen
 		});
 	},
 	
@@ -88,8 +98,14 @@ var CreateApp = {
 		var records = $.evalJSON( msg ).records;
 		var ingredienten = $.evalJSON( msg ).ingredienten;
 		
+		var img = new Image();
+		img.src = 'http://127.0.0.1/pizzario/images/productApp/' + records[0].image_groot;
+		
 		var count = 0;
 		var tr;
+		
+		self.config.view1.empty();
+		self.config.selector1.empty();
 		
 		self.config.samenstellenText.remove();
 		self.config.divSamenstellen.show();
@@ -126,7 +142,6 @@ var CreateApp = {
 				gekozen: false
 			}
 			
-			
 			if(count % 2 == 0){
 				tr = $('<tr>').appendTo(self.config.sidebar2.find('table'));
 			}
@@ -159,9 +174,6 @@ var CreateApp = {
 		} 
 				
 		// aanpassingen aan div1
-		self.config.view1.empty();
-		self.config.selector1.empty();
-
 		$('<h1>', {
 			text: 'U heeft gekozen voor: ' + records[0].naam,
 		}).appendTo(self.config.view1);
@@ -170,11 +182,13 @@ var CreateApp = {
 			'class': 'center',
 		}).appendTo(self.config.view1);
 		
-		$('<img>', {
-			src: 'http://127.0.0.1/pizzario/images/productApp/' + records[0].image_groot,
+		var imgdiv = $('<img>', {
+			src: img.src,
 			width: 400,
 			height: 300,
-		}).appendTo(div);
+		}).hide().appendTo(div).load(function() {
+			imgdiv.css({'display': ''});
+		});
 
 		$('<h1>', {
 			text: records[0].naam,
@@ -183,11 +197,6 @@ var CreateApp = {
 			text: records[0].omschrijving,
 		}).appendTo(self.config.selector1);
 		// end aanpassingen aan div1
-
-		self.config.view2.find('table').show();
-		self.config.view3.find('table').show();
-		self.config.view4.find('table').show();
-		
 	},
 	
 	setPrice: function(id){

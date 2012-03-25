@@ -1,3 +1,8 @@
+div.loading{
+	background-image: url(http://127.0.0.1/pizzario/images/productApp/ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
 	
 div#productApp {
 	 background: #fbfbfb;
@@ -46,7 +51,7 @@ ol, ul {
 /*    background: url("http://127.0.0.1/pizzario/images/productApp/nav-second.png") no-repeat right transparent;*/
 }
 
-#appNavigation li:not(.yellow){
+#appNavigation li{
 	background: url("http://127.0.0.1/pizzario/images/productApp/arrow.png") no-repeat right transparent;
 
 }
@@ -69,10 +74,6 @@ background: url("http://127.0.0.1/pizzario/images/productApp/bg_active.png") rep
     background: url("http://127.0.0.1/pizzario/images/productApp/arrow.png") no-repeat scroll right top transparent;
     color: #705E47;
     
-}
-
-.yellow{
-	background: url("http://127.0.0.1/pizzario/images/productApp/arrow_active.png") no-repeat scroll right top transparent;
 }
 
 
@@ -144,7 +145,7 @@ div#appSideBar{
 }
 
 div#appView{
-	background: #DFE3CB;
+	background-color: #DFE3CB;
 	float: left;
 	width: 536px;
 	height: 320px;
