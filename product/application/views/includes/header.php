@@ -14,24 +14,25 @@
 	<body>
 		<div id="wrapper">
 			<header>
-				
-					<div id="inlog_false" class="inlog" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display:none;"; } ?>" >
-						<form action="<?php echo base_url();?>index.php/login" method="post">
-							<label for="username" >Email adres:</label>
-							<input class="right_input" name="username" id="username" type="text" />
+					<?php if($this->session->userdata('logged_in') == FALSE) { ?>
+					<div id="inlog_false" class="inlog">
+						<?php echo form_open('user/login'); ?>
+							<label for="email" >Email adres:</label>
+							<input class="right_input" name="email" id="email" type="text" />
 							<label for="password" >Wachtwoord:</label>
 							<input class="right_input" name="password" id="password" type="password" />
 							<input class="remember_me" name="remember" id="remember_me" type="checkbox" />
 							<label class="remember_me_text" for="remember_me">Onthoud mij</label>
 							<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
-						</form>
+						<?php echo form_close(); ?>
 					</div>
-					<div id="inlog_true" class="inlog" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display:none;"; } ?>" >
+					<?php } else { ?>
+					<div id="inlog_true" class="inlog">
 						<form action="<?php echo base_url();?>index.php/login/logout" method="post">
 							<input type="submit" id="logout" value="Logout"/>
 						</form>
-<!-- 						<a href="<?php echo base_url();?>index.php/mijnprofiel_cont">Mijn profiel</a> -->
 					</div>
+					<?php } ?>
 				<nav>
 					<ul id="header_nav">
 						<li>
