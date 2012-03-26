@@ -119,6 +119,8 @@ var CreateApp = {
 		self.config.divBestellen.show();
 		self.config.bestellenViewTitel.show();
 		
+		self.config.divDelen.show();
+		
 		self.config.sidebar2.find('table').empty();
 		self.config.totaalGewicht = 0;
 		self.config.h4Gewicht.text(self.config.totaalGewicht);
@@ -402,6 +404,8 @@ var CreateApp = {
 			self.config.opslaan_logout.hide();
 			self.config.bestellen_login.show();
 			self.config.bestellen_logout.hide();
+			self.config.delen_login.show();
+			self.config.delen_logout.hide();
 			$('div#inlog_false').hide();
 			$('div#inlog_true').show();
 		} else {
@@ -474,8 +478,10 @@ var CreateApp = {
 		if(results !== 'failed' && results !== 'naam'){
 			self.config.opslaan_login.hide();
 			self.config.bestellen_login.hide();
+			self.config.delen_login.hide();
 			self.config.after_opslaan.show();
 			self.config.after_bestellen.show();
+			self.config.after_delen.show();
 			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
 			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
 			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
@@ -485,6 +491,8 @@ var CreateApp = {
 				if(self.config.after_opslaan.find('p.5publiekelijk').length === 0){
 					$('<p>', {text: 'U heeft al 5 publiekelijke producten , dit product is niet publiekelijke gemaakt', style: 'color: red;', 'class': '5publiekelijk'}).appendTo(self.config.after_opslaan);
 				}
+				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken in "mijn profiel"');
+
 			}
 		} else if(results === 'naam') {
 			if(self.config.opslaan_login.find('p.naamerror').length === 0){

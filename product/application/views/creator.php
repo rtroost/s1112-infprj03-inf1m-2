@@ -418,6 +418,22 @@
 			<div id="appMainWindow5" class="mainWindows">
 				<div id="appSideBar">
 					<h1>Uw product Delen</h1>
+					<div <?php if(isset($load)){ echo 'style="display: none;"'; }?>>
+						<p id="bestelText">U heeft nog geen categorie gekozen.<br /> Maak een product aan en probeer het opnieuw.</p>
+					</div>
+					<div id="delen" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>
+						<div id="delen_login" style="<?php if($this->session->userdata('logged_in') != 1){ echo "display: none;"; } ?>">
+							<p>Hallo <span class="name"><?php if($this->session->userdata('voornaam')){ echo $this->session->userdata('voornaam'); } ?></span>, <br />
+								Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
+							</p>
+						</div>
+						<div id="delen_logout" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display: none;"; } ?>">
+							<p>U kunt uw product niet delen als u niet ingelogged bent. </p>
+						</div>
+						<div id="after_delen" style="display: none;">
+							<p>Je kan hier je aangemaakte product delen op uw favoriete social media sites.</p>
+						</div>	
+					</div>
 					<div class="center nav_div">
 						<button class="nav_button" id="vorige"> « Vorige </button>
 						 &nbsp; <button class="nav_button" id="volgende" style="visibility:hidden;"> Volgende » </button>
@@ -503,6 +519,7 @@
 				
 				bestelText: $('p#bestelText'),
 				divBestellen: $('div#bestellen'),
+				divDelen: $('div#delen'),
 				bestellenViewTitel: $('h1#bestellen_view_titel'),
 				a_naarWinkelwagen: $('a#naarWinkelwagen'),
 				winkelwagenHeading: $('h4#winkelwagenHeading'),
@@ -510,9 +527,12 @@
 				opslaan_logout: $('div#opslaan_logout'),
 				bestellen_login: $('div#bestellen_login'),
 				bestellen_logout: $('div#bestellen_logout'),
+				delen_login: $('div#delen_login'),
+				delen_logout: $('div#delen_logout'),
 				spanNaam: $('span.name'),
 				after_opslaan: $('div#after_opslaan'),
 				after_bestellen: $('div#after_bestellen'),
+				after_delen: $('div#after_delen'),
 				product_naam: '',
 				quantity: 0,
 				a_nav: $('div#appNavigation'),

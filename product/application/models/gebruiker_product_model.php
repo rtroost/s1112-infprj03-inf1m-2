@@ -40,16 +40,16 @@ class Gebruiker_product_model extends CI_model {
 	}
 	
 	function get_publiekelijk_count($user_id){
-		$result = $this->db->query("
-			SELECT * FROM gebruiker_product WHERE gebruikerid = '{$user_id}' AND publiekelijk = 1;
+		$result =  $this->db->query("
+			SELECT COUNT( * ) AS count
+			FROM gebruiker_product AS gp, product AS p
+			WHERE gp.gebruikerid = {$user_id}
+			AND gp.productid = p.productid
+			AND p.gearchiveerd =0
+			AND gp.eigenaar =1
+			AND gp.publiekelijk =1
 		");
-		$count = 0;
-		if ($result->num_rows() > 0){
-			foreach($result->result() as $gebruiker_product){
-				$count++;
-			}
-		}
-		return $count;
+		return $result->row()->count;
 	}
 	
 	function remove_favoriet($product_id, $gebruikerid){
