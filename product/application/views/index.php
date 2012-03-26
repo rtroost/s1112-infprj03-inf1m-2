@@ -1,10 +1,25 @@
 <?php $this->load->view('includes/header') ?>
-	<div id="content">
-		<h1>Hoofdpagina</h1>
-		<?php if(isset($naam)){  ?>
-			<p style="margin-bottom: 0px;">Welkom <?php echo $naam; ?></p>	
-		<?php } ?>
-		<a href="<?php echo base_url(); ?>index.php/login?redirect=product_cont/creator">Login pagina</a>
-<!-- 		<a href="<?php echo base_url(); ?>index.php/login_cont">Login pagina</a> -->
-	</div>	
+
+<div id="content">
+		
+<?php
+	
+	if($news == null)
+	{
+		echo (".<h1>Er is momenteel geen nieuws</h1>");
+	}
+	
+	else
+	{
+		echo "
+		<div id=\"newsTitel\">
+			<h1>".$news[0]->titel."</h1>
+		</div>
+		";	
+	}
+				
+?>
+		
+</div>	
+	
 <?php $this->load->view('includes/footer') ?>
