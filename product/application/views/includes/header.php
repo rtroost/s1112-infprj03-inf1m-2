@@ -28,9 +28,7 @@
 			</div>
 			<?php } else { ?>
 			<div id="inlog_true" class="inlog">
-				<form action="<?php echo base_url();?>index.php/login/logout" method="post">
-					<input type="submit" id="logout" value="Logout"/>
-				</form>
+				<?php echo anchor('user/logout', 'Logout'); ?>
 			</div>
 			<?php } ?>
 			<nav>
