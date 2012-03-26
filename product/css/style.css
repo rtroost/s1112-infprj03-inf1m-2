@@ -306,3 +306,34 @@ div#zoekGebruiker{
 /* =========== */
 /* End Beheer_Gebruikers  */
 /* =========== */
+
+/* =========== */
+/* Start Home_News */
+/* =========== */
+
+div#homeNewsTitel{
+	font-size: 24pt;
+	border: 1px solid #000000;
+	height: 60px;
+}
+
+div#homeNewsInhoud{
+	font-size: 16pt;
+	border: 1px solid #000000;
+	height: auto;
+}
+
+/* =========== */
+/* End Home_News */
+/* =========== */
+
+/* =========== */
+/* Start Beheer_News */
+/* =========== */
+
+
+
+
+/* =========== */
+/* End Home_News */
+/* =========== */

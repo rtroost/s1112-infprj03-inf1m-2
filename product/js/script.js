@@ -145,6 +145,7 @@ function activeerGebruiker(id)
 {
 	var answer = confirm("Weet u zeker dat u de gebruiker wilt activeren?")
 	var status = document.getElementById("gebruikersType").value;
+	
 		if(answer)
 		{
 			xmlhttp=new XMLHttpRequest();
@@ -193,5 +194,59 @@ function paginaType(sel)
     			document.getElementById("gebruikers").innerHTML=xmlhttp.responseText;
     		}
 		}
+	}
+}
+
+function updateNews()
+{
+	var titel = document.getElementById("titelInput").value;
+	var inhoud = document.getElementById("inhoudInput").value;
+	
+	if(document.getElementById("titelInput").disabled == true)
+	{
+			document.getElementById("titelInput").disabled = false;
+			document.getElementById("inhoudInput").disabled = false;
+			document.getElementById("cancelNews").disabled = false;
+			document.getElementById("activateNews").value = "Opslaan";
+	}
+	else
+	{
+		if(window.XMLHttpRequest)
+		{
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	
+		xmlhttp.onreadystatechange=function()
+		{
+			if(xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				document.getElementById("newsOpgeslagen").innerHTML = "Het bericht is opgeslagen en nu zichtbaar op de homepage.";
+			}
+		}
+		
+		xmlhttp.open("GET","beheer_news_cont?update=waar&titel="+titel+"&inhoud="+inhoud,true);
+		xmlhttp.send();
+		
+		document.getElementById("activateNews").disabled = true;
+		document.getElementById("activateNews").value = "Voeg nieuws toe";
+	}
+}
+
+function cancelNews()
+{
+	if(document.getElementById("titelInput").disabled == false)
+	{
+		document.getElementById("titelInput").disabled = true;
+		document.getElementById("titelInput").value = "Titel";
+			
+		document.getElementById("inhoudInput").disabled = true;
+		document.getElementById("inhoudInput").value = "Inhoud";
+			
+		document.getElementById("cancelNews").disabled = true;
+		document.getElementById("activateNews").value = "Voeg nieuws toe";
 	}
 }

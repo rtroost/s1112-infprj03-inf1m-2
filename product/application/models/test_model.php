@@ -1,6 +1,6 @@
 <?php
 
-class Index_model extends CI_model
+class Test_model extends CI_model
 {
 	
 	function getNews()
