@@ -49,6 +49,10 @@
 		width: 200px;
 		float: left;
 	}
+	form.registreerform error {
+		width: 200px;
+		float: right;
+	}
 	form.registreerform input[type="text"], select {
 		font: normal 13px Arial, Helvetica, sans-serif; ;
 		padding: 4px;
@@ -86,26 +90,32 @@
 	<p>
 		<?php echo form_label('Voornaam', 'voornaam');?>
 		<?php echo form_input(array('name' => 'voornaam', 'id' => 'voornaam', 'value' => set_value('voornaam')));?>
+		<?php echo form_error('voornaam'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Achternaam', 'achternaam');?>
 		<?php echo form_input(array('name' => 'achternaam', 'id' => 'achternaam', 'value' => set_value('achternaam')));?>
+		<?php echo form_error('achternaam'); ?>
 	</p>
 	<p>
 		<?php echo form_label('E-mail', 'email');?>
-		<?php echo form_input(array('name' => 'email', 'id' => 'email', 'value' => set_value('email')));?>
+		<?php echo form_input(array('name' => 'email', 'id' => 'email', 'value' => set_value('email')));?>		
+		<?php echo form_error('email'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Wachtwoord', 'wachtwoord');?>
 		<?php echo form_password(array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'value' => ''));?>
+
 	</p>
 	<p>
 		<?php echo form_label('Herhaal wachtwoord', 'wachtwoord2');?>
 		<?php echo form_password(array('name' => 'wachtwoord2', 'id' => 'wachtwoord2', 'value' => ''));?>
+		<?php echo form_error('wachtwoord2'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 1', 'adresregel_1');?>
 		<?php echo form_input(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'value' => set_value('adresregel_1')));?>
+		<?php echo form_error('adresregel_1'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 2', 'adresregel_2');?>
@@ -114,14 +124,17 @@
 	<p>
 		<?php echo form_label('Postcode', 'postcode');?>
 		<?php echo form_input(array('name' => 'postcode', 'id' => 'postcode', 'value' => set_value('postcode')));?>
+		<?php echo form_error('postcode'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Woonplaats', 'woonplaats');?>
 		<?php echo form_input(array('name' => 'woonplaats', 'id' => 'woonplaats', 'value' => set_value('woonplaats')));?>
+		<?php echo form_error('woonplaats'); ?>
 	</p>
 	<p>
 		<?php echo form_label('Telefoonnummer', 'telefoonnummer');?>
 		<?php echo form_input(array('name' => 'telefoonnummer', 'id' => 'telefoonnummer', 'value' => set_value('telefoonnummer')));?>
+		<?php echo form_error('telefoonnummer'); ?>
 	</p>
 	<p>
 		<?php echo form_submit('registreer_submit', 'Registreer');?>
