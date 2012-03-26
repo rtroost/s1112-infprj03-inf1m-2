@@ -14,8 +14,7 @@
 <body>
 	<div id="wrapper">
 		<header>
-			<?php if($this->session->userdata('logged_in') == FALSE) { ?>
-			<div id="inlog_false" class="inlog">
+			<div id="inlog_false" class="inlog"<?php if($this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
 				<?php echo form_open('user/login'); ?>
 				<label for="email" >Email adres:</label>
 				<input class="right_input" name="email" id="email" type="text" />
@@ -26,11 +25,9 @@
 				<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
 				<?php echo form_close(); ?>
 			</div>
-			<?php } else { ?>
-			<div id="inlog_true" class="inlog">
+			<div id="inlog_true" class="inlog"<?php if(!$this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
 				<?php echo anchor('user/logout', 'Logout'); ?>
 			</div>
-			<?php } ?>
 			<nav>
 				<ul id="header_nav">
 					<li>
