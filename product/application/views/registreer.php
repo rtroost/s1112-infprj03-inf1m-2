@@ -97,7 +97,7 @@
 	</p>
 	<p>
 		<?php echo form_label('Wachtwoord', 'wachtwoord');?>
-		<?php echo form_input(array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'value' => ''));?>
+		<?php echo form_password(array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'value' => ''));?>
 	</p>
 	<p>
 		<?php echo form_label('Herhaal wachtwoord', 'wachtwoord2');?>
@@ -105,7 +105,7 @@
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 1', 'adresregel_1');?>
-		<?php echo form_password(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'value' => set_value('adresregel_1')));?>
+		<?php echo form_input(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'value' => set_value('adresregel_1')));?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 2', 'adresregel_2');?>
