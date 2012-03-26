@@ -8,7 +8,7 @@ class Cart extends CI_controller {
 		$this -> load -> database();
 		$this -> load -> helper('form');
 		$this -> load -> helper('url');
-		$this -> load -> model('order_model');
+		$this -> load -> model('cart_model');
 		$this -> load -> model('product_model');
 
 		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
@@ -20,6 +20,19 @@ class Cart extends CI_controller {
 
 	function index() {
 		$this -> load -> view('cart');
+	}
+
+	function ajaxAddProduct() {
+		if($this->input->is_ajax_request()) {
+			$id = $this->input->post('id');
+			$qty = $this->input->post('qty');
+			$price = $this->input->post('price');
+			$name = $this->input->post('name');
+
+			$data = array('id' => $id, 'qty' => $qty, 'price' => $price, 'name' => $name);
+
+			return $this->cart->insert($data);
+		}
 	}
 
 	function update_cart() {
@@ -65,7 +78,7 @@ class Cart extends CI_controller {
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data = $this -> order_model -> getShippingData();
+			$data = $this -> cart_model -> getShippingData();
 			$this -> load -> view('order-form', $data);
 		} else// passed validation proceed to post success logic
 		{
@@ -75,7 +88,7 @@ class Cart extends CI_controller {
 			$this->session->set_userdata(array('bestelmethode' => set_value('bestelmethode')));
 			// run insert model to write data to db
 
-			if ($this -> order_model -> saveShippingData($form_data) == TRUE)// the information has therefore been successfully saved in the db
+			if ($this -> cart_model -> saveShippingData($form_data) == TRUE)// the information has therefore been successfully saved in the db
 			{
 				//if bestelmethode == aan de deur
 
@@ -113,8 +126,8 @@ class Cart extends CI_controller {
 			// Notify user
 			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
 
-			$orderid = $this->order_model->createOrder();
-			$this->order_model->makePayment($orderid);			
+			$orderid = $this->cart_model->createOrder();
+			$this->cart_model->makePayment($orderid);			
 
 			$this -> cart -> destroy();
 		} else {
@@ -126,8 +139,8 @@ class Cart extends CI_controller {
 	}
 
 	function complete() {
-		$orderid = $this->order_model->createOrder();
-		$this->order_model->makePayment($orderid);			
+		$orderid = $this->cart_model->createOrder();
+		$this->cart_model->makePayment($orderid);			
 
 		$this -> cart -> destroy();
 
