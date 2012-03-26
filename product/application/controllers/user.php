@@ -10,6 +10,12 @@ class User extends CI_controller {
 		$this -> load -> helper('form');
 		$this -> load -> helper('url');
 		$this -> load -> model('usersystem_model');
+
+		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
+		$this -> form_validation -> set_message('required', 'Het veld %s is niet ingevuld.');
+		$this -> form_validation -> set_message('matches', 'De wachtwoord velden kwamen niet overeen.');
+		$this -> form_validation -> set_message('email', 'Gelieve een geldig e-mailadres in te vullen.');
+		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens.');
 	}
 	function index() {
 		if($this->session->userdata('logged_in') == TRUE) {
@@ -82,12 +88,6 @@ class User extends CI_controller {
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
 		$this -> form_validation -> set_rules('password', 'wachtwoord', 'required');
 		$this -> form_validation -> set_rules('password_check', 'controle wachtwoord', 'required|matches[password]');
-
-		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
-		$this -> form_validation -> set_message('required', 'Het veld %s is niet ingevuld.');
-		$this -> form_validation -> set_message('matches', 'De wachtwoord velden kwamen niet overeen.');
-		$this -> form_validation -> set_message('email', 'Gelieve een geldig e-mailadres in te vullen.');
-		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens.');
 
 		$this -> form_validation -> set_error_delimiters('<li">', '</li>');
 
