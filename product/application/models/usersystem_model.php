@@ -24,7 +24,7 @@ class Usersystem_model extends CI_model {
 	{	
 		$this->db->select('email');
 		$this->db->where('email', $form_data['email']);
-		$this->db->get('gebruiker');
+		$query = $this->db->get('gebruiker');
 
 		if ($query -> num_rows() > 0) {
 			return TRUE;

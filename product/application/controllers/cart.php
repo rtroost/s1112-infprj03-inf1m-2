@@ -1,4 +1,4 @@
-	<?php
+<?php
 class Cart extends CI_controller {
 
 	function __construct() {
