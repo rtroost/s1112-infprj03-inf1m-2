@@ -13,11 +13,11 @@ class Usersystem_model extends CI_model {
 
 			return $row;
 		}
-		return FALSE;
+		return FALSE;		
 	}
 
 	function register($form_data) {
-		return $this->db->insert('membership', $form_data);
+		return $this->db->insert('gebruiker', $form_data);
 	}
 
 }

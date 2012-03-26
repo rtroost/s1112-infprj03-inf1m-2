@@ -20,6 +20,10 @@ class User extends CI_controller {
 	}
 
 	function login() {
+		if($this->session->userdata('logged_in') == TRUE) {
+			redirect('user');
+		} 
+
 		$this -> form_validation -> set_rules('email', 'E-mail Adres', 'required|trim|valid_email');
 		$this -> form_validation -> set_rules('password', 'Wachtwoord', 'required');
 
@@ -41,6 +45,9 @@ class User extends CI_controller {
 				// ERROR VERKEERDE COMBINATIE
 				if($this->input->is_ajax_request()){
 					return FALSE;					
+				} else {
+					//Foutieve ingave
+					$this->load->view('login');
 				}							
 			} else {				
 				if($this->input->is_ajax_request()){
@@ -62,7 +69,7 @@ class User extends CI_controller {
 
 	function register() {
 		if($this->session->userdata('logged_in') == TRUE) {
-			redirect(base_url());
+			redirect('user');
 		} 
 
 		$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
@@ -73,22 +80,25 @@ class User extends CI_controller {
 		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
-		$this -> form_validation -> set_rules('wachtwoord', 'wachtwoord', 'required');
-		$this -> form_validation -> set_rules('wachtwoord2', 'controle wachtwoord', 'required|matches[wachtwoord]');
+		$this -> form_validation -> set_rules('password', 'wachtwoord', 'required');
+		$this -> form_validation -> set_rules('password_check', 'controle wachtwoord', 'required|matches[password]');
 
 		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
 		$this -> form_validation -> set_message('required', 'Het veld %s is niet ingevuld.');
 		$this -> form_validation -> set_message('matches', 'De wachtwoord velden kwamen niet overeen.');
 		$this -> form_validation -> set_message('email', 'Gelieve een geldig e-mailadres in te vullen.');
-		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens');
+		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens.');
 
-		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
+		$this -> form_validation -> set_error_delimiters('<li">', '</li>');
 
 		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('registreer');
 		} else {
 			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => md5(set_value('wachtwoord')));
-			$this -> usersystem_model -> registreer_gebruiker($form_data);
+			$this -> usersystem_model -> register($form_data);
+
+			$data['result'] = '<h1>Succes!</h1><p>Gefeliciteerd. U bent geregistreerd en kunt nu inloggen.</p>';
+			$this->load->view('message', $data);
 		}
 	}
 
