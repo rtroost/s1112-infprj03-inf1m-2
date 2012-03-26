@@ -17,7 +17,7 @@ class Registreer_cont extends CI_controller {
 		$this -> form_validation -> set_rules('postcode', 'Postcode', 'required|trim|max_length[6]');
 		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
-		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
+		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]|callback_email_is_uniek');
 		$this -> form_validation -> set_rules('wachtwoord', 'wachtwoord', 'required');
 		$this -> form_validation -> set_rules('wachtwoord2', 'controle wachtwoord', 'required|matches[wachtwoord]');
 
@@ -35,6 +35,20 @@ class Registreer_cont extends CI_controller {
 			$this -> load -> view('registreer_succesvol.php');
 		}
 	}
-
+	
+	function email_is_uniek($email){
+	
+	$this->form_validation->set_message('email_is_uniek','Het opgegeven email adres bestaat al.');
+	
+	
+	if ($this->gebruiker_model->check_bestaat_email($email))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	}
 }
 ?>
