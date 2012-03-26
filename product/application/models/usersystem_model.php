@@ -20,5 +20,17 @@ class Usersystem_model extends CI_model {
 		return $this->db->insert('gebruiker', $form_data);
 	}
 
+	function emailInUse($form_data)
+	{	
+		$this->db->select('email');
+		$this->db->where('email', $form_data['email']);
+		$this->db->get('gebruiker');
+
+		if ($query -> num_rows() > 0) {
+			return TRUE;
+		}
+		return FALSE;	
+	}
+
 }
 ?>

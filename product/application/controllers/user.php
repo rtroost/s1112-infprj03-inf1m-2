@@ -95,10 +95,16 @@ class User extends CI_controller {
 			$this -> load -> view('registreer');
 		} else {
 			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => md5(set_value('wachtwoord')));
-			$this -> usersystem_model -> register($form_data);
+			
+			if($this->usersystem_model->emailInUse($form_data)) {
+				$this->form_validation->set_message('email_is_uniek','Het opgegeven email adres bestaat al.');
+				$this->load->view('registreer');
+			} else {
+				$this -> usersystem_model -> register($form_data);
 
-			$data['result'] = '<h1>Succes!</h1><p>Gefeliciteerd. U bent geregistreerd en kunt nu inloggen.</p>';
-			$this->load->view('message', $data);
+				$data['result'] = '<h1>Succes!</h1><p>Gefeliciteerd. U bent geregistreerd en kunt nu inloggen.</p>';
+				$this->load->view('message', $data);
+			}			
 		}
 	}
 
