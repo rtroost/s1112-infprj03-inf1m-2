@@ -238,7 +238,6 @@ var CreateApp = {
 				self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen = !self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen;
 				self.click_ingredient(id, self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen);
 			} else {
-				console.log('kom ik hier');
 				e.preventDefault();
 				return;
 			}
@@ -448,7 +447,8 @@ var CreateApp = {
 		} else {
 			formData = formData.concat('&load=false');
 		}
-		
+		formData = formData.concat('&wasPubliekelijk='+self.config.wasPubliekelijk);
+		console.log(formData);
 		return formData;
 	},
 	
@@ -482,17 +482,22 @@ var CreateApp = {
 			self.config.after_opslaan.show();
 			self.config.after_bestellen.show();
 			self.config.after_delen.show();
+			results = results.split(",");
+			self.config.product_id = results[0];
+			var urltwitter = 'http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=' + self.config.product_id;
+			var urlfacebook = 'http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=' + self.config.product_id;
+			self.config.facebook.data('href', urlfacebook);
+			self.config.twitter.data('url', urltwitter);
 			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
 			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
 			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
-			results = results.split(",");
-			self.config.product_id = results[0];
 			if(results[1] === 'onder5'){
 				if(self.config.after_opslaan.find('p.5publiekelijk').length === 0){
 					$('<p>', {text: 'U heeft al 5 publiekelijke producten , dit product is niet publiekelijke gemaakt', style: 'color: red;', 'class': '5publiekelijk'}).appendTo(self.config.after_opslaan);
 				}
-				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken in "mijn profiel"');
-
+				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken en delen in "mijn profiel"');
+			} else if(results[1] === 'nietpubliekelijk'){
+				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken en delen in "mijn profiel"');
 			}
 		} else if(results === 'naam') {
 			if(self.config.opslaan_login.find('p.naamerror').length === 0){
@@ -524,7 +529,6 @@ var CreateApp = {
 			prijs = String(self.config.totaalPrijs).substring(0,1) + '.' + String(self.config.totaalPrijs).substring(1);
 		} else {
 			prijs = String(self.config.totaalPrijs).substring(0,2) + '.' + String(self.config.totaalPrijs).substring(2);
-			console.log(prijs);
 		}
 		$.ajax({
 				url: self.config.base_url+'index.php/product_cont',

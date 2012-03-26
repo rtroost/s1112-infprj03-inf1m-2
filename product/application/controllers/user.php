@@ -18,10 +18,10 @@ class User extends CI_controller {
 		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens.');
 	}
 	function index() {
-		if($this->session->userdata('logged_in') == TRUE) {
-			$this->load->view('mijnprofiel');
+		if($this->session->userdata('logged_in') != 1) {
+			redirect(base_url()."index.php/user/login?redirect=user");
 		} else {
-			redirect('user/login');
+			$this->load->view('mijnprofiel');
 		}
 	}
 
@@ -38,7 +38,7 @@ class User extends CI_controller {
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed and/or no post has happend
 		{
 			if($this->input->is_ajax_request()){
-				return FALSE;				
+				return "false";				
 			} else {
 				$this -> load -> view('login');
 			}
@@ -47,10 +47,10 @@ class User extends CI_controller {
 			$form_data = array('email' => set_value('email'), 'wachtwoord' => md5(set_value('password')));
 			$result = $this -> usersystem_model -> validate($form_data);
 
-			if($result == FALSE) {
+			if($result == NULL) {
 				// ERROR VERKEERDE COMBINATIE
 				if($this->input->is_ajax_request()){
-					return FALSE;					
+					return "false";					
 				} else {
 					//Foutieve ingave
 					$this->load->view('login');
@@ -115,11 +115,13 @@ class User extends CI_controller {
 	}
 
 	function product(){
-
+		if($this->session->userdata('logged_in') != 1) {
+			redirect(base_url()."index.php/user?redirect=user");
+		}
 		$this->load->model('gebruiker_product_model');
 		
 		if($this->input->is_ajax_request()){
-			if($this->input->post('check') == 'true'){
+			if($this->input->post('new') == '1'){
 				if($this->gebruiker_product_model->get_publiekelijk_count($this->input->post('userid')) >= 5){
 					echo "publiekelijk";
 					return;
@@ -136,7 +138,7 @@ class User extends CI_controller {
 		
 		if($this->input->post('productid')){
 			if($this->product_model->verwijder_product($this->input->post('productid'))){
-				redirect('user/product');
+				redirect(base_url() . 'index.php/mijnprofiel_cont/product');
 			} else {
 				//error
 			}
@@ -157,19 +159,39 @@ class User extends CI_controller {
 		} else {
 			//error
 		}
+		
+		$data['publiekelijkcount'] = $this->gebruiker_product_model->get_publiekelijk_count($this->session->userdata('gebruikerid'));
 		//var_dump( $data['rows'][0]);
 		$this->load->view('mijnproducten', $data);
 	}
 
 	function favoriet(){
-
+		if($this->session->userdata('logged_in') != 1) {
+			redirect(base_url()."index.php/user?redirect=user");
+		}
 		$this->load->model('gebruiker_product_model');		
+		
+		if($this->input->is_ajax_request()){
+			if($this->input->post('new') == 1){
+				$data['gebruikerid'] = $this->session->userdata('gebruikerid');
+				$data['productid'] = $this->input->post('id');
+				$data['publiekelijk'] = 0;
+				$data['aanmaak_datetime'] = date("Y-m-d H:i:s");
+				$data['eigenaar'] = 0;
+				$this->gebruiker_product_model->create_gebruiker_product($data);
+			} else {
+				$this->gebruiker_product_model->remove_favoriet($this->input->post('id'), $this->session->userdata('gebruikerid'));
+			}
+			
+			return;
+		}
+		
 		$this->load->model('product_model');
 		$this->load->model('categorie_model');
 		
 		if($this->input->post('productid')){
 			if($this->gebruiker_product_model->remove_favoriet($this->input->post('productid'), $this->session->userdata('gebruikerid'))){
-				redirect('user/favoriet');
+				redirect(base_url() . 'index.php/mijnprofiel_cont/favoriet');
 			} else {
 				//error
 			}

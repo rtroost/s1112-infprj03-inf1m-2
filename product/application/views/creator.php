@@ -9,6 +9,8 @@
 		$nameCounter = 0;
 		$totaalgewicht = 0;
 		$totaalprijs = $rows[0]->standaardprijs;
+		
+		$lol = array();
 	}
  ?>
 		
@@ -112,7 +114,7 @@
 											<label for="sidebar_keuze"><?php echo $ing->naam; ?></label>
 											<br>
 											<img src="http://127.0.0.1/pizzario/images/productApp/<?php echo $rows[0]->categorieid; ?>/<?php echo $ing->ingredientid; ?>/left.png" style="float: left; height: 50px; width: 50px;">
-											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="1" data-arrayindex="<?php echo $ing->ingredientid-1; ?>" style="margin-top: 20px; margin-left: 10px;" <?php if(($nameCounter < count($rows[0]->names) && ($ing->naam == $rows[0]->names[$nameCounter]))){ echo "checked='checked'"; $nameCounter++; }  ?>>
+											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="<?php echo $ing->ingredientid; ?>" data-arrayindex="<?php echo $count-1; $lol[$count-1] = $ing->naam;  ?>" style="margin-top: 20px; margin-left: 10px;" <?php if(($nameCounter < count($rows[0]->names) && ($ing->naam == $rows[0]->names[$nameCounter]))){ echo "checked='checked'"; $nameCounter++; }  ?>>
 										</td>
 									<?php if($count % 2 == 0 ){ echo "</tr>"; } ?>
 								<?php $count++; endforeach; ?>
@@ -143,7 +145,7 @@
 								
 								<?php $catid = $rows[0]->categorieid; $count = 1; $tempcount = 1; foreach($rows[0]->names as $naam) : ?>
 									<?php 
-									
+									//var_dump($naam);
 									$JScount = 0;
 									$temptemp = false;
 									foreach($ingredienten as $ing){
@@ -159,8 +161,8 @@
 										$tempprijs = round($prijs100 * $multi);
 										
 										if($ing->naam == $naam){
-											
-											$viewid =  ($ing->ingredientid-1);
+											//var_dump($naam);
+											$viewid =  $count;
 												
 											$hoeveelheid = $rows[0]->hoeveelheid[$count-1];
 											$viewhoeveelheid = $hoeveelheid;
@@ -188,6 +190,14 @@
 											}
 											$ingredientenArray[$count-1]['calcedprijs'] = $prijs;
 											$temptemp = true;
+											
+											$foreachCounter = 0; 
+											foreach ($lol as $l) {
+												if($l == $naam){
+													$counterhaha = $foreachCounter;
+												}
+												$foreachCounter++;
+											}
 										}
 										
 										
@@ -212,10 +222,12 @@
 											if($tempcount == 1){
 												$tempcount++;
 											}
+											
+											
 									?>
-									<tr class="<?php echo $viewid; ?>">
+									<tr class="<?php echo $counterhaha; ?>">
 											<td>
-												<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $viewid+1; ?>/left.png">
+												<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $counterhaha+1; ?>/left.png">
 												<p><?php echo $naam; ?></p>
 											</td>
 											<td class="totaalGewicht"><?php echo $viewgewicht; ?></td>
@@ -271,10 +283,10 @@
 						<div id="opslaan_logout" style="<?php if($this->session->userdata('logged_in') == 1){ echo "display: none;"; } ?>">
 							<p>U bent nog niet ingelogd. U hoeft uw product niet op te slaan om te kunnen bestellen, u deze stap eventueel overslaan.</p>
 							<h4>Login:</h4>
-							<form id="login_form" action="<?php echo base_url();?>index.php/login" method="post">
-								<label for="username">Email adres: </label>
+							<form id="login_form" action="<?php echo base_url();?>index.php/user/login" method="post">
+								<label for="email">Email adres: </label>
 								<br />
-								<input name="username" value="" type="text" />
+								<input name="email" value="" type="text" />
 								<br />
 								<label for="password">Password: </label>
 								<br />
@@ -440,7 +452,19 @@
 					</div>
 				</div>
 				<div id="appView2">
-
+					<div id="after_delen" style="display: none;">
+						<a id="twitter" href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=<?php if(isset($load)){ echo $rows[0]->productid; } ?>" data-size="large" data-hashtags="Pizzario">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164794886939768";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
+						<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=<?php if(isset($load)){ echo $rows[0]->productid; } ?>" data-send="true" data-width="450" data-show-faces="true"></div>
+					</div>
 				</div>
 			</div>
 			
@@ -476,6 +500,7 @@
 					totaalPrijs: <?php echo $totaalprijs; ?>,
 					load: true,
 					product_id: <?php echo $rows[0]->productid; ?>,
+					wasPubliekelijk: <?php if($rows[0]->publiekelijk == 1){ echo "true"; } else { echo "false"; }?>,
 				<?php } else {?>
 					ingredienten: [],
 					gekozenCategorie: 0,
@@ -483,6 +508,7 @@
 					totaalPrijs: 0,
 					load: false,
 					product_id: 0,
+					wasPubliekelijk: false,
 				<?php } ?>
 				pagenr: 1,
 				appNavigationUl: $('div#appNavigation ul'),
@@ -541,6 +567,8 @@
 				base_url: '<?php echo base_url(); ?>',
 				opslaanButton: $('button#buttonOpslaan'),
 				winkelwagenButton: $('button#winkelwagen'),
+				facebook: $('div#facebook'),
+				twitter: $('a#twitter')
 		});
 		
 		

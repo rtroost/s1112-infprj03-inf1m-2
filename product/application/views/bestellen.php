@@ -42,7 +42,7 @@
 			
 			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4);
 echo		"<tr id=\"productRow\" >
-				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\">".$product."</span>";
+				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product."</span>";
 
 				/* tooltip */
 echo			$fixedTooltipBegin;

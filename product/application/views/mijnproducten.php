@@ -34,6 +34,7 @@ input[type=submit]{
 </style>
 	<div id="content">
 		<h1>Mijn producten</h1><br />
+		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="publiekelijkcount"><?php echo $publiekelijkcount; ?></span> publiekelijke producten.</h3>
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -48,28 +49,27 @@ input[type=submit]{
 				<td> 
 					<h3><?php echo $r->product[0]->naam; ?></h3>
 					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
-					<p><b>Ingredienten: </b><?php $count = 1; foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></p>
+					<p><b>Ingredienten: </b><?php $count = 1; if(count($r->names) != 0){ foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;} }?></p>
 					<p><b>Aangemaakt op: </b> <?php echo $r->aanmaak_datetime; ?></p>
 					<p><b>Prijs: </b> €<span class="prijs"><?php if(strlen($r->prijs) == 4){ echo substr($r->prijs, 0, 2) . ',' . substr($r->prijs, 2);	} 
 								else if(strlen($r->prijs) == 3){ echo substr($r->prijs, 0, 1) . ',' . substr($r->prijs, 1); } else { echo '0,' . $r->prijs; } ?></span></p>
 				</td>
 				<td>
-					
-					<div id="fb-root"></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  if (d.getElementById(id)) return;
-					  js = d.createElement(s); js.id = id;
-					  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164794886939768";
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
-<!-- 					<div class="fb-like" data-href="http://example.com" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div> -->
-					<div class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=<?php echo $r->productid; ?>" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div>
-					
-					<a href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=<?php echo $r->productid; ?>" class="twitter-share-button" data-hashtags="Pizzario">Tweet</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-					
-					</td>
+					<div class="socialmedia" style="<?php if($r->publiekelijk != 1){ echo "display: none;"; }?>">
+						<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164794886939768";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
+						<div class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=<?php echo $r->productid; ?>" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div>
+						
+						<a href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=<?php echo $r->productid; ?>" class="twitter-share-button" data-hashtags="Pizzario">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</div>
+				</td>
 				<td class="aantal">
 					<img id="plus" class="bestellenButtons" src="http://127.0.0.1/pizzario/images/img_order_plus.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_plus.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_plus_mouseover.png'">
 					<input id="aantal1" class="aantal" type="text" name="aantal" value="0">
@@ -82,7 +82,7 @@ input[type=submit]{
 					<h5 style="display: inline;">publiekelijk</h5>
 					<input class="publiekelijk" style="display: inline;" type="checkbox" <?php if($r->publiekelijk == 1){ echo "checked=\"checked\""; }?> />
 					<br /> <form method="post" action="<?php echo base_url(); ?>index.php/product_cont/creator"><input type="submit" value="product wijzigen" name="button" /> <input type="hidden" name="productid" value="<?php echo $r->productid; ?>"/></form>
-					<form method="post" action="<?php echo base_url(); ?>index.php/mijnprofiel_cont/product"><input class="verwijder" type="submit" value="Verwijderen" name="button" onclick="confirm()"/> <input type="hidden" name="productid" value="<?php echo $r->productid; ?>"/></form><br />
+					<form method="post" action="<?php echo base_url(); ?>index.php/user/product"><input class="verwijder" type="submit" value="Verwijderen" name="button" onclick="confirm()"/> <input type="hidden" name="productid" value="<?php echo $r->productid; ?>"/></form><br />
 				</td>
 				</tr>
 			<?php } ?>
@@ -96,6 +96,9 @@ input[type=submit]{
 	
 <script>
 (function( $ ){
+	
+	var $span = $('span#publiekelijkcount');
+		
 	
 	$('input.aantal').numeric();
 	
@@ -137,36 +140,39 @@ input[type=submit]{
 	});
 	
 	$('input.publiekelijk').on('click', function(e){
+		
+		var $this = $(this),
+			spanText = parseInt($span.html());
+			
+		if(spanText >= 5 && $this.attr('checked')){
+			alert('u heeft al 5 publiekelijke producten');
+			e.preventDefault();
+			return;
+		}
+		var parent =  $this.parents('tr'),
+			id = parent.attr('id'),
+			varnew = '',
+			socialmediaDiv = parent.find('div.socialmedia');
 
-		$this = $(this);
 		if($this.attr('checked')){
 			var checked = true;
-		} else {
-			var checked = false;
-		}
-
-		var id = $this.parents('tr').attr('id'),
-			varnew = '';
-			
-		if($this.attr('checked') === 'checked'){
+			$span.text(spanText+1);
+			socialmediaDiv.show();
 			varnew = 1;
 		} else {
+			var checked = false;
+			$span.text(spanText-1);
+			socialmediaDiv.hide();
 			varnew = 0;
 		}
 		
-		
 		$.ajax({
-			url: '<?php echo base_url(); ?>index.php/mijnprofiel_cont/product',
+			url: '<?php echo base_url(); ?>index.php/user/product',
 			type: 'POST',
 			data: {productid: id, new: varnew, userid: '<?php echo $this->session->userdata('gebruikerid'); ?>', check: checked},
 			success: function(results) {
-				if(results === 'publiekelijk'){
-					//$('<p>', {text: 'u heeft al 5 publiekelijke producten', style: 'color: red;'}).insertAfter($this);
-					$this.removeAttr('checked');
-					alert('u heeft al 5 publiekelijke producten');
-				} else if(results === 'failed'){
+				if(results === 'failed'){
 					//iets
-				} else {
 				}
 			}
 		});

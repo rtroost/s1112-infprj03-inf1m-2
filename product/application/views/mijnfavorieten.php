@@ -64,7 +64,7 @@ input[type=submit]{
 					<img id="<?php echo $r->productid; ?>" class="bestellen" height="16px" src="http://127.0.0.1/pizzario/images/img_order_cart.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_cart.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_cart_mouseover.png'"style="cursor: pointer;">
 				</td>
 				<td> 
-					<form method="post" action="<?php echo base_url(); ?>index.php/mijnprofiel_cont/favoriet"><input class="verwijder" type="submit" value="Verwijderen" name="button" onclick="confirm()"/> <input type="hidden" name="productid" value="<?php echo $r->productid; ?>"/></form><br />
+					<form method="post" action="<?php echo base_url(); ?>index.php/user/favoriet"><input class="verwijder" type="submit" value="Verwijderen" name="button" onclick="confirm()"/> <input type="hidden" name="productid" value="<?php echo $r->productid; ?>"/></form><br />
 				</td>
 				</tr>
 			<?php } ?>
@@ -138,7 +138,7 @@ input[type=submit]{
 		
 		
 		$.ajax({
-			url: '<?php echo base_url(); ?>index.php/mijnprofiel_cont/product',
+			url: '<?php echo base_url(); ?>index.php/user/product',
 			type: 'POST',
 			data: {productid: id, new: varnew, userid: '<?php echo $this->session->userdata('gebruikerid'); ?>', check: checked},
 			success: function(results) {

@@ -46,7 +46,13 @@ class product_cont extends CI_controller {
 			$prijs = $this->product_model->getTotalCost($product_id);
 			$data['rows']->prijs = $prijs;
 			$eigenaar = $this->gebruiker_product_model->get_eigenaar($product_id);
-			$data['rows']->eigenaar_naam = $eigenaar[0]->email;
+			if($eigenaar != null){
+				$data['rows']->eigenaar_naam = $eigenaar[0]->email;
+			}
+			if($this->session->userdata('logged_in')){
+				$favoriet = $this->gebruiker_product_model->is_favoriet($product_id, $this->session->userdata('gebruikerid'));
+				$data['rows']->favoriet = $favoriet;
+			}
 		}
 		if($this->input->get('ref')){
 			$data['ref'] = "true";
@@ -151,17 +157,28 @@ class product_cont extends CI_controller {
 
 		$success = true;
 		$publiekelijkonder5 = false;
+		$publiekelijk = false;
 		
 		
 		if($load == 'true'){
 			$product_id = $this->input->post('product_id');
 			if($this->product_ingredient_model->del_ingredients_for_product($product_id)){
-				$publiekelijk = $this->input->post('publiekelijk');
-				if($this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
-					$publiekelijk = 0;
+				$publiekelijk_var = $this->input->post('publiekelijk');
+				//echo $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) . ".....";
+				if($this->input->post('wasPubliekelijk') == "true"){
+					if($this->input->post('publiekelijk') == 1){
+						$publiekelijk_var = 1;
+					} else {
+						$publiekelijk_var = 0;
+						$publiekelijk = true;
+						echo "hier1";
+					}
+				} else if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
+					$publiekelijk_var = 0;
 					$publiekelijkonder5 = true;
+					echo "hier2";
 				}
-				$this->gebruiker_product_model->set_publiekelijk($product_id, $publiekelijk);
+				$this->gebruiker_product_model->set_publiekelijk($product_id, $publiekelijk_var);
 				$this->product_model->update_name($product_id, $this->input->post('productNaam'));
 				if($this->input->post('aantalingredienten') != 0){
 				
@@ -192,9 +209,13 @@ class product_cont extends CI_controller {
 					$dataGebruiker_Product['gebruikerid'] = $this->input->post('gebruikerid');
 					$dataGebruiker_Product['productid'] = $product_id;
 					$dataGebruiker_Product['publiekelijk'] = $this->input->post('publiekelijk');
-					if($this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
+					if($this->input->post('publiekelijk') == 0){
+						$publiekelijk = true;
+					}
+					if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
 						$dataGebruiker_Product['publiekelijk'] = 0;
 						$publiekelijkonder5 = true;
+						$publiekelijk = true;
 					}
 					$dataGebruiker_Product['aanmaak_datetime'] = date("Y-m-d H:i:s");
 					$dataGebruiker_Product['eigenaar'] = 1;
@@ -228,6 +249,8 @@ class product_cont extends CI_controller {
 		if($success){
 			if($publiekelijkonder5){
 				echo $product_id . ",onder5";
+			} elseif($publiekelijk) {
+				echo $product_id . ",nietpubliekelijk";
 			} else {
 				echo $product_id;
 			}

@@ -59,6 +59,7 @@ class Gebruiker_product_model extends CI_model {
 	}
 	
 	function get_eigenaar($product_id){
+		$data = null;	
 		$result = $this->db->query("
 			SELECT g.email FROM gebruiker_product AS gp, gebruiker AS g WHERE gp.gebruikerid = g.gebruikerid AND gp.productid = {$product_id} AND gp.eigenaar = 1;
 		");
@@ -66,6 +67,16 @@ class Gebruiker_product_model extends CI_model {
 			$data = $result->result();
 		}
 		return $data;
+	}
+	function is_favoriet($product_id, $gebruikerid){
+		$query = $this->db->query("
+			SELECT * FROM gebruiker_product WHERE productid = '{$product_id}' AND gebruikerid = '{$gebruikerid}' AND eigenaar = 0;
+		");
+		if ($query->num_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 ?>
