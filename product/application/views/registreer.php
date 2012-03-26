@@ -53,6 +53,10 @@
 		font: normal 13px Arial, Helvetica, sans-serif; ;
 		padding: 4px;
 	}
+	form.registreerform input[type="password"], select {
+		font: normal 13px Arial, Helvetica, sans-serif; ;
+		padding: 4px;
+	}
 	form.registreerform .margRight {
 		margin-left: 200px;
 	}
@@ -97,11 +101,11 @@
 	</p>
 	<p>
 		<?php echo form_label('Herhaal wachtwoord', 'wachtwoord2');?>
-		<?php echo form_input(array('name' => 'wachtwoord2', 'id' => 'wachtwoord2', 'value' => ''));?>
+		<?php echo form_password(array('name' => 'wachtwoord2', 'id' => 'wachtwoord2', 'value' => ''));?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 1', 'adresregel_1');?>
-		<?php echo form_input(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'value' => set_value('adresregel_1')));?>
+		<?php echo form_password(array('name' => 'adresregel_1', 'id' => 'adresregel_1', 'value' => set_value('adresregel_1')));?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 2', 'adresregel_2');?>
