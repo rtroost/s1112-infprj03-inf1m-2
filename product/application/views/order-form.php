@@ -35,27 +35,27 @@
 		background-image: url('../images/icons/error.png');
 	}
 	/*
-	 * Order-form.php
+	 * Form
 	 */
-	form.order_userinfo {
+	form.singleForm {
 		font: normal 13px Arial, Helvetica, sans-serif;
 		line-height: 2em;
 	}
-	form.order_userinfo p {
+	form.singleForm p {
 		padding: 5px;
 	}
-	form.order_userinfo label {
+	form.singleForm label {
 		width: 200px;
 		float: left;
 	}
-	form.order_userinfo input[type="text"], select {
+	form.singleForm input[type="text"], form.singleForm input[type="password"] {
 		font: normal 13px Arial, Helvetica, sans-serif; ;
 		padding: 4px;
 	}
-	form.order_userinfo .margRight {
+	form.singleForm .margRight {
 		margin-left: 200px;
 	}
-	form.order_userinfo input[type="submit"] {
+	form.singleForm input[type="submit"] {
 		border: 1px solid #39adf0;
 		background: #6ac7fc;
 		color: white;
@@ -66,7 +66,7 @@
 		cursor: pointer;
 		width: 145px;
 	}
-	form.order_userinfo input[type="submit"]:hover {
+	form.singleForm input[type="submit"]:hover {
 		background: #70d2fd;
 	}
 
@@ -85,7 +85,7 @@
 		?>
 		</div>
 		<?php
-		$attributes = array('class' => 'order_userinfo', 'id' => 'order_userinfo');
+		$attributes = array('class' => 'singleForm');
 		echo form_open('', $attributes);
 		?>
 		<?php $required = ' <span class="required">*</span>';?>

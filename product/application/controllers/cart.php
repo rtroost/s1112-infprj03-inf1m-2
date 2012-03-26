@@ -55,6 +55,12 @@ class Cart extends CI_controller {
 		$this -> form_validation -> set_rules('payment-method', 'Payment methode', 'required');
 		$this -> form_validation -> set_rules('bestelmethode', 'Bestel methode', 'required');
 
+		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
+		$this -> form_validation -> set_message('required', 'Het veld %s is niet ingevuld.');
+		$this -> form_validation -> set_message('matches', 'De wachtwoord velden kwamen niet overeen.');
+		$this -> form_validation -> set_message('email', 'Gelieve een geldig e-mailadres in te vullen.');
+		$this -> form_validation -> set_message('max_length', 'Het veld %s bevatte te veel of te weinig tekens');
+
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed

@@ -25,6 +25,7 @@
 		width: 100%;
 		text-align: right;
 	}
+	
 	button, div.checkout-div input[type="submit"], div.checkout-div input[type="button"] {
 		border: 1px solid #39adf0;
 		background: #6ac7fc;
