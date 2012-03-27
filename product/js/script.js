@@ -110,13 +110,14 @@ function wijzigGebruiker(id)
 			}
 		}
 		
-		xmlhttp.open("GET","beheer_gebruikers_cont?update=waar&id="+document.getElementById("beheer0"+id).value+"&voornaam="+document.getElementById("beheer2"+id).value+"&achternaam="+document.getElementById("beheer3"+id).value+"&email="+document.getElementById("beheer4"+id).value+"&adres1="+document.getElementById("beheer5"+id).value+"&adres2="+document.getElementById("beheer6"+id).value+"&postcode="+document.getElementById("beheer7"+id).value+"&woonplaats="+document.getElementById("beheer8"+id).value+"&telefoon="+document.getElementById("beheer9"+id).value+"&korting="+document.getElementById("beheer10"+id).value ,true);
+		xmlhttp.open("GET","ajax_cont?wijzigGebruiker=waar&id="+document.getElementById("beheer0"+id).value+"&voornaam="+document.getElementById("beheer2"+id).value+"&achternaam="+document.getElementById("beheer3"+id).value+"&email="+document.getElementById("beheer4"+id).value+"&adres1="+document.getElementById("beheer5"+id).value+"&adres2="+document.getElementById("beheer6"+id).value+"&postcode="+document.getElementById("beheer7"+id).value+"&woonplaats="+document.getElementById("beheer8"+id).value+"&telefoon="+document.getElementById("beheer9"+id).value+"&korting="+document.getElementById("beheer10"+id).value, true);
 		xmlhttp.send();
 		
 		for(i=1; i<=10; i++)
 		{
 			document.getElementById("beheer"+i+id).disabled = true;
 		}
+		
 		document.getElementById("wijzigGebruiker"+id).value = "Wijzig";
 	}
 }
@@ -220,6 +221,12 @@ function updateNews()
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
 	
+		xmlhttp.open("GET","ajax_cont?updateNews=waar&titel="+titel+"&inhoud="+inhoud, true);
+		xmlhttp.send();
+		
+		document.getElementById("activateNews").disabled = true;
+		document.getElementById("activateNews").value = "Voeg nieuws toe";
+		
 		xmlhttp.onreadystatechange=function()
 		{
 			if(xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -227,12 +234,6 @@ function updateNews()
 				document.getElementById("newsOpgeslagen").innerHTML = "Het bericht is opgeslagen en nu zichtbaar op de homepage.";
 			}
 		}
-		
-		xmlhttp.open("GET","beheer_news_cont?update=waar&titel="+titel+"&inhoud="+inhoud,true);
-		xmlhttp.send();
-		
-		document.getElementById("activateNews").disabled = true;
-		document.getElementById("activateNews").value = "Voeg nieuws toe";
 	}
 }
 
