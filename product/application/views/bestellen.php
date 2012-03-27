@@ -3,7 +3,7 @@
 ?>
 <div id="content"> 	
 	<div id="legenda"><div class="legendaItem" ><b>(w) = weinig</div><div class="legendaItem">(n) = normale hoeveelheid</div><div class="legendaItem" >(v) = veel</b></div></div>													
-	<p>&nbsp;<p>&nbsp;
+	<p>&nbsp;</p><p>&nbsp;</p>
 	<?php
 	/* variabellen */
 		$fixedTooltipBegin = "<table id=\"dpop\" class=\"popup\">
@@ -23,7 +23,8 @@
         		<td class=\"bottom\"></td>
         		<td id=\"bottomright\" class=\"corner\"></td>
         	</tr>
-        </tbody></table>";
+        </tbody>
+        </table>";
 		$i=0; 
 		$pid=0;
 		/* einde variabellen */
@@ -31,14 +32,17 @@
 		
 		/* bestellijst  */
 		foreach($bestellijst as $categorie => $producten){ echo "						
-		<table id=\"bestellijst\">
+		<table id=\"bestellijst\" class=\"productlijst\">
+			<thead>
 			<tr id=\"categorieRow\">
-				<td id=\"categorieColumn\">".$categorie."</td>
-				<td id=\"categoriePrijs\">Prijs per stuk</td>
-				<td id=\"categorieAantal\">Aantal</td>
-				<td id=\"categorieTotaal\">Totaal</td>
-				<td id=\"categorieBestellen\"></td>
-			</tr>";
+				<th id=\"categorieColumn\">".$categorie."</th>
+				<th id=\"categoriePrijs\">Prijs per stuk</th>
+				<th id=\"categorieAantal\">Aantal</th>
+				<th id=\"categorieTotaal\">Totaal</th>
+				<th id=\"categorieBestellen\"></th>
+			</tr>
+			</thead>
+			";
 			
 			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4);
 echo		"<tr id=\"productRow\" >

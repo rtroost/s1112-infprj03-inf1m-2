@@ -4,12 +4,12 @@
 	<?php
 	$i=0; 
 	$pid=0;
-	
+
 	if($search == null){
 		echo "geen resultaten";
 	} else {
 		foreach($search as $categorie => $producten) { ?>
-		<table id="bestellijst">
+		<table class="productlijst" id="productlijst">
 			<thead id="categorieRow">
 				<tr>
 					<th id="categorieColumn"><?php echo $categorie; ?></th>
