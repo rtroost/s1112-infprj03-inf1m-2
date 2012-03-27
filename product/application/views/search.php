@@ -48,7 +48,7 @@
 					<?php } ?>
 				</tbody>
 			</table>
-			<?php } ?>
-			<?php } ?>													
-		</div>																
-		<?php $this->load->view('includes/footer') ?>
+		<?php } ?>
+	<?php } ?>													
+</div>															
+<?php $this->load->view('includes/footer') ?>
