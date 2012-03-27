@@ -1,42 +1,4 @@
 <?php $this->load->view('includes/header') ?>
-
-<style type="text/css">
-	/*
-	 * Form
-	 */
-	form.singleForm {
-		font: normal 13px Arial, Helvetica, sans-serif;
-		line-height: 2em;
-	}
-	form.singleForm p {
-		padding: 5px;
-	}
-	form.singleForm label {
-		width: 200px;
-		float: left;
-	}
-	form.singleForm input[type="text"], form.singleForm input[type="password"] {
-		font: normal 13px Arial, Helvetica, sans-serif; ;
-		padding: 4px;
-	}
-	form.singleForm .margRight {
-		margin-left: 200px;
-	}
-	form.singleForm input[type="submit"] {
-		border: 1px solid #39adf0;
-		background: #6ac7fc;
-		color: white;
-		font: bold 13px Arial, Helvetica, sans-serif;
-		text-transform: uppercase;
-		text-shadow: 1px 1px 0 #7a7a7a;
-		padding: 6px;
-		cursor: pointer;
-		width: 145px;
-	}
-	form.singleForm input[type="submit"]:hover {
-		background: #70d2fd;
-	}
-</style>
 <div id="content">
 	<?php $this -> form_validation -> set_error_delimiters('<li">', '</li>');
 	echo validation_errors(' <div class="error"> ', ' </div> ');

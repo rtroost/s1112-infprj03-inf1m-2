@@ -86,7 +86,7 @@ class User extends CI_controller {
 		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
 		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
-		$this -> form_validation -> set_rules('password', 'wachtwoord', 'required');
+		$this -> form_validation -> set_rules('password', 'wachtwoord', 'required|md5');
 		$this -> form_validation -> set_rules('password_check', 'controle wachtwoord', 'required|matches[password]');
 
 		$this -> form_validation -> set_error_delimiters('<li">', '</li>');
@@ -94,7 +94,7 @@ class User extends CI_controller {
 		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('registreer');
 		} else {
-			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => md5(set_value('wachtwoord')));
+			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => set_value('password'));
 			
 			if($this->usersystem_model->emailInUse($form_data)) {
 				$this->form_validation->set_message('email_is_uniek','Het opgegeven email adres bestaat al.');

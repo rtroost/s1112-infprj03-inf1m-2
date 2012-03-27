@@ -5,8 +5,6 @@
 }
 html {
 	overflow-y: scroll;
-}
-html {
 	margin: 0px;
 	padding: 0px;
 	position: relative;
@@ -87,253 +85,327 @@ input.aanmeldInput {
 }
 
 div #legenda {
-	padding-left:100px;}
-	
-div.legendaItem{
-	padding-left:50px;
-	padding-right:50px;
-	float:left;
+	padding-left:100px;
 }
 	
-/* end login */
-
-/* =========== */
-/* end header  */
-/* =========== */
-
-/* =========== */
-/* content     */
-/* =========== */
-section#main_content {
-	height: auto;
-	width: 940px;
-	position: relative;
-	background: url('../images/img_content_bgsmall.png') repeat-y scroll center bottom transparent;
-}
-
-div#content {
-	padding-left: 80px;
-	width: 800px;
-}
-
-input.aantal {
-	width: 20px;
-	font-size: 10px;
-	height: 14px;
-	border:1px solid #000000;
-	position:relative;
-	margin-left:2px;
-	margin-right:2px;
-	float:right;
+	div.legendaItem{
+		padding-left:50px;
+		padding-right:50px;
+		float:left;
+	}
 	
-}
+	/* end login */
 
-img.bestellenButtons {
-	vertical-align: baseline;
-	border:1px solid #000000;
-	position:relative;
-	float:right;
-	cursor: pointer;
-}
-/* =========== */
-/* end content */
-/* =========== */
+	/* =========== */
+	/* end header  */
+	/* =========== */
 
-/* =========== */
-/* footer      */
-/* =========== */
-footer {
-	height: 55px;
-	width: 940px;
-	position: relative;
-	background: url('../images/img_content_footer.png') repeat-y scroll center bottom transparent;
-	margin-bottom: 6px;
-}
-div.footer_center {
-	text-align: center;
-	padding-top: 29px;
-}
+	/* =========== */
+	/* content     */
+	/* =========== */
+	section#main_content {
+		height: auto;
+		width: 940px;
+		position: relative;
+		background: url('../images/img_content_bgsmall.png') repeat-y scroll center bottom transparent;
+	}
 
-#footer_nav li {
-	display: inline;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-/* =========== */
-/* end footer  */
-/* =========== */
+	div#content {
+		padding-left: 80px;
+		width: 800px;
+	}
 
-p {
-/*	margin-bottom: 18px;*/
-	height: auto;
-}
+	input.aantal {
+		width: 20px;
+		font-size: 10px;
+		height: 14px;
+		border:1px solid #000000;
+		position:relative;
+		margin-left:2px;
+		margin-right:2px;
+		float:right;
 
-img {
-	padding: 0 !important;
-	border: none !important;
-	background: none !important;
-}
-.clear {
-	clear: both;
-	height: 0;
-	width: 0;
-	line-height: 0;
-	font-size: 0px;
-}
-.hidden {
-	display: none;
-}
-.no-margin {
-	margin-right: 0 !important;
-}
+	}
 
-/*div#content{
-	padding-left:50px;
-	padding-right:50px;
-	position:relative;
-}*/
+	img.bestellenButtons {
+		vertical-align: baseline;
+		border:1px solid #000000;
+		position:relative;
+		float:right;
+		cursor: pointer;
+	}
+	/* =========== */
+	/* end content */
+	/* =========== */
 
-table#bestellijst{
-	line-height:1.0em;
-	padding: 0px;
-	border-collapse:collapse;
-}
+	/* =========== */
+	/* footer      */
+	/* =========== */
+	footer {
+		height: 55px;
+		width: 940px;
+		position: relative;
+		background: url('../images/img_content_footer.png') repeat-y scroll center bottom transparent;
+		margin-bottom: 6px;
+	}
+	div.footer_center {
+		text-align: center;
+		padding-top: 29px;
+	}
 
-tr#categorieRow{
-	font-size:18px;
-	font-family:calibri;
-	font-weight:bold;
-	color:#c0a55a;
+	#footer_nav li {
+		display: inline;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	/* =========== */
+	/* end footer  */
+	/* =========== */
 
-	height:25px;
-}
+	p {
+		/*	margin-bottom: 18px;*/
+		height: auto;
+	}
 
-td#categorieColumn{
-	width:350px;
-}
+	img {
+		padding: 0 !important;
+		border: none !important;
+		background: none !important;
+	}
+	.clear {
+		clear: both;
+		height: 0;
+		width: 0;
+		line-height: 0;
+		font-size: 0px;
+	}
+	.hidden {
+		display: none;
+	}
+	.no-margin {
+		margin-right: 0 !important;
+	}
 
-td#categoriePrijs{
-	width:100px;
-	text-align:right;
-}
+	table#bestellijst{
+		line-height:1.0em;
+		padding: 0px;
+		border-collapse:collapse;
+	}
 
-td#categorieAantal{
-	width:120px;
-	text-align:right;
-}
+	tr#categorieRow{
+		font-size:18px;
+		font-family:calibri;
+		font-weight:bold;
+		color:#c0a55a;
 
-td#categorieTotaal{
-	width:110px;
-	text-align:right;
-}
+		height:25px;
+	}
 
-td#categorieBestellen{
-	width:110px;
-	text-align:right;
-}
+	td#categorieColumn{
+		width:350px;
+	}
 
-tr#productRow{
-	font-size:12px;
-	font-family: "Trebuchet MS", sans-serif;
-	font-weight:bold;
-}
+	td#categoriePrijs{
+		width:100px;
+		text-align:right;
+	}
 
-td#productColumn{
-	padding-left:15px;
-}
+	td#categorieAantal{
+		width:120px;
+		text-align:right;
+	}
 
-td#productPrijs{
-	text-align:right;
-	vertical-align:baseline;
-	float:right;
-}
+	td#categorieTotaal{
+		width:110px;
+		text-align:right;
+	}
 
-td.productTotaal, td#productAantal {
-	text-align:right;
-	vertical-align:baseline;
-}
+	td#categorieBestellen{
+		width:110px;
+		text-align:right;
+	}
 
-td.productTotaal{
-	float:right;
-}
+	tr#productRow{
+		font-size:12px;
+		font-family: "Trebuchet MS", sans-serif;
+		font-weight:bold;
+	}
 
-td#productBestellen{
-	text-align:right;
-	vertical-align:baseline;
-}
+	td#productColumn{
+		padding-left:15px;
+	}
 
-tr#ingredientRow{
-	font-size:8px;
+	td#productPrijs{
+		text-align:right;
+		vertical-align:baseline;
+		float:right;
+	}
 
-}
+	td.productTotaal, td#productAantal {
+		text-align:right;
+		vertical-align:baseline;
+	}
 
-td#ingredientColumn{
-	padding-left:20px;
-	padding-bottom: 8px;
-}
+	td.productTotaal{
+		float:right;
+	}
 
-/* =========== */
-/* Start Beheer_Gebruikers  */
-/* =========== */
+	td#productBestellen{
+		text-align:right;
+		vertical-align:baseline;
+	}
 
-div#gebruikers{
-	line-height:1.0em;
-	padding: 0px;
-}
+	tr#ingredientRow{
+		font-size:8px;
 
-table#gebruikerTable{
-	line-height:1.0em;
-	padding: 0px;
-	border: 1px solid #000000;
-}
+	}
 
-.beheerInput{
-	width: 250px;
-}
+	td#ingredientColumn{
+		padding-left:20px;
+		padding-bottom: 8px;
+	}
 
-div#navigatie{
-	width: 300px;
-	height: 50px;
-	float: left;
-}
+	/* =========== */
+	/* Start Beheer_Gebruikers  */
+	/* =========== */
 
-div#zoekGebruiker{
-	width: 300px;
-	height: 50px;
-	float: right;
-}
+	div#gebruikers{
+		line-height:1.0em;
+		padding: 0px;
+	}
 
-/* =========== */
-/* End Beheer_Gebruikers  */
-/* =========== */
+	table#gebruikerTable{
+		line-height:1.0em;
+		padding: 0px;
+		border: 1px solid #000000;
+	}
 
-/* =========== */
-/* Start Home_News */
-/* =========== */
+	.beheerInput{
+		width: 250px;
+	}
 
-div#homeNewsTitel{
-	font-size: 24pt;
-	border: 1px solid #000000;
-	height: 60px;
-}
+	div#navigatie{
+		width: 300px;
+		height: 50px;
+		float: left;
+	}
 
-div#homeNewsInhoud{
-	font-size: 16pt;
-	border: 1px solid #000000;
-	height: auto;
-}
+	div#zoekGebruiker{
+		width: 300px;
+		height: 50px;
+		float: right;
+	}
 
-/* =========== */
-/* End Home_News */
-/* =========== */
+	/*
+	 * Messages
+	 */
+	 .info, .success, .warning, .error, .validation {
+	 	font-size: 11px;
+	 	border: 1px solid;
+	 	margin: 10px 0px;
+	 	padding: 5px 5px 5px 40px;
+	 	background-size: 20px;
+	 	background-repeat: no-repeat;
+	 	background-position: 10px center;
+	 	/*		display: block;*/
+	 	width: 250px;
+	 }
+	 .info {
+	 	color: #00529B;
+	 	background-color: #BDE5F8;
+	 	background-image: url('../images/icons/info.png');
+	 }
+	 .success {
+	 	color: #4F8A10;
+	 	background-color: #DFF2BF;
+	 	background-image: url('../images/icons/success.png');
+	 }
+	 .warning {
+	 	color: #9F6000;
+	 	background-color: #FEEFB3;
+	 	background-image: url('../images/icons/warning.png');
+	 }
+	 .error {
+	 	color: #D8000C;
+	 	background-color: #FFBABA;
+	 	background-image: url('../images/icons/error.png');
+	 }
 
-/* =========== */
-/* Start Beheer_News */
-/* =========== */
+	/*
+	 * Form
+	 */
+	 form.singleForm {
+	 	font: normal 13px Arial, Helvetica, sans-serif;
+	 	line-height: 2em;
+	 }
+	 form.singleForm p {
+	 	padding: 5px;
+	 }
+	 form.singleForm label {
+	 	width: 200px;
+	 	float: left;
+	 }
+	 form.singleForm input[type="text"], form.singleForm input[type="password"] {
+	 	font: normal 13px Arial, Helvetica, sans-serif; ;
+	 	padding: 4px;
+	 }
+	 form.singleForm .margRight {
+	 	margin-left: 200px;
+	 }
+	 form.singleForm input[type="submit"] {
+	 	border: 1px solid #39adf0;
+	 	background: #6ac7fc;
+	 	color: white;
+	 	font: bold 13px Arial, Helvetica, sans-serif;
+	 	text-transform: uppercase;
+	 	text-shadow: 1px 1px 0 #7a7a7a;
+	 	padding: 6px;
+	 	cursor: pointer;
+	 	width: 145px;
+	 }
+	 form.singleForm input[type="submit"]:hover {
+	 	background: #70d2fd;
+	 }
 
+	/*
+	 * Cart
+	 */
+	 table.cart {
+	 	font: bold 12px "Trebuchet MS", sans-serif;
+	 	line-height: 1.0em;
+	 	padding: 0px;
+	 	border-collapse: collapse;
+	 	width: 100%;
+	 }
+	 table.cart th {
+	 	font-size: 18px;
+	 	color: #c0a55a;
+	 	height: 25px;
+	 }
+	 table.cart tr {
+	 	height: 25px;
+	 }
+	 table.cart td:last-child {
+	 	text-align: right;
+	 }
+	 table.cart td.upperBorder {
+	 	border-top: 1px #000 solid;
+	 }
+	 table.cart div.checkout-div {
+	 	width: 100%;
+	 	text-align: right;
+	 }
 
-
-
-/* =========== */
-/* End Home_News */
-/* =========== */
+	 table.cart button, div.checkout-div input[type="submit"], table.cart div.checkout-div input[type="button"] {
+	 	border: 1px solid #39adf0;
+	 	background: #6ac7fc;
+	 	color: white;
+	 	font: bold 11px "Trebuchet MS", sans-serif;
+	 	text-transform: uppercase;
+	 	text-shadow: 1px 1px 0 #7a7a7a;
+	 	padding: 6px;
+	 	cursor: pointer;
+	 }
+	 table.cart button:hover, div.checkout-div input[type="submit"]:hover, table.cart div.checkout-div input[type="button"]:hover {
+	 	background: #70d2fd;
+	 }
