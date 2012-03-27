@@ -334,3 +334,24 @@ div #legenda {
 	 table.cart button:hover, div.checkout-div input[type="submit"]:hover, table.cart div.checkout-div input[type="button"]:hover {
 	 	background: #70d2fd;
 	 }
+
+/* =========== */
+/* Start Home_News */
+/* =========== */
+
+div#homeNewsTitel{
+	font-size: 26pt;
+	height: 70px;
+	border:1px solid #000000;
+}
+
+div#homeNewsInhoud{
+	font-size: 16pt;
+	height: auto;
+	border:1px solid #000000;
+}
+
+/* =========== */
+/* End Home_News */
+/* =========== */
+	 
