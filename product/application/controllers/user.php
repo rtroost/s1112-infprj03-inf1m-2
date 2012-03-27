@@ -53,7 +53,7 @@ class User extends CI_controller {
 					return "false";					
 				} else {
 					//Foutieve ingave
-					$this->load->view('login');
+					$this->load->view('login_failed');
 				}							
 			} else {				
 				if($this->input->is_ajax_request()){
