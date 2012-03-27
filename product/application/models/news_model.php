@@ -1,8 +1,7 @@
 <?php
 
-class Test_model extends CI_model
+class News_model extends CI_model
 {
-	
 	function getNews()
 	{
 		$news = $this->db->query('
@@ -20,6 +19,14 @@ class Test_model extends CI_model
 		}
 		
 		return $data;
+	}
+	
+	function updateNews($titel, $inhoud)
+	{
+		$news = $this->db->query("
+		INSERT INTO news (titel, inhoud)
+		VALUES ('".$titel."', '".$inhoud."')
+		");
 	}
 }
 
