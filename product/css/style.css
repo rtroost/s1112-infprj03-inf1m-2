@@ -175,19 +175,20 @@ div #legenda {
 	/*
 	 *Productlijst
 	*/
-	table.productlijst 										{ width: 100%; line-height: 1.0em; border-collapse: collapse; }
-	table.productlijst thead tr 							{ font: bold 18px 'Calibri'; color: #c0a55a; height: 25px; }
+	table.productlijst 										{ width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; }
+	table.productlijst thead tr 							{ font-weight: bold; font-size: 18px; color: #c0a55a; height: 25px; }
 	table.productlijst th 									{ text-align: right; }
 	table.productlijst th:first-child 						{ width: 350px; text-align: left; }
 	table.productlijst th:nth-child(2) 						{ width: 100px; }
 	table.productlijst th:nth-child(3) 						{ width: 120px; }
 	table.productlijst th:nth-child(4) 						{ width: 110px; }
 	table.productlijst th:nth-child(5) 						{ width: 110px; }
+	table.productlijst tr 									{ font-size: 12px; }
 	table.productlijst tr:nth-child(odd) 					{ }
 	table.productlijst tr:nth-child(odd) td:first-child		{ padding-left: 10px; }
-	table.productlijst tr:nth-child(even) 					{ font-size: 8px; padding-bottom: 10px; }
-	table.productlijst tr:nth-child(even) td:first-child 	{ padding-left: 20px;}
-	table.productlijst td 									{ text-align: right; vertical-align: baseline; }
+	table.productlijst tr:nth-child(even) 					{ font-size: 10px; }
+	table.productlijst tr:nth-child(even) td:first-child 	{ padding-left: 20px; }
+	table.productlijst td 									{ text-align: right; }
 	table.productlijst td:first-child 						{ text-align: left; }
 
 	/* =========== */
