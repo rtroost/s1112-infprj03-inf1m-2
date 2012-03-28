@@ -222,21 +222,44 @@ class User extends CI_controller {
 	if($this->session->userdata('logged_in') != 1) {
 			redirect(base_url()."index.php/user?redirect=user/wijziggegevens");
 		}
+			$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
+		$this -> form_validation -> set_rules('achternaam', 'Achternaam', 'required|trim|max_length[50]');
+		$this -> form_validation -> set_rules('adresregel_1', 'Adresregel 1', 'required|trim|max_length[50]');
+		$this -> form_validation -> set_rules('adresregel_2', 'Adresregel 2', 'trim|max_length[50]');
+		$this -> form_validation -> set_rules('postcode', 'Postcode', 'required|trim|max_length[6]');
+		$this -> form_validation -> set_rules('woonplaats', 'Woonplaats', 'required|trim|max_length[50]');
+		$this -> form_validation -> set_rules('telefoonnummer', 'Telefoonnummer', 'required|trim|is_numeric|max_length[10]');
+		$this -> form_validation -> set_rules('email', 'Email', 'required|trim|valid_email|max_length[100]');
+		// $this -> form_validation -> set_rules('password', 'wachtwoord', 'required|md5');
+		// $this -> form_validation -> set_rules('password_check', 'controle wachtwoord', 'required|matches[password]');
 	
-	$id = $this->session->userdata('gebruikerid');
-	$this->load->model('usersystem_model');
-	$gebruikergegevens = $this->usersystem_model->getgebruiker($id);
+	
+	if ($this -> form_validation -> run() == FALSE)
+	{	
+	
+	
+	$gebruikergegevens = $this->usersystem_model->getuserdata();
+	
+	$this->load->view('wijziggegevens',$gebruikergegevens);
+	
+	} else {
+		$form_data = array('voornaam' => set_value ('voorletters'),'achternaam' => set_value('achternaam'),
+	'adresregel_1' => set_value('adresregel_1'),'adresregel_2' => set_value('adresregel_2'),
+	'email' => set_value('email'),'postcode' => set_value('postcode'),'telefoonnummer' => set_value('telefoonnummer'));
+	
+	$this->usersystem_model->setUserData($form_data);
+	redirect('user');	 
+	}
 	
 	//print_r($gebruikergegevens);
-	echo $gebruikergegevens['voornaam'];
-	echo $gebruikergegevens['achternaam'];
-	echo $gebruikergegevens['email'];
-	echo $gebruikergegevens['adresregel_1'];
-	echo $gebruikergegevens['adresregel_2'];
-	echo $gebruikergegevens['postcode'];
-	echo $gebruikergegevens['woonplaats'];
-	echo $gebruikergegevens['telefoonnummer'];
-	
+	//echo $gebruikergegevens['voornaam'];
+	//echo $gebruikergegevens['achternaam'];
+	//echo $gebruikergegevens['email'];
+	//echo $gebruikergegevens['adresregel_1'];
+	//echo $gebruikergegevens['adresregel_2'];
+	//echo $gebruikergegevens['postcode'];
+	//echo $gebruikergegevens['woonplaats'];
+	//echo $gebruikergegevens['telefoonnummer'];
 	
 	}
 }
