@@ -2,8 +2,6 @@
 	$this->load->view('includes/header') 
 ?>
 <div id="content"> 	
-	<div id="legenda"><div class="legendaItem" ><b>(w) = weinig</div><div class="legendaItem">(n) = normale hoeveelheid</div><div class="legendaItem" >(v) = veel</b></div></div>													
-	<p>&nbsp;</p><p>&nbsp;</p>
 	<?php
 	/* variabellen */
 		$fixedTooltipBegin = "<table id=\"dpop\" class=\"popup\">
@@ -20,7 +18,7 @@
         	</tr>
         	<tr>
         		<td class=\"corner\" id=\"bottomleft\"></td>
-        		<td class=\"bottom\"></td>
+        		<td class=\"bottom\"><img width=\"30\" height=\"29\" alt=\"popup tail\" src=\"".base_url()."images/tooltip/bubble-tail2.png\"></td>
         		<td id=\"bottomright\" class=\"corner\"></td>
         	</tr>
         </tbody>
@@ -87,8 +85,8 @@ echo   			"</div></td>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";
 				for($i = 0; $i < count($productinformatie)-3; $i++){ 
-					if($i == 0){ echo $productinformatie[$i];}
-					else{ echo ", ".$productinformatie[$i];}
+					if($i == 0){ echo substr($productinformatie[$i], 3);}
+					else{ echo ", ".substr($productinformatie[$i], 3);}
 					
 				}echo "														
 				</td>
