@@ -38,7 +38,7 @@ function oldValue(id, oudeWaarde)
 		}
 }
 
-function updateWinkelwagen(id, price)
+function updateWinkelwagen(naam, id, price)
 {
 	aantal = document.getElementById("aantal"+id).value
 	if(window.XMLHttpRequest)
@@ -58,7 +58,7 @@ function updateWinkelwagen(id, price)
 		}
 	}
 	
-	xmlhttp.open("GET","updatewinkelwagen_cont?id="+id+"&aantal="+aantal+"&prijs="+price,true);
+	xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
 	xmlhttp.send();
 }
 
@@ -206,7 +206,9 @@ function updateNews()
 	if(document.getElementById("titelInput").disabled == true)
 	{
 			document.getElementById("titelInput").disabled = false;
+			document.getElementById("titelInput").value = "";
 			document.getElementById("inhoudInput").disabled = false;
+			document.getElementById("inhoudInput").value = "";
 			document.getElementById("cancelNews").disabled = false;
 			document.getElementById("activateNews").value = "Opslaan";
 	}
@@ -231,7 +233,7 @@ function updateNews()
 		{
 			if(xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
-				document.getElementById("newsOpgeslagen").innerHTML = "Het bericht is opgeslagen en nu zichtbaar op de homepage.";
+				document.getElementById("newsOpgeslagen").innerHTML = "Het nieuws bericht is opgeslagen en nu zichtbaar op de homepage.";
 			}
 		}
 	}
@@ -242,10 +244,10 @@ function cancelNews()
 	if(document.getElementById("titelInput").disabled == false)
 	{
 		document.getElementById("titelInput").disabled = true;
-		document.getElementById("titelInput").value = "Titel";
+		document.getElementById("titelInput").value = "Vul hier de titel in.";
 			
 		document.getElementById("inhoudInput").disabled = true;
-		document.getElementById("inhoudInput").value = "Inhoud";
+		document.getElementById("inhoudInput").value = "Vul hier de inhoud in.";
 			
 		document.getElementById("cancelNews").disabled = true;
 		document.getElementById("activateNews").value = "Voeg nieuws toe";

@@ -44,7 +44,7 @@
 			</thead>
 			";
 			
-			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4);
+			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4); $lol = $product;
 echo		"<tr id=\"productRow\" >
 				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product."</span>";
 
@@ -82,7 +82,7 @@ echo   			"</div></td>
 					<img class=\"bestellenButtons\" onClick=\"minAantal(".$pid.", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_min_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_min.png'\" src=\"".base_url()."images/img_order_min.png\"></img>
 				</td>
 				<td rowspan=\"2\" id=\"totaal".$pid."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
-				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
+				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen('".$product."',".$productinformatie['id'].", ".number_format($productinformatie['prijs']/100, 2).")\" onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
 			</tr>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";

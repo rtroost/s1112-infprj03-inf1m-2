@@ -3,7 +3,27 @@
 class Ajax_cont extends CI_controller 
 {	
 	function index()
-	{		
+	{
+		if(isset ($_GET['updateWagen']))
+		{
+			$this->load->library('cart');
+			$data['id'] = $this->input->get('id');
+			$data['name'] = $this->input->get('naam');
+			$data['price'] = $this->input->get('prijs');
+			$data['qty'] = $this->input->get('aantal');
+			
+			if($this->cart->insert($data))
+			{
+				echo "success";
+				return;	
+			} 
+			else 
+			{
+				echo "failed";
+				return;
+			}
+		}
+				
 		if(isset ($_GET['archiveer']))
 		{
 			$this->load->model('beheer_gebruikers_model');

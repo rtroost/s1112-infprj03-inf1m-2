@@ -20,7 +20,7 @@ class Home_cont extends CI_controller {
 		{
 			$this->load->model('news_model');
 			$data['news'] = $this->news_model->getNews();
-			$this -> load -> view('index');
+			$this -> load -> view('index', $data);
 		}
 
 	}

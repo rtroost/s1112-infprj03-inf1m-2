@@ -354,4 +354,44 @@ div#homeNewsInhoud{
 /* =========== */
 /* End Home_News */
 /* =========== */
-	 
+
+/* =========== */
+/* Start Beheer_News */
+/* =========== */
+
+div#updateNews{
+	padding-top: 25px;
+}
+
+#titelInput{
+	width: 600px;
+}
+
+#inhoudInput{
+	width: 600px;
+	height: 300px;
+}
+
+#activateNews{
+	width: 200px;
+}
+
+#cancelNews{
+	width: 200px;
+}
+
+div#navigatieNews{
+	
+	width: 500px;
+	padding-top: 10px;
+	margin-left: 103px;
+}
+
+div#newsOpgeslagen{
+	padding-top: 15px;
+	font-weight: bold;
+}
+
+/* =========== */
+/* End Beheer_News */
+/* =========== */	 

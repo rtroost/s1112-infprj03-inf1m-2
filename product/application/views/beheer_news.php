@@ -2,15 +2,23 @@
 
 <div id="content">
 	
+	<h1>Beheer nieuws</h1>
+	
 	<div id ="updateNews">
 		<table id="newsTable">
-			<tr><td>Titel</td><td><input id="titelInput" name="Titel" class="newsInput" disabled value="Titel"</td></tr>
-			<tr><td>Inhoud</td><td><input id="inhoudInput" name="Inhoud" class="newsInput" disabled value="Inhoud"</td></tr>
-			<tr><td><input name="activateNews" id="activateNews" style="width:110px" onmousedown="updateNews()" type="button" value="Voeg nieuws toe"></td>
-				<td><input name="cancelNews" id="cancelNews" style="width:110px" onmousedown="cancelNews()" type="button" disabled value="Annuleer"></td></tr> 
-			<tr><td><div id="newsOpgeslagen"></div></td></tr>
-		
+			<tr><td style="width: 100px;"><b>Titel</b></td><td><textarea id="titelInput" name="Titel" disabled>Vul hier de titel in.</textarea></td></tr>
+			<tr><td style="width: 100px;"><b>Inhoud</b></td><td><textarea id="inhoudInput" name="Inhoud" disabled>Vul hier de inhoud in.</textarea></td></tr>
 		</table>
+		
+		<div id="navigatieNews">
+			<input name="activateNews" id="activateNews" onmousedown="updateNews()" type="button" value="Activeer nieuws">
+			<td><input name="cancelNews" id="cancelNews" onmousedown="cancelNews()" type="button" disabled value="Annuleer"></td></tr>
+			
+			<div id="newsOpgeslagen"></div>
+		
+		
+		</div>
+		
 	</div>	
 
 </div>

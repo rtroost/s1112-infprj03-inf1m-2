@@ -15,7 +15,6 @@
 	
 	else
 	{
-	
 		$index = count($news);
 		$index = $index - 1;
 		
