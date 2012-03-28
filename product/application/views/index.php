@@ -28,6 +28,15 @@
 		</div>
 		";	
 	}
+	
+	echo "
+	<div id=\"aanbiedingen\">
+	
+	
+	
+	</div>
+	
+	";
 				
 ?>
 		

@@ -336,23 +336,25 @@ div #legenda {
 	 }
 
 /* =========== */
-/* Start Home_News */
+/* Start Home */
 /* =========== */
 
 div#homeNewsTitel{
+	width: 600px;
 	font-size: 26pt;
 	height: 70px;
 	border:1px solid #000000;
 }
 
 div#homeNewsInhoud{
+	width: 600px;
 	font-size: 16pt;
 	height: auto;
 	border:1px solid #000000;
 }
 
 /* =========== */
-/* End Home_News */
+/* End Home */
 /* =========== */
 
 /* =========== */
