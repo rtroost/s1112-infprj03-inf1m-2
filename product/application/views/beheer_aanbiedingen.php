@@ -31,7 +31,7 @@ input[type=submit]{
 </style>
 	<div id="content">
 		<h1>Mijn producten</h1><br />
-		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="publiekelijkcount"><?php echo $publiekelijkcount; ?></span> publiekelijke producten.</h3>
+		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="aanbiedingcount"><?php echo $aanbiedingcountcount; ?></span> publiekelijke producten.</h3>
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -42,7 +42,7 @@ input[type=submit]{
 			<?php foreach($rows as $r){ ?>
 				<tr id="<?php echo $r->productid; ?>">
 				<td> 
-					<h3><?php echo $r->product[0]->naam; ?></h3>
+					<h3><?php echo $r->naam; ?></h3>
 					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
 					<p><b>Ingredienten: </b><?php $count = 1; if(count($r->names) != 0){ foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;} }?></p>
 					<p><b>Aangemaakt op: </b> <?php echo $r->aanmaak_datetime; ?></p>
@@ -52,7 +52,7 @@ input[type=submit]{
 				
 				<td> 
 					<h5 style="display: inline;">Aanbieding</h5>
-					<input class="publiekelijk" style="display: inline;" type="checkbox" <?php if($r->publiekelijk == 1){ echo "checked=\"checked\""; }?> />
+					<input class="aanbieding" style="display: inline;" type="checkbox" <?php if($r->aanbieding == 1){ echo "checked=\"checked\""; }?> />
 				</td>
 				</tr>
 			<?php } ?>
@@ -67,39 +67,36 @@ input[type=submit]{
 <script>
 (function( $ ){
 	
-	var $span = $('span#publiekelijkcount');
+	var $span = $('span#aanbiedingcount');
 		
-	$('input.publiekelijk').on('click', function(e){
+	$('input.aanbieding').on('click', function(e){
 		
 		var $this = $(this),
 			spanText = parseInt($span.html());
 			
 		if(spanText >= 5 && $this.attr('checked')){
-			alert('u heeft al 5 publiekelijke producten');
+			alert('u heeft al 5 producten in de aanbieding ');
 			e.preventDefault();
 			return;
 		}
 		var parent =  $this.parents('tr'),
 			id = parent.attr('id'),
-			varnew = '',
-			socialmediaDiv = parent.find('div.socialmedia');
+			varnew = '';
 
 		if($this.attr('checked')){
 			var checked = true;
 			$span.text(spanText+1);
-			socialmediaDiv.show();
 			varnew = 1;
 		} else {
 			var checked = false;
 			$span.text(spanText-1);
-			socialmediaDiv.hide();
 			varnew = 0;
 		}
 		
 		$.ajax({
-			url: '<?php echo base_url(); ?>index.php/user/product',
+			url: '<?php echo base_url(); ?>index.php/beheer_aanbiedingen_cont',
 			type: 'POST',
-			data: {productid: id, new: varnew, userid: '<?php echo $this->session->userdata('gebruikerid'); ?>', check: checked},
+			data: {productid: id, new: varnew},
 			success: function(results) {
 				if(results === 'failed'){
 					//iets

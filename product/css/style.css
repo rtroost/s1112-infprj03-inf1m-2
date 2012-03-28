@@ -84,6 +84,15 @@ input.aanmeldInput {
 	color: #666666;
 }
 
+/*slider*/
+#example {
+	position: relative;
+	float: left;
+	width: 780px;
+	height: 267px;
+	margin-bottom: 45px;
+}
+
 div #legenda {
 	padding-left:100px;
 }

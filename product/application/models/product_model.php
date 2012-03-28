@@ -85,7 +85,7 @@ class Product_model extends CI_model {
 	}
 	
 	function create_product($data){
-		$sql = 'INSERT INTO product (naam, standaard, categorieid, gearchiveerd, temp) VALUES (?, ?, ?, ?, ?);';
+		$sql = 'INSERT INTO product (naam, standaard, categorieid, gearchiveerd, temp, aanbieding) VALUES (?, ?, ?, ?, ?, 0);';
 		$insert = $this->db->query($sql, $data);
 		return $insert;
 	}
@@ -151,6 +151,39 @@ class Product_model extends CI_model {
 	function verwijder_product($product_id){
 		return $this->db->query("
 			UPDATE product SET gearchiveerd = 1 WHERE productid = '{$product_id}';
+		");
+	}
+	
+	function get_all_aanbiedingen(){
+		$data = NULL;
+		$result = $this->db->query("
+			SELECT *
+			FROM product AS p, gebruiker_product AS gp, gebruiker AS g
+			WHERE p.`productid` = gp.`productid`
+			AND gp.`gebruikerid` = g.`gebruikerid`
+			AND gp.`eigenaar` =1
+			AND g.typeid =2
+		");
+		if ($result->num_rows() > 0){
+			foreach($result->result() as $naam){
+				$data[] = $naam;
+			}			
+		}
+		return $data;
+	}
+	
+	function get_aanbieding_count(){
+		$result =  $this->db->query("
+			SELECT COUNT(*) AS count
+			FROM product
+			WHERE aanbieding = 1
+		");
+		return $result->row()->count;
+	}
+	
+	function set_aanbieding($product_id, $new){
+		return $this->db->query("
+			UPDATE product SET aanbieding = {$new} WHERE productid = '{$product_id}';
 		");
 	}
 	

@@ -8,6 +8,16 @@ class Gebruiker_product_model extends CI_model {
 		return $insert;
 	}
 	
+	function get_gebruiker_product_by_productid($productid){
+		$result = $this->db->query("
+			SELECT * FROM `gebruiker_product` WHERE productid = '{$productid}' AND eigenaar = 1
+		");
+		if ($result->num_rows() > 0){
+			$data = $result->result();
+		}
+		return $data;
+	}
+	
 	function get_all_products_from_user($user_id, $eigenaar){
 		
 		$data = NULL;
