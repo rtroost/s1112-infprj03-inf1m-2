@@ -10,6 +10,7 @@ class Cart extends CI_controller {
 		$this -> load -> helper('url');
 		$this -> load -> model('cart_model');
 		$this -> load -> model('product_model');
+		$this -> load -> model('usersystem_model');
 
 		$this -> form_validation -> set_message('alpha_numeric', 'Het veld %s bevat tekens uit een niet toegestane karaktergroep.');
 		$this -> form_validation -> set_message('required', 'Het veld %s is niet ingevuld.');
@@ -78,7 +79,7 @@ class Cart extends CI_controller {
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data = $this -> cart_model -> getShippingData();
+			$data = $this -> usersystem_model -> getUserData();
 			$this -> load -> view('order-form', $data);
 		} else// passed validation proceed to post success logic
 		{
@@ -88,7 +89,7 @@ class Cart extends CI_controller {
 			$this->session->set_userdata(array('bestelmethode' => set_value('bestelmethode')));
 			// run insert model to write data to db
 
-			if ($this -> cart_model -> saveShippingData($form_data) == TRUE)// the information has therefore been successfully saved in the db
+			if ($this -> usersystem_model -> setUserData($form_data) == TRUE)// the information has therefore been successfully saved in the db
 			{
 				//if bestelmethode == aan de deur
 
@@ -140,7 +141,7 @@ class Cart extends CI_controller {
 
 	function complete() {
 		$orderid = $this->cart_model->createOrder();
-		$this->cart_model->makePayment($orderid);			
+		$this->cart_model->makePayment($orderid);	
 
 		$this -> cart -> destroy();
 

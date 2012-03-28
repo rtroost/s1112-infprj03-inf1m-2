@@ -31,21 +31,26 @@ class Usersystem_model extends CI_model {
 		}
 		return FALSE;	
 	}
-	function getGebruiker($id)
-	{ 
-		
-		$gebruikersgegevens = mysql_query("
-		
-		SELECT voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer
-        FROM gebruiker
-        WHERE gebruikerid = '{$id}'
-		
-		");
-		
-		$gebruikersgegevens = mysql_fetch_array($gebruikersgegevens);
-		
-		return $gebruikersgegevens;
-		
+
+	function getUserData() {
+		$this->db->select('voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer');
+		$this->db->where('gebruikerid', $this -> session -> userdata('gebruikerid'));
+		$query = $this->db->get('gebruiker');
+
+		if ($query -> num_rows() > 0) {
+			$row = $query -> row();
+
+			return $row;
+		}
+		return FALSE;
+	}
+
+	function setUserData($form_data) {
+		$this -> db -> where('gebruikerid', $this -> session -> userdata('gebruikerid'));
+		$this -> db -> update('gebruiker', $form_data);
+
+		//If something, do something :D
+		return TRUE;
 	}
 }
 ?>

@@ -5,27 +5,6 @@ class Cart_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function saveShippingData($form_data) {
-		$this -> db -> where('gebruikerid', $this -> session -> userdata('gebruikerid'));
-		$this -> db -> update('gebruiker', $form_data);
-
-		//If something, do something :D
-		return TRUE;
-	}
-
-	function getShippingData() {
-		$this->db->select('voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer');
-		$this->db->where('gebruikerid', $this -> session -> userdata('gebruikerid'));
-		$query = $this->db->get('gebruiker');
-
-		if ($query -> num_rows() > 0) {
-			$row = $query -> row();
-
-			return $row;
-		}
-		return FALSE;
-	}
-
 	function createOrder() {
 		$q = array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'), 'bestelmethodeid' => $this->session->userdata('bestelmethode'));
 		$this -> db -> insert('bestelling', $q);
