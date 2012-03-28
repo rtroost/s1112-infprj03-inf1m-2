@@ -217,6 +217,27 @@ class User extends CI_controller {
 		//var_dump( $data['rows'][0]);
 		$this->load->view('mijnfavorieten', $data);
 	}
-
+	function wijziggegevens(){
+	
+	if($this->session->userdata('logged_in') != 1) {
+			redirect(base_url()."index.php/user?redirect=user/wijziggegevens");
+		}
+	
+	$id = $this->session->userdata('gebruikerid');
+	$this->load->model('usersystem_model');
+	$gebruikergegevens = $this->usersystem_model->getgebruiker($id);
+	
+	//print_r($gebruikergegevens);
+	echo $gebruikergegevens['voornaam'];
+	echo $gebruikergegevens['achternaam'];
+	echo $gebruikergegevens['email'];
+	echo $gebruikergegevens['adresregel_1'];
+	echo $gebruikergegevens['adresregel_2'];
+	echo $gebruikergegevens['postcode'];
+	echo $gebruikergegevens['woonplaats'];
+	echo $gebruikergegevens['telefoonnummer'];
+	
+	
+	}
 }
 ?>
