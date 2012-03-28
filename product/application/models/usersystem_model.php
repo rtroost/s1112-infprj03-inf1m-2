@@ -31,6 +31,21 @@ class Usersystem_model extends CI_model {
 		}
 		return FALSE;	
 	}
-
+	function getGebruiker($id)
+	{ 
+		
+		$gebruikersgegevens = mysql_query("
+		
+		SELECT voornaam, achternaam, email, adresregel_1, adresregel_2, postcode, woonplaats, telefoonnummer
+        FROM gebruiker
+        WHERE gebruikerid = '{$id}'
+		
+		");
+		
+		$gebruikersgegevens = mysql_fetch_array($gebruikersgegevens);
+		
+		return $gebruikersgegevens;
+		
+	}
 }
 ?>
