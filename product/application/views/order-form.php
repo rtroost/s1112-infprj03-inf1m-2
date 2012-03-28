@@ -52,8 +52,8 @@
 	</p>
 	<p>
 		<?php echo form_label('Betaalmethode' . $required, 'payment_method');?>
-		<?php $options = array('' => '-- Maak een keuze --', 'paypal' => 'Paypal', 'ideal' => 'iDEAL', 'gwallet' => 'Google Wallet', 'creditcard' => 'Creditcard', 'contant' => 'Contant');?>
-		<?php echo form_dropdown('payment-method', $options, set_value('payment-method'));?>
+		<?php $payment_method_options = array('' => '-- Maak een keuze --', 'ideal' => 'iDEAL', 'contant' => 'Contant');?>
+		<?php echo form_dropdown('payment-method', $payment_method_options, set_value('payment-method'));?>
 	</p>
 	<p>
 		<?php echo form_label('Afleveren/Ophalen' . $required, 'bestelmethode');?>
