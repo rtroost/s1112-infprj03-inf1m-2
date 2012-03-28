@@ -278,7 +278,7 @@ div #legenda {
 	 form.singleForm .margRight {
 	 	margin-left: 200px;
 	 }
-	 form.singleForm input[type="submit"] {
+	 form.singleForm input[type="submit"], form.singleForm input[type="button"], form.singleForm button {
 	 	border: 1px solid #39adf0;
 	 	background: #6ac7fc;
 	 	color: white;
@@ -289,7 +289,7 @@ div #legenda {
 	 	cursor: pointer;
 	 	width: 145px;
 	 }
-	 form.singleForm input[type="submit"]:hover {
+	 form.singleForm input[type="submit"]:hover, form.singleForm input[type="button"]:hover, form.singleForm button:hover {
 	 	background: #70d2fd;
 	 }
 
