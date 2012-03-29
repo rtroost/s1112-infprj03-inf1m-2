@@ -24,7 +24,6 @@
         </tbody>
         </table>";
 		$i=0; 
-		$pid=0;
 		/* einde variabellen */
 		
 		
@@ -42,7 +41,7 @@
 			</thead>
 			";
 			
-			foreach($producten as $product => $productinformatie){ $pid++; $tableWidth = ceil((count($productinformatie)-3)/4); $lol = $product;
+			foreach($producten as $product => $productinformatie){ $tableWidth = ceil((count($productinformatie)-3)/4); $lol = $product;
 echo		"<tr id=\"productRow\" >
 				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product."</span>";
 
@@ -75,11 +74,11 @@ echo   			$fixedTooltipEinde;
 echo   			"</div></td>
 				<td rowspan=\"2\" id=\"productPrijs\">&#8364;".number_format($productinformatie['prijs']/100, 2) ."</td>
 				<td rowspan=\"2\" id=\"productAantal\">
-					<img class=\"bestellenButtons\" onClick=\"plusAantal(".$pid.", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_plus_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_plus.png'\" src=\"".base_url()."images/img_order_plus.png\"></img>
-					<input class=\"aantal\" onChange=\"manualAantal(".$pid.", ".$productinformatie['prijs'].")\" id=\"aantal".$pid."\" value=\"0\" name=\"aantal\" type=\"text\" />
-					<img class=\"bestellenButtons\" onClick=\"minAantal(".$pid.", ".$productinformatie['prijs'].")\" <img onmouseover=\"this.src='".base_url() ."images/img_order_min_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_min.png'\" src=\"".base_url()."images/img_order_min.png\"></img>
+					<img class=\"bestellenButtons\" onClick=\"plusAantal(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" onmouseover=\"this.src='".base_url() ."images/img_order_plus_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_plus.png'\" src=\"".base_url()."images/img_order_plus.png\"></img>
+					<input class=\"aantal\" onChange=\"manualAantal(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" id=\"aantal".$productinformatie['id']."\" value=\"0\" name=\"aantal\" type=\"text\" />
+					<img class=\"bestellenButtons\" onClick=\"minAantal(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" onmouseover=\"this.src='".base_url() ."images/img_order_min_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_min.png'\" src=\"".base_url()."images/img_order_min.png\"></img>
 				</td>
-				<td rowspan=\"2\" id=\"totaal".$pid."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
+				<td rowspan=\"2\" id=\"totaal".$productinformatie['id']."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
 				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen('".$product."',".$productinformatie['id'].", ".number_format($productinformatie['prijs']/100, 2).")\" onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
 			</tr>
 			<tr id=\"ingredientRow\">

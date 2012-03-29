@@ -38,8 +38,8 @@ function oldValue(id, oudeWaarde)
 		}
 }
 
-function updateWinkelwagen(naam, id, price)
-{
+/*function updateWinkelwagen(naam, id, price)
+{	
 	aantal = document.getElementById("aantal"+id).value
 	if(window.XMLHttpRequest)
 	{
@@ -50,16 +50,55 @@ function updateWinkelwagen(naam, id, price)
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
+	//document.write("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price);
 	xmlhttp.onreadystatechange=function()
 	{
 		if(xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
+			alert(xmlhttp.responseText)
+			document.getElementById("linkWinkelwagen").innerHTML = xmlhttp.responseText;
+			document.getElementById("aantal"+id).value = 0;
+			prijs = 0;
+			document.getElementById("totaal"+id).innerHTML = "&#8364;" + prijs.toFixed(2);
 			
-		}
-	}
-	
+			$('#updateWinkelwagen').fadeIn('slow');
+			
+			/*$('#updateWinkelwagen').fadeIn(
+				500, 
+				setTimeout(
+					function () {
+						$('#updateWinkelwagen').fadeOut(500)
+						}, 
+						1000));*/
+		/*}
 	xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
 	xmlhttp.send();
+	}
+}*/
+
+function updateWinkelwagen(naam, id, price)
+{
+	aantal = document.getElementById("aantal"+id).value
+	if(window.XMLHttpRequest){
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		   document.getElementById("linkWinkelwagen").innerHTML = xmlhttp.responseText;
+			document.getElementById("aantal"+id).value = 0;
+			prijs = 0;
+			document.getElementById("totaal"+id).innerHTML = "&#8364;" + prijs.toFixed(2);
+			
+			$('#updateWinkelwagen').fadeIn(1000, function () {$('#updateWinkelwagen').delay(500).fadeOut(1000)})
+		}
+	}
+	 
+	 xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
+	 xmlhttp.send();
 }
 
 function getSearch()

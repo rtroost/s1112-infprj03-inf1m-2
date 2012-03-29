@@ -21,6 +21,28 @@
 		</div>
     </footer>
 	</div>
+	
+	<div id="updateWinkelwagen" style="
+	display:none;
+	position: fixed;  
+	top:0px;  
+	left: 30px; 
+	width: 220px; 
+	height:100%;
+	bottom:40px;
+	z-index:1;
+	vertical-align:bottom;">
+		<div style="position: absolute; 
+		bottom: 25px;
+		width:270px;
+		height:203px;
+		left:490px;
+		
+		background-image: url('<?php echo base_url(); ?>images/updateWinkelwagen.png');">
+		sdlfnsdlfmsdlkfm
+		</div>
+	</div>
+	
 	<div id="footer">
 		<?php if(!$this->session->userdata('logged_in')){ ?>
 			<div id="barInlog">
@@ -52,7 +74,7 @@
 			<table style="float:left;" id="cartTable">
 				<tr>
 					<td><img id="barWinkelwagen" src="<?php echo base_url(); ?>images/bar/winkelwagen.png" /></td>
-					<td class="cartTd"><a href="#" >&nbsp;Winkelwagen(<?php echo $totalitems; ?>)</a></td>
+					<td class="cartTd"><a id="linkWinkelwagen" href="#" >&nbsp;Winkelwagen(<?php echo $totalitems; ?>)</a></td>
 					<td class="cartTd"><b>&nbsp;|&nbsp;</b></td>
 					<td class="cartTd"><a href="#"><b>Checkout</b></a></td>
 				</tr>

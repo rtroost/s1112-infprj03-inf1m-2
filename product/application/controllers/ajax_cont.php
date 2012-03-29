@@ -12,16 +12,9 @@ class Ajax_cont extends CI_controller
 			$data['price'] = $this->input->get('prijs');
 			$data['qty'] = $this->input->get('aantal');
 			
-			if($this->cart->insert($data))
-			{
-				echo "success";
-				return;	
-			} 
-			else 
-			{
-				echo "failed";
-				return;
-			}
+			$this->cart->insert($data);
+			$totalitems = $this->cart->total_items();
+			echo "&nbsp;Winkelwagen(".$totalitems.")";
 		}
 				
 		if(isset ($_GET['archiveer']))
