@@ -88,5 +88,16 @@ class Gebruiker_product_model extends CI_model {
 			return false;
 		}
 	}
+	
+	function getKortingspunten(){
+		$query = $this->db->query("
+			SELECT kortingspunten FROM gebruiker WHERE gebruikerid = '".$this->session->userdata('gebruikerid')."';
+		");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		} else {
+			return 0;
+		}
+	}
 }
 ?>

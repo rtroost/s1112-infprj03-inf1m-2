@@ -3,26 +3,40 @@
 	margin: 0;
 	padding: 0;
 }
+
+html, body{
+                padding: 0px;
+                margin: 0px;
+        }
+		
 html {
-	overflow-y: scroll;
 	margin: 0px;
 	padding: 0px;
 	position: relative;
+
 	background: url('../images/img_BG.png') repeat top left;
-	height: 100%;
 }
+
 body{
 	color: #555;
 	text-align: left;
 	line-height: 1.67em;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
+	padding-bottom: 40px;
 }
 
 #wrapper{
 	margin: 0 auto;
 	width: 960px;
 }
+
+
+
+div#footer:hover{
+	background: url('../images/bar/bottombarshadow2.png') repeat top left;
+}
+
 /* =========== */
 /* header      */
 /* =========== */
@@ -184,14 +198,29 @@ div #legenda {
 	/*
 	 *Productlijst
 	*/
+<<<<<<< .mine
+	table.productlijst 										{ width: 100%; line-height: 1.0em; border-collapse: collapse; }
+	table.productlijst thead tr 									{ font: bold 18px 'Calibri'; color: #c0a55a; height: 25px; }
+	table.productlijst th 										{ text-align: right; }
+	table.productlijst th:first-child 							{ width: 350px; text-align: left; }
+=======
 	table.productlijst 										{ width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; }
 	table.productlijst thead tr 							{ font-weight: bold; font-size: 18px; color: #c0a55a; height: 25px; }
 	table.productlijst th 									{ text-align: right; }
 	table.productlijst th:first-child 						{ width: 350px; text-align: left; }
+>>>>>>> .r136
 	table.productlijst th:nth-child(2) 						{ width: 100px; }
 	table.productlijst th:nth-child(3) 						{ width: 120px; }
 	table.productlijst th:nth-child(4) 						{ width: 110px; }
 	table.productlijst th:nth-child(5) 						{ width: 110px; }
+<<<<<<< .mine
+	table.productlijst tr:nth-child(odd) 						{ }
+	table.productlijst tr:nth-child(odd) td:first-child			{ padding-left: 10px; }
+	table.productlijst tr:nth-child(even) 						{ font-size: 8px; padding-bottom: 10px; }
+	table.productlijst tr:nth-child(even) td:first-child 		{ padding-left: 20px;}
+	table.productlijst td 										{ text-align: right; vertical-align: baseline; }
+	table.productlijst td:first-child 							{ text-align: left; }
+=======
 	table.productlijst tr 									{ font-size: 12px; }
 	table.productlijst tr:nth-child(odd) 					{ }
 	table.productlijst tr:nth-child(odd) td:first-child		{ padding-left: 10px; }
@@ -199,6 +228,7 @@ div #legenda {
 	table.productlijst tr:nth-child(even) td:first-child 	{ padding-left: 20px; }
 	table.productlijst td 									{ text-align: right; }
 	table.productlijst td:first-child 						{ text-align: left; }
+>>>>>>> .r136
 
 	/* =========== */
 	/* Start Beheer_Gebruikers  */
@@ -405,5 +435,146 @@ div#newsOpgeslagen{
 }
 
 /* =========== */
+/* End Beheer_Gebruikers  */
+/* =========== */
+
+
+
 /* End Beheer_News */
 /* =========== */	 
+
+ div#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 40px;
+	font-size: 14px;
+	background: url('../images/bar/bottombarshadowOver2.png') repeat top left;
+}
+
+div#barInlog{
+	padding-left:60px;
+}
+
+ul#inlogul{
+margin-right:50px;
+}
+
+ul#inlogul li{
+	display:inline;
+	cursor:pointer;
+}
+
+ul#inlogul li a{
+	text-decoration:none;
+	color: #555555;
+	float:left;
+	margin-top:6px;
+	padding-top:6px;
+	padding-left:10px;
+	padding-right:10px;
+	height:40px;
+}
+
+ul#inlogul li a:hover{
+	background:url('../images/bar/bottombarshadowOverOver2.png');
+	color: #333333;
+	text-decoration: underline;
+}
+
+ul#inlogul li img{
+	margin-top:10px;
+	float:left;
+}
+
+div#barLinks{
+	padding-left:300px;
+}
+
+ul#linksUl{
+margin-right:50px;
+}
+
+ul#linksUl li{
+	display:inline;
+	cursor:pointer;
+}
+
+ul#linksUl li a{
+	text-decoration:none;
+	color: #555555;
+	float:left;
+	margin-top:6px;
+	padding-top:4px;
+	padding-left:10px;
+	padding-right:10px;
+	height:40px;
+}
+
+ul#linksUl li a:hover{
+	background:url('../images/bar/bottombarshadowOverOver2.png');
+	color: #333333;
+}
+
+ul#linksUl li img.tussenLinks{
+	margin-top:10px;
+	float:left;
+}
+
+img.imgLinks{
+	width:25px;
+	height:25px;
+}
+
+div#barCart{
+	float:left;
+}
+
+table#cartTable{
+	margin-top:6px;
+	height:40px;
+	font-size: 14px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+table#cartTable a{
+	text-decoration:none;
+	color: #555555;
+}
+
+table#cartTable a:hover{
+	text-decoration:underline;
+	color: #333333;
+}
+
+table#cartTable:hover{
+	background:url('../images/bar/bottombarshadowOverOver2.png');
+}
+
+img#barWinkelwagen{
+	width:20px;
+	height:20px;
+}
+
+img.barTussen{
+	margin-top:10px;
+}
+
+td.cartTd{
+	padding-bottom:6px;
+}
+
+div#barKorting{
+	padding-left:860px;
+}
+
+div#barKorting a{
+	text-decoration:none;
+	color: #555555;
+}
+
+div#barKorting a :hover{
+	text-decoration:underline;
+	color: #333333;
+}
