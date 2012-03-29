@@ -214,6 +214,8 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 table.productlijst td          						{ text-align: right; }
 	 table.productlijst td:first-child       				{ text-align: left; }
 
+	 table.productlijst table.popup td:first-child 			{ padding: 0px;}
+
 	 /* =========== */
 	 /* Start Beheer_Gebruikers  */
 	 /* =========== */

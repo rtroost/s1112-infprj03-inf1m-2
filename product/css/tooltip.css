@@ -1,6 +1,7 @@
  td {
 	margin:0px;
-	padding:0px;}
+	padding:0px;
+}
 		
 .tooltipStart {
 	position: relative;}
@@ -10,12 +11,12 @@ text-decoration:underline;
 color:#000099;
 }
 
-
 .popup {
 	position: absolute;
 	display: none;
 	z-index: 50;
-	border-collapse: collapse;}
+	border-collapse: collapse;
+}
 
 .popup td.corner {
 	height: 15px;
