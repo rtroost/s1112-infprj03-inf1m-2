@@ -30,6 +30,13 @@ class Cart extends CI_controller {
 			$price = $this->input->post('price');
 			$name = $this->input->post('name');
 
+			foreach ($this -> cart -> contents() as $item) {
+				if($item['id'] == $id) {
+					$data = array('rowid' => $item['rowid'], 'qty' => $item['qty'] + $qty);
+					return $this->cart->update($data);
+				}
+			}			
+
 			$data = array('id' => $id, 'qty' => $qty, 'price' => $price, 'name' => $name);
 
 			return $this->cart->insert($data);
