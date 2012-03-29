@@ -551,3 +551,15 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 	text-decoration:underline;
 	 	color: #333333;
 	 }
+	 
+	 /* =========== */
+	 /* Start News  */
+	 /* =========== */
+	
+	div#contactTable{
+		
+	}
+	
+	div#maps{
+		padding-top: 40px;
+	}

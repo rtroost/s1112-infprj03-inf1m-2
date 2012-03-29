@@ -94,7 +94,7 @@ function updateWinkelwagen(naam, id, price, aantal)
 			prijs = 0;
 			document.getElementById("totaal"+id).innerHTML = "&#8364;" + prijs.toFixed(2);
 			
-			$('#updateWinkelwagen').fadeIn(1000, function () {$('#updateWinkelwagen').delay(500).fadeOut(1000)})
+			$("#updateWinkelwagen").fadeIn(1000, function () {$("#updateWinkelwagen").delay(500).fadeOut(1000)})
 		}
 	}
 	 
