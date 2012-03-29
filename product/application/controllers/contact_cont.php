@@ -1,10 +1,11 @@
 <?php 
 
-class Contact_cont extends CI_controller {
-	
-	function index(){
-		$this->load->model('placeholder_model');
-		$data['records'] = $this->placeholder_model->getAll();
+class Contact_cont extends CI_controller
+{	
+	function index()
+	{
+		$this->load->model('contact_model');
+		$data['contact'] = $this->contact_model->getContact();
 		$this->load->view('contact', $data);
 	}
 	

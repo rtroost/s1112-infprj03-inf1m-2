@@ -8,37 +8,24 @@
 <div id="content">
 
 	<div id="example">
-
-	
-		<div class="i-slider-section">
-			<img src="images/examples/adorepaper.jpg" />
-		</div>
-		<div class="i-slider-section">
-			<img src="images/examples/bed.jpg" />
-			
-			<div class="i-slider-captions bottom">
-			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
-			</div>
-		</div>
-		<div class="i-slider-section">
-
-			<img src="images/examples/cactus.jpg" />
-		</div>
-		<div class="i-slider-section">
-			<img src="images/examples/chair.jpg" />
-		</div>
-		<div class="i-slider-section">
-			<iframe title="YouTube video player" width="800" height="267" src="http://www.youtube.com/embed/ZN5PoW7_kdA" frameborder="0" allowfullscreen></iframe>
-		</div>
-
-	
+		<?php for($i = 0; $i < count($aanbiedingen); $i++)	
+			{ ?>	
+				<div class="i-slider-section">
+					<img src="images/producten/<?php print_r($aanbiedingen[$i]->productid)?>.jpg" />
+					<div class="i-slider-captions bottom">
+						<?php print_r($aanbiedingen[$i]->naam); ?>
+					</div>
+				</div>
+		<?php } ?>
 	</div>
+		
 	<p style="clear: both;"></p>
 	
 	<?php if($news == null)	{ ?>
 		<div id="homeNewsTitel">
 			Er is momenteel geen nieuws
 		</div>
+		
 	<?php } else { $index = count($news)-1; ?>
 
 		<div id="homeNewsTitel">
@@ -49,12 +36,7 @@
 			<?php echo $news[$index]->inhoud; ?>
 		</div>
 		
-	<?php }  ?>
-	
-
-	<div id="aanbiedingen">
-	
-	</div>		
+	<?php }  ?>	
 </div>	
 	
 <?php $this->load->view('includes/footer') ?>

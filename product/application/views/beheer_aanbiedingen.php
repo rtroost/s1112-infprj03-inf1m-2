@@ -30,8 +30,8 @@ input[type=submit]{
 
 </style>
 	<div id="content">
-		<h1>Mijn producten</h1><br />
-		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="aanbiedingcount"><?php echo $aanbiedingcountcount; ?></span> publiekelijke producten.</h3>
+		<h1>Aanbiedingen beheer</h1><br />
+		<h3>Let op! U kunt maximaal 5 producten in de aanbieding plaatsen. <span id="aanbiedingcount"><?php echo $aanbiedingcountcount; ?></span> aanbiedingen geselecteerd.</h3>
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -44,8 +44,8 @@ input[type=submit]{
 				<td> 
 					<h3><?php echo $r->naam; ?></h3>
 					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
-					<p><b>Ingredienten: </b><?php $count = 1; if(count($r->names) != 0){ foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;} }?></p>
-					<p><b>Aangemaakt op: </b> <?php echo $r->aanmaak_datetime; ?></p>
+					
+					
 					<p><b>Prijs: </b> €<span class="prijs"><?php if(strlen($r->prijs) == 4){ echo substr($r->prijs, 0, 2) . ',' . substr($r->prijs, 2);	} 
 								else if(strlen($r->prijs) == 3){ echo substr($r->prijs, 0, 1) . ',' . substr($r->prijs, 1); } else { echo '0,' . $r->prijs; } ?></span></p>
 				</td>

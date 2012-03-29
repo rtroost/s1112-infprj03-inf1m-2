@@ -55,7 +55,7 @@ class Beheer_Gebruikers_model extends CI_model{
 		");
 	}
 	
-		function activeerGebruiker($gebruikerid){
+	function activeerGebruiker($gebruikerid){
 		$gebruikers = $this->db->query("
 		UPDATE gebruiker
 		SET gearchiveerd = '0'

@@ -187,6 +187,25 @@ class Product_model extends CI_model {
 		");
 	}
 	
-	
+	function get_set_aanbiedingen(){
+		$data = NULL;
+		$aanbiedingen = $this->db->query("
+			SELECT productid, naam
+			FROM product
+			WHERE aanbieding = 1
+		");
+		
+		if ($aanbiedingen->num_rows() > 0){
+			foreach($aanbiedingen->result() as $aanbieding){
+			$data[] = $aanbieding;
+			}
+		}
+		
+		else{
+			$data = null;
+		}
+		
+		return $data;
+	}
 }
 ?>
