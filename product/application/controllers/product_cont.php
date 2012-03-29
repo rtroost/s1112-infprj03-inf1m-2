@@ -12,7 +12,7 @@ class product_cont extends CI_controller {
 			$data['price'] = $this->input->post('price');
 			$data['qty'] = $this->input->post('qty');
 			if($this->input->post('mediatype') == 'true'){
-				$data['options'] = array('media' => 'true');
+				$data['options'] = array('media' => TRUE);
 			}
 			if($this->cart->insert($data)){
 				echo "success";

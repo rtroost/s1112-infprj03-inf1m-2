@@ -36,6 +36,18 @@ class Cart extends CI_controller {
 		}
 	}
 
+	function discount($do) {
+		if($do == 'remove') {
+			$this -> session -> set_userdata(array('discount' => FALSE));
+		} else {
+			if($this -> cart_model -> getDiscountP($this -> session -> userdata('gebruikerid')) >= 20) {
+				$this -> session -> set_userdata(array('discount' => TRUE));
+			}			
+		}
+
+		redirect('cart');
+	}
+
 	function update_cart() {
 		$total = $this -> cart -> total_items();
 
@@ -62,6 +74,10 @@ class Cart extends CI_controller {
 	function checkout() {
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			redirect('login?redirect=cart/checkout');
+		}
+
+		if($this->cart->total_items() == 0) {
+			redirect(base_url());
 		}
 
 		$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
@@ -106,6 +122,14 @@ class Cart extends CI_controller {
 	}
 
 	function payment() {
+		if ($this -> session -> userdata('logged_in') == FALSE) {
+			redirect('login?redirect=cart/payment');
+		}
+
+		if($this->cart->total_items() == 0) {
+			redirect(base_url());
+		}
+
 		foreach($this->cart->contents() as $item) {
 			$data = array('rowid' => $item['rowid'], 'price' => ($this->product_model->getTotalCost($item['id']) / 100));
 			$this->cart->update($data);
@@ -114,7 +138,37 @@ class Cart extends CI_controller {
 		$this -> load -> view('payment');
 	}
 
+	function giveDiscountPoints($orderid) {
+		if ($this -> session -> userdata('logged_in') == FALSE) {
+			redirect('login?redirect=cart/');
+		}
+
+		if($this->cart->total_items() == 0) {
+			redirect('cart');
+		}
+
+		foreach ($this->cart->contents() as $item) :
+			$this -> cart_model -> createOrderLines($orderid, $item);
+
+			if($this->cart->has_options($item['rowid']) == TRUE) :
+				foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value):
+					if($option_name == 'media' && $option_value == TRUE) :
+						$this->cart_model->giveDiscountPoints($item['id']);
+					endif;					
+				endforeach;
+			endif;
+		endforeach;
+	}
+
 	function idealresult() {
+		if ($this -> session -> userdata('logged_in') == FALSE) {
+			redirect(base_url());
+		}
+
+		if($this->cart->total_items() == 0) {
+			redirect(base_url());
+		}
+
 		$status = $this -> input -> get('status');
 
 		if (strcmp($status, 'cancel') === 0) {
@@ -127,7 +181,8 @@ class Cart extends CI_controller {
 			// Notify user
 			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
 
-			$orderid = $this->cart_model->createOrder();
+			$orderid = $this->cart_model->createOrder($this->session->userdata('gebruikerid'));
+			$this->giveDiscountPoints($orderid);
 			$this->cart_model->makePayment($orderid);			
 
 			$this -> cart -> destroy();
@@ -140,7 +195,8 @@ class Cart extends CI_controller {
 	}
 
 	function complete() {
-		$orderid = $this->cart_model->createOrder();
+		$orderid = $this->cart_model->createOrder($this->session->userdata('gebruikerid'));
+		$this->giveDiscountPoints($orderid);
 		$this->cart_model->makePayment($orderid);	
 
 		$this -> cart -> destroy();

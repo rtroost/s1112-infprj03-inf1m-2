@@ -5,18 +5,36 @@ class Cart_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function createOrder() {
-		$q = array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'), 'bestelmethodeid' => $this->session->userdata('bestelmethode'));
+	function createOrder($userid) {
+		$q = array('gebruikerid' => $userid, 'kortingspunten' => '0', 'verwerkdatum' => date('Y-m-d H:i:s'), 'bestelmethodeid' => $this->session->userdata('bestelmethode'));
 		$this -> db -> insert('bestelling', $q);
 
-		$bestellingid = $this -> db -> insert_id();
+		return $this -> db -> insert_id();
+	}
 
-		foreach ($this->cart->contents() as $item) :
-			$q = array('productid' => $item['id'], 'bestellingid' => $bestellingid, 'aantal' => $item['qty'], 'korting' => '0');
-			$this -> db -> insert('bestelregel', $q);
-		endforeach;
+	function createOrderLines($orderid, $item) {
+		$q = array('productid' => $item['id'], 'bestellingid' => $orderid, 'aantal' => $item['qty'], 'korting' => '0');
+		$this -> db -> insert('bestelregel', $q);
+	}
 
-		return $bestellingid;
+	function giveDiscountPoints($gebruikerid) {
+		$data = array('kortingspunten' => 'kortingspunten + 5');
+		$this -> db -> where('gebruikerid', $gebruikerid);
+		$this -> db -> update('gebruiker', $data);
+	}
+
+
+	function getDiscountP($userid) {
+		$this -> db -> select('kortingspunten');
+		$this -> db -> where('gebruikerid', $userid);
+		$result = $this -> db -> get('gebruiker');
+
+		if ($result -> num_rows() > 0) {
+			$row = $result -> row();
+
+			return $row -> kortingspunten;
+		}
+		return FALSE;
 	}
 
 	function makePayment($orderid) {
