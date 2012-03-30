@@ -12,13 +12,10 @@
 		
 		<div id="navigatieNews">
 			<input name="activateNews" id="activateNews" onmousedown="updateNews()" type="button" value="Activeer nieuws">
-			<td><input name="cancelNews" id="cancelNews" onmousedown="cancelNews()" type="button" disabled value="Annuleer"></td></tr>
+			<input name="cancelNews" id="cancelNews" onmousedown="cancelNews()" type="button" disabled value="Annuleer">
 			
 			<div id="newsOpgeslagen"></div>
-		
-		
 		</div>
-		
 	</div>	
 
 </div>

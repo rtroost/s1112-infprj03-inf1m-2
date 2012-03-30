@@ -293,3 +293,75 @@ function cancelNews()
 		document.getElementById("activateNews").value = "Voeg nieuws toe";
 	}
 }
+
+function wijzigContact()
+{
+	if(document.getElementById("adres2").disabled == true)
+	{
+			document.getElementById("adres2").disabled = false;
+			document.getElementById("postcode2").disabled = false;
+			document.getElementById("plaats2").disabled = false;
+			document.getElementById("land2").disabled = false;
+			document.getElementById("telefoon2").disabled = false;
+			document.getElementById("fax2").disabled = false;
+			document.getElementById("email2").disabled = false;
+			document.getElementById("twitter2").disabled = false;
+			document.getElementById("facebook2").disabled = false;
+			document.getElementById("cancelContact").disabled = false;
+			
+			document.getElementById("wijzigContact").value = "Opslaan";
+	}
+	
+	else
+	{
+		if(window.XMLHttpRequest)
+		{
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.open("GET","ajax_cont?wijzigContact=waar&adres="+document.getElementById("adres2").value+"&postcode="+document.getElementById("postcode2").value+"&plaats="+document.getElementById("plaats2").value+"&land="+document.getElementById("land2").value+"&telefoon="+document.getElementById("telefoon2").value+"&fax="+document.getElementById("fax2").value+"&email="+document.getElementById("email2").value+"&twitter="+document.getElementById("twitter2").value+"&facebook="+document.getElementById("facebook2").value, true);
+		xmlhttp.send();
+		
+		xmlhttp.onreadystatechange=function()
+		{
+			if(xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				document.getElementById("contactResultaat").innerHTML = "De contact gegevens zijn aangepast en nu zichtbaar op de contact page.";
+			}
+		}
+		
+		document.getElementById("wijzigContact").value = "Wijzig";
+		document.getElementById("adres2").disabled = true;
+		document.getElementById("postcode2").disabled = true;
+		document.getElementById("plaats2").disabled = true;
+		document.getElementById("land2").disabled = true;
+		document.getElementById("telefoon2").disabled = true;
+		document.getElementById("fax2").disabled = true;
+		document.getElementById("email2").disabled = true;
+		document.getElementById("twitter2").disabled = true;
+		document.getElementById("facebook2").disabled = true;
+		document.getElementById("cancelContact").disabled = true;
+	}
+}
+
+function cancelContact()
+{
+	if(document.getElementById("adres2").disabled == false)
+	{
+		document.getElementById("adres2").disabled = true;
+		document.getElementById("postcode2").disabled = true;
+		document.getElementById("plaats2").disabled = true;
+		document.getElementById("land2").disabled = true;
+		document.getElementById("telefoon2").disabled = true;
+		document.getElementById("fax2").disabled = true;
+		document.getElementById("email2").disabled = true;
+		document.getElementById("twitter2").disabled = true;
+		document.getElementById("facebook2").disabled = true;
+		document.getElementById("wijzigContact").value = "Wijzig";
+		document.getElementById("cancelContact").disabled = true;
+	}
+}

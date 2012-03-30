@@ -77,6 +77,12 @@ class Ajax_cont extends CI_controller
 			$this->load->model('news_model');
 			$this->news_model->updateNews($_GET['titel'], $_GET['inhoud']);
 		}
+
+		if (isset ($_GET['wijzigContact']))
+		{
+			$this->load->model('contact_model');
+			$this->contact_model->updateContact($_GET['adres'], $_GET['postcode'], $_GET['plaats'], $_GET['land'], $_GET['telefoon'], $_GET['fax'], $_GET['email'], $_GET['twitter'], $_GET['facebook']);
+		}
 	}
 }
 	

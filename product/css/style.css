@@ -563,3 +563,27 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	div#maps{
 		padding-top: 40px;
 	}
+	
+	 /* ===================== */
+	 /* Start Beheer Contact  */
+	 /* ===================== */
+	
+	div#contactGegevens{
+		padding-top: 30px;
+	}
+	
+	div#contactNavigatie{
+		padding-top: 20px;
+	}
+	
+	div#contactResultaat{
+		padding-top: 20px;
+	}
+	
+	#wijzigContact{
+		width: 109px;
+	}
+	
+	#cancelContact{
+		width: 109px;
+	}
