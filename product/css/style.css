@@ -1,37 +1,63 @@
 @charset "utf-8";
+
+/** Configure standards on the site */
+
 * {
-	margin: 0;
 	padding: 0;
+	margin: 0;
 }
 
-html, body{
-	padding: 0px;
-	margin: 0px;
-}
-
-html {
-	margin: 0px;
-	padding: 0px;
-	position: relative;
-
-	background: url('../images/img_BG.png') repeat top left;
-}
-
-body{
+body {
+	font-size: 62.5%;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif;
 	color: #555;
-	text-align: left;
-	line-height: 1.67em;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	padding-bottom: 40px;
+	line-height: 1.8em;
 }
+
+h1 {
+	font-size: 2.7em;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin-bottom: 0.666666em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.2em;
+	margin-bottom: -1.5em;
+}
+
+p, ul {
+	font-size: 1.2em;
+	margin: 1.5em 0;
+}
+
+blockquote {
+	font-weight: bold;
+	padding: 0 10em;
+}
+
+blockquote p {
+	margin: 0;
+}
+
+cite {
+	text-align: right;
+	display: block;
+}
+
+/** Other stuff below this line */
+
+body { background: url('../images/img_BG.png') repeat top left; }
 
 #wrapper{
 	margin: 0 auto;
 	width: 960px;
+	padding-bottom: 40px;
 }
-
-
 
 div#footer:hover{
 	background: url('../images/bar/bottombarshadow2.png') repeat top left;
@@ -149,6 +175,7 @@ section#main_content {
 div#content {
 	padding-left: 80px;
 	width: 800px;
+	padding-bottom: 10px;
 }
 
 input.aantal {
@@ -568,35 +595,35 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 /* =========== */
 	 /* Start News  */
 	 /* =========== */
-	
-	div#contactTable{
-		
-	}
-	
-	div#maps{
-		padding-top: 40px;
-	}
-	
+
+	 div#contactTable{
+
+	 }
+
+	 div#maps{
+	 	padding-top: 40px;
+	 }
+
 	 /* ===================== */
 	 /* Start Beheer Contact  */
 	 /* ===================== */
-	
-	div#contactGegevens{
-		padding-top: 30px;
-	}
-	
-	div#contactNavigatie{
-		padding-top: 20px;
-	}
-	
-	div#contactResultaat{
-		padding-top: 20px;
-	}
-	
-	#wijzigContact{
-		width: 109px;
-	}
-	
-	#cancelContact{
-		width: 109px;
-	}
+
+	 div#contactGegevens{
+	 	padding-top: 30px;
+	 }
+
+	 div#contactNavigatie{
+	 	padding-top: 20px;
+	 }
+
+	 div#contactResultaat{
+	 	padding-top: 20px;
+	 }
+
+	 #wijzigContact{
+	 	width: 109px;
+	 }
+
+	 #cancelContact{
+	 	width: 109px;
+	 }

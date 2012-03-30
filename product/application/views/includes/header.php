@@ -20,8 +20,6 @@
 				<input class="right_input" name="email" id="email" type="text" />
 				<label for="password" >Wachtwoord:</label>
 				<input class="right_input" name="password" id="password" type="password" />
-				<input class="remember_me" name="remember" id="remember_me" type="checkbox" />
-				<label class="remember_me_text" for="remember_me">Onthoud mij</label>
 				<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
 				<?php echo form_close(); ?>
 			</div>

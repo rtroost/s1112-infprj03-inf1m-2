@@ -91,7 +91,7 @@ echo   			"</div></td>
 				</td>
 			</tr>";															
 			} echo "
-		</table><p>&nbsp;<p>";
+		</table>";
 		}
 		
 		/* einde bestellijst */
