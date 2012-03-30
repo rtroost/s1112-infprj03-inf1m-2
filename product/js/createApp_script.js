@@ -6,7 +6,19 @@ var CreateApp = {
 		this.bindEvents();
 		
 		$('input#qty').numeric();
+		// console.log(this.config.facebook);
+		// setTimeout(this.lol, 3000);
+		// console.log(this.config.after_delen.eq(1).find('script#facebook'));
+		// $('<div id="fb-root"></div>').insertBefore(this.config.after_delen.eq(1).find('script#facebook'));
+		// $('<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=16" data-send="true" data-width="450" data-show-faces="true"></div>').insertAfter(this.config.after_delen.eq(1).find('script#facebook'));
 		
+	console.log(this.config.loginData.type);
+		
+	},
+	
+	lol: function(){
+		var self = CreateApp;
+		console.log(self.config.after_delen.eq(1).find('iframe.twitter-share-button'));
 	},
 	
 	bindEvents: function(){
@@ -88,6 +100,7 @@ var CreateApp = {
 			self.config.view3.find('table').show();
 			self.config.view4.find('table').show();
 			self.config.view1.removeClass('loading');
+			console.log(self.config.ingredienten);
 			//loading uit divs weghalen en alle aangemakte objs showen
 		});
 	},
@@ -134,7 +147,7 @@ var CreateApp = {
 		
 		for ( property in ingredienten ){
 			self.config.ingredienten[count] = {
-				ingredientId: ingredienten[count].ingredientid,
+				ingredientId: ingredienten[count].catingid,
 				prijs100: ingredienten[count].prijs,
 				prijs: Math.round(ingredienten[count].prijs*0.75),
 				naam: ingredienten[count].naam,
@@ -307,6 +320,7 @@ var CreateApp = {
 
 		self.config.totaalPrijs += self.config.ingredienten[id].prijs;
 		self.setPrice();
+		console.log(self.config.ingredienten);
 	},
 	
 	remove_ingredient: function(id){
@@ -484,24 +498,45 @@ var CreateApp = {
 			self.config.after_delen.show();
 			results = results.split(",");
 			self.config.product_id = results[0];
-			var urltwitter = 'http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=' + self.config.product_id;
-			var urlfacebook = 'http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=' + self.config.product_id;
-			self.config.facebook.data('href', urlfacebook);
-			self.config.twitter.data('url', urltwitter);
+			self.config.after_delen.eq(1).find('iframe.twitter-share-button').attr('src', self.config.after_delen.eq(1).find('iframe.twitter-share-button').attr('src') + self.config.product_id);
+
+			
+			if(self.config.loginData.type != 2){
+				var a = $('<a id="twitter" href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid='+ self.config.product_id +'" data-size="large" data-hashtags="Pizzario">Tweet</a>').prependTo(self.config.after_delen.eq(1));
+				$('<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>').insertAfter(a);
+				
+				
+				$('<div id="fb-root"></div>').appendTo(self.config.after_delen.eq(1));
+				var facebook = $('<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid='+ self.config.product_id +'" data-send="true" data-width="450" data-show-faces="true"></div>').appendTo(self.config.after_delen.eq(1));
+				$('<script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];		  if (d.getElementById(id)) return;				  js = d.createElement(s); js.id = id;		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164794886939768";		  fjs.parentNode.insertBefore(js, fjs);			}(document, \'script\', \'facebook-jssdk\'));</script>').insertBefore(facebook);
+			}
+			
+			
 			self.config.sidebar1.find('.sidebar_keuze_categorie').attr('disabled', 'disabled');
 			self.config.sidebar2.find('.sidebar_keuze_ingredient').attr('disabled', 'disabled');
 			self.config.view2.find('div.view2buttons button').attr('disabled', 'disabled');
 			if(results[1] === 'onder5'){
-				if(self.config.after_opslaan.find('p.5publiekelijk').length === 0){
-					$('<p>', {text: 'U heeft al 5 publiekelijke producten , dit product is niet publiekelijke gemaakt', style: 'color: red;', 'class': '5publiekelijk'}).appendTo(self.config.after_opslaan);
+				if(self.config.after_opslaan.find('p.warningApp').length === 0){
+					$('<p>', {'class': 'warningApp', text: 'Uw product is opgeslagen maar niet publiekelijk gemaakt omdat u al 5 publiekelijke producten heeft.'}).appendTo(self.config.after_opslaan);
 				}
 				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken en delen in "mijn profiel"');
+				self.config.after_delen.eq(1).hide();
 			} else if(results[1] === 'nietpubliekelijk'){
 				self.config.after_delen.find('p').text('Uw product is niet publiekelijk, Je kan je product altijd publiekelijk maken en delen in "mijn profiel"');
+				self.config.after_delen.eq(1).hide();
+				if(self.config.after_opslaan.find('p.successApp').length === 0){
+					$('<p>', {'class': 'successApp', text: 'Uw product is opgeslagen'}).appendTo(self.config.after_opslaan);
+				}
+			} else {
+				// succes
+				console.log('why');
+				if(self.config.after_opslaan.find('p.successApp').length === 0){
+					$('<p>', {'class': 'successApp', text: 'Uw product is opgeslagen'}).appendTo(self.config.after_opslaan);
+				}
 			}
 		} else if(results === 'naam') {
-			if(self.config.opslaan_login.find('p.naamerror').length === 0){
-				$('<p>', {text: 'Deze naam bestaat al', style: 'color: red;', 'class': 'naamerror'}).appendTo(self.config.opslaan_login);
+			if(self.config.opslaan_login.find('p.errorApp').length === 0){
+				$('<p>', {text: 'Deze naam bestaat al', 'class': 'errorApp'}).appendTo(self.config.opslaan_login);
 			}
 		} else {
 			//error

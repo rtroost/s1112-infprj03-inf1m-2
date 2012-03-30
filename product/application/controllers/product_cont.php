@@ -69,36 +69,28 @@ class product_cont extends CI_controller {
 			$this->load->model('categorie_model');
 			$this->load->model('gebruiker_product_model');
 			$data['rows'] = $this->product_model->get_products_by_id($this->input->post('productid'));
+
+			$data['rows'] = $data['rows'][0];
+			
 			if($data['rows'] != null){
-				foreach ($data['rows'] as $row) {
-					$result = $this->product_model->get_products_by_id($row->productid);
-					$row->product = $result;
-					$categorierow = $this->categorie_model->getId($row->product[0]->categorieid);
-					$row->categorienaam = $categorierow[0]->naam;
-					$row->categorieimg = $categorierow[0]->image_groot;
-					$row->categorieomschrijving = $categorierow[0]->omschrijving;
-					$row->standaardprijs = $categorierow[0]->standaardprijs;
-					$publikelijk = $this->gebruiker_product_model->get_publiekelijk($this->input->post('productid'));
-					$row->publiekelijk = $publikelijk[0]->publiekelijk;
-					//$categorieimg = $this->categorie_model->get_img($row->product[0]->categorieid);
-					//$row->categorieimg = $categorieimg[0]->image_groot;
-					$records = $this->product_model->get_name_hoeveelheid_of_ingredients($row->productid);
-					//var_dump($names);
-					$row->names = $records['names'];
-					$row->hoeveelheid = $records['hoeveelheid'];
-				}
+				$categorierow = $this->categorie_model->getId($data['rows']->categorieid);
+				$data['rows']->categorienaam = $categorierow[0]->naam;
+				$data['rows']->categorieimg = $categorierow[0]->image_groot;
+				$data['rows']->categorieomschrijving = $categorierow[0]->omschrijving;
+				$data['rows']->standaardprijs = $categorierow[0]->standaardprijs;
+				$publikelijk = $this->gebruiker_product_model->get_publiekelijk($this->input->post('productid'));
+				$data['rows']->publiekelijk = $publikelijk[0]->publiekelijk;
+				$records = $this->product_model->get_name_hoeveelheid_of_ingredients($data['rows']->productid);
+				$data['rows']->ingredienten = $records;
+
 			} else {
 				//error
 			}
-
+			
 			$this->load->model('ingredient_model');
-			$data['ingredienten'] = $this->ingredient_model->get_all_names_by_categorie($data['rows'][0]->categorieid);
+			$data['ingredienten'] = $this->ingredient_model->get_all_names_by_categorie($data['rows']->categorieid);
 			$data['id'] = $this->input->post('productid');
-			//echo $this->input->post('productid');
-			// laad de gegevens van dit product
-			// en zet in de divs van de view de ingredienten etc 
 		}
-		
 		$this->load->model('categorie_model');
 		$data['records'] = $this->categorie_model->getCategorieen();
 		$this->load->view('creator', $data);
@@ -111,14 +103,15 @@ class product_cont extends CI_controller {
 		$this->load->model('categorie_model');
 		$this->load->model('categorie_ingredient_model');
 		$this->load->model('ingredient_model');
+		$id = $this->input->post('id');
 		
-		$data['records'] = $this->categorie_model->getId($this->input->post('id'));
-		$data['ingredienten'] = $this->categorie_ingredient_model->getIngredientenPerCategorie($this->input->post('id'));
+		$data['records'] = $this->categorie_model->getId($id);
+		$data['ingredienten'] = $this->categorie_ingredient_model->getIngredientenPerCategorie($id);
 		
 		//print_r($data['ingredienten']);
 		
 		foreach ($data['ingredienten'] as $row) {
-			$result = $this->ingredient_model->getId($row->ingredientid);
+			$result = $this->ingredient_model->getIdv2($row->catingid);
 			$row->naam = $result[0]->naam;
 			$row->gewichtspunten = $result[0]->gewichtspunten;
 		}
@@ -164,19 +157,21 @@ class product_cont extends CI_controller {
 			$product_id = $this->input->post('product_id');
 			if($this->product_ingredient_model->del_ingredients_for_product($product_id)){
 				$publiekelijk_var = $this->input->post('publiekelijk');
-				//echo $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) . ".....";
-				if($this->input->post('wasPubliekelijk') == "true"){
-					if($this->input->post('publiekelijk') == 1){
-						$publiekelijk_var = 1;
-					} else {
+				if($this->session->userdata('typeid') != 2){
+					if($this->input->post('wasPubliekelijk') == "true"){
+						if($this->input->post('publiekelijk') == 1){
+							$publiekelijk_var = 1;
+						} else {
+							$publiekelijk_var = 0;
+							$publiekelijk = true;
+						}
+					} else if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
 						$publiekelijk_var = 0;
-						$publiekelijk = true;
-						echo "hier1";
+						$publiekelijkonder5 = true;
 					}
-				} else if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
-					$publiekelijk_var = 0;
-					$publiekelijkonder5 = true;
-					echo "hier2";
+				}
+				if($publiekelijk_var == 0){
+					$publiekelijk = true;
 				}
 				$this->gebruiker_product_model->set_publiekelijk($product_id, $publiekelijk_var);
 				$this->product_model->update_name($product_id, $this->input->post('productNaam'));
@@ -209,13 +204,15 @@ class product_cont extends CI_controller {
 					$dataGebruiker_Product['gebruikerid'] = $this->input->post('gebruikerid');
 					$dataGebruiker_Product['productid'] = $product_id;
 					$dataGebruiker_Product['publiekelijk'] = $this->input->post('publiekelijk');
-					if($this->input->post('publiekelijk') == 0){
-						$publiekelijk = true;
-					}
-					if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
-						$dataGebruiker_Product['publiekelijk'] = 0;
-						$publiekelijkonder5 = true;
-						$publiekelijk = true;
+					if($this->session->userdata('typeid') != 2){
+						if($this->input->post('publiekelijk') == 0){
+							$publiekelijk = true;
+						}
+						if($this->input->post('publiekelijk') == 1 && $this->gebruiker_product_model->get_publiekelijk_count($this->input->post('gebruikerid')) >= 5){
+							$dataGebruiker_Product['publiekelijk'] = 0;
+							$publiekelijkonder5 = true;
+							$publiekelijk = true;
+						}
 					}
 					$dataGebruiker_Product['aanmaak_datetime'] = date("Y-m-d H:i:s");
 					$dataGebruiker_Product['eigenaar'] = 1;
@@ -233,7 +230,7 @@ class product_cont extends CI_controller {
 						$hoeveelheid = 'hoeveelheid'.($i+1);
 						$dataProduct_ingredient[$i]['catingid'] = $this->input->post($ingredientid);
 						$dataProduct_ingredient[$i]['productid'] = $product_id;
-						$dataProduct_ingredient[$i]['ingredienthoeveelheid'] = $this->input->post($hoeveelheid);
+						$dataProduct_ingredient[$i]['ingredienthoeveelheid'] = $this->input->post($hoeveelheid);				
 						
 						if(!$this->product_ingredient_model->create_product_ingredient($dataProduct_ingredient[$i])){
 							$success = false;

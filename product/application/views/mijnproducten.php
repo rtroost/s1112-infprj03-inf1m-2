@@ -34,7 +34,9 @@ input[type=submit]{
 </style>
 	<div id="content">
 		<h1>Mijn producten</h1><br />
+		<?php if($this->session->userdata('typeid') != 2){ ?>
 		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="publiekelijkcount"><?php echo $publiekelijkcount; ?></span> publiekelijke producten.</h3>
+		<?php } ?>
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -55,6 +57,7 @@ input[type=submit]{
 								else if(strlen($r->prijs) == 3){ echo substr($r->prijs, 0, 1) . ',' . substr($r->prijs, 1); } else { echo '0,' . $r->prijs; } ?></span></p>
 				</td>
 				<td>
+					<?php if($this->session->userdata('typeid') != 2){ ?>
 					<div class="socialmedia" style="<?php if($r->publiekelijk != 1){ echo "display: none;"; }?>">
 						<div id="fb-root"></div>
 						<script>(function(d, s, id) {
@@ -69,6 +72,7 @@ input[type=submit]{
 						<a href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=<?php echo $r->productid; ?>" class="twitter-share-button" data-hashtags="Pizzario">Tweet</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</div>
+					<?php } ?>
 				</td>
 				<td class="aantal">
 					<img id="plus" class="bestellenButtons" src="http://127.0.0.1/pizzario/images/img_order_plus.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_plus.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_plus_mouseover.png'">
@@ -143,12 +147,14 @@ input[type=submit]{
 		
 		var $this = $(this),
 			spanText = parseInt($span.html());
-			
+		
+		<?php if($this->session->userdata('typeid') != 2){ ?>
 		if(spanText >= 5 && $this.attr('checked')){
 			alert('u heeft al 5 publiekelijke producten');
 			e.preventDefault();
 			return;
 		}
+		<?php } ?>
 		var parent =  $this.parents('tr'),
 			id = parent.attr('id'),
 			varnew = '',

@@ -131,7 +131,7 @@ class Product_model extends CI_model {
 	function get_name_hoeveelheid_of_ingredients($product_id){
 			$data = array();
 			$result = $this->db->query("
-				SELECT i.naam, pi.ingredienthoeveelheid
+				SELECT i.naam, pi.ingredienthoeveelheid, ci.catingid, ci.prijs, i.gewichtspunten
 				FROM product AS p, product_ingredient AS pi, categorie_ingredient AS ci, ingredient AS i
 				WHERE p.productid = '{$product_id}' 
 				AND p.productid= pi.productid 
@@ -140,8 +140,7 @@ class Product_model extends CI_model {
 			");
 			if ($result->num_rows() > 0){
 				foreach($result->result() as $naam){
-					$data['names'][] = $naam->naam;
-					$data['hoeveelheid'][] = $naam->ingredienthoeveelheid;
+					$data[] = $naam;
 				}	
 				//$data = $result->result();		
 			}

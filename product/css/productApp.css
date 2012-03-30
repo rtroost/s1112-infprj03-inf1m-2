@@ -342,7 +342,29 @@ table#view2_table_foot td{
 }
 
 
+.successApp{
+	background-color: #E3FFCD;
+    border: 1px solid #A3C159;
+    color: #5E6F33;
+    padding: 15px;
+    width: 194px;
+}
 
+.warningApp{
+	background-color: #FFF0BC;
+    border: 1px solid #D3BC6F;
+    color: #9E660D;
+    padding: 15px;
+    width: 194px;
+}
+
+.errorApp{
+	background-color: #FFC7C2;
+    border: 1px solid #FF8C80;
+    color: #A22121;
+    padding: 15px;
+    width: 194px;
+}
 
 
 

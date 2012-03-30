@@ -6,16 +6,26 @@
 		
 <?php
 	if(isset($load)){
-		$nameCounter = 0;
+		//$nameCounter = 0;
 		$totaalgewicht = 0;
-		$totaalprijs = $rows[0]->standaardprijs;
+		$totaalprijs = $rows->standaardprijs;
 		
-		$lol = array();
+		$activeArray;
+		$calcedPrice;
+		
+		//$lol = array();
+		
+		
+		$jsCount = 0;
+		foreach ($ingredienten as $ingredient) {
+			$JSingredienten[$jsCount] = "ingredientId: '{$ingredient->catingid}', prijs100: '{$ingredient->prijs}', prijs: ".round($ingredient->prijs*0.75).", naam: '{$ingredient->naam}', gewichtspunten: '{$ingredient->gewichtspunten}', hoeveelheid: 1, gewicht: {$ingredient->gewichtspunten}, gekozen: false";
+			$jsCount++;
+		}
+		
+		
+		
 	}
  ?>
-		
-		
-		
 		<h1>De product creëer pagina</h1>
 		<p>U kunt hier uw eigen product samenstellen</p>
 		<br />
@@ -52,7 +62,7 @@
 						<tr>
 							<td><img src="<?php echo base_url(); ?>images/productApp/<?php echo $row->image_klein; ?>" width="80px" height="70px"/></td>
 							<td>
-								<input class="sidebar_keuze_categorie" name="sidebar_keuze" value="<?php echo $row->categorieid; ?>" type="radio" <?php if(isset($load)){ if($count == $rows[0]->categorieid){ echo "checked='checked'"; } else { echo "disabled='disabled'";} } ?>/>
+								<input class="sidebar_keuze_categorie" name="sidebar_keuze" value="<?php echo $row->categorieid; ?>" type="radio" <?php if(isset($load)){ if($count == $rows->categorieid){ echo "checked='checked'"; } else { echo "disabled='disabled'";} } ?>/>
 								<label><?php echo $row->naam; ?></label>
 							</td>
 						</tr>
@@ -81,17 +91,17 @@
 					</p>
 					<?php } else { ?>
 						
-						<h1>U heeft gekozen voor: <?php echo $rows[0]->categorienaam; ?></h1>
+						<h1>U heeft gekozen voor: <?php echo $rows->categorienaam; ?></h1>
 						<div class="center">
-						<img src="<?php echo base_url(); ?>images/productApp/<?php echo $rows[0]->categorieimg; ?>" style="width: 400px; height: 300px;">
+						<img src="<?php echo base_url(); ?>images/productApp/<?php echo $rows->categorieimg; ?>" style="width: 400px; height: 300px;">
 <!-- 						http://127.0.0.1/pizzario/images/productApp/soep_groot.jpg -->
 						</div>
 					<?php } ?>
 				</div>
 				<div id="appSelector">
 					<?php if(isset($load)){ ?>
-						<h1><?php echo $rows[0]->categorienaam; ?></h1>
-						<p><?php echo $rows[0]->categorieomschrijving; ?></p>
+						<h1><?php echo $rows->categorienaam; ?></h1>
+						<p><?php echo $rows->categorieomschrijving; ?></p>
 					<?php } ?>
 				</div>
 				
@@ -109,12 +119,11 @@
 							<?php if(isset($load)){ ?>
 								
 								<?php $count = 1; foreach($ingredienten as $ing) : ?>
-									<?php if($count % 2 == 0 ){ } ?>
 										<td>
 											<label for="sidebar_keuze"><?php echo $ing->naam; ?></label>
 											<br>
-											<img src="http://127.0.0.1/pizzario/images/productApp/<?php echo $rows[0]->categorieid; ?>/<?php echo $ing->ingredientid; ?>/left.png" style="float: left; height: 50px; width: 50px;">
-											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="<?php echo $ing->ingredientid; ?>" data-arrayindex="<?php echo $count-1; $lol[$count-1] = $ing->naam;  ?>" style="margin-top: 20px; margin-left: 10px;" <?php if(($nameCounter < count($rows[0]->names) && ($ing->naam == $rows[0]->names[$nameCounter]))){ echo "checked='checked'"; $nameCounter++; }  ?>>
+											<img src="http://127.0.0.1/pizzario/images/productApp/<?php echo $rows->categorieid; ?>/<?php echo $ing->catingid; ?>/left.png" style="float: left; height: 50px; width: 50px;">
+											<input class="sidebar_keuze_ingredient" type="checkbox" name="sidebar_keuze" value="<?php echo $ing->catingid; ?>" data-arrayindex="<?php echo $count-1; ?>" style="margin-top: 20px; margin-left: 10px;" <?php foreach ($rows->ingredienten as $ingredient) { if($ing->naam == $ingredient->naam){ $activeArray[] = $count-1;	echo "checked='checked'"; }	} ?>>
 										</td>
 									<?php if($count % 2 == 0 ){ echo "</tr>"; } ?>
 								<?php $count++; endforeach; ?>
@@ -129,7 +138,7 @@
 					</div>
 				</div>
 				<div id="appView2">
-					<h1 id="samenstellen_view_titel" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>Uw product:</h1>
+					<h1 id="samenstellen_view_titel" <?php if(!isset($load)){ echo 'style="display: none;"'; } ?>>Uw product:</h1>
 					<table id="view2_table_head" <?php if(isset($load)){ echo 'style="display:inline;"'; } ?>>
 						<tr>
 							<td><h4>Ingredient</h4></td>
@@ -138,110 +147,56 @@
 							<td><h4>Prijs</h4></td>
 						</tr>
 					</table>
-					<div id="overflow" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>
+					<div id="overflow" <?php if(!isset($load)){ echo 'style="display: none;"'; } ?>>
 						<table id="view2_table_main" style="display: inline;">
 							
 							<?php if(isset($load)){ ?>
-								
-								<?php $catid = $rows[0]->categorieid; $count = 1; $tempcount = 1; foreach($rows[0]->names as $naam) : ?>
+								<?php $viewCounter = 0; ?>
+								<?php foreach ($rows->ingredienten as $ingredient) { ?>
 									<?php 
-									//var_dump($naam);
-									$JScount = 0;
-									$temptemp = false;
-									foreach($ingredienten as $ing){
+										switch ($ingredient->ingredienthoeveelheid) {
+											case '1': $multiplier = 0.75; break;
+											case '2': $multiplier = 1; break;
+											case '3': $multiplier = 1.25; break;
+											default : $multiplier = 0.75; break;
+										}
 										
-										$id = ($ing->ingredientid-1);
-										$multi = 0.75;
-										$prijs100 = $ing->prijs;
+										$prijs = round($ingredient->prijs * $multiplier);
 										
-										$hoeveelheid = 1;
-										$gewichtspunten = $ing->gewichtspunten;
-										$tempgewicht = $gewichtspunten * $hoeveelheid;
-										
-										$tempprijs = round($prijs100 * $multi);
-										
-										if($ing->naam == $naam){
-											//var_dump($naam);
-											$viewid =  $count;
-												
-											$hoeveelheid = $rows[0]->hoeveelheid[$count-1];
-											$viewhoeveelheid = $hoeveelheid;
-											//var_dump($hoeveelheid);
-											
-											$tempgewicht = $gewichtspunten * $hoeveelheid;
-											$viewgewicht = $tempgewicht;
-											$totaalgewicht += $tempgewicht;
-											
-											if($hoeveelheid == 1){ $multi = 0.75;
-											} elseif($hoeveelheid == 2){ $multi = 1; 
-											} else { $multi = 1.25; }
-											
-											$tempprijs = round($prijs100 * $multi);
-											$totaalprijs += $tempprijs;
-											
-											$ingredientenArray[$count-1]['id'] = $id;
-											$ingredientenArray[$count-1]['naam'] = $naam;
-											$ingredientenArray[$count-1]['hoeveelheid'] = $hoeveelheid;
-											
-											if(strlen($tempprijs) == 3){
-												$prijs = '€' . substr($tempprijs, 0, 1) . ',' . substr($tempprijs, 1);
-											} else {
-												$prijs = '€0,' . $tempprijs;
-											}
-											$ingredientenArray[$count-1]['calcedprijs'] = $prijs;
-											$temptemp = true;
-											
-											$foreachCounter = 0; 
-											foreach ($lol as $l) {
-												if($l == $naam){
-													$counterhaha = $foreachCounter;
-												}
-												$foreachCounter++;
-											}
+										if(strlen($prijs) == 3){
+											$displayPrijs = '€' . substr($prijs, 0, 1) . ',' . substr($prijs, 1);
+										} else {
+											$displayPrijs = '€0,' . $prijs;
 										}
 										
 										
-										if($tempcount == 1 || $temptemp == true){
-											$JSingredienten[$JScount] = "ingredientId: '{$ing->ingredientid}', prijs100: '{$ing->prijs}'";
-											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", prijs: {$tempprijs}";
-											
-											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", naam: '{$ing->naam}', gewichtspunten: '{$ing->gewichtspunten}'";
-											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", hoeveelheid: {$hoeveelheid}";
-											$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", gewicht: {$tempgewicht}";
-											
-											if(($ing->naam == $naam)){
-												$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", gekozen: true";
-											} else {
-												$JSingredienten[$JScount] = $JSingredienten[$JScount] . ", gekozen: false";
-											}
-											
-										}										
-										$JScount++;
-
-									}
-											if($tempcount == 1){
-												$tempcount++;
-											}
-											
-											
+										$calcedPrice[] = $displayPrijs;
+										
+										$gewicht = $ingredient->gewichtspunten * $ingredient->ingredienthoeveelheid;
+										
+										$totaalgewicht += $gewicht;
+										$totaalprijs += $prijs;
+										
+										$JSingredienten[$activeArray[$viewCounter]] = $JSingredienten[$activeArray[$viewCounter]] . ", prijs: {$prijs}, naam: '{$ingredient->naam}', gewichtspunten: '{$ingredient->gewichtspunten}', hoeveelheid: {$ingredient->ingredienthoeveelheid}, gewicht: {$gewicht}, gekozen: true";
 									?>
-									<tr class="<?php echo $counterhaha; ?>">
-											<td>
-												<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $counterhaha+1; ?>/left.png">
-												<p><?php echo $naam; ?></p>
-											</td>
-											<td class="totaalGewicht"><?php echo $viewgewicht; ?></td>
-											<td>
-												<div class="view2buttons">
-													<button <?php if($viewhoeveelheid == 1){ echo "class='down'"; } ?> data-func="1">Weinig</button>
-													<button <?php if($viewhoeveelheid == 2){ echo "class='down'"; } ?> data-func="2">Normaal</button>
-													<button <?php if($viewhoeveelheid == 3){ echo "class='down'"; } ?> data-func="3">Veel</button>
-												</div>
-											</td>
-											<td class="prijs"><?php echo $prijs; ?></td>
-										</tr>
-								<?php $count++; endforeach; ?>
+									<tr class="<?php echo $activeArray[$viewCounter]; ?>">
+										<td>
+											<img src="<?php echo base_url(); ?>images/productApp/<?php echo $rows->categorieid; ?>/<?php echo $ingredient->catingid; ?>/left.png">
+											<p><?php echo $ingredient->naam; ?></p>
+										</td>
+										<td class="totaalGewicht"><?php echo $gewicht; ?></td>
+										<td>
+											<div class="view2buttons">
+												<button <?php if($ingredient->ingredienthoeveelheid == 1){ echo "class='down'"; } ?> data-func="1">Weinig</button>
+												<button <?php if($ingredient->ingredienthoeveelheid == 2){ echo "class='down'"; } ?> data-func="2">Normaal</button>
+												<button <?php if($ingredient->ingredienthoeveelheid == 3){ echo "class='down'"; } ?> data-func="3">Veel</button>
+											</div>
+										</td>
+										<td class="prijs"><?php echo $displayPrijs;?></td>
+									</tr>
 								
+								<?php $viewCounter++; } ?>
+						
 							<?php } ?>
 							
 						</table>
@@ -271,9 +226,9 @@
 							</p>
 							
 							<h4>Product naam:</h4>
-							<input id="product_name" type="text" name="naam" size="34" value="<?php if(isset($load)){ echo $rows[0]->naam; }?>"/><br />
+							<input id="product_name" type="text" name="naam" size="34" value="<?php if(isset($load)){ echo $rows->naam; }?>"/><br />
 							<p>Wilt u uw product publiekelijk maken?</p>
-							<input id="product_publikelijk" type="checkbox" name="publikelijk" value="" <?php if(isset($load) && $rows[0]->publiekelijk == 1){ echo "checked='checked'"; }?>/>
+							<input id="product_publikelijk" type="checkbox" name="publikelijk" value="" <?php if(isset($load) && $rows->publiekelijk == 1){ echo "checked='checked'"; }?>/>
 							<br />
 							
 							<button id="buttonOpslaan">Opslaan</button><br /><br />
@@ -297,13 +252,14 @@
 							
 							
 							
-							<p>Geen account? <a href="register">Registeer hier</a></p>
+							<p>Geen account? <a href="<?php echo base_url(); ?>index.php/user/register">Registeer hier</a></p>
 						</div>
 						<div id="after_opslaan" style="display: none;">
-							<p>Uw product is opgeslagen<br />
+							<p>
 								U kunt de samenstelling van dit product later nog wijzigen, dit kunt u regelen in "mijn profiel".<br />
 								U kunt nu uw product bestellen door naar de volgende stap te gaan.
 							</p><br />
+<!-- 							<p class="successApp">Uw product is opgeslagen</p> -->
 						</div>		
 					</div>
 					
@@ -325,19 +281,18 @@
 					<div id="overflow" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>
 						<table id="view3_table_main" style="display: inline;">
 							<?php if(isset($load)){ ?>
-								<?php 
-								  foreach($ingredientenArray as $ingredientdeel) : ?>
-									<tr class="<?php echo $ingredientdeel['id']; ?>">
+								  <?php $view2Counter = 0; foreach ($rows->ingredienten as $ingredient) { ?> 
+									<tr class="<?php echo $activeArray[$view2Counter]; ?>">
 										<td>
-											<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $ingredientdeel['id']+1; ?>/left.png">
-											<p><?php echo $ingredientdeel['naam']; ?></p>
+											<img src="<?php echo base_url(); ?>images/productApp/<?php echo $rows->categorieid;; ?>/<?php echo $ingredient->catingid; ?>/left.png">
+											<p><?php echo $ingredient->naam; ?></p>
 										</td>
 										<td>	
-											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Weinig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
+											<p id="view3Hoeveelheid"><?php if($ingredient->ingredienthoeveelheid == 1){ echo "Weinig"; } elseif($ingredient->ingredienthoeveelheid == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
 										</td>
-										<td class="prijs"><?php echo $ingredientdeel['calcedprijs']; ?></td>
+										<td class="prijs"><?php echo $calcedPrice[$view2Counter]; ?></td>
 									</tr>
-								<?php  endforeach; ?>
+									<?php $view2Counter++; }?>
 							<?php } ?>
 						</table>
 					</div>
@@ -370,7 +325,7 @@
 							<h5>Hoeveel wilt u bestellen</h5>
 							<input id="qty" type="text" name="qty" value="1"/>
 							<button id="winkelwagen" data-after="false">In Winkelwagen</button><br />
-							<h4 id="winkelwagenHeading" data-after="false" style="display: none;">Uw bestelling is geplaatst</h4>
+							<h4 id="winkelwagenHeading" class="successApp" data-after="false" style="display: none;">Uw bestelling is geplaatst</h4>
 							<a id="naarWinkelwagen" data-after="false" href="<?php echo base_url();?>index.php/cart" style="display: none;">Naar uw Winkelwagen</a>
 						</div>
 						<div id="after_bestellen" style="display: none;">
@@ -378,7 +333,7 @@
 							<h5>Hoeveel wilt u bestellen</h5>
 							<input id="qty" type="text" name="qty" value="1"/>
 							<button id="winkelwagen" data-after="true">In Winkelwagen</button><br />
-							<h4 id="winkelwagenHeading" data-after="true" style="display: none;">Uw bestelling is geplaatst</h4>
+							<h4 id="winkelwagenHeading" class="successApp" data-after="true" style="display: none;">Uw bestelling is geplaatst</h4>
 							<a id="naarWinkelwagen" data-after="true" href="<?php echo base_url();?>index.php/cart" style="display: none;">Naar uw Winkelwagen</a>
 						</div>	
 					</div>	
@@ -399,19 +354,18 @@
 					<div id="overflow" <?php if(!isset($load)){ echo 'style="display: none;"'; }?>>
 						<table id="view3_table_main" style="display: inline;">
 							<?php if(isset($load)){ ?>
-								<?php 
-								  foreach($ingredientenArray as $ingredientdeel) : ?>
-									<tr class="<?php echo $ingredientdeel['id']; ?>">
+								  <?php $view2Counter = 0; foreach ($rows->ingredienten as $ingredient) { ?> 
+									<tr class="<?php echo $activeArray[$view2Counter]; ?>">
 										<td>
-											<img src="<?php echo base_url(); ?>images/productApp/<?php echo $catid; ?>/<?php echo $ingredientdeel['id']+1; ?>/left.png">
-											<p><?php echo $ingredientdeel['naam']; ?></p>
+											<img src="<?php echo base_url(); ?>images/productApp/<?php echo $rows->categorieid;; ?>/<?php echo $ingredient->catingid; ?>/left.png">
+											<p><?php echo $ingredient->naam; ?></p>
 										</td>
-										<td>
-											<p id="view3Hoeveelheid"><?php if($ingredientdeel['hoeveelheid'] == 1){ echo "Weinig"; } elseif($ingredientdeel['hoeveelheid'] == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
+										<td>	
+											<p id="view3Hoeveelheid"><?php if($ingredient->ingredienthoeveelheid == 1){ echo "Weinig"; } elseif($ingredient->ingredienthoeveelheid == 2){ echo "Normaal"; } else { echo "Veel"; } ?></p>
 										</td>
-										<td class="prijs"><?php echo $ingredientdeel['calcedprijs']; ?></td>
+										<td class="prijs"><?php echo $calcedPrice[$view2Counter]; ?></td>
 									</tr>
-								<?php  endforeach; ?>
+									<?php $view2Counter++; }?>
 							<?php } ?>
 						</table>
 					</div>
@@ -453,17 +407,7 @@
 				</div>
 				<div id="appView2">
 					<div id="after_delen" style="display: none;">
-						<a id="twitter" href="https://twitter.com/share" class="twitter-share-button" data-url="http://127.0.0.1/pizzario/index.php/product_cont?ref=fb&productid=<?php if(isset($load)){ echo $rows[0]->productid; } ?>" data-size="large" data-hashtags="Pizzario">Tweet</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-						<div id="fb-root"></div>
-						<script>(function(d, s, id) {
-						  var js, fjs = d.getElementsByTagName(s)[0];
-						  if (d.getElementById(id)) return;
-						  js = d.createElement(s); js.id = id;
-						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164794886939768";
-						  fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));</script>
-						<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=<?php if(isset($load)){ echo $rows[0]->productid; } ?>" data-send="true" data-width="450" data-show-faces="true"></div>
+						
 					</div>
 				</div>
 			</div>
@@ -486,7 +430,7 @@
 						email: '{$this->session->userdata('email')}',
 						gebruikerid: '{$this->session->userdata('gebruikerid')}',
 						logged_in: {$this->session->userdata('logged_in')},
-						type: '{$this->session->userdata('type')}',
+						type: '{$this->session->userdata('typeid')}',
 						voornaam: '{$this->session->userdata('voornaam')}'
 					},"; 
 				} else {
@@ -495,12 +439,12 @@
 				opgeslagen: 0,
 				<?php if(isset($load)){ ?>
 					ingredienten: [ <?php  $javascriptCounter = 0;	foreach ($JSingredienten as $JSing) { echo '{' . $JSing . "},"; $javascriptCounter++; } ?>	],
-					gekozenCategorie: <?php echo $catid; ?>,
+					gekozenCategorie: <?php echo $rows->categorieid; ?>,
 					totaalGewicht: <?php echo $totaalgewicht; ?>,
 					totaalPrijs: <?php echo $totaalprijs; ?>,
 					load: true,
-					product_id: <?php echo $rows[0]->productid; ?>,
-					wasPubliekelijk: <?php if($rows[0]->publiekelijk == 1){ echo "true"; } else { echo "false"; }?>,
+					product_id: <?php echo $rows->productid; ?>,
+					wasPubliekelijk: <?php if($rows->publiekelijk == 1){ echo "true"; } else { echo "false"; }?>,
 				<?php } else {?>
 					ingredienten: [],
 					gekozenCategorie: 0,
@@ -531,7 +475,7 @@
 				view4: $('div#appMainWindow4').find('div#appView2'),
 
 				appMainWindow5: $('div#appMainWindow5'),
-
+				
 				h4Gewicht: $('h4#totaal_gewicht_ingredienten'),
 				h4Prijs: $('h4#totaal_prijs_ingredienten'),
 				
@@ -568,7 +512,7 @@
 				opslaanButton: $('button#buttonOpslaan'),
 				winkelwagenButton: $('button#winkelwagen'),
 				facebook: $('div#facebook'),
-				twitter: $('a#twitter')
+				twitter: $('iframe')
 		});
 		
 		

@@ -55,14 +55,13 @@ class User extends CI_controller {
 					//Foutieve ingave
 					$this->load->view('login_failed');
 				}							
-			} else {				
+			} else {
+				$this -> session -> set_userdata($result);
+				$this -> session -> set_userdata(array('logged_in' => TRUE));			
 				if($this->input->is_ajax_request()){
 					echo json_encode($result);
 					return;					
 				} else {
-					$this -> session -> set_userdata($result);
-					$this -> session -> set_userdata(array('logged_in' => TRUE));
-
 					if ($this -> input -> post('redirect')) {
 						redirect($this -> input -> post('redirect'));
 					} else {
