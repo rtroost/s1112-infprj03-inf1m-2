@@ -246,7 +246,7 @@ var CreateApp = {
 		var self = CreateApp;
 		var	id = $this.attr('data-arrayIndex');
 
-		if((parseInt(self.config.totaalGewicht) + parseInt(self.config.ingredienten[id].gewichtspunten)) > 20){
+		if((parseInt(self.config.totaalGewicht) + parseInt(self.config.ingredienten[id].gewichtspunten)) > self.config.maxGewicht){
 			if(self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen && self.config.view2.find('table#view2_table_main tr.' + id).length == 1){
 				self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen = !self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen;
 				self.click_ingredient(id, self.config.ingredienten[$this.attr('data-arrayIndex')].gekozen);
@@ -357,7 +357,7 @@ var CreateApp = {
 		if(self.config.ingredienten[id].gewichtspunten != 0){
 			var huidigGewichtPunt = self.config.ingredienten[id].gewicht/self.config.ingredienten[id].gewichtspunten,
 				diff = (dataFunc - huidigGewichtPunt) * self.config.ingredienten[id].gewichtspunten;
-			if(self.config.totaalGewicht + diff > 20){
+			if(self.config.totaalGewicht + diff > self.config.maxGewicht){
 				return;
 			}
 		}							

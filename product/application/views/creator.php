@@ -512,7 +512,8 @@
 				opslaanButton: $('button#buttonOpslaan'),
 				winkelwagenButton: $('button#winkelwagen'),
 				facebook: $('div#facebook'),
-				twitter: $('iframe')
+				twitter: $('iframe'),
+				maxGewicht: 20
 		});
 		
 		
