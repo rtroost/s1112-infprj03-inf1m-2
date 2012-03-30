@@ -22,7 +22,7 @@ $(function () {
                     beingShown = true;
 
                     info.css({
-                        top: -123,
+                        top: -127,
                         left: -60,
                         display: 'block'
                     }).animate({

@@ -61,6 +61,19 @@ nav {
 	margin-right: 15px;
 }
 
+nav#navSub{
+	padding-top: 23px;
+	padding-left: 202px;
+	width: 960px;
+	position: relative;
+}
+
+nav#navSub li{
+	display: inline;
+	margin-left: 13px;
+	margin-right: 13px;
+}
+
 div#search {
 	width: 175px;
 	margin-left: 740px;

@@ -18,7 +18,7 @@
         	</tr>
         	<tr>
         		<td class=\"corner\" id=\"bottomleft\"></td>
-        		<td class=\"bottom\"><img width=\"30\" height=\"29\" alt=\"popup tail\" src=\"".base_url()."images/tooltip/bubble-tail2.png\"></td>
+        		<td class=\"bottom\"><img style=\"display:none;\" width=\"30\" height=\"29\" alt=\"popup tail\" src=\"".base_url()."images/tooltip/bubble-tail2.png\"></td>
         		<td id=\"bottomright\" class=\"corner\"></td>
         	</tr>
         </tbody>
@@ -50,7 +50,7 @@ echo			$fixedTooltipBegin;
 echo 			"<table style=\"background-color:#ffffff;\">
 					<tr>
 						<td rowspan=\"3\" style=\"width:130px;\"><img style=\"border:1px solid #000000;\" width=\"100px\" height=\"100px\" src=\"".base_url()."images/products/".$productinformatie['plaatje']."\"></td>
-						<td colspan=\"".$tableWidth."\" style=\"font-size:13px;font-weight:bold; vertical-align:baseline\">".$product."</td>
+						<td colspan=\"".$tableWidth."\" style=\"font-size:13px;font-weight:bold;text-align:left; vertical-align:baseline\">".$product."</td>
 					</tr>
 					<tr>
 						<td colspan=\"".$tableWidth."\" style=\"font-size:11px;height:30px;font-weight:bold; vertical-align:baseline\">&#8364;".number_format($productinformatie['prijs']/100, 2)."</td>

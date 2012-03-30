@@ -97,9 +97,9 @@ function updateWinkelwagen(naam, id, price, aantal)
 			$("#updateWinkelwagen").fadeIn(1000, function () {$("#updateWinkelwagen").delay(500).fadeOut(1000)})
 		}
 	}
-	 
-	 xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
-	 xmlhttp.send();
+	//document.write("ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price);
+	xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
+	xmlhttp.send();
 }
 
 function getSearch()

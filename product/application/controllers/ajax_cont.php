@@ -7,14 +7,24 @@ class Ajax_cont extends CI_controller
 		if(isset ($_GET['updateWagen']))
 		{
 			$this->load->library('cart');
+			
 			$data['id'] = $this->input->get('id');
 			$data['name'] = $this->input->get('naam');
 			$data['price'] = $this->input->get('prijs');
-			$data['qty'] = $this->input->get('aantal');
+			$data['qty'] = $this->input->get('aantal');				
+			
+			foreach ($this -> cart -> contents() as $item) {
+				if($item['id'] == $this->input->get('id')) {
+					$data = array('rowid' => $item['rowid'], 'qty' => $item['qty'] + $this->input->get('aantal'));
+					$this->cart->update($data);
+				}
+			}
+			
 			
 			$this->cart->insert($data);
+			
 			$totalitems = $this->cart->total_items();
-			echo "&nbsp;Winkelwagen(".$totalitems.")";
+			echo "&nbsp;Winkelwagen(".$totalitems.")";			
 		}
 				
 		if(isset ($_GET['archiveer']))

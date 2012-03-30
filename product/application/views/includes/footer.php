@@ -39,7 +39,6 @@
 		left:490px;
 		
 		background-image: url('<?php echo base_url(); ?>images/updateWinkelwagen.png');">
-		sdlfnsdlfmsdlkfm
 		</div>
 	</div>
 	
