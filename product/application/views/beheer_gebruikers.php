@@ -31,7 +31,7 @@
 	{
 		$id++;
 		echo "
-		
+		<br>
 		<table id=\"gebruikerTable\">	
 			<tr><td>GebruikerID</td><td><input id=\"beheer0".$id."\" name=\"gebruikerId\" class=\"beheerInput\" disabled value=\"".$gebruikers[$i]->gebruikerid ."\"</td></tr>
 			<tr><td>TypeID</td><td><input id=\"beheer1".$id."\" disabled name=\"TypeId\" class=\"beheerInput\" value=\"".$gebruikers[$i]->typeid ."\"</td></tr>
