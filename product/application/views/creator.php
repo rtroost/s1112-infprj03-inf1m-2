@@ -203,7 +203,7 @@
 					</div>
 					<table id="view2_table_foot" cellspacing="0" <?php if(isset($load)){ echo 'style="display:inline;"'; } ?>>
 						<tr>
-							<td><h4>Totaal Gewicht (max 20)</h4></td>
+							<td><h4>Totaal Gewicht (max 50)</h4></td>
 							<td><h4 id="totaal_gewicht_ingredienten"><?php if(isset($load)){ echo $totaalgewicht; } else { echo "0"; }?></h4></td>
 							<td><h4>Totaal Prijs</h4></td>
 							<td><h4 id="totaal_prijs_ingredienten"><?php if(isset($load)){ if(strlen($totaalprijs) == 4){ echo '€' . substr($totaalprijs, 0, 2) . ',' . substr($totaalprijs, 2);	} 
@@ -513,7 +513,7 @@
 				winkelwagenButton: $('button#winkelwagen'),
 				facebook: $('div#facebook'),
 				twitter: $('iframe'),
-				maxGewicht: 20
+				maxGewicht: 50
 		});
 		
 		
