@@ -5,8 +5,7 @@ class Home_cont extends CI_controller {
 	function index() {
 
 		// LAAT STAAN AUB ================
-		var_dump($this->session->all_userdata());
-		var_dump($this -> session -> userdata('cart_contents'));
+		//var_dump($this->session->all_userdata());
 		// ===============================
 		
 		$this->load->model('news_model');
