@@ -80,7 +80,7 @@ class Cart extends CI_controller {
 
 	function checkout() {
 		if ($this -> session -> userdata('logged_in') == FALSE) {
-			redirect('login?redirect=cart/checkout');
+			redirect('user?redirect=cart/checkout');
 		}
 
 		if($this->cart->total_items() == 0) {
@@ -130,7 +130,7 @@ class Cart extends CI_controller {
 
 	function payment() {
 		if ($this -> session -> userdata('logged_in') == FALSE) {
-			redirect('login?redirect=cart/payment');
+			redirect('user?redirect=cart/payment');
 		}
 
 		if($this->cart->total_items() == 0) {
@@ -147,7 +147,7 @@ class Cart extends CI_controller {
 
 	function giveDiscountPoints($orderid) {
 		if ($this -> session -> userdata('logged_in') == FALSE) {
-			redirect('login?redirect=cart/');
+			redirect('user?redirect=cart/');
 		}
 
 		if($this->cart->total_items() == 0) {
