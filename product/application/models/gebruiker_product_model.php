@@ -99,5 +99,16 @@ class Gebruiker_product_model extends CI_model {
 			return 0;
 		}
 	}
+	
+	function isPublieklijk($product_id){
+		$query = $this->db->query("
+			SELECT * FROM gebruiker_product WHERE productid = {$product_id} AND publiekelijk = 1 AND eigenaar = 1
+		");
+		if ($query->num_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>

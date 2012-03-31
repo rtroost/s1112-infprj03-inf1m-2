@@ -4,6 +4,8 @@ class product_cont extends CI_controller {
 	
 	function index(){
 		
+		$this->load->model('gebruiker_product_model');	
+		
 		if($this->input->is_ajax_request()){
 			//$data = array('id' => 1, 'qty' => 1, 'price' => 1.00, 'name' => 'sdf');
 			$this->load->library('cart');
@@ -11,7 +13,10 @@ class product_cont extends CI_controller {
 			$data['name'] = $this->input->post('name');
 			$data['price'] = $this->input->post('price');
 			$data['qty'] = $this->input->post('qty');
-			if($this->input->post('mediatype') == 'true'){
+			
+			$gebruikerid = $this->input->post('gebruikerid');
+			$productEigenaar = $this->input->post('productEigenaar');
+			if($this->input->post('mediatype') == 'true' && $this->gebruiker_product_model->isPublieklijk($this->input->post('id')) && ($gebruikerid != $productEigenaar)){
 				$data['options'] = array('media' => TRUE);
 			}
 			if($this->cart->insert($data)){
@@ -24,13 +29,11 @@ class product_cont extends CI_controller {
 			
 		}
 
-
 		if(!$this->input->get('productid')){
 			$this->load->view('product');
 			return;
 		}
 		
-		$this->load->model('gebruiker_product_model');		
 		$this->load->model('product_model');
 		$this->load->model('categorie_model');
 		

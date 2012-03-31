@@ -82,7 +82,9 @@ input[type=submit]{
 <script>
 (function( $ ){
 	
-	var lock = false;
+	var lock = false,
+		gebruikerid = <?php if(isset($this->session->userdata('email'))){ echo $this->session->userdata('email'); }?>,
+		productEigenaar = <?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?>;
 	
 	$('input.aantal').numeric();
 	
@@ -136,7 +138,7 @@ input[type=submit]{
 		$.ajax({
 				url: '<?php echo base_url(); ?>index.php/product_cont',
 				type: 'POST',
-				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('h3').html(), mediatype: $this.parents('tr').data('mediatype')},
+				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('h3').html(), mediatype: $this.parents('tr').data('mediatype'), gebruikerid: gebruikerid, productEigenaar: productEigenaar},
 				success: function(result){
 					if(result === 'success'){
 						//succes callback
