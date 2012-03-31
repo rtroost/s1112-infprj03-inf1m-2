@@ -83,8 +83,8 @@ input[type=submit]{
 (function( $ ){
 	
 	var lock = false,
-		gebruikerid = <?php if(isset($this->session->userdata('email'))){ echo $this->session->userdata('email'); }?>,
-		productEigenaar = <?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?>;
+		gebruikerid = '<?php if($this->session->userdata('email')){ echo $this->session->userdata('email'); }?>',
+		productEigenaar = '<?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?>';
 	
 	$('input.aantal').numeric();
 	
