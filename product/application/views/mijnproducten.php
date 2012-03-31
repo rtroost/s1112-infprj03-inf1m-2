@@ -35,7 +35,7 @@ input[type=submit]{
 	<div id="content">
 		<h1>Mijn producten</h1><br />
 		<?php if($this->session->userdata('typeid') != 2){ ?>
-		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="publiekelijkcount"><?php echo $publiekelijkcount; ?></span> publiekelijke producten.</h3>
+		<h3>Let op! U mag maximaal 5 producten publiekelijk maken. U heeft <span id="publiekelijkcount"><?php echo $publiekelijkcount; ?></span> publiekelijke producten.</h3><br /><br />
 		<?php } ?>
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
@@ -49,7 +49,7 @@ input[type=submit]{
 			<?php foreach($rows as $r){ ?>
 				<tr id="<?php echo $r->productid; ?>">
 				<td> 
-					<h3><?php echo $r->product[0]->naam; ?></h3>
+					<h3><?php echo $r->product[0]->naam; ?></h3><br />
 					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
 					<p><b>Ingredienten: </b><?php $count = 1; if(count($r->names) != 0){ foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;} }?></p>
 					<p><b>Aangemaakt op: </b> <?php echo $r->aanmaak_datetime; ?></p>

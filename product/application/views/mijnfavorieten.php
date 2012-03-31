@@ -47,7 +47,7 @@ input[type=submit]{
 			<?php foreach($rows as $r){ ?>
 				<tr id="<?php echo $r->productid; ?>">
 				<td> 
-					<h3><?php echo $r->product[0]->naam; ?></h3>
+					<h3><?php echo $r->product[0]->naam; ?></h3><br />
 					<p><b>Eigenaar: </b> <?php echo $r->eigenaar_naam; ?></p>
 					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
 					<p><b>Ingredienten: </b><?php $count = 1; foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></p>
