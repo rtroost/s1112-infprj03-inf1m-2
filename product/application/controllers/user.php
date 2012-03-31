@@ -261,5 +261,46 @@ class User extends CI_controller {
 	//echo $gebruikergegevens['telefoonnummer'];
 	
 	}
+
+	function wijzigwachtwoord(){
+	
+	if($this->session->userdata('logged_in') != 1) {
+			redirect(base_url()."index.php/user?redirect=user/wijzigwachtwoord");
+		}
+	$this -> form_validation -> set_rules('wwoud', 'huidig wachtwoord', 'required|md5');
+	$this -> form_validation -> set_rules('wwnieuw', 'nieuw wachtwoord', 'required|md5');
+	$this -> form_validation -> set_rules('wwnieuw2', 'nieuw wachtwoord(controle)', 'required|matches[wwnieuw]');
+	
+	if ($this -> form_validation -> run() == FALSE)
+	{
+	
+	$this->load->view('wijzigwachtwoord');
+	
+	}
+	else
+	{
+	//Gegevens zijn gecheckt, schrijven naar db hier
+	
+	//Formulier info laden in array
+	
+	$gebruiker_id = $this -> session -> userdata('gebruikerid');
+	
+	$ww_data = array('gebruikerid' => $gebruiker_id,'wwoud' => set_value ('wwoud'),'wwnieuw' => set_value('wwnieuw'),
+	'wwnieuw2' => set_value('wwnieuw2'));
+	
+	//check of ww oud klopt
+	
+	if ($this->usersystem_model->checkPassword() == true){
+	
+	$this->usersystem_model->setPassword($ww_data);
+	
+	}
+	else{
+	
+	return false;}
+	
+	}
+	
+	}
 }
 ?>
