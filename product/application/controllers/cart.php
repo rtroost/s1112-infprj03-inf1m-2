@@ -146,14 +146,6 @@ class Cart extends CI_controller {
 	}
 
 	function giveDiscountPoints($orderid) {
-		if ($this -> session -> userdata('logged_in') == FALSE) {
-			redirect('user/login?redirect=cart');
-		}
-
-		if($this->cart->total_items() == 0) {
-			redirect('cart');
-		}
-
 		foreach ($this->cart->contents() as $item) :
 			$this -> cart_model -> createOrderLines($orderid, $item);
 
@@ -167,9 +159,8 @@ class Cart extends CI_controller {
 		endforeach;
 	}
 
-	function checkForDiscount() {
+	function removeDiscountPoints() {
 		if($this -> session -> userdata('discount') == TRUE) {
-			$this -> session -> set_userdata('discount', FALSE);
 			$this -> cart_model -> takeDiscountPoints($this -> session -> userdata('gebruikerid'), 20);
 		}
 	}
@@ -197,9 +188,12 @@ class Cart extends CI_controller {
 
 			$orderid = $this->cart_model->createOrder($this -> session -> userdata('gebruikerid'));
 			$this -> giveDiscountPoints($orderid);
-			$this -> checkForDiscount();
-			$this -> cart_model -> makePayment($orderid);			
+			$this -> removeDiscountPoints();
+			$this -> cart_model -> makePayment($orderid);
 
+			/** Clean up */
+			$array_items = array('discount' => '', 'bestelmethode' => '');
+			$this->session->unset_userdata($array_items);
 			$this -> cart -> destroy();
 		} else {
 			// Notify user
