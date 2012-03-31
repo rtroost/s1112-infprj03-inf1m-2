@@ -46,7 +46,7 @@ input[type=submit]{
 			</tr>
 			<tr id="<?php echo $rows->productid; ?>" data-mediatype="<?php if(isset($ref)){ echo "true"; }?>">
 			<td> 
-				<h3><?php echo $rows->naam; ?></h3>
+				<h3><?php echo $rows->naam; ?></h3><br />
 				<p><b>Eigenaar: </b> <?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?></p>
 				<p><b>Categorie: </b> <?php echo $rows->categorienaam; ?></p>
 				<p><b>Ingredienten: </b><?php $count = 1; foreach($rows->names as $naam){ if($count != count($rows->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></p>
