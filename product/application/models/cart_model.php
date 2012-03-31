@@ -17,30 +17,45 @@ class Cart_model extends CI_Model {
 		$this -> db -> insert('bestelregel', $q);
 	}
 
-	function giveDiscountPoints($gebruikerid) {
-		$data = array('kortingspunten' => 'kortingspunten + 5');
-		$this -> db -> where('gebruikerid', $gebruikerid);
-		$this -> db -> update('gebruiker', $data);
-	}
+	function giveDiscountPoints($productid) {
+		$this -> db -> select('gebruikerid');
+		$this -> db -> where(array('productid' => $productid, 'eigenaar' => 1));
+			$result = $this -> db -> get('gebruiker_product');
 
+			if ($result -> num_rows() > 0) {
+				$row = $result -> row();
 
-	function getDiscountP($userid) {
-		$this -> db -> select('kortingspunten');
-		$this -> db -> where('gebruikerid', $userid);
-		$result = $this -> db -> get('gebruiker');
-
-		if ($result -> num_rows() > 0) {
-			$row = $result -> row();
-
-			return $row -> kortingspunten;
+				if(($row -> gebruikerid == $this -> session -> userdata('gebruikerid')) == FALSE) {
+					$data = array('kortingspunten' => 'kortingspunten + 5');
+					$this -> db -> where('gebruikerid', $row -> gebruikerid);
+					$this -> db -> update('gebruiker', $data);
+				}			
+			}		
 		}
-		return FALSE;
-	}
 
-	function makePayment($orderid) {
-		$q = array('bestellingid' => $orderid, 'bedrag' => $this -> cart -> total(), 'datetime' => date('Y-m-d H:i:s'), 'betaalmethodeid' => '1');
-		$this -> db -> insert('betaling', $q);
-	}
+		function takeDiscountPoints($gebruikerid, $points) {
+			$data = array('kortingspunten' => 'kortingspunten - '.$points);
+			$this -> db -> where('gebruikerid', $gebruikerid);
+			$this -> db -> update('gebruiker', $data);
+		}
 
-}
-?>
+		function getDiscountP($userid) {
+			$this -> db -> select('kortingspunten');
+			$this -> db -> where('gebruikerid', $userid);
+			$result = $this -> db -> get('gebruiker');
+
+			if ($result -> num_rows() > 0) {
+				$row = $result -> row();
+
+				return $row -> kortingspunten;
+			}
+			return FALSE;
+		}
+
+		function makePayment($orderid) {
+			$q = array('bestellingid' => $orderid, 'bedrag' => $this -> cart -> total(), 'datetime' => date('Y-m-d H:i:s'), 'betaalmethodeid' => '1');
+			$this -> db -> insert('betaling', $q);
+		}
+
+	}
+	?>

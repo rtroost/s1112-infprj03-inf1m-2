@@ -167,6 +167,13 @@ class Cart extends CI_controller {
 		endforeach;
 	}
 
+	function checkForDiscount() {
+		if($this -> session -> userdata('discount') == TRUE) {
+			$this -> session -> set_userdata('discount', FALSE);
+			$this -> cart_model -> takeDiscountPoints($this -> session -> userdata('gebruikerid'), 20);
+		}
+	}
+
 	function idealresult() {
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			redirect(base_url());
@@ -188,9 +195,10 @@ class Cart extends CI_controller {
 			// Notify user
 			$data['result'] = '<h1>Transactie geslaagd.</h1><p>Uw betaling met iDEAL is geslaagd.</p>';
 
-			$orderid = $this->cart_model->createOrder($this->session->userdata('gebruikerid'));
-			$this->giveDiscountPoints($orderid);
-			$this->cart_model->makePayment($orderid);			
+			$orderid = $this->cart_model->createOrder($this -> session -> userdata('gebruikerid'));
+			$this -> giveDiscountPoints($orderid);
+			$this -> checkForDiscount();
+			$this -> cart_model -> makePayment($orderid);			
 
 			$this -> cart -> destroy();
 		} else {
