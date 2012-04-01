@@ -67,12 +67,12 @@ class Cart extends CI_controller {
 
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			/** If the user is not logged in, redirect to the login page */
-			redirect('user/login?redirect=cart/checkout');
+			redirect('user/login?redirect=cart');
 		}
 
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
-			redirect(base_url());
+			redirect('cart');
 		}
 
 		if ($do == 'remove') {
@@ -96,12 +96,12 @@ class Cart extends CI_controller {
 
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			/** If the user is not logged in, redirect to the login page */
-			redirect('user/login?redirect=cart/checkout');
+			redirect('user/login?redirect=cart');
 		}
 
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
-			redirect(base_url());
+			redirect('cart');
 		}
 
 		$total = $this -> cart -> total_items();
@@ -143,7 +143,7 @@ class Cart extends CI_controller {
 		}
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
-			redirect(base_url());
+			redirect('cart');
 		}
 
 		/** Set all rules for our form */
@@ -199,12 +199,12 @@ class Cart extends CI_controller {
 
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			/** If the user is not logged in, redirect to the login page */
-			redirect('user/login?redirect=cart/checkout');
+			redirect('user/login?redirect=cart/payment');
 		}
 
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
-			redirect(base_url());
+			redirect('cart');
 		}
 
 		foreach ($this->cart->contents() as $item) {
@@ -259,12 +259,12 @@ class Cart extends CI_controller {
 
 		if ($this -> session -> userdata('logged_in') == FALSE) {
 			/** If the user is not logged in, redirect to the login page */
-			redirect('user/login?redirect=cart/checkout');
+			redirect('user/login?redirect=cart');
 		}
 
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
-			redirect(base_url());
+			redirect('cart');
 		}
 
 		/** Get the status returned by iDeal simulator */

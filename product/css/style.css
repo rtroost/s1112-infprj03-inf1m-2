@@ -370,8 +370,8 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	/*
 	 * Cart
 	 */
-	 table.cart 										{ width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; }
-	 table.cart thead tr 							{ font-weight: bold; font-size: 18px; color: #c0a55a; height: 25px; }
+	 table.cart 									{ width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; }
+	 table.cart thead tr 							{ font-weight: bold; font-size: 18px; color: #c0a55a; height: 25px; text-align: left;}
 	 table.cart tr 									{ font-size: 12px; }
 	 table.cart td 									{ height: 20px; }
 
