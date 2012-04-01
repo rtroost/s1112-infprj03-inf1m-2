@@ -339,7 +339,7 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 	line-height: 2em;
 	 }
 	 form.singleForm p {
-	 	padding: 5px;
+	 	padding-bottom: 5px;
 	 }
 	 form.singleForm label {
 	 	width: 200px;

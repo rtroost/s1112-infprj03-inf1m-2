@@ -168,7 +168,7 @@ class Cart extends CI_controller {
 			$data = $this -> usersystem_model -> getUserData();
 
 			/** Load the view and fill in the received userdata */
-			$this -> load -> view('order-form', $data);
+			$this -> load -> view('edit_userdata', $data);
 		} else {
 			/** Form validation passed */
 

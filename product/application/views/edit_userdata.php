@@ -1,19 +1,15 @@
 <?php $this -> load -> view('includes/header');?>
 <div id="content">
-	<h2>Mijn gegevens</h2><br><br>
-	<p>
-		
-	</p>		
-	<?php
+	<h2>Mijn gegevens</h2>
+	<div style="float:right;">
+		<?php
 		$this -> form_validation -> set_error_delimiters('<li">', '</li>');
 		echo validation_errors(' <div class="error"> ', ' </div> ');
 		?>
-		<?php
-		$attributes = array('class' => 'singleForm');
-		echo form_open('', $attributes);
-		?>
-		<?php $required = ' <span class="required">*</span>';?>
-			<?php echo form_open('', array('class' => 'registreerform'));?>
+	</div>
+	<?php $attributes = array('class' => 'singleForm');?>
+	<?php echo form_open('', $attributes);?>
+	<?php $required = ' <span class="required">*</span>';?>
 	<p>
 		<?php echo form_label('Voorletters' . $required, 'voorletters');?>
 		<?php echo form_input(array('name' => 'voorletters', 'id' => 'voorletters', 'placeholder' => 'A.B.F.', 'maxlength' => '20', 'value' => $voornaam));?>
@@ -46,10 +42,19 @@
 		<?php echo form_label('E-mail' . $required, 'email');?>
 		<?php echo form_input(array('name' => 'email', 'id' => 'email', 'placeholder' => 'username@provider.countrycode', 'maxlength' => '100', 'value' => $email));?>
 	</p>
-	
+	<p>
+		<?php echo form_label('Betaalmethode' . $required, 'payment_method');?>
+		<?php $payment_method_options = array('' => '-- Maak een keuze --', 'ideal' => 'iDEAL', 'contant' => 'Contant');?>
+		<?php echo form_dropdown('payment-method', $payment_method_options, set_value('payment-method'));?>
+	</p>
+	<p>
+		<?php echo form_label('Afleveren/Ophalen' . $required, 'bestelmethode');?>
+		<?php $options = array('' => '-- Maak een keuze --', '1' => 'Afhalen na 30 minuten', '2' => 'Bezorging binnen 1 uur');?>
+		<?php echo form_dropdown('bestelmethode', $options, set_value('bestelmethode'));?>
+	</p>
 	<p>
 		<?php echo form_submit(array('value' => 'Verder', 'class' => 'margRight'));?>
 	</p>
 	<?php echo form_close();?>
-</div>
+	</div>
 <?php $this -> load -> view('includes/footer');?>
