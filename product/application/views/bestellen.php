@@ -79,7 +79,7 @@ echo   			"</div></td>
 					<img class=\"bestellenButtons\" onClick=\"minAantal(".$productinformatie['id'].", ".$productinformatie['prijs'].")\" onmouseover=\"this.src='".base_url() ."images/img_order_min_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_min.png'\" src=\"".base_url()."images/img_order_min.png\"></img>
 				</td>
 				<td rowspan=\"2\" id=\"totaal".$productinformatie['id']."\" class=\"productTotaal\">&#8364;".number_format(0, 2) ."</td>
-				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen('".$product."',".$productinformatie['id'].", ".number_format($productinformatie['prijs']/100, 2).")\" onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
+				<td rowspan=\"2\" id=\"productBestellen\"><img height=\"16px\" style=\"cursor: pointer;\" onclick=\"updateWinkelwagen('".$product."', ".$productinformatie['id'].", ".number_format($productinformatie['prijs']/100, 2).")\" onmouseover=\"this.src='".base_url() ."images/img_order_cart_mouseover.png' \" onmouseout=\"this.src='".base_url()."images/img_order_cart.png'\" src=\"".base_url()."images/img_order_cart.png\"></img>
 			</tr>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";

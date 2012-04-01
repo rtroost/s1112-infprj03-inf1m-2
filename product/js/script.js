@@ -76,10 +76,9 @@ function oldValue(id, oudeWaarde)
 	}
 }*/
 
-function updateWinkelwagen(naam, id, price, aantal)
+function updateWinkelwagen(naam, id, price)
 {
-	if(!aantal){
-	aantal = document.getElementById("aantal"+id).value}
+	aantal = document.getElementById("aantal"+id).value
 	if(window.XMLHttpRequest){
 		xmlhttp=new XMLHttpRequest();
 	}
@@ -87,9 +86,10 @@ function updateWinkelwagen(naam, id, price, aantal)
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
-	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4 && xmlhttp.status==200){
-		   document.getElementById("linkWinkelwagen").innerHTML = xmlhttp.responseText;
+	xmlhttp.onreadystatechange=function(){ 
+		if(xmlhttp.readyState==4){
+		//document.write(xmlhttp.responseText);
+		  document.getElementById("linkWinkelwagen").innerHTML = xmlhttp.responseText;
 			document.getElementById("aantal"+id).value = 0;
 			prijs = 0;
 			document.getElementById("totaal"+id).innerHTML = "&#8364;" + prijs.toFixed(2);
@@ -97,8 +97,8 @@ function updateWinkelwagen(naam, id, price, aantal)
 			$("#updateWinkelwagen").fadeIn(1000, function () {$("#updateWinkelwagen").delay(500).fadeOut(1000)})
 		}
 	}
-	//document.write("ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price);
-	xmlhttp.open("GET","ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price,true);
+	
+	xmlhttp.open("GET", "ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price, true);
 	xmlhttp.send();
 }
 

@@ -32,6 +32,7 @@
 	bottom:40px;
 	z-index:1;
 	vertical-align:bottom;">
+	
 		<div style="position: absolute; 
 		bottom: 25px;
 		width:270px;
@@ -46,25 +47,25 @@
 		<?php if(!$this->session->userdata('logged_in')){ ?>
 			<div id="barInlog">
 				<ul id="inlogul">
-					<li><img src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="#">Login</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
-					<li><a href="#">Register</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><img src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="<?php echo base_url(); ?>index.php/user/login">Login</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><a href="<?php echo base_url(); ?>index.php/user/register">Register</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
 				</ul>
 			</div>
 		<?php }
 		else { 	?>
 			<div id="barInlog">
 				<ul id="inlogul">
-					<li><img src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="#">Mijn profiel</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
-					<li><a href="#">Logout</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><img src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="<?php echo base_url(); ?>index.php/user/">Mijn profiel</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><a href="<?php echo base_url(); ?>index.php/user/logout">Logout</a><img src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
 				</ul>
 			</div>
 		<?php } ?>
 			<div id="barLinks">
 				<ul id="linksUl">
-					<li><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="#"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/home.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
-					<li><a href="#"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/roller.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
-					<li><a href="#"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/bestel.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
-					<li><a href="#"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/contact.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /><a href="<?php echo base_url(); ?>index.php"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/home.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><a href="<?php echo base_url(); ?>index.php/product_cont/creator"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/roller.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><a href="<?php echo base_url(); ?>index.php/bestellen_cont"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/bestel.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
+					<li><a href="<?php echo base_url(); ?>index.php/contact_cont"><img class="imgLinks" src="<?php echo base_url(); ?>images/bar/contact.png" /></a><img class="tussenLinks" src="<?php echo base_url(); ?>images/bar/tussen.png" /></li>
 				</ul>
 			</div>
 		
@@ -73,9 +74,9 @@
 			<table style="float:left;" id="cartTable">
 				<tr>
 					<td><img id="barWinkelwagen" src="<?php echo base_url(); ?>images/bar/winkelwagen.png" /></td>
-					<td class="cartTd"><a id="linkWinkelwagen" href="#" >&nbsp;Winkelwagen(<?php echo $totalitems; ?>)</a></td>
+					<td class="cartTd"><a id="linkWinkelwagen" href="<?php echo base_url(); ?>index.php/cart" >&nbsp;Winkelwagen(<?php echo $totalitems; ?>)</a></td>
 					<td class="cartTd"><b>&nbsp;|&nbsp;</b></td>
-					<td class="cartTd"><a href="#"><b>Checkout</b></a></td>
+					<td class="cartTd"><a href="<?php echo base_url(); ?>index.php/cart/checkout"><b>Checkout</b></a></td>
 				</tr>
 			</table>
 			<img class="barTussen" src="<?php echo base_url(); ?>images/bar/tussen.png" />
@@ -87,7 +88,7 @@
 				<table style="float:left;" id="cartTable">
 					<tr>
 						<td><img id="barWinkelwagen" src="<?php echo base_url(); ?>images/bar/korting.png" /></td>
-						<td class="cartTd">&nbsp;Kortingspunten(<?php echo $kortingspunten ?>)</td>
+						<td class="cartTd"><a href="<?php echo base_url(); ?>/index.php/kortingspunten_cont" >&nbsp;Kortingspunten(<?php echo $kortingspunten ?>)</a></td>
 					</tr>
 				</table>
 			</a>
