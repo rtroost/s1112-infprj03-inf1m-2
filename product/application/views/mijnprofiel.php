@@ -1,8 +1,14 @@
 <?php $this->load->view('includes/header') ?>
+
 	<div id="content">
-		<h1>Mijn profiel</h1>
-		<p style="margin-bottom: 0px;">Welkom <?php echo $this->session->userdata('voornaam'); ?></p>	
-		<a href="<?php echo base_url(); ?>index.php/user/product">Mijn producten</a>
-		<a href="<?php echo base_url(); ?>index.php/user/favoriet">Mijn favorieten</a>
+		
+		<h2>Mijn account</h2><br>
+		<p style="margin-bottom: 0px;">Welkom <?php echo $this->session->userdata('voornaam'); ?>,</p><br>	
+		Via het bovenstaande menu kunt u navigeren door de website en al uw eigen gegevens aanpassen.<br><br>
+		Wij wensen u veel plezier op de website van PizzaRio!<br><br>
+		Groeten,<br><br>
+		Het PizzaRio Team
+		
 	</div>	
+	
 <?php $this->load->view('includes/footer') ?>

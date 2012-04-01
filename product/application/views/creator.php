@@ -19,34 +19,34 @@
 
 	}
 	?>
-	<h1>De product creëer pagina</h1>
+	<h2>Maak product</h2><br>
 	<p>
-		U kunt hier uw eigen product samenstellen
+		U kunt hier uw eigen product samenstellen, bestellen en delen om korting te verdienen!
 	</p>
 	<br />
 	<div id="productApp">
 		<div id="appNavigation">
 			<ul>
 				<li id="1" class="activated">
-					<a class="appNav" href="">Categorie 1</a>
+					<a class="appNav" href="">1: Categorie</a>
 				</li>
 				<li id="2" class="overig">
-					<a class="appNav" href="">Samenstellen 2</a>
+					<a class="appNav" href="">2: Maken</a>
 				</li>
 				<li id="3" class="overig">
-					<a class="appNav" href="">Opslaan 3</a>
+					<a class="appNav" href="">3: Opslaan</a>
 				</li>
 				<li id="4" class="overig">
-					<a class="appNav" href="">Bestellen 4</a>
+					<a class="appNav" href="">4: Bestellen</a>
 				</li>
 				<li id="5" class="overig">
-					<a class="appNav" href="">Delen 5</a>
+					<a class="appNav" href="">5: Delen</a>
 				</li>
 			</ul>
 		</div>
 		<div id="appMainWindow1" class="mainWindows">
 			<div id="appSideBar">
-				<h2>Kies een categorie: </h2>
+				<h2>Kies een categorie</h2><br>
 				<br />
 				<table id="sidebar_table">
 					<?php $count = 1; foreach($records as $row) :
@@ -80,28 +80,33 @@
 			<div id="appView">
 				<?php if(!isset($load)){
 				?>
-				<h2>Product creator</h2>
+				<h2>Product creator</h2><br>
 				<p>
-					Welkom bij de product creator. Hier kan je zelf een product maken en gelijk bestellen.
-				</p>
+					Welkom bij de product ontwikkelaar. Hier kan je zelf producten maken, bestellen en delen om korting te krijgen!
+				</p><br>
+				U kunt de product ontwikkelaar op de volgende eenvoudige manier gebruiken:
 				<p>
 					<br />
-					<b>Stap1</b> : Kies een categorie. Elke categorie heeft een start prijs
+					<b>1: Categorie</b> - Kies een categorie.
 					<br />
-					<b>Stap2</b> : Stel je product samen.
+					<b>2: Maken</b> - Stel je product samen.
 					<br />
-					<b>Stap3</b> : Sla je product op.
+					<b>3: Opslaan</b> - Sla je product op.
 					<br />
-					Dit kan allen als je ingelogged bent. Ben je nog niet ingeloged?
-					Je kan hier <a href="#">inloggen</a> of <a href="#">registreren</a>.
-					Je kan je product een naam geven en opslaan zodat je het product later nog een keer kan bestellen.
+					<b>4: Bestellen</b> - Bestel je product.
 					<br />
-					<b>Stap4</b> : Bestel je product.
+					<b>5: Delen</b> - Deel je product met de wereld en verdien korting!<br><br>
+					
+					U kunt de product ontwikkelaar alleen gebruiken als u ingelogd bent.<br><br>
+					Nog niet ingelogd? Je kan hier <a href="#">inloggen</a>.<br>
+					Nog niet geregistreerd? Je kan hier <a href="#">registreren</a>.
+					<br />
+					
 					<br />
 				</p>
 				<?php } else {?>
 
-				<h2>U heeft gekozen voor: <?php echo $rows -> categorienaam;?></h2>
+				<b>U heeft gekozen voor: <?php echo $rows -> categorienaam;?></b>
 				<div class="center">
 					<img src="<?php echo base_url();?>images/productApp/<?php echo $rows -> categorieimg;?>" style="width: 400px; height: 300px;">
 					<!-- 						http://127.0.0.1/pizzario/images/productApp/soep_groot.jpg -->
@@ -120,7 +125,7 @@
 		</div>
 		<div id="appMainWindow2" class="mainWindows">
 			<div id="appSideBar">
-				<h2>Product samenstellen</h2>
+				<h2>Product samenstellen</h2><br>
 				<div <?php
 					if (isset($load)) { echo 'style="display: none;"';
 					}
@@ -128,7 +133,7 @@
 					<p id="samenstellenText">
 						U heeft nog geen categorie gekozen.
 						<br />
-						Maak een product aan en probeer het opnieuw.
+						Kies een categorie en probeer het opnieuw.
 					</p>
 				</div>
 				<div id="sidebar_table2_div" <?php
@@ -176,7 +181,7 @@
 				<h2 id="samenstellen_view_titel" <?php
 				if (!isset($load)) { echo 'style="display: none;"';
 				}
- ?>>Uw product:</h2>
+ ?>>Uw product</h2><br>
 				<table id="view2_table_head" <?php
 					if (isset($load)) { echo 'style="display:inline;"';
 					}
@@ -294,7 +299,7 @@
 		</div>
 		<div id="appMainWindow3" class="mainWindows">
 			<div id="appSideBar">
-				<h2>Uw product opslaan</h2>
+				<h2>Uw product opslaan</h2><br>
 				<div <?php
 					if (isset($load)) { echo 'style="display: none;"';
 					}
@@ -302,7 +307,7 @@
 					<p id="opslaanText">
 						U heeft nog geen categorie gekozen.
 						<br />
-						Maak een product aan en probeer het opnieuw.
+						Kies een categorie en probeer het opnieuw.
 					</p>
 				</div>
 				<div id="opslaan" <?php
@@ -313,20 +318,14 @@
 					if ($this -> session -> userdata('logged_in') != 1) { echo "display: none;";
 					}
  ?>">
-						<p>
-							Hallo <span class="name"><?php
-							if ($this -> session -> userdata('voornaam')) { echo $this -> session -> userdata('voornaam');
-							}
-								?></span>,
-							<br />
-							U kunt hier uw product opslaan op uw profiel.
-						</p>
+							U kunt hier uw product opslaan.
+						</p><br>
 						<h4>Product naam:</h4>
-						<input id="product_name" type="text" name="naam" size="34" value="<?php
+						<input id="product_name" type="text" style="width: 190px" name="naam" size="34" value="<?php
 							if (isset($load)) { echo $rows -> naam;
 							}
 						?>"/>
-						<br />
+						<br /><br>
 						<p>
 							Wilt u uw product publiekelijk maken?
 						</p>
@@ -342,7 +341,7 @@
 						<br />
 						<br />
 						<p>
-							U kunt dit product en andere gemaakte producten beheren door maar "Mijn profiel" te gaan.
+							U kunt dit product en andere gemaakte producten beheren door naar de "Mijn account" pagina te gaan.
 						</p>
 					</div>
 					<div id="opslaan_logout" style="<?php
@@ -371,8 +370,8 @@
 					</div>
 					<div id="after_opslaan" style="display: none;">
 						<p>
-							U kunt de samenstelling van dit product later nog wijzigen, dit kunt u regelen in "mijn profiel".
-							<br />
+							U kunt de samenstelling van dit product later nog wijzigen, dit kunt u regelen op de 'Mijn account' pagina.
+							<br /><br>
 							U kunt nu uw product bestellen door naar de volgende stap te gaan.
 						</p>
 						<br />
@@ -393,7 +392,7 @@
 				<h2 id="opslaan_view_titel" <?php
 				if (!isset($load)) { echo 'style="display: none;"';
 				}
-			?>>Uw product:</h2>
+			?>>Uw product</h2><br>
 				<table id="view3_table_head" <?php
 					if (isset($load)) { echo 'style="display:inline;"';
 					}
@@ -464,7 +463,7 @@
 		</div>
 		<div id="appMainWindow4" class="mainWindows">
 			<div id="appSideBar">
-				<h2>Uw product bestellen</h2>
+				<h2>Uw product bestellen</h2><br>
 				<div <?php
 					if (isset($load)) { echo 'style="display: none;"';
 					}
@@ -472,7 +471,7 @@
 					<p id="bestelText">
 						U heeft nog geen categorie gekozen.
 						<br />
-						Maak een product aan en probeer het opnieuw.
+						Kies een categorie en probeer het opnieuw.
 					</p>
 				</div>
 				<div id="bestellen" <?php
@@ -483,12 +482,6 @@
 					if ($this -> session -> userdata('logged_in') != 1) { echo "display: none;";
 					}
  ?>">
-						<p>
-							Hallo <span class="name"><?php
-							if ($this -> session -> userdata('voornaam')) { echo $this -> session -> userdata('voornaam');
-							}
-								?></span>,
-							<br />
 							Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
 						</p>
 					</div>
@@ -497,12 +490,12 @@
 						}
  ?>">
 						<p>
-							Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.
+							Bedankt voor het maken van een product.<br><br> U kunt uw product nu in uw winkelwagen plaatsen.<br><br> Daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.<br><br>
 						</p>
-						<h5>Hoeveel wilt u bestellen</h5>
-						<input id="qty" type="text" name="qty" value="1"/>
+						<h5>Aantal</h5>
+						<input id="qty" type="text" name="qty" value="1"/><br><br>
 						<button id="winkelwagen" data-after="false">
-							In Winkelwagen
+							In winkelwagen
 						</button>
 						<br />
 						<h4 id="winkelwagenHeading" class="successApp" data-after="false" style="display: none;">Uw bestelling is geplaatst</h4>
@@ -510,12 +503,12 @@
 					</div>
 					<div id="after_bestellen" style="display: none;">
 						<p>
-							Bedankt voor het maken van een product. U kunt uw product nu in uw winkelwagen stoppen. En daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.
+							Bedankt voor het maken van een product.<br><br> U kunt uw product nu in uw winkelwagen plaatsen.<br><br> Daarna kunt u naar uw winkelwagen gaan om uw product te bestellen.<br><br>
 						</p>
-						<h5>Hoeveel wilt u bestellen</h5>
-						<input id="qty" type="text" name="qty" value="1"/>
+						<h5>Aantal</h5>
+						<input id="qty" type="text" name="qty" value="1"/><br><br>
 						<button id="winkelwagen" data-after="true">
-							In Winkelwagen
+							In winkelwagen
 						</button>
 						<br />
 						<h4 id="winkelwagenHeading" class="successApp" data-after="true" style="display: none;">Uw bestelling is geplaatst</h4>
@@ -536,7 +529,7 @@
 				<h2 id="bestellen_view_titel" <?php
 				if (!isset($load)) { echo 'style="display: none;"';
 				}
-			?>>Uw product:</h2>
+			?>>Uw product</h2><br>
 				<table id="view3_table_head" <?php
 					if (isset($load)) { echo 'style="display:inline;"';
 					}
@@ -607,7 +600,7 @@
 		</div>
 		<div id="appMainWindow5" class="mainWindows">
 			<div id="appSideBar">
-				<h2>Uw product Delen</h2>
+				<h2>Uw product delen</h2><br>
 				<div <?php
 					if (isset($load)) { echo 'style="display: none;"';
 					}
@@ -615,7 +608,7 @@
 					<p id="bestelText">
 						U heeft nog geen categorie gekozen.
 						<br />
-						Maak een product aan en probeer het opnieuw.
+						Kies een categorie en probeer het opnieuw.
 					</p>
 				</div>
 				<div id="delen" <?php
@@ -626,13 +619,8 @@
 					if ($this -> session -> userdata('logged_in') != 1) { echo "display: none;";
 					}
  ?>">
-						<p>
-							Hallo <span class="name"><?php
-							if ($this -> session -> userdata('voornaam')) { echo $this -> session -> userdata('voornaam');
-							}
-								?></span>,
 							<br />
-							Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product opgeslaan
+							Uw product is nog niet opgeslagen. Ga naar de "Opslaan" pagina om uw product op te slaan.
 						</p>
 					</div>
 					<div id="delen_logout" style="<?php

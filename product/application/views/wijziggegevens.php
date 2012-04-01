@@ -1,6 +1,6 @@
 <?php $this -> load -> view('includes/header');?>
 <div id="content">
-	<h1>Uw gegevens</h1>
+	<h2>Mijn gegevens</h2><br><br>
 	<p>
 		
 	</p>		
