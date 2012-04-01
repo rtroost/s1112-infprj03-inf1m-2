@@ -51,11 +51,6 @@ class Usersystem_model extends CI_model {
 		return TRUE;
 	}
 
-	function setPassword($data) {
-		$this -> db -> where('gebruikerid', $this -> session -> userdata('gebruikerid'));
-		$this -> db -> update('gebruiker', $data);
-	}
-
 	function checkPassword($password) {
 		$this -> db -> where(array('gebruikerid' => $this -> session -> userdata('gebruikerid'), 'wachtwoord' => $password));
 		$query = $this -> db -> get('gebruiker');

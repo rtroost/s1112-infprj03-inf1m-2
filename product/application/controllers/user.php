@@ -269,7 +269,7 @@ class User extends CI_controller {
 			$this -> load -> view('edit_password');
 		} else {
 			$data = array('wachtwoord' => set_value('wwnieuw'));
-			$this -> usersystem_model -> setPassword($data);
+			$this -> usersystem_model -> setUserData($data);
 		}
 	}
 
