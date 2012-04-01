@@ -84,7 +84,7 @@ var CreateApp = {
 		var self = CreateApp;
 		// div op loading zetten..
 		self.config.gekozenCategorie = $(this).attr('value');
-		self.config.view1.find('h1').hide();
+		self.config.view1.find('h2').hide();
 		self.config.view1.find('div').hide();
 		self.config.view1.addClass('loading');
 		
@@ -189,7 +189,7 @@ var CreateApp = {
 		} 
 				
 		// aanpassingen aan div1
-		$('<h1>', {
+		$('<h2>', {
 			text: 'U heeft gekozen voor: ' + records[0].naam,
 		}).appendTo(self.config.view1);
 		
@@ -205,7 +205,7 @@ var CreateApp = {
 			imgdiv.css({'display': ''});
 		});
 
-		$('<h1>', {
+		$('<h2>', {
 			text: records[0].naam,
 		}).appendTo(self.config.selector1);
 		$('<p>', {

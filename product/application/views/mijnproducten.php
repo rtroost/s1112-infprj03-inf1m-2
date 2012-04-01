@@ -23,7 +23,7 @@ table#mijnproducten tr:last-child td{
 /* 800 */
 table#mijnproducten td:nth-child(1){ width: 460px; }
 table#mijnproducten td:nth-child(2){ width: 120px; }
-table#mijnproducten td:nth-child(3){ width: 80px;  padding-right: 20px;}
+table#mijnproducten td:nth-child(3){ width: 80px;  padding-right: 12px;}
 table#mijnproducten td:nth-child(4){ width: 100px; }
 table#mijnproducten td:nth-child(5){ width: 60px; }
 
@@ -42,14 +42,14 @@ input[type=submit]{
 			<tr>
 				<th>Producten</th>
 				<th>Delen</th>
-				<th style="padding-left: 14px;">Aantal</th>
+				<th>Aantal</th>
 				<th>Bestellen</th>
 				<th>Aanpassen</th>
 			</tr>
 			<?php foreach($rows as $r){ ?>
 				<tr id="<?php echo $r->productid; ?>">
 				<td> 
-					<b><?php echo $r->product[0]->naam; ?></b><br />
+					<b id="naam"><?php echo $r->product[0]->naam; ?></b><br />
 					<p>Categorie: <i><?php echo $r->categorienaam; ?></i></p>
 					<p>Ingredienten: <i></O><?php $count = 1; if(count($r->names) != 0){ foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;} }?></i></p>
 					<p>Aangemaakt op: <i><?php echo $r->aanmaak_datetime; ?></i></p>
@@ -80,7 +80,7 @@ input[type=submit]{
 					<img id="min" class="bestellenButtons" src="http://127.0.0.1/pizzario/images/img_order_min.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_min.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_min_mouseover.png'">
 				</td>
 				<td>
-					<img id="<?php echo $r->productid; ?>" class="bestellen" height="16px" src="http://127.0.0.1/pizzario/images/img_order_cart.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_cart.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_cart_mouseover.png'"style="cursor: pointer;">
+					<img style="margin-left: 18px;" id="<?php echo $r->productid; ?>" class="bestellen" height="16px" src="http://127.0.0.1/pizzario/images/img_order_cart.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_cart.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_cart_mouseover.png'"style="cursor: pointer;">
 				</td>
 				<td> 
 					<h5 style="display: inline;">publiekelijk</h5>
@@ -124,7 +124,7 @@ input[type=submit]{
 		$.ajax({
 				url: '<?php echo base_url(); ?>index.php/product_cont',
 				type: 'POST',
-				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('h3').html()},
+				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('b#naam').html()},
 				success: function(result){
 					if(result === 'success'){
 						//succes callback
