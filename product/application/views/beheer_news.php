@@ -2,7 +2,9 @@
 
 <div id="content">
 	
-	<h1>Beheer nieuws</h1>
+	<div id="titelBeheerNews">
+		<h2>Beheer nieuws</h2>
+	</div>
 	
 	<div id ="updateNews">
 		<table id="newsTable">

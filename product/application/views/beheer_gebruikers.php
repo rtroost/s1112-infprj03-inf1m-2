@@ -3,7 +3,11 @@
 <?php
 	echo "
 	
-	<div id=\"content\"> ";
+	<div id=\"content\">
+		<div id=\"titelGebruikers\">
+			<h2>Account beheer</h2>
+		</div>
+	 ";
 
 	$id = 0;
 	

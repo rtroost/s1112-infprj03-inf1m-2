@@ -34,7 +34,7 @@ input[type=submit]{
 </style>
 
 	<div id="content">
-		<h1>Mijn Favorieten</h1><br />
+		<h2>Mijn Favorieten</h2><br />
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -47,12 +47,12 @@ input[type=submit]{
 			<?php foreach($rows as $r){ ?>
 				<tr id="<?php echo $r->productid; ?>">
 				<td> 
-					<h3><?php echo $r->product[0]->naam; ?></h3><br />
-					<p><b>Eigenaar: </b> <?php echo $r->eigenaar_naam; ?></p>
-					<p><b>Categorie: </b> <?php echo $r->categorienaam; ?></p>
-					<p><b>Ingredienten: </b><?php $count = 1; foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></p>
-					<p><b>Prijs: </b> €<span class="prijs"><?php if(strlen($r->prijs) == 4){ echo substr($r->prijs, 0, 2) . ',' . substr($r->prijs, 2);	} 
-								else if(strlen($r->prijs) == 3){ echo substr($r->prijs, 0, 1) . ',' . substr($r->prijs, 1); } else { echo '0,' . $r->prijs; } ?></span></p>
+					<b><?php echo $r->product[0]->naam; ?></b><br />
+					<p>Eigenaar: <i><?php echo $r->eigenaar_naam; ?></i></p>
+					<p>Categorie: <i><?php echo $r->categorienaam; ?></i></p>
+					<p>Ingredienten: <i><?php $count = 1; foreach($r->names as $naam){ if($count != count($r->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></i></p>
+					<p>Prijs: <b>€<span class="prijs"><?php if(strlen($r->prijs) == 4){ echo substr($r->prijs, 0, 2) . ',' . substr($r->prijs, 2);	} 
+								else if(strlen($r->prijs) == 3){ echo substr($r->prijs, 0, 1) . ',' . substr($r->prijs, 1); } else { echo '0,' . $r->prijs; } ?></b></span></p>
 				</td>
 				<td>Delen</td>
 				<td class="aantal">

@@ -3,16 +3,16 @@
 	<div id="content">
 		
 		<table id="contactTable">
-			<h1>Contact gegevens</h1><br>
-			<tr><td><b>Adres</b></td><td><a href="http://maps.google.com/maps?q=G.J.+de+Jonghweg,+Deelgemeente+Centrum,+Nederland+4+-+6&hl=nl&ll=51.910113,4.462702&spn=0.011106,0.01929&sll=51.908967,4.463413&sspn=0.011106,0.01929&hnear=G.J.+de+Jonghweg+6,+Deelgemeente+Centrum,+Rotterdam,+Zuid-Holland,+Nederland&t=m&z=16"><?php print_r($contact[0]->adres); ?></a></td></tr>
-			<tr><td><b>Postcode</b></td><td><?php print_r($contact[0]->postcode); ?></td></tr>
-			<tr><td><b>Plaats</b></td><td><?php print_r($contact[0]->plaats); ?></td></tr>
-			<tr><td><b>Land</b></td><td><?php print_r($contact[0]->land); ?></td></tr>
-			<tr><td><b>Telefoon</b></td><td><?php print_r($contact[0]->telefoon); ?></td></tr>
-			<tr><td><b>Fax</b></td><td><?php print_r($contact[0]->fax); ?></td></tr>
-			<tr><td><b>Email</b></td><td><a href="mailto:contact@pizzario.nl"><?php print_r($contact[0]->email); ?></a></td></tr>
-			<tr><td><b>Twitter</b></td><td><a href="http://www.twitter.com/pizzario"><?php print_r($contact[0]->twitter); ?></a></td></tr>
-			<tr><td><b>Facebook</b></td><td><a href="http://www.facebook.com/pizzario"><?php print_r($contact[0]->facebook); ?></a></td></tr>
+			<h2>Contact gegevens</h2><br>
+			<tr><td id="contactTd"><i>Adres</i></td><td><a href="http://maps.google.com/maps?q=G.J.+de+Jonghweg,+Deelgemeente+Centrum,+Nederland+4+-+6&hl=nl&ll=51.910113,4.462702&spn=0.011106,0.01929&sll=51.908967,4.463413&sspn=0.011106,0.01929&hnear=G.J.+de+Jonghweg+6,+Deelgemeente+Centrum,+Rotterdam,+Zuid-Holland,+Nederland&t=m&z=16"><?php print_r($contact[0]->adres); ?></a></td></tr>
+			<tr><td id="contactTd"><i>Postcode</i></td><td><?php print_r($contact[0]->postcode); ?></td></tr>
+			<tr><td id="contactTd"><i>Plaats</i></td><td><?php print_r($contact[0]->plaats); ?></td></tr>
+			<tr><td id="contactTd"><i>Land</i></td><td><?php print_r($contact[0]->land); ?></td></tr>
+			<tr><td id="contactTd"><i>Telefoon</i></td><td><?php print_r($contact[0]->telefoon); ?></td></tr>
+			<tr><td id="contactTd"><i>Fax</i></td><td><?php print_r($contact[0]->fax); ?></td></tr>
+			<tr><td id="contactTd"><i>Email</i></td><td><a href="mailto:contact@pizzario.nl"><?php print_r($contact[0]->email); ?></a></td></tr>
+			<tr><td id="contactTd"><i>Twitter</i></td><td><a href="http://www.twitter.com/pizzario"><?php print_r($contact[0]->twitter); ?></a></td></tr>
+			<tr><td id="contactTd"><i>Facebook</i></td><td><a href="http://www.facebook.com/pizzario"><?php print_r($contact[0]->facebook); ?></a></td></tr>
 		</table>
 
 		<div id="maps">

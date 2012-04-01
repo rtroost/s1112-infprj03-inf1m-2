@@ -9,7 +9,7 @@
 
 body {
 	/*font-size: 62.5%;*/
-	font-size: 1em; /* 12px */
+	font-size: 13px; /* 12px */
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif;
 	color: #555;
 	line-height: 1.5em; /* 18px */
@@ -177,6 +177,7 @@ div#content {
 	padding-left: 80px;
 	width: 800px;
 	padding-bottom: 10px;
+	padding-top: 15px;
 }
 
 input.aantal {
@@ -261,6 +262,11 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 /* Start Beheer_Gebruikers  */
 	 /* =========== */
 
+	div#titelGebruikers{
+		padding-bottom: 40px;
+		padding-top: 10px;
+	}
+
 	 div#gebruikers{
 	 	line-height:1.0em;
 	 	padding: 0px;
@@ -280,6 +286,8 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 	width: 300px;
 	 	height: 50px;
 	 	float: left;
+	 	
+	 	
 	 }
 
 	 div#zoekGebruiker{
@@ -414,6 +422,10 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 /* =========== */
 	 /* Start Beheer_News */
 	 /* =========== */
+	
+	 div#titelBeheerNews{
+	 	padding-bottom: 20px;
+	 }
 
 	 div#updateNews{
 	 	padding-top: 25px;
@@ -593,21 +605,33 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 	color: #333333;
 	 }
 	 
-	 /* =========== */
-	 /* Start News  */
-	 /* =========== */
+	 /* ============= */
+	 /* Start Contact */
+	 /* ============= */
 
 	 div#contactTable{
 
 	 }
 
 	 div#maps{
-	 	padding-top: 40px;
+	 	padding-top: 60px;
 	 }
+	 
+	 #contactTd{
+	 	width: 140px;
+	 }
+	 
+	 /* =========== */
+	 /* End Contact */
+	 /* =========== */
 
 	 /* ===================== */
 	 /* Start Beheer Contact  */
 	 /* ===================== */
+	
+	 #contactTd1{
+	 	width: 110px;
+	 }
 
 	 div#contactGegevens{
 	 	padding-top: 30px;
@@ -628,3 +652,22 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 #cancelContact{
 	 	width: 109px;
 	 }
+	 
+	 /*	========================= */
+	 /* Start Beheer Aanbiedingen */
+	 /* ========================= */
+
+	div#titelAanbiedingen{
+		padding-bottom: 25px;
+		padding-top: 10px;
+	}
+	
+	div#navigatieAanbiedingen{
+		padding-bottom: 20px;
+	}
+
+
+
+	 /* ======================== */
+	 /* End Beheer Aanbiedingen  */
+	 /* =========================*/
