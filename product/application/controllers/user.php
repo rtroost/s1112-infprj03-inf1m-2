@@ -36,24 +36,20 @@ class User extends CI_controller {
 
 		$this -> form_validation -> set_error_delimiters('<br /><span class="error">', '</span>');
 
-		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed and/or no post has happend
-		{
+		if ($this -> form_validation -> run() == FALSE) {
 			if ($this -> input -> is_ajax_request()) {
 				return "false";
 			} else {
 				$this -> load -> view('login');
 			}
-		} else// passed validation proceed to post success logic
-		{
+		} else {
 			$form_data = array('email' => set_value('email'), 'wachtwoord' => md5(set_value('password')));
 			$result = $this -> usersystem_model -> validate($form_data);
 
 			if ($result == NULL) {
-				// ERROR VERKEERDE COMBINATIE
 				if ($this -> input -> is_ajax_request()) {
 					return "false";
 				} else {
-					//Foutieve ingave
 					$data['error'] = '<p>Naam en wachtwoord combinatie komt niet voor in de database. Probeer het opnieuw.</p><br />';
 					$this -> load -> view('login', $data);
 				}
@@ -261,7 +257,7 @@ class User extends CI_controller {
 		$this -> form_validation -> set_rules('wwoud', 'huidig wachtwoord', 'required|md5|callback_password_check');
 		$this -> form_validation -> set_rules('wwnieuw', 'nieuw wachtwoord', 'required|md5');
 		$this -> form_validation -> set_rules('wwnieuw2', 'herhaling van nieuw wachtwoord', 'required|md5|matches[wwnieuw]');
-		
+
 		$this -> form_validation -> set_message('password_check', 'Uw huidige wachtwoord is niet correct.');
 
 		if ($this -> form_validation -> run() == FALSE) {

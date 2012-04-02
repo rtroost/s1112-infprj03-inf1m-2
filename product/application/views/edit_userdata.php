@@ -42,6 +42,7 @@
 		<?php echo form_label('E-mail' . $required, 'email');?>
 		<?php echo form_input(array('name' => 'email', 'id' => 'email', 'placeholder' => 'username@provider.countrycode', 'maxlength' => '100', 'value' => $email));?>
 	</p>
+	<?php if(isset($order) && $order == TRUE) { ?>
 	<p>
 		<?php echo form_label('Betaalmethode' . $required, 'payment_method');?>
 		<?php $payment_method_options = array('' => '-- Maak een keuze --', 'ideal' => 'iDEAL', 'contant' => 'Contant');?>
@@ -52,6 +53,7 @@
 		<?php $options = array('' => '-- Maak een keuze --', '1' => 'Afhalen na 30 minuten', '2' => 'Bezorging binnen 1 uur');?>
 		<?php echo form_dropdown('bestelmethode', $options, set_value('bestelmethode'));?>
 	</p>
+	<?php } ?>
 	<p>
 		<?php echo form_submit(array('value' => 'Verder', 'class' => 'margRight'));?>
 	</p>
