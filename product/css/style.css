@@ -492,7 +492,7 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 	height: 40px;
 	 	font-size: 14px;
 	 	background: url('../images/bar/bottombarshadowOver2.png') repeat top left;
-	 	z-index: 50;
+	 	z-index: 100;
 	 }
 
 	 div#barInlog{
