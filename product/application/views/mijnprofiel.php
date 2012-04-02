@@ -21,7 +21,6 @@
 		<p>
 			Wij wensen u veel plezier op de website van PizzaRio!
 		</p>
-		<br />
 		<p>
 			Met vriendelijke groet,
 			<br />
