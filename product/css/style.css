@@ -70,6 +70,7 @@ div#footer:hover{
 header {
 	height: 208px;
 	width: 940px;
+	
 	position: relative;
 	background: url('../images/img_banner_banner.png') no-repeat scroll center bottom transparent;
 }
@@ -89,7 +90,6 @@ nav {
 }
 
 nav#navSub{
-	padding-top: 23px;
 	padding-left: 202px;
 	width: 960px;
 	position: relative;
@@ -103,10 +103,10 @@ nav#navSub li{
 
 div#search {
 	width: 175px;
+	position:relative;
 	margin-left: 740px;
-	margin-top: -30px;
-	position: relative;
 	text-align: right;
+	height:20px;
 }
 
 input.zoeken {
@@ -117,7 +117,7 @@ input.zoeken {
 
 /* login */
 div.inlog {
-	width: 232px;
+	width: 242px;
 	height: 66px;
 	position: relative;
 	margin-left: 690px;
@@ -145,6 +145,25 @@ input.aanmeldInput {
 	width: 445px;
 	height: 302px;
 	margin-bottom: 45px;
+}
+
+#pizzaPromotie{
+	padding-left:500px;
+	margin-top:-26px;
+}
+
+#topProducten{
+	margin-left:500px;
+	margin-top:10px;
+	width:290px;
+	height:150px;
+	background: url('../images/topProducten.png') no-repeat transparent;
+}
+
+#topProducten span{
+	font-weight:bold;
+	text-decoration:underline;
+	font-size:16px;
 }
 
 div #legenda {
@@ -240,7 +259,7 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	/*
 	 *Productlijst
 	 */
-	 table.productlijst           							{ width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; border-spacing:0px;}
+	 table.productlijst           							{ margin-bottom:20px;width: 100%; line-height: 1.0em; border: 0; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; border-spacing:0px;}
 	 table.productlijst thead tr        					{ font-weight: bold; font-size: 18px; color: #c0a55a; height: 25px; }
 	 table.productlijst th          						{ text-align: right; }
 	 table.productlijst th:first-child       				{ width: 350px; text-align: left; }
@@ -402,17 +421,14 @@ img 		{ padding: 0 !important; border: none !important; background: none !import
 	 /* =========== */
 
 	 div#homeNewsTitel{
-	 	width: 600px;
 	 	font-size: 26pt;
-	 	height: 70px;
-	 	border:1px solid #000000;
+		line-height: 1em;
+		margin-bottom:10px;
 	 }
 
 	 div#homeNewsInhoud{
-	 	width: 600px;
-	 	font-size: 16pt;
+	 	font-size: 10pt;
 	 	height: auto;
-	 	border:1px solid #000000;
 	 }
 
 	 /* =========== */

@@ -206,5 +206,23 @@ class Product_model extends CI_model {
 		
 		return $data;
 	}
+
+	function get_top_producten(){
+		$data = NULL;
+		$top = $this->db->query("SELECT product.naam, bestelregel.productid, COUNT( bestelregel.productid ) as aantal
+		FROM  `bestelregel` 
+		INNER JOIN product ON ( bestelregel.productid = product.productid ) 
+		INNER JOIN gebruiker_product ON ( product.productid = gebruiker_product.productid ) 
+		INNER JOIN gebruiker ON ( gebruiker_product.gebruikerid = gebruiker.gebruikerid ) 
+		where gebruiker.typeid != '2'
+		GROUP BY productid
+		limit 5");
+		
+			foreach($top->result() as $topProducten){
+			$data[] = $topProducten;
+			}
+		
+		return $data;
+	}
 }
 ?>

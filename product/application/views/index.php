@@ -19,6 +19,23 @@
 		<?php } ?>
 	</div>
 		
+	<div id="pizzaPromotie">
+		<a href="<?php echo base_url();?>index.php/product_cont/creator"> <img src="<?php echo base_url();?>images/pizzaPromotie.png" /></a>
+	</div>	
+	
+	<div id="topProducten">
+		<span>Top 5 best verkochte ontwerpen</span>
+		<table>
+		<tr><td style="width:300px;font-size:10px;">Productnaam</td><td style="text-align:right;font-size:10px;">verkocht</td></tr>
+		<?php
+		for($i=0; $i<=4; $i++)
+			{
+			echo "<tr><td><a href=\"#\">".$topProducten[$i]->naam ."</a></td><td style=\"text-align:right;\">".$topProducten[$i]->aantal ."</td></tr>";
+			}
+		?>
+		</table>
+	</div>
+		
 	<p style="clear: both;"></p>
 	
 	<?php if($news == null)	{ ?>
