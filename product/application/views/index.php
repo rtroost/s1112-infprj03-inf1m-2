@@ -39,7 +39,7 @@
 		
 	
 	<p style="clear: both;"></p>
-	<div style="margin-left:184px;margin-top:-45px;margin-bottom:30px;font-size:12px;">aanbiedingen</div>
+	<div style="margin-left:184px;margin-bottom:30px;font-size:12px;">aanbiedingen</div>
 	<?php if($news == null)	{ ?>
 		<div id="homeNewsTitel">
 			Er is momenteel geen nieuws

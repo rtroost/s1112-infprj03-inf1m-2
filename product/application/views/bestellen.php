@@ -41,16 +41,16 @@
 			</thead>
 			";
 			
-			foreach($producten as $product => $productinformatie){ $tableWidth = ceil((count($productinformatie)-3)/4); $lol = $product;
+			foreach($producten as $product => $productinformatie){ $tableWidth = ceil((count($productinformatie)-3)/4);
 echo		"<tr id=\"productRow\" >
-				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product."</span>";
+				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a style=\"color:".$productinformatie['aanbiedingKleur']."\" href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product."</span>";
 
 				/* tooltip */
 echo			$fixedTooltipBegin;
 echo 			"<table style=\"background-color:#ffffff;\">
 					<tr>
 						<td rowspan=\"3\" style=\"width:130px;\"><img style=\"border:1px solid #000000;\" width=\"100px\" height=\"100px\" src=\"".base_url()."images/products/".$productinformatie['plaatje']."\"></td>
-						<td colspan=\"".$tableWidth."\" style=\"font-size:13px;font-weight:bold;text-align:left; vertical-align:baseline\">".$product."</td>
+						<td colspan=\"".$tableWidth."\" style=\"color:".$productinformatie['aanbiedingKleur'].";font-size:13px;font-weight:bold;text-align:left; vertical-align:baseline\">".$product."</td>
 					</tr>
 					<tr>
 						<td colspan=\"".$tableWidth."\" style=\"font-size:11px;height:30px;font-weight:bold; vertical-align:baseline\">&#8364;".number_format($productinformatie['prijs']/100, 2)."</td>
@@ -59,10 +59,10 @@ echo 			"<table style=\"background-color:#ffffff;\">
 					<tr>";
 								for($i = 0; $i < $tableWidth; $i++){
 echo								"<td style=\"vertical-align:baseline\">";
-										if(0+$i*4 < count($productinformatie)-3) {echo $productinformatie[0+$i*4]."&nbsp;&nbsp;<br>";}
-										if(1+$i*4 < count($productinformatie)-3) {echo $productinformatie[1+$i*4]."&nbsp;&nbsp;<br>";}
-										if(2+$i*4 < count($productinformatie)-3) {echo $productinformatie[2+$i*4]."&nbsp;&nbsp;<br>";}
-										if(3+$i*4 < count($productinformatie)-3) {echo $productinformatie[3+$i*4]."&nbsp;&nbsp;";}
+										if(0+$i*4 < count($productinformatie)-4) {echo $productinformatie[0+$i*4]."&nbsp;&nbsp;<br>";}
+										if(1+$i*4 < count($productinformatie)-4) {echo $productinformatie[1+$i*4]."&nbsp;&nbsp;<br>";}
+										if(2+$i*4 < count($productinformatie)-4) {echo $productinformatie[2+$i*4]."&nbsp;&nbsp;<br>";}
+										if(3+$i*4 < count($productinformatie)-4) {echo $productinformatie[3+$i*4]."&nbsp;&nbsp;";}
 echo								"</td>";
 								}
 echo					"</td>
@@ -83,7 +83,7 @@ echo   			"</div></td>
 			</tr>
 			<tr id=\"ingredientRow\">
 				<td id=\"ingredientColumn\">";
-				for($i = 0; $i < count($productinformatie)-3; $i++){ 
+				for($i = 0; $i < count($productinformatie)-4; $i++){ 
 					if($i == 0){ echo substr($productinformatie[$i], 3);}
 					else{ echo ", ".substr($productinformatie[$i], 3);}
 					

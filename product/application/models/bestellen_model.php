@@ -1,7 +1,6 @@
 <?php
 // Deze model zorgt voor het genereren van data voor bestellijsten
 class Bestellen_model extends CI_model{
-	
 	// Returned een array met bestellijst van alle producten die neit gemaakt zijn door admins en niet zijn gearchiveerd.
 	// Returnde array bevat alle categorieen welke vervolgens alle producten bevat welke vervolgens alle ingredienten van het product bevat, prijs en image
 	function getFullProducten(){
@@ -36,9 +35,11 @@ class Bestellen_model extends CI_model{
 							{
 								$prijs = $categorie->standaardprijs+$prijs;
 								$prijs = $prijs*0.8;
+								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#00ff00";
 							}
 							else{
 								$prijs = $categorie->standaardprijs+$prijs;
+								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#0000aa";
 							}
 							$data[$categorie->naam][$product->naam]['prijs'] = $prijs;
 							$data[$categorie->naam][$product->naam]['id'] = $product->productid;
