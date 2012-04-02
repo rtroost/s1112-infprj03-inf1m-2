@@ -377,17 +377,6 @@ table#view2_table_foot td{
 
 
 
-input[type="submit"], div.checkout-div input[type="button"] {
-    background: none repeat scroll 0 0 #6AC7FC;
-    border: 1px solid #39ADF0;
-    color: white;
-    cursor: pointer;
-    font: bold 11px "Trebuchet MS",sans-serif;
-    padding: 6px;
-    text-shadow: 1px 1px 0 #7A7A7A;
-    text-transform: uppercase;
-}
-
 
 
 
