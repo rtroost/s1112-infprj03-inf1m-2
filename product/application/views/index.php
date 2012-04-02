@@ -30,7 +30,7 @@
 		<?php
 		for($i=0; $i<=4; $i++)
 			{
-			echo "<tr><td><a href=\"#\">".$topProducten[$i]->naam ."</a></td><td style=\"text-align:right;\">".$topProducten[$i]->aantal ."</td></tr>";
+			echo "<tr><td><a href=\"".base_url() ."index.php/product_cont?productid=".$topProducten[$i]->productid ."\">".$topProducten[$i]->naam ."</a></td><td style=\"text-align:right;\">".$topProducten[$i]->aantal ."</td></tr>";
 			}
 		?>
 		</table>
