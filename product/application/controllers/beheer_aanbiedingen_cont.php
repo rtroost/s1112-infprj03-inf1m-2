@@ -2,6 +2,7 @@
 
 class Beheer_Aanbiedingen_cont extends CI_controller {
 
+	// constructor
 	function __construct() {
 		parent::__construct();
 		/** Initialize helpers, libraries, models and the database*/
@@ -15,6 +16,7 @@ class Beheer_Aanbiedingen_cont extends CI_controller {
 		}
 	}
 
+	// deze functie maakt data klaar en geeft dat aan de aanbiedingen beheer view
 	function index() {
 		if ($this -> input -> is_ajax_request()) {
 			if ($this -> input -> post('new') == '1') {

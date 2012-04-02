@@ -111,6 +111,7 @@ class User extends CI_controller {
 		redirect(base_url());
 	}
 
+	// deze functie maakt data klaar en geeft dat aan de mijn producten view
 	function product() {
 		if ($this -> session -> userdata('logged_in') != 1) {
 			redirect(base_url() . "index.php/user?redirect=user");
@@ -162,6 +163,7 @@ class User extends CI_controller {
 		$this -> load -> view('mijnproducten', $data);
 	}
 
+	// deze functie maakt data klaar en geeft dat aan de favoriet view
 	function favoriet() {
 		if ($this -> session -> userdata('logged_in') != 1) {
 			redirect(base_url() . "index.php/user?redirect=user");

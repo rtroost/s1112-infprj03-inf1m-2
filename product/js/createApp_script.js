@@ -1,3 +1,4 @@
+// Dit is de javascript functie die alles voor de prodcut create app regelt.
 var CreateApp = {
 	
 	init: function( config ){

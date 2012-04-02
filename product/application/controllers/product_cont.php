@@ -2,10 +2,12 @@
 
 class product_cont extends CI_controller {
 	
+	// deze functie maakt data klaar en geeft dat aan de prodcut view, als er een ajax request naar deze functie gedaan is wordt er een insert in de cart gedaan.
 	function index(){
 		
 		$this->load->model('gebruiker_product_model');	
 		
+		// ajax request
 		if($this->input->is_ajax_request()){
 			//$data = array('id' => 1, 'qty' => 1, 'price' => 1.00, 'name' => 'sdf');
 			$this->load->library('cart');
@@ -28,7 +30,8 @@ class product_cont extends CI_controller {
 			}
 			
 		}
-
+		
+		// als er geen get waarde is word deze pagina leeg weergegeven
 		if(!$this->input->get('productid')){
 			$this->load->view('product');
 			return;
@@ -63,6 +66,7 @@ class product_cont extends CI_controller {
 		$this->load->view('product', $data);
 	}
 	
+	// deze functie maakt data klaar en geeft dat aan de product create app view.
 	function creator(){
 		
 		if($this->input->post('productid')){
@@ -99,6 +103,8 @@ class product_cont extends CI_controller {
 		$this->load->view('creator', $data);
 	}
 	
+	// de ajax functie die gebruikt wordt door de product create app.
+	// deze functie genereert data die vervolgns gebruikt word in de product create app.
 	function ajax_getId(){
 
 		$is_ajax = $this->input->post('ajax');
@@ -127,6 +133,7 @@ class product_cont extends CI_controller {
 		
 	}
 	
+	// de functie voor het opslaan van een aangemaakt of gewijzigt product met de product create app.
 	function save_product(){
 		
 		$this->load->model('product_model');
