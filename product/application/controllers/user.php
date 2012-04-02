@@ -135,7 +135,7 @@ class User extends CI_controller {
 
 		if ($this -> input -> post('productid')) {
 			if ($this -> product_model -> verwijder_product($this -> input -> post('productid'))) {
-				redirect(base_url() . 'index.php/mijnprofiel_cont/product');
+				redirect(base_url() . 'index.php/user/product');
 			} else {
 				//error
 			}
