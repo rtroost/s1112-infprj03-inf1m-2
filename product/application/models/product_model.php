@@ -132,6 +132,25 @@ class Product_model extends CI_model {
 			return $data;
 	}
 	
+	function get_name_of_ingredientsv2($product_id){
+			$data = NULL;
+			$result = $this->db->query("
+				SELECT i.naam, pi.ingredienthoeveelheid
+				FROM product AS p, product_ingredient AS pi, categorie_ingredient AS ci, ingredient AS i
+				WHERE p.productid = '{$product_id}' 
+				AND p.productid= pi.productid 
+				AND pi.catingid = ci.catingid 
+				AND ci.ingredientid = i.ingredientid
+			");
+			if ($result->num_rows() > 0){
+				foreach($result->result() as $naam){
+					$data[] = $naam;
+				}	
+				//$data = $result->result();		
+			}
+			return $data;
+	}
+	
 	function get_name_hoeveelheid_of_ingredients($product_id){
 			$data = array();
 			$result = $this->db->query("

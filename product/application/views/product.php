@@ -31,12 +31,11 @@ input[type=submit]{
 	width: 110px;
 }
 </style>
-
 	<div id="content">
 		<?php if(isset($rows)){?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
-				<th><span <?php if(!$this->session->userdata('logged_in')){ echo "style='margin-left: -500px;'"; } else { echo "style='margin-left: -448px;'"; } ?>>Producten</span></th>
+				<th><span <?php if(!$this->session->userdata('logged_in')){ echo "style='margin-left: -500px;'"; } else { echo "style='margin-left: -448px;'"; } ?>>Product</span></th>
 				<th <?php if(!$this->session->userdata('logged_in')){ echo "style='padding-right: 24px;'"; } else { echo "style='padding-right: 26px;'"; } ?>>Aantal</th>
 				<th>Bestellen</th>
 				<?php if($this->session->userdata('logged_in')){ ?>
@@ -48,7 +47,7 @@ input[type=submit]{
 				<b id="naam"><?php echo $rows->naam; ?></b><br />
 				<p>Eigenaar: <i><?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?></i></p>
 				<p>Categorie: <i><?php echo $rows->categorienaam; ?></i></p>
-				<p>Ingredienten: <i><?php $count = 1; foreach($rows->names as $naam){ if($count != count($rows->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></i></p>
+				<p>Ingredienten: <i><?php $count = 1; foreach($rows->names as $naam){ if($count != count($rows->names)){ echo $naam->naam .  "("; if($naam->ingredienthoeveelheid == 1){ echo"W"; } else if($naam->ingredienthoeveelheid == 2) { echo"N"; } else { echo"V"; }; echo ")" . ", "; } else { echo $naam->naam .  "("; if($naam->ingredienthoeveelheid == 1){ echo"W"; } else if($naam->ingredienthoeveelheid == 2) { echo"N)"; } else { echo"V)"; }; } $count++;}?></i></p>
 				<p>Prijs: <b>€<span class="prijs"><?php if(strlen($rows->prijs) == 4){ echo substr($rows->prijs, 0, 2) . ',' . substr($rows->prijs, 2);	} 
 							else if(strlen($rows->prijs) == 3){ echo substr($rows->prijs, 0, 1) . ',' . substr($rows->prijs, 1); } else { echo '0,' . $rows->prijs; } ?></b></span></p>
 			</td>

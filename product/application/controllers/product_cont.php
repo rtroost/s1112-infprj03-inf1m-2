@@ -44,7 +44,7 @@ class product_cont extends CI_controller {
 			$data['rows'] = $result[0];
 			$categorienaam = $this->categorie_model->get_name($data['rows']->categorieid);
 			$data['rows']->categorienaam = $categorienaam[0]->naam;
-			$names = $this->product_model->get_name_of_ingredients($product_id);
+			$names = $this->product_model->get_name_of_ingredientsv2($product_id);
 			$data['rows']->names = $names;
 			$prijs = $this->product_model->getTotalCost($product_id);
 			$data['rows']->prijs = $prijs;
