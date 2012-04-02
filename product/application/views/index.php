@@ -17,7 +17,7 @@
 					</div>
 				</div>
 		<?php } ?>
-	</div>
+	dfgdfgdf</div>
 		
 	<div id="pizzaPromotie">
 		<a href="<?php echo base_url();?>index.php/product_cont/creator"> <img src="<?php echo base_url();?>images/pizzaPromotie.png" /></a>
