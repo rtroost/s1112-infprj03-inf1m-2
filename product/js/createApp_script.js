@@ -12,7 +12,7 @@ var CreateApp = {
 		// $('<div id="fb-root"></div>').insertBefore(this.config.after_delen.eq(1).find('script#facebook'));
 		// $('<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=16" data-send="true" data-width="450" data-show-faces="true"></div>').insertAfter(this.config.after_delen.eq(1).find('script#facebook'));
 		
-	console.log(this.config.loginData.type);
+		console.log(this.config.loginData.type);
 		
 	},
 	
@@ -171,7 +171,7 @@ var CreateApp = {
 			$('<br />').appendTo(td);
 			
 			$('<img>', {
-				src: 'http://127.0.0.1/pizzario/images/productApp/' + self.config.gekozenCategorie + '/' + ingredienten[count].ingredientid + '/left.png',
+				src: 'http://127.0.0.1/pizzario/images/productApp/' + self.config.gekozenCategorie + '/' + ingredienten[count].catingid + '/left.png',
 				width: 50,
 				height: 50,
 				style: 'float: left; height: 50px; width: 50px;',
