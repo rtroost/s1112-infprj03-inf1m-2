@@ -62,12 +62,16 @@ class Product_model extends CI_model {
 								$data += $row[0]->prijs;
 							}
 					}
-				}
-				
+				}			
 			}
-			
 		}
-		return $data;
+		
+		if ($temp->aanbieding == 1){
+			return $data - (($data / 100) * 20);
+		}
+		else{
+			return $data;
+		}
 	}
 	
 	function check_name($naam, $load){
