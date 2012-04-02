@@ -21,7 +21,7 @@ class search_model extends CI_model{
 				foreach($categorienQ->result() as $categorie){
 			
 			$productenQ = $this->db->query("
-			SELECT product.productid, product.naam, product.standaard, product.categorieid, product.gearchiveerd, product.temp
+			SELECT product.aanbieding, product.productid, product.naam, product.standaard, product.categorieid, product.gearchiveerd, product.temp
 			FROM categorie
 			INNER JOIN product ON (categorie.categorieid = product.categorieid)
 			INNER JOIN product_ingredient ON (product.productid = product_ingredient.productid)
