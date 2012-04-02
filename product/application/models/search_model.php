@@ -49,7 +49,14 @@ class search_model extends CI_model{
 							$prijs = $prijs+(($ingredient->ingredienthoeveelheid*0.5)*$ingredient->prijs);
 							$i++;        
 						}
-						$prijs = $categorie->standaardprijs+$prijs;
+						if($product->aanbieding == 1)
+							{
+								$prijs = $categorie->standaardprijs+$prijs;
+								$prijs = $prijs*0.8;
+							}
+							else{
+								$prijs = $categorie->standaardprijs+$prijs;
+							}
 						$data[$categorie->naam][$product->naam]['prijs'] = $prijs;
 				}
 				}

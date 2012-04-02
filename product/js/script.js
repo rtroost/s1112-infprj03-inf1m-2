@@ -76,9 +76,12 @@ function oldValue(id, oudeWaarde)
 	}
 }*/
 
-function updateWinkelwagen(naam, id, price)
+function updateWinkelwagen(naam, id, price, aantal)
 {
-	aantal = document.getElementById("aantal"+id).value
+	if(aantal == "")
+		{
+		aantal = document.getElementById("aantal"+id).value
+		}
 	if(window.XMLHttpRequest){
 		xmlhttp=new XMLHttpRequest();
 	}

@@ -17,7 +17,8 @@
 					</div>
 				</div>
 		<?php } ?>
-	dfgdfgdf</div>
+	</div>
+	
 		
 	<div id="pizzaPromotie">
 		<a href="<?php echo base_url();?>index.php/product_cont/creator"> <img src="<?php echo base_url();?>images/pizzaPromotie.png" /></a>
@@ -36,8 +37,9 @@
 		</table>
 	</div>
 		
-	<p style="clear: both;"></p>
 	
+	<p style="clear: both;"></p>
+	<div style="margin-left:184px;margin-top:-45px;margin-bottom:30px;font-size:12px;">aanbiedingen</div>
 	<?php if($news == null)	{ ?>
 		<div id="homeNewsTitel">
 			Er is momenteel geen nieuws
