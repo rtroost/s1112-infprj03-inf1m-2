@@ -71,11 +71,11 @@
 	
 	line-height: 1px;
 	font-size: 1px;
-	background: url('http://127.0.0.1/pizzario/js/islider/islider-switcher.png') no-repeat right;
+	/*background: url('http://127.0.0.1/pizzario/js/islider/islider-switcher.png') no-repeat right; */
 	cursor: pointer;
 }
 .i-slider-listNav li.active {
-	background: url('http://127.0.0.1/pizzario/js/islider/islider-switcher.png') no-repeat left;
+	/*background: url('http://127.0.0.1/pizzario/js/islider/islider-switcher.png') no-repeat left;*/
 }
 
 /* Thumbnails navigation
