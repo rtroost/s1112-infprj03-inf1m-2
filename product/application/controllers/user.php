@@ -188,7 +188,7 @@ class User extends CI_controller {
 
 		if ($this -> input -> post('productid')) {
 			if ($this -> gebruiker_product_model -> remove_favoriet($this -> input -> post('productid'), $this -> session -> userdata('gebruikerid'))) {
-				redirect(base_url() . 'index.php/mijnprofiel_cont/favoriet');
+				redirect(base_url() . 'index.php/user/favoriet');
 			} else {
 				//error
 			}
