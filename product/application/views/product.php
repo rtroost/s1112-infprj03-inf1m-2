@@ -46,7 +46,7 @@ input[type=submit]{
 			</tr>
 			<tr id="<?php echo $rows->productid; ?>" data-mediatype="<?php if(isset($ref)){ echo "true"; }?>">
 			<td> 
-				<b><?php echo $rows->naam; ?></b><br />
+				<b id="naam"><?php echo $rows->naam; ?></b><br />
 				<p>Eigenaar: <i><?php if(isset($rows->eigenaar_naam)){ echo $rows->eigenaar_naam; } ?></i></p>
 				<p>Categorie: <i><?php echo $rows->categorienaam; ?></i></p>
 				<p>Ingredienten: <i><?php $count = 1; foreach($rows->names as $naam){ if($count != count($rows->names)){ echo $naam . ", "; } else { echo $naam; } $count++;}?></i></p>
@@ -138,7 +138,7 @@ input[type=submit]{
 		$.ajax({
 				url: '<?php echo base_url(); ?>index.php/product_cont',
 				type: 'POST',
-				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('h3').html(), mediatype: $this.parents('tr').data('mediatype'), gebruikerid: gebruikerid, productEigenaar: productEigenaar},
+				data: {id: $this.parents('tr').attr('id'), qty: $this.parents('tr').find('input.aantal').attr('value'), price: $this.parents('tr').find('span.prijs').html().replace(',', '.'), name: $this.parents('tr').find('b#naam').html(), mediatype: $this.parents('tr').data('mediatype'), gebruikerid: gebruikerid, productEigenaar: productEigenaar},
 				success: function(result){
 					if(result === 'success'){
 						//succes callback
@@ -146,7 +146,7 @@ input[type=submit]{
 						//error
 					}
 				}
-		});
+		}).done(bestelPopup());
 	});
 	
 	$('input.verwijder').on('click', function(e){
