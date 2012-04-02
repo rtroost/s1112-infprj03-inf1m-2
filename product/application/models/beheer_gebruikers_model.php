@@ -1,5 +1,6 @@
 <?php
 
+//SQL queries voor het ophalen, wijzigen, archiveren en activeren van accounts/gebruikers.
 class Beheer_Gebruikers_model extends CI_model{
 	
 	function getGebruikers(){

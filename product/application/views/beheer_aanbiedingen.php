@@ -28,6 +28,7 @@ input[type=submit]{
 	width: 110px;
 }
 
+/* HTML en PHP opmaak voor het beheren van aanbiedingen */
 </style>
 	<div id="content">
 		<div id="titelAanbiedingen">
