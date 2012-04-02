@@ -16,13 +16,15 @@
 		<header>
 			<div id="inlog_false" class="inlog"<?php if($this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
 				<?php echo form_open('user/login'); ?>
-				<label for="email" >Email adres:</label>
-				<input class="right_input" name="email" id="email" type="text" />
-				<label for="password" >Wachtwoord:</label>
-				<input class="right_input" name="password" id="password" type="password" />
-				<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
-				<?php echo form_close(); ?>
-				<a href="<?php echo base_url(); ?>index.php/user/register">Registreer</a>
+				<table><tr><td>
+				<label for="email" >Email adres:</label></td>
+				<td><input class="right_input" name="email" id="email" type="text" /></td></tr>
+				<tr><td><label for="password" >Wachtwoord:</label></td>
+				<td><input class="right_input" name="password" id="password" type="password" /></td></tr>
+				<tr><td><?php echo form_close(); ?>
+				<a href="<?php echo base_url(); ?>index.php/user/register">Registreer</a></td><td><input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" /></td>
+				</tr></table>
+				
 			</div>
 			<div id="inlog_true" class="inlog"<?php if(!$this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
 				
