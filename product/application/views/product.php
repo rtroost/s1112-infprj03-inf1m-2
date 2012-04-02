@@ -37,8 +37,8 @@ input[type=submit]{
 		<?php if(isset($rows)){?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
-				<th><span style="margin-left: -448px;">Producten</span></th>
-				<th style="padding-right: 24px;">Aantal</th>
+				<th><span <?php if(!$this->session->userdata('logged_in')){ echo "style='margin-left: -500px;'"; } else { echo "style='margin-left: -448px;'"; } ?>>Producten</span></th>
+				<th <?php if(!$this->session->userdata('logged_in')){ echo "style='padding-right: 24px;'"; } else { echo "style='padding-right: 26px;'"; } ?>>Aantal</th>
 				<th>Bestellen</th>
 				<?php if($this->session->userdata('logged_in')){ ?>
 				<th>Favoriet</th>
@@ -146,7 +146,7 @@ input[type=submit]{
 						//error
 					}
 				}
-		}).done(bestelPopup());
+		}).done(bestelPopup($this.parents('tr').find('input.aantal').attr('value')));
 	});
 	
 	$('input.verwijder').on('click', function(e){

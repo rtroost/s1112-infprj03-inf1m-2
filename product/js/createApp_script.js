@@ -566,7 +566,7 @@ var CreateApp = {
 						self.config.winkelwagenHeading.text('bestellen is mislukt').show();
 					}
 				}
-		}).done(bestelPopup());
+		}).done(bestelPopup(self.config.quantity));
 	},
 	
 	winkelwagen: function(){

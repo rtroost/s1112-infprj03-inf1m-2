@@ -334,7 +334,7 @@
 							}
 						?>
 						/>
-						<br />
+						<br /><br />
 						<button id="buttonOpslaan">
 							Opslaan
 						</button>

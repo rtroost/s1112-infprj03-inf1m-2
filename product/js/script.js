@@ -372,9 +372,15 @@ function cancelContact()
 
 	
 	
-function bestelPopup(){
-	var updateDiv = $("#updateWinkelwagen");
+function bestelPopup(aantal){
+	var updateDiv = $("#updateWinkelwagen"),
+		link = $('a#linkWinkelwagen'),
+		linkhtml = link.html(),
+		linkdeel1 = linkhtml.split("(");
+		linkJuistDeel = parseInt(linkdeel1[1].split(")")),
+		temp = linkJuistDeel + parseInt(aantal);
 	updateDiv.fadeIn(1000, function(){updateDiv.delay(500).fadeOut(1000)});
+	link.html(linkdeel1[0] + '(' + temp + ')');
 }
 	
 

@@ -132,7 +132,7 @@ input[type=submit]{
 						//error
 					}
 				}
-		}).done(bestelPopup());
+		}).done(bestelPopup($this.parents('tr').find('input.aantal').attr('value')));
 	});
 	
 	$('input.verwijder').on('click', function(e){
