@@ -78,7 +78,8 @@ function oldValue(id, oudeWaarde)
 
 function updateWinkelwagen(naam, id, price, aantal)
 {
-	if(aantal == "")
+
+	if(aantal == undefined)
 		{
 		aantal = document.getElementById("aantal"+id).value
 		}
@@ -100,7 +101,7 @@ function updateWinkelwagen(naam, id, price, aantal)
 			$("#updateWinkelwagen").fadeIn(1000, function () {$("#updateWinkelwagen").delay(500).fadeOut(1000)})
 		}
 	}
-	
+	//document.write("ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price)
 	xmlhttp.open("GET", "ajax_cont?updateWagen=true&naam="+naam+"&id="+id+"&aantal="+aantal+"&prijs="+price, true);
 	xmlhttp.send();
 }

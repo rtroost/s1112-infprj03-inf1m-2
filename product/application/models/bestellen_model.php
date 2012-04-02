@@ -90,6 +90,16 @@ class Bestellen_model extends CI_model{
 								$prijs = $prijs+(($ingredient->ingredienthoeveelheid*0.5)*$ingredient->prijs);
 								$i++;								
 							}
+							if($product->aanbieding == 1)
+							{
+								$prijs = $categorie->standaardprijs+$prijs;
+								$prijs = $prijs*0.8;
+								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#00aa00";
+							}
+							else{
+								$prijs = $categorie->standaardprijs+$prijs;
+								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#0000aa";
+							}
 							$prijs = $categorie->standaardprijs+$prijs;
 							$data[$categorie->naam][$product->naam]['prijs'] = $prijs;
 							$data[$categorie->naam][$product->naam]['id'] = $product->productid;
