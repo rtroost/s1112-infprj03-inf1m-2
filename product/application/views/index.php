@@ -9,7 +9,9 @@
 
 	<div id="example">
 		<?php for($i = 0; $i < count($aanbiedingen); $i++)	
-			{ ?>	
+			{ 
+				$aanbieding_id = ($aanbiedingen[$i]->productid);
+				?>	
 				<div class="i-slider-section">
 					<a href="index.php/product_cont?productid=<?php print_r($aanbiedingen[$i]->productid)?>"><img src="images/producten/<?php print_r($aanbiedingen[$i]->productid)?>.jpg" /></a>
 					<div class="i-slider-captions bottom">
