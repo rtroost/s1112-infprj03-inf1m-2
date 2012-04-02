@@ -79,7 +79,7 @@ class User extends CI_controller {
 			redirect('user');
 		}
 
-		$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
+		$this -> form_validation -> set_rules('voornaam', 'Voornaam', 'required|trim|max_length[20]');
 		$this -> form_validation -> set_rules('achternaam', 'Achternaam', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_1', 'Adresregel 1', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_2', 'Adresregel 2', 'trim|max_length[50]');
@@ -95,7 +95,7 @@ class User extends CI_controller {
 		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('registreer');
 		} else {
-			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => set_value('password'));
+			$form_data = array('voornaam' => set_value('voornaam'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'), 'wachtwoord' => set_value('password'));
 
 			if ($this -> usersystem_model -> emailInUse($form_data)) {
 				$this -> form_validation -> set_message('email_is_uniek', 'Het opgegeven email adres bestaat al.');
@@ -226,7 +226,7 @@ class User extends CI_controller {
 			redirect('user/login?redirect=user/edit');
 		}
 
-		$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
+		$this -> form_validation -> set_rules('voornaam', 'Voornaam', 'required|trim|max_length[20]');
 		$this -> form_validation -> set_rules('achternaam', 'Achternaam', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_1', 'Adresregel 1', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_2', 'Adresregel 2', 'trim|max_length[50]');
@@ -244,7 +244,7 @@ class User extends CI_controller {
 			/** Load the view and fill in the received userdata */
 			$this -> load -> view('edit_userdata', $data);
 		} else {
-			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'email' => set_value('email'), 'postcode' => set_value('postcode'), 'telefoonnummer' => set_value('telefoonnummer'));
+			$form_data = array('voornaam' => set_value('voornaam'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'email' => set_value('email'), 'postcode' => set_value('postcode'), 'telefoonnummer' => set_value('telefoonnummer'));
 			$this -> usersystem_model -> setUserData($form_data);
 
 			redirect('user');

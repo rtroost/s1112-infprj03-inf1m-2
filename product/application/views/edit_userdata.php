@@ -11,12 +11,12 @@
 	<?php echo form_open('', $attributes);?>
 	<?php $required = ' <span class="required">*</span>';?>
 	<p>
-		<?php echo form_label('Voorletters' . $required, 'voorletters');?>
-		<?php echo form_input(array('name' => 'voorletters', 'id' => 'voorletters', 'placeholder' => 'A.B.F.', 'maxlength' => '20', 'value' => $voornaam));?>
+		<?php echo form_label('Voornaam' . $required, 'voornaam');?>
+		<?php echo form_input(array('name' => 'voornaam', 'id' => 'voornaam', 'placeholder' => 'John', 'maxlength' => '20', 'value' => $voornaam));?>
 	</p>
 	<p>
 		<?php echo form_label('Achternaam' . $required, 'achternaam');?>
-		<?php echo form_input(array('name' => 'achternaam', 'id' => 'achternaam', 'placeholder' => '', 'maxlength' => '50', 'value' => $achternaam));?>
+		<?php echo form_input(array('name' => 'achternaam', 'id' => 'achternaam', 'placeholder' => 'Do', 'maxlength' => '50', 'value' => $achternaam));?>
 	</p>
 	<p>
 		<?php echo form_label('Adresregel 1' . $required, 'adresregel_1');?>

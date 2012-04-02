@@ -147,7 +147,7 @@ class Cart extends CI_controller {
 		}
 
 		/** Set all rules for our form */
-		$this -> form_validation -> set_rules('voorletters', 'Voorletters', 'required|trim|max_length[20]');
+		$this -> form_validation -> set_rules('voornaam', 'Voornaam', 'required|trim|max_length[20]');
 		$this -> form_validation -> set_rules('achternaam', 'Achternaam', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_1', 'Adresregel 1', 'required|trim|max_length[50]');
 		$this -> form_validation -> set_rules('adresregel_2', 'Adresregel 2', 'trim|max_length[50]');
@@ -173,7 +173,7 @@ class Cart extends CI_controller {
 			/** Form validation passed */
 
 			/** Create data to pass onto the database */
-			$form_data = array('voornaam' => set_value('voorletters'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'));
+			$form_data = array('voornaam' => set_value('voornaam'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'postcode' => set_value('postcode'), 'woonplaats' => set_value('woonplaats'), 'telefoonnummer' => set_value('telefoonnummer'), 'email' => set_value('email'));
 			$this -> session -> set_userdata(array('bestelmethode' => set_value('bestelmethode')));
 
 			if ($this -> usersystem_model -> setUserData($form_data) == TRUE) {
