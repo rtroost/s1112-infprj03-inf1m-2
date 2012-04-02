@@ -238,6 +238,7 @@ class User extends CI_controller {
 			$data = $this -> usersystem_model -> getUserData();
 
 			/** Load the view and fill in the received userdata */
+			$data -> change_password = TRUE;
 			$this -> load -> view('edit_userdata', $data);
 		} else {
 			$form_data = array('voornaam' => set_value('voornaam'), 'achternaam' => set_value('achternaam'), 'adresregel_1' => set_value('adresregel_1'), 'adresregel_2' => set_value('adresregel_2'), 'email' => set_value('email'), 'postcode' => set_value('postcode'), 'telefoonnummer' => set_value('telefoonnummer'));
@@ -261,8 +262,7 @@ class User extends CI_controller {
 		$this -> form_validation -> set_message('password_check', 'Uw huidige wachtwoord is niet correct.');
 
 		if ($this -> form_validation -> run() == FALSE) {
-
-			$this -> load -> view('edit_password');
+			redirect('user/edit');
 		} else {
 			$data = array('wachtwoord' => set_value('wwnieuw'));
 			$this -> usersystem_model -> setUserData($data);
