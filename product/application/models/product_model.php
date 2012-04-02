@@ -239,6 +239,7 @@ class Product_model extends CI_model {
 		INNER JOIN gebruiker ON ( gebruiker_product.gebruikerid = gebruiker.gebruikerid ) 
 		where gebruiker.typeid != '2'
 		GROUP BY productid
+		order by aantal DESC
 		limit 5");
 		
 			foreach($top->result() as $topProducten){

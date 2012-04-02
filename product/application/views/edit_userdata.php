@@ -88,4 +88,6 @@
 	<?php echo form_close();?>
 	<?php }?>
 </div>
+	
+	
 <?php $this -> load -> view('includes/footer');?>
