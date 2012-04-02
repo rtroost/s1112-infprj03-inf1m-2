@@ -94,11 +94,6 @@ class Cart extends CI_controller {
 	 */
 	function update_cart() {
 
-		if ($this -> session -> userdata('logged_in') == FALSE) {
-			/** If the user is not logged in, redirect to the login page */
-			redirect('user/login?redirect=cart');
-		}
-
 		if ($this -> cart -> total_items() == 0) {
 			/** If the cart is empty, redirect to the base */
 			redirect('cart');
