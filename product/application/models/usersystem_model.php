@@ -61,5 +61,16 @@ class Usersystem_model extends CI_model {
 		return FALSE;
 	}
 
+	function hasAdminRights() {
+		$this -> db -> where('gebruikerid', $this -> session -> userdata('gebruikerid'));
+		$this -> db -> where('typeid', 2);
+		$query = $this -> db -> get('gebruiker');
+
+		if ($query -> num_rows() > 0) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 }
 ?>
