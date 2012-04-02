@@ -25,7 +25,7 @@
 				<a href="<?php echo base_url(); ?>index.php/user/register">Registreer</a>
 			</div>
 			<div id="inlog_true" class="inlog"<?php if(!$this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
-				<?php echo anchor('user/logout', 'Logout'); ?>
+				
 			</div>
 			<nav>
 				<ul id="header_nav">

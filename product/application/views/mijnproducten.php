@@ -40,8 +40,8 @@ input[type=submit]{
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
-				<th>Producten</th>
-				<th>Delen</th>
+				<th><span style="margin-left: -314px;">Producten</span></th>
+				<th><span style="margin-left: -20px;">Delen</span></th>
 				<th>Aantal</th>
 				<th>Bestellen</th>
 				<th>Aanpassen</th>

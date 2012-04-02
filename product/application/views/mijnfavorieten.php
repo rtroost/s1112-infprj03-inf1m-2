@@ -37,7 +37,7 @@ input[type=submit]{
 		<?php if(count($rows) != 0){ ?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
-				<th>Producten</th>
+				<th><span style="margin-left: -406px;">Producten</span></th>
 				<th style="padding-left: 14px;">Aantal</th>
 				<th>Bestellen</th>
 				<th>Verwijderen</th>

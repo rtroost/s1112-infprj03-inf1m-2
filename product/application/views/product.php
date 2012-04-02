@@ -22,10 +22,10 @@ table#mijnproducten th{
 
 
 /* 800 */
-table#mijnproducten td:nth-child(1){ width: 400px; }
+table#mijnproducten td:nth-child(1){ width: 460px; }
 table#mijnproducten td:nth-child(2){ width: 80px; }
 table#mijnproducten td:nth-child(3){ width: 100px; }
-table#mijnproducten td:nth-child(4){ width: 100px; }
+table#mijnproducten td:nth-child(4){ width: 60px; }
 
 input[type=submit]{
 	width: 110px;
@@ -37,8 +37,8 @@ input[type=submit]{
 		<?php if(isset($rows)){?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
-				<th>Producten</th>
-				<th style="padding-left: 8px;">Aantal</th>
+				<th><span style="margin-left: -448px;">Producten</span></th>
+				<th style="padding-right: 24px;">Aantal</th>
 				<th>Bestellen</th>
 				<?php if($this->session->userdata('logged_in')){ ?>
 				<th>Favoriet</th>
@@ -61,12 +61,12 @@ input[type=submit]{
 				</div>			
 			</td>
 			<td>
-				<img id="<?php echo $rows->productid; ?>" class="bestellen" height="16px" src="http://127.0.0.1/pizzario/images/img_order_cart.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_cart.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_cart_mouseover.png'"style="cursor: pointer;">
+				<img  style="margin-left: 28px;" id="<?php echo $rows->productid; ?>" class="bestellen" height="16px" src="http://127.0.0.1/pizzario/images/img_order_cart.png" onmouseout="this.src='http://127.0.0.1/pizzario/images/img_order_cart.png'" onmouseover="this.src='http://127.0.0.1/pizzario/images/img_order_cart_mouseover.png'"style="cursor: pointer;">
 			</td>
 			<?php if($this->session->userdata('logged_in')){ ?>
 				<?php if(isset($rows->eigenaar_naam)){ if($this->session->userdata('email') != $rows->eigenaar_naam ){ ?>
 					<td>
-						<img id="<?php echo $rows->productid; ?>" class="favoriet" data-one="http://127.0.0.1/pizzario/images/icons/favorite.png" data-two="http://127.0.0.1/pizzario/images/icons/favorite_2.png" <?php if($rows->favoriet){ echo "data-on=\"true\" src=\"http://127.0.0.1/pizzario/images/icons/favorite_2.png\""; } else { echo "data-on=\"false\" src=\"http://127.0.0.1/pizzario/images/icons/favorite.png\""; } ?> height="30" style="cursor: pointer;" />
+						<img  style="margin-left: 18px;" id="<?php echo $rows->productid; ?>" class="favoriet" data-one="http://127.0.0.1/pizzario/images/icons/favorite.png" data-two="http://127.0.0.1/pizzario/images/icons/favorite_2.png" <?php if($rows->favoriet){ echo "data-on=\"true\" src=\"http://127.0.0.1/pizzario/images/icons/favorite_2.png\""; } else { echo "data-on=\"false\" src=\"http://127.0.0.1/pizzario/images/icons/favorite.png\""; } ?> height="30" style="cursor: pointer;" />
 					</td>
 				<?php } }?>
 			<?php } ?>
