@@ -41,7 +41,7 @@
 			</thead>
 			";
 			
-			foreach($producten as $product => $productinformatie){ $tableWidth = ceil((count($productinformatie)-3)/4); if($productinformatie['aanbiedingKleur'] == "#00ff00") {$aanbieding = "<span style=\"font-size:11px\">&nbsp;(aanbieding)</span>";} else {$aanbieding = "";}
+			foreach($producten as $product => $productinformatie){ $tableWidth = ceil((count($productinformatie)-3)/4); if($productinformatie['aanbiedingKleur'] == "#00aa00") {$aanbieding = "<span style=\"font-size:11px\">&nbsp;(aanbieding)</span>";} else {$aanbieding = "";}
 echo		"<tr id=\"productRow\" >
 				<td id=\"productColumn\"><div class=\"tooltipStart\"><span class=\"trigger\"><a style=\"color:".$productinformatie['aanbiedingKleur']."\" href=\"". base_url() ."index.php/product_cont?productid=" . $productinformatie['id']  . " \">".$product.$aanbieding."</span>";
 

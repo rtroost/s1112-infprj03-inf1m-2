@@ -35,7 +35,7 @@ class Bestellen_model extends CI_model{
 							{
 								$prijs = $categorie->standaardprijs+$prijs;
 								$prijs = $prijs*0.8;
-								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#00ff00";
+								$data[$categorie->naam][$product->naam]['aanbiedingKleur'] = "#00aa00";
 							}
 							else{
 								$prijs = $categorie->standaardprijs+$prijs;
