@@ -4,21 +4,6 @@ var CreateApp = {
 		this.config = config;
 
 		this.bindEvents();
-		
-		$('input#qty').numeric();
-		// console.log(this.config.facebook);
-		// setTimeout(this.lol, 3000);
-		// console.log(this.config.after_delen.eq(1).find('script#facebook'));
-		// $('<div id="fb-root"></div>').insertBefore(this.config.after_delen.eq(1).find('script#facebook'));
-		// $('<div id="facebook" class="fb-like" data-href="http://127.0.0.1/pizzario/index.php/product_cont?ref=tw&productid=16" data-send="true" data-width="450" data-show-faces="true"></div>').insertAfter(this.config.after_delen.eq(1).find('script#facebook'));
-		
-		console.log(this.config.loginData.type);
-		
-	},
-	
-	lol: function(){
-		var self = CreateApp;
-		console.log(self.config.after_delen.eq(1).find('iframe.twitter-share-button'));
 	},
 	
 	bindEvents: function(){
@@ -581,7 +566,7 @@ var CreateApp = {
 						self.config.winkelwagenHeading.text('bestellen is mislukt').show();
 					}
 				}
-		});
+		}).done(bestelPopup());
 	},
 	
 	winkelwagen: function(){

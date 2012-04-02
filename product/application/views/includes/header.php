@@ -22,6 +22,7 @@
 				<input class="right_input" name="password" id="password" type="password" />
 				<input class="aanmeldInput" name="aanmeldenSubmit" id="remember_me_text" value="Aanmelden" type="submit" />
 				<?php echo form_close(); ?>
+				<a href="<?php echo base_url(); ?>index.php/user/register">Registreer</a>
 			</div>
 			<div id="inlog_true" class="inlog"<?php if(!$this->session->userdata('logged_in')) echo ' style="display:none;"' ?>>
 				<?php echo anchor('user/logout', 'Logout'); ?>

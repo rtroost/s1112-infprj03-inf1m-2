@@ -660,116 +660,109 @@
 <script src="<?php echo base_url();?>js/createApp_script.js"></script>
 <script>
 		(function( $ ){
+			$('input#qty').numeric();
 
-	CreateApp.init({<?php
-		if ($this -> session -> userdata('logged_in') == 1) {
-			echo "loginData: {
-				achternaam: '{$this->session->userdata('achternaam')}',
-				email: '{$this->session->userdata('email')}',
-				gebruikerid: '{$this->session->userdata('gebruikerid')}',
-				logged_in: {$this->session->userdata('logged_in')},
-				type: '{$this->session->userdata('typeid')}',
-				voornaam: '{$this->session->userdata('voornaam')}'
-			},";
-		} else {
-			echo "loginData: {},";
-		}
-	?>
-			opgeslagen: 0,<?php if(isset($load)){
-	?>
-			ingredienten: [<?php  $javascriptCounter = 0;
-		foreach ($JSingredienten as $JSing) { echo '{' . $JSing . "},";
-			$javascriptCounter++;
-		}
-	?>
-		],
-		gekozenCategorie:
- <?php echo $rows -> categorieid;?>
-		,
-		totaalGewicht:
- <?php echo $totaalgewicht;?>
-		,
-		totaalPrijs:
- <?php echo $totaalprijs;?>
-		, load: true,
-		product_id:
- <?php echo $rows -> productid;?>
-		,
-		wasPubliekelijk:
- <?php
-		if ($rows -> publiekelijk == 1) { echo "true";
-		} else { echo "false";
-		}
-	?>,<?php } else {?>
-		ingredienten: [],
-		gekozenCategorie: 0,
-		totaalGewicht: 0,
-		totaalPrijs: 0,
-		load: false,
-		product_id: 0,
-		wasPubliekelijk: false,
-	<?php }?>
-		pagenr: 1,
-		appNavigationUl: $('div#appNavigation ul'),
-
-		appMainWindow1: $('div#appMainWindow1'),
-		sidebar1: $('div#appMainWindow1').find('div#appSideBar'),
-		view1: $('div#appMainWindow1').find('div#appView'),
-		selector1: $('div#appMainWindow1').find('div#appSelector'),
-
-		appMainWindow2: $('div#appMainWindow2'),
-		sidebar2: $('div#appMainWindow2').find('div#appSideBar'),
-		view2: $('div#appMainWindow2').find('div#appView2'),
-
-		appMainWindow3: $('div#appMainWindow3'),
-		sidebar3: $('div#appMainWindow3').find('div#appSideBar'),
-		view3: $('div#appMainWindow3').find('div#appView2'),
-
-		appMainWindow4: $('div#appMainWindow4'),
-		sidebar4: $('div#appMainWindow4').find('div#appSideBar'),
-		view4: $('div#appMainWindow4').find('div#appView2'),
-
-		appMainWindow5: $('div#appMainWindow5'),
-
-		h4Gewicht: $('h4#totaal_gewicht_ingredienten'),
-		h4Prijs: $('h4#totaal_prijs_ingredienten'),
-
-		samenstellenText: $('p#samenstellenText'),
-		divSamenstellen: $('div#sidebar_table2_div'),
-		samenstellenViewTitel: $('h2#samenstellen_view_titel'),
-
-		opslaanText: $('p#opslaanText'),
-		divOpslaan: $('div#opslaan'),
-		opslaanViewTitel: $('h2#opslaan_view_titel'),
-
-		bestelText: $('p#bestelText'),
-		divBestellen: $('div#bestellen'),
-		divDelen: $('div#delen'),
-		bestellenViewTitel: $('h2#bestellen_view_titel'),
-		a_naarWinkelwagen: $('a#naarWinkelwagen'),
-		winkelwagenHeading: $('h4#winkelwagenHeading'),
-		opslaan_login: $('div#opslaan_login'),
-		opslaan_logout: $('div#opslaan_logout'),
-		bestellen_login: $('div#bestellen_login'),
-		bestellen_logout: $('div#bestellen_logout'),
-		delen_login: $('div#delen_login'),
-		delen_logout: $('div#delen_logout'),
-		spanNaam: $('span.name'),
-		after_opslaan: $('div#after_opslaan'),
-		after_bestellen: $('div#after_bestellen'),
-		after_delen: $('div#after_delen'),
-		product_naam: '',
-		quantity: 0,
-		a_nav: $('div#appNavigation'),
-		nav_buttons: $('div.nav_div'),
-		sidebar_keuze_categorie: $('input.sidebar_keuze_categorie'),
-		base_url: '<?php echo base_url();?>		',
-		opslaanButton: $('button#buttonOpslaan'),
-		winkelwagenButton: $('button#winkelwagen'),
-		facebook: $('div#facebook'),
-		twitter: $('iframe'),
-		maxGewicht: 50
-		});
+			CreateApp.init({
+				<?php 	if ($this -> session -> userdata('logged_in') == 1) {
+					echo "loginData: {
+						achternaam: '{$this->session->userdata('achternaam')}',
+						email: '{$this->session->userdata('email')}',
+						gebruikerid: '{$this->session->userdata('gebruikerid')}',
+						logged_in: {$this->session->userdata('logged_in')},
+						type: '{$this->session->userdata('typeid')}',
+						voornaam: '{$this->session->userdata('voornaam')}'
+					},";
+				} else {
+					echo "loginData: {},";
+				}	?>
+				opgeslagen: 0,<?php if(isset($load)){ ?>
+				ingredienten: [<?php  $javascriptCounter = 0;
+					foreach ($JSingredienten as $JSing) { echo '{' . $JSing . "},";
+						$javascriptCounter++;
+					}	?>	],
+				gekozenCategorie: <?php echo $rows -> categorieid;?>,
+				totaalGewicht: <?php echo $totaalgewicht;?>,
+				totaalPrijs: <?php echo $totaalprijs;?>,
+				load: true,
+				product_id: <?php echo $rows -> productid;?>,
+				wasPubliekelijk:
+		 		<?php
+				if ($rows -> publiekelijk == 1) {
+					echo "true";
+				} else {
+					 echo "false";
+				}
+				?>,
+				<?php } else {?>
+					ingredienten: [],
+					gekozenCategorie: 0,
+					totaalGewicht: 0,
+					totaalPrijs: 0,
+					load: false,
+					product_id: 0,
+					wasPubliekelijk: false,
+				<?php }?>
+				pagenr: 1,
+				appNavigationUl: $('div#appNavigation ul'),
+		
+				appMainWindow1: $('div#appMainWindow1'),
+				sidebar1: $('div#appMainWindow1').find('div#appSideBar'),
+				view1: $('div#appMainWindow1').find('div#appView'),
+				selector1: $('div#appMainWindow1').find('div#appSelector'),
+		
+				appMainWindow2: $('div#appMainWindow2'),
+				sidebar2: $('div#appMainWindow2').find('div#appSideBar'),
+				view2: $('div#appMainWindow2').find('div#appView2'),
+		
+				appMainWindow3: $('div#appMainWindow3'),
+				sidebar3: $('div#appMainWindow3').find('div#appSideBar'),
+				view3: $('div#appMainWindow3').find('div#appView2'),
+		
+				appMainWindow4: $('div#appMainWindow4'),
+				sidebar4: $('div#appMainWindow4').find('div#appSideBar'),
+				view4: $('div#appMainWindow4').find('div#appView2'),
+		
+				appMainWindow5: $('div#appMainWindow5'),
+		
+				h4Gewicht: $('h4#totaal_gewicht_ingredienten'),
+				h4Prijs: $('h4#totaal_prijs_ingredienten'),
+		
+				samenstellenText: $('p#samenstellenText'),
+				divSamenstellen: $('div#sidebar_table2_div'),
+				samenstellenViewTitel: $('h2#samenstellen_view_titel'),
+		
+				opslaanText: $('p#opslaanText'),
+				divOpslaan: $('div#opslaan'),
+				opslaanViewTitel: $('h2#opslaan_view_titel'),
+		
+				bestelText: $('p#bestelText'),
+				divBestellen: $('div#bestellen'),
+				divDelen: $('div#delen'),
+				bestellenViewTitel: $('h2#bestellen_view_titel'),
+				a_naarWinkelwagen: $('a#naarWinkelwagen'),
+				winkelwagenHeading: $('h4#winkelwagenHeading'),
+				opslaan_login: $('div#opslaan_login'),
+				opslaan_logout: $('div#opslaan_logout'),
+				bestellen_login: $('div#bestellen_login'),
+				bestellen_logout: $('div#bestellen_logout'),
+				delen_login: $('div#delen_login'),
+				delen_logout: $('div#delen_logout'),
+				spanNaam: $('span.name'),
+				after_opslaan: $('div#after_opslaan'),
+				after_bestellen: $('div#after_bestellen'),
+				after_delen: $('div#after_delen'),
+				product_naam: '',
+				quantity: 0,
+				a_nav: $('div#appNavigation'),
+				nav_buttons: $('div.nav_div'),
+				sidebar_keuze_categorie: $('input.sidebar_keuze_categorie'),
+				base_url: '<?php echo base_url();?>		',
+				opslaanButton: $('button#buttonOpslaan'),
+				winkelwagenButton: $('button#winkelwagen'),
+				facebook: $('div#facebook'),
+				twitter: $('iframe'),
+				maxGewicht: 50
+			});
 
 		})( jQuery );
 </script>

@@ -365,3 +365,13 @@ function cancelContact()
 		document.getElementById("cancelContact").disabled = true;
 	}
 }
+
+
+	
+	
+function bestelPopup(){
+	var updateDiv = $("#updateWinkelwagen");
+	updateDiv.fadeIn(1000, function(){updateDiv.delay(500).fadeOut(1000)});
+}
+	
+

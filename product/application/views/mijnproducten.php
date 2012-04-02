@@ -132,7 +132,7 @@ input[type=submit]{
 						//error
 					}
 				}
-		});
+		}).done(bestelPopup());
 	});
 	
 	$('input.verwijder').on('click', function(e){
