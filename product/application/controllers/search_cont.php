@@ -1,5 +1,5 @@
 <?php
-
+// klasse haalt alle producten op die de search engine oplevert en geeft deze door aan de view search
 class Search_cont extends CI_controller {
 	
 	function index(){

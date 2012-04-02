@@ -1,7 +1,8 @@
 <?php
 
 class search_model extends CI_model{
-	
+	// Returned een array met bestellijst van alle producten waarop is gezocht en niet gearchiveerd is
+	// Returnde array bevat alle categorieen welke vervolgens alle producten bevat welke vervolgens alle ingredienten van het product bevat, prijs en image
 	function getSearchProducten(){
 		
 		if($_GET['search'] != "")

@@ -1,7 +1,9 @@
 <?php
-
+// Deze model zorgt voor het genereren van data voor bestellijsten
 class Bestellen_model extends CI_model{
-
+	
+	// Returned een array met bestellijst van alle producten die neit gemaakt zijn door admins en niet zijn gearchiveerd.
+	// Returnde array bevat alle categorieen welke vervolgens alle producten bevat welke vervolgens alle ingredienten van het product bevat, prijs en image
 	function getFullProducten(){
 		$categorienQ = $this->db->query('select * from categorie where gearchiveerd = 0');
 		if($categorienQ->num_rows() > 0){
@@ -49,7 +51,9 @@ class Bestellen_model extends CI_model{
 		}
 		return $data;
 	}
-	
+
+	// Returned een array met bestellijst van alle producten die neit gemaakt zijn door admins en niet zijn gearchiveerd.
+	// Returnde array bevat alle categorieen welke vervolgens alle producten bevat welke vervolgens alle ingredienten van het product bevat, prijs en image
 	function getFullSelfmade(){
 		$categorienQ = $this->db->query('select * from categorie where gearchiveerd = 0');
 		if($categorienQ->num_rows() > 0){
@@ -93,27 +97,6 @@ class Bestellen_model extends CI_model{
 						}
 					}
 				}
-			}
-		}
-		return $data;
-	}
-	
-	function getCategorien(){
-		$categorienQ = $this->db->query("select categorieid, naam from categorie where gearchiveerd = '0'");
-		if ($categorienQ->num_rows() > 0){
-			foreach($categorienQ->result() as $categorie){
-				$data[] = $categorie;
-				
-			}
-		}
-		return $data;
-	}
-	
-	function getProducten(){
-		$productenQ = $this->db->query("select productid, naam, categorieid from product where gearchiveerd = '0'");
-		if ($productenQ->num_rows() > 0){
-			foreach($productenQ->result() as $product){
-				$data[] = $product;
 			}
 		}
 		return $data;

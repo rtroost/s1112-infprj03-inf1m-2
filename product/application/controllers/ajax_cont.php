@@ -1,9 +1,10 @@
 <?php 
-
+//klasse handelt groot gedeelte van alle ajax functies op
 class Ajax_cont extends CI_controller 
-{	
+{
 	function index()
 	{
+		//Pakt alle informatie van het bestelde product via "GET", update de CART en returned HTML aan JS
 		if(isset ($_GET['updateWagen']))
 		{
 			$this->load->library('cart');
@@ -59,6 +60,7 @@ class Ajax_cont extends CI_controller
 				$this->load->view('ajax/beheer_gebruikers_actief', $data);
 			}
 		}
+		
 		if(isset ($_GET['search']))
 		{
 			if(isset ($_GET['status']) && $_GET['status'] == 1)

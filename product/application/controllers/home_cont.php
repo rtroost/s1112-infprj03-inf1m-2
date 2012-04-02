@@ -1,7 +1,9 @@
 <?php
-
+// klasse haalt gegevens op voor de homepage en stuurt deze door naar de view
 class Home_cont extends CI_controller {
 
+	// functie load models news_model en product_model, haalt daar de aanbiedingen(functie get_set_aanbiedingen), top5 meest verkochte producten(functie get_top_producten) 
+	// en het laatste nieuwsbericht(functie getNews). Geeft deze data door aan de home view
 	function index() {
 
 		// LAAT STAAN AUB ================
