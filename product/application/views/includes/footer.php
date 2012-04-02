@@ -30,7 +30,7 @@
 	width: 220px; 
 	height:100%;
 	bottom:40px;
-	z-index:1;
+	z-index:51;
 	vertical-align:bottom;">
 	
 		<div style="position: absolute; 
@@ -38,6 +38,7 @@
 		width:270px;
 		height:203px;
 		left:490px;
+		z-index:52;
 		
 		background-image: url('<?php echo base_url(); ?>images/updateWinkelwagen.png');">
 		</div>
