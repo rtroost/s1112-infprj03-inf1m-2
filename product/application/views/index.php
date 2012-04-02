@@ -24,7 +24,7 @@
 	</div>	
 	
 	<div id="topProducten">
-		<span>Top 5 best verkochte ontwerpen</span>
+		<span style="color:#a0751a;">Top 5 best verkochte ontwerpen</span>
 		<table>
 		<tr><td style="width:300px;font-size:10px;">Productnaam</td><td style="text-align:right;font-size:10px;">verkocht</td></tr>
 		<?php
