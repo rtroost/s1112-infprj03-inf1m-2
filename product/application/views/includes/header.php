@@ -63,6 +63,9 @@
 							<li>
 								<a href="<?php echo base_url();?>index.php/bestellen_selfmade_cont"><img src="<?php if(strpos($_SERVER['REQUEST_URI'], "selfmade_cont") > 0) { echo base_url();?>images/subMenu/bestellen/ontworpenProducten_over.png <?php } else { echo base_url();?>images/subMenu/bestellen/ontworpenProducten.png <?php } ?>" onmouseover="this.src='<?php echo base_url();?>images/subMenu/bestellen/ontworpenProducten_over.png' " onmouseout="this.src='<?php if(strpos($_SERVER['REQUEST_URI'], "selfmade_cont") > 0) { echo base_url();?>images/subMenu/bestellen/ontworpenProducten_over.png <?php } else { echo base_url();?>images/subMenu/bestellen/ontworpenProducten.png <?php } ?>'"/></a>
 							</li>
+							<li>
+								<a href="<?php echo base_url();?>index.php/product_cont/creator"><img src="<?php if(strpos($_SERVER['REQUEST_URI'], "creator") > 0) { echo base_url();?>images/subMenu/mijnAccount/maakProduct_over.png <?php } else { echo base_url();?>images/subMenu/mijnAccount/maakProduct.png <?php } ?>" onmouseover="this.src='<?php echo base_url();?>images/subMenu/mijnAccount/maakProduct_over.png' " onmouseout="this.src='<?php if(strpos($_SERVER['REQUEST_URI'], "creator") > 0) { echo base_url();?>images/subMenu/mijnAccount/maakProduct_over.png <?php } else { echo base_url();?>images/subMenu/mijnAccount/maakProduct.png <?php } ?>'"/></a>
+							</li>
 						</ul>
 						<?php } 
 						if(strpos($_SERVER['REQUEST_URI'], "beheer") > 0 and $this->session->userdata('typeid') == 2 or strpos($_SERVER['REQUEST_URI'], "user") > 0 and $this->session->userdata('typeid') == 2) { ?>
