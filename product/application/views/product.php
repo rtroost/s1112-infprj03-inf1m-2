@@ -33,7 +33,6 @@ input[type=submit]{
 </style>
 
 	<div id="content">
-		<h2>Product</h2><br />
 		<?php if(isset($rows)){?>
 		<table id="mijnproducten" cellspacing="0px">
 			<tr>
@@ -72,6 +71,8 @@ input[type=submit]{
 			<?php } ?>
 			</tr>
 		</table>
+		<br />
+		<img src="<?php echo base_url(); ?>images/products/<?php echo $rows->productid; ?>.png"/>
 		<?php } else { ?>
 			<p>niet gevonden</p>
 		<?php } ?>
