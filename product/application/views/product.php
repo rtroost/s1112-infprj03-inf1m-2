@@ -71,7 +71,11 @@ input[type=submit]{
 			</tr>
 		</table>
 		<br />
-		<img src="<?php echo base_url(); ?>images/products/<?php echo $rows->productid; ?>.png"/>
+		<?php if(file_exists("images/products/".$rows->productid .".png")){ ?>
+			<img src="<?php echo base_url(); ?>images/products/<?php echo $rows->productid; ?>.png"/>
+		<?php } else { ?>
+			<img src="<?php echo base_url(); ?>images/products/geenAfbeelding.png"/>
+		<?php } ?>
 		<?php } else { ?>
 			<p>niet gevonden</p>
 		<?php } ?>
